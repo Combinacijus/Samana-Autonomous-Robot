@@ -1,0 +1,77 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/opt/arduino-1.8.9/hardware/arduino/avr/variants/eightanaloginputs"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Include": "Wire.h",
+    "Includepath": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/Wire/src"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Include": "Adafruit_Sensor.h",
+    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/Adafruit_Unified_Sensor"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Include": "Adafruit_BNO055.h",
+    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Include": "EEPROM.h",
+    "Includepath": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/EEPROM/src"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Include": "ros.h",
+    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/ros_lib"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Include": "TimerOne.h",
+    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/TimerOne"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/Wire/src/Wire.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/Wire/src/utility/twi.c",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055/Adafruit_BNO055.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/ros_lib/duration.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/ros_lib/time.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/TimerOne/TimerOne.cpp",
+    "Include": "",
+    "Includepath": ""
+  }
+]

@@ -1,0 +1,7 @@
+{
+    "board": "arduino:avr:nano",
+    "port": "/dev/ttyUSB0",
+    "sketch": "imu_node.ino",
+    "configuration": "cpu=atmega328old",
+    "output": "../ArduinoOutput"
+}

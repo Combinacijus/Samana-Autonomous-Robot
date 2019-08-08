@@ -1,0 +1,46 @@
+/home/combinacijus/Documents/Samana\ Autonomous\ Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp.o: \
+ /home/combinacijus/Documents/Samana\ Autonomous\ Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/binary.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/WCharacter.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/WString.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/HardwareSerial.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Stream.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Print.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Printable.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/USBAPI.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/variants/eightanaloginputs/pins_arduino.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/variants/eightanaloginputs/../standard/pins_arduino.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/libraries/Wire/src/Wire.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Stream.h \
+ /home/combinacijus/Documents/Arduino/libraries/Adafruit_Unified_Sensor/Adafruit_Sensor.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Print.h \
+ /home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055/Adafruit_BNO055.h \
+ /home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055/utility/imumaths.h \
+ /home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055/utility/vector.h \
+ /home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055/utility/matrix.h \
+ /home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055/utility/quaternion.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/libraries/EEPROM/src/EEPROM.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/node_handle.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/std_msgs/Time.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/msg.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/time.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/duration.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/rosserial_msgs/TopicInfo.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/rosserial_msgs/Log.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/rosserial_msgs/RequestParam.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/publisher.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/node_handle.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/subscriber.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/service_server.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ros/service_client.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/ArduinoHardware.h \
+ /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/HardwareSerial.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/samana_msgs/ImuSmall.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/std_msgs/Header.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/samana_msgs/ImuCalib.h \
+ /home/combinacijus/Documents/Arduino/libraries/TimerOne/TimerOne.h \
+ /home/combinacijus/Documents/Arduino/libraries/TimerOne/config/known_16bit_timers.h \
+ /home/combinacijus/Documents/Arduino/libraries/ros_lib/std_srvs/Empty.h

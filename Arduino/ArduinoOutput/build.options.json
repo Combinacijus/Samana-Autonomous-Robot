@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "",
+  "builtInLibrariesFolders": "/opt/arduino-1.8.9/libraries",
+  "customBuildProperties": "build.path=/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput,build.warn_data_percentage=75,runtime.tools.avr-gcc.path=/opt/arduino-1.8.9/hardware/tools/avr,runtime.tools.avr-gcc-5.4.0-atmel3.6.1-arduino2.path=/opt/arduino-1.8.9/hardware/tools/avr,runtime.tools.avrdude.path=/opt/arduino-1.8.9/hardware/tools/avr,runtime.tools.avrdude-6.3.0-arduino14.path=/opt/arduino-1.8.9/hardware/tools/avr,runtime.tools.arduinoOTA.path=/opt/arduino-1.8.9/hardware/tools/avr,runtime.tools.arduinoOTA-1.2.1.path=/opt/arduino-1.8.9/hardware/tools/avr",
+  "fqbn": "arduino:avr:nano:cpu=atmega328old",
+  "hardwareFolders": "/opt/arduino-1.8.9/hardware,/home/combinacijus/.arduino15/packages,/home/combinacijus/Documents/Arduino/hardware",
+  "otherLibrariesFolders": "/home/combinacijus/Documents/Arduino/libraries",
+  "runtime.ide.version": "10809",
+  "sketchLocation": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino",
+  "toolsFolders": "/opt/arduino-1.8.9/tools-builder,/opt/arduino-1.8.9/hardware/tools/avr,/home/combinacijus/.arduino15/packages"
+}

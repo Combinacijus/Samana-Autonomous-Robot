@@ -1,0 +1,8 @@
+prefix=/home/combinacijus/Documents/ROS/samana_ws/install
+
+Name: rosserial_windows
+Description: Description of rosserial_windows
+Version: 0.8.0
+Cflags: 
+Libs: -L/home/combinacijus/Documents/ROS/samana_ws/install/lib 
+Requires: 

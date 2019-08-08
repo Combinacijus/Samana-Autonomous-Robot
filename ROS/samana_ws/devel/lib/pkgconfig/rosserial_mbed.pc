@@ -1,0 +1,8 @@
+prefix=/home/combinacijus/Documents/ROS/samana_ws/devel
+
+Name: rosserial_mbed
+Description: Description of rosserial_mbed
+Version: 0.8.0
+Cflags: -I/home/combinacijus/Documents/ROS/samana_ws/devel/include
+Libs: -L/home/combinacijus/Documents/ROS/samana_ws/devel/lib 
+Requires: message_runtime

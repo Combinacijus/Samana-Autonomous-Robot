@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}",
+                "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Src",
+                "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc",
+                "${workspaceFolder}/Inc"
+            ]
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,8 @@
+prefix=/home/combinacijus/Documents/ROS/samana_ws/install
+
+Name: samana
+Description: Description of samana
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/combinacijus/Documents/ROS/samana_ws/install/lib 
+Requires: message_runtime

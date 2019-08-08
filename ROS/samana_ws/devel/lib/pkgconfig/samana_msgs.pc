@@ -1,0 +1,8 @@
+prefix=/home/combinacijus/Documents/ROS/samana_ws/devel
+
+Name: samana_msgs
+Description: Description of samana_msgs
+Version: 0.0.1
+Cflags: -I/home/combinacijus/Documents/ROS/samana_ws/devel/include
+Libs: -L/home/combinacijus/Documents/ROS/samana_ws/devel/lib 
+Requires: message_runtime
