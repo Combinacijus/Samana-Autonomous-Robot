@@ -43,25 +43,25 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for samana_generate_messages_eus.
 
 # Include the progress variables for this target.
 include samana/CMakeFiles/samana_generate_messages_eus.dir/progress.make
 
-samana/CMakeFiles/samana_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana/manifest.l
+samana/CMakeFiles/samana_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana/manifest.l
 
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana/manifest.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp manifest code for samana"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana samana std_msgs
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana/manifest.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp manifest code for samana"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana samana std_msgs
 
 samana_generate_messages_eus: samana/CMakeFiles/samana_generate_messages_eus
-samana_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana/manifest.l
+samana_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana/manifest.l
 samana_generate_messages_eus: samana/CMakeFiles/samana_generate_messages_eus.dir/build.make
 
 .PHONY : samana_generate_messages_eus
@@ -72,10 +72,10 @@ samana/CMakeFiles/samana_generate_messages_eus.dir/build: samana_generate_messag
 .PHONY : samana/CMakeFiles/samana_generate_messages_eus.dir/build
 
 samana/CMakeFiles/samana_generate_messages_eus.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana && $(CMAKE_COMMAND) -P CMakeFiles/samana_generate_messages_eus.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana && $(CMAKE_COMMAND) -P CMakeFiles/samana_generate_messages_eus.dir/cmake_clean.cmake
 .PHONY : samana/CMakeFiles/samana_generate_messages_eus.dir/clean
 
 samana/CMakeFiles/samana_generate_messages_eus.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/samana /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/samana /home/combinacijus/Documents/ROS/samana_ws/build/samana/CMakeFiles/samana_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana/CMakeFiles/samana_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : samana/CMakeFiles/samana_generate_messages_eus.dir/depend
 

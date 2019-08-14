@@ -1,4 +1,4 @@
-/home/combinacijus/Documents/Samana\ Autonomous\ Robot/Arduino/ArduinoOutput/libraries/TimerOne/TimerOne.cpp.o: \
+/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/libraries/TimerOne/TimerOne.cpp.o: \
  /home/combinacijus/Documents/Arduino/libraries/TimerOne/TimerOne.cpp \
  /home/combinacijus/Documents/Arduino/libraries/TimerOne/TimerOne.h \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h \

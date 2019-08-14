@@ -1,476 +1,288 @@
-# 1 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-# 1 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
+# 1 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino"
+# 1 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino"
 /*
     Gintaras Grebliunas
-    combinacijus@gmail.com
+    Combinacijus@gmail.com
+    ROS node which handles many ultrasonic sensors
 
-    Reads transformation data from IMU BNO055 sensor
-    and sends it via serial to ROS
+    Connections:
+    VCC-5V  GND-GND  TRIG-PIN_TRIG_ALL  ECHO-PIN_ECHO_X
+    10k Pulldown resistor to every ECHO pin (else random values)
 
-    CONNECTIONS:
-    VCC 5V | GND GND | SCL A5 + 4K7 PULLUP | SDA A4 + 4K7 PULLUP | ard_RST D2
-    I2C address 0X28 or 0x29
+    Single Arduino Nano should be able to handle 10 sensors no problem
 
-    NOTE: ros.h: typedef NodeHandle_<ArduinoHardware, 1, 2, 30, 90> NodeHandle;
+    Times:
+    digitalRead()                                 -  4us
+    FastGPIO::Pin<IO_D1>::setOutputValueHigh()    -  0.16us
 
-    @param bool _recal: if true on reset IMU need full recalibration
-    @service reset: resets Arduino
+    FastGPIO requires knowledge on pin numbers in compile time
+    so we have a lot of copy paste code
 
-    BUG: If IMU looses power Arduino get stuck in infinite loop 
-    until IMU gets powered again
-    BUG: If in loop Arduino won't reset by itself but will timeout ROS
+    Use find to read all 'NOTE:' comments
 */
 
-# 23 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 24 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 25 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 26 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 27 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 28 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 29 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 30 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 31 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 32 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 2
-# 41 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-void reset_service(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res)
-{
-    reset();
-}
+# 23 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino" 2
+# 24 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino" 2
+# 25 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino" 2
+# 26 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino" 2
+# 27 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino" 2
 
-bool found_calib = false; // Is calibration found in EEPROM
-bool recalibrate = false; // Value read from param server if false don't read EEPROM
-unsigned long long last_update_time = 0; // In milis
-unsigned long long last_setup_up_time = 0; // In milis
 
-Adafruit_BNO055 bno = Adafruit_BNO055();
-ros::NodeHandle nh; // ROS node
-samana_msgs::ImuSmall imu_data;
-ros::Publisher imu_data_pub("imu_data", &imu_data); // IMU data publisher
-samana_msgs::ImuCalib imu_calib;
-ros::Publisher imu_calib_pub("imu_calib", &imu_calib); // IMU calibration status publisher
-ros::ServiceServer<std_srvs::Empty::Request, std_srvs::Empty::Response> srv_reset("reset", &reset_service);
 
-uint8_t sys, gyro, acc, mag; // Data for /imu_calib
-sensors_event_t angVel, linAcc; // Data for /imu_data
-imu::Quaternion quat; // Data for /imu_data
-
-String log_str; // Temporary variable to set log_msg
-char log_msg[20]; // Placeholder for log messages
-
-void setup(void)
-{
-    pinMode(2 /* GPIO pin which is connected to RST*/, 0x2); // Pull high so it won't reset Arduino
-
-    setupRoutine();
-
-    // Initializing interrupt service routine for healthCheck()
-    Timer1.initialize(40000 /* Interrupt service routine period in micro sec*/);
-    Timer1.attachInterrupt(healthCheck);
-
-    nh.spinOnce();
-}
-
-void loop(void)
-{
-    sendNewData();
-    sendCalibrationStatus();
-    last_update_time = millis();
-
-    delayMicroseconds(3000 /* Delay between samples (>4k slows updates)*/);
-}
-
-void reset()
-{
-    log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 90 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-             (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 90 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-             "Arduino Restarting"
-# 90 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-             ); &__c[0];}))
-# 90 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-             ));
-    strcpy(log_msg, log_str.c_str());
-    nh.logfatal(log_msg);
-    delay(50);
-
-    pinMode(2 /* GPIO pin which is connected to RST*/, 0x1);
-    digitalWrite(2 /* GPIO pin which is connected to RST*/, 0x0);
-}
-
-void setupRoutine()
-{
-    initROS();
-    delay(100);
-
-    // Needs longer timeout for IMU to initialize
-    nh.setSpinTimeout(10000); // 10s timeout
-
-    connectToBNO055();
-
-    // CALIBRATION
-    if (recalibrate)
-    {
-        log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 112 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 112 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 "Recalibrate"
-# 112 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 ); &__c[0];}))
-# 112 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 ));
-        strcpy(log_msg, log_str.c_str());
-        nh.logwarn(log_msg);
-    }
-    else
-    {
-        found_calib = readCalibrationFromEEPROM();
-    }
-
-    delay(1);
-    // \/ Crystal must be configured after loading calibration
-    bno.setExtCrystalUse(true);
-
-    fullyCalibrate();
-    if (!found_calib || recalibrate)
-        saveCalibrationToEEPROM();
-
-    // nh.setSpinTimeout(100); // Reset timeout
-}
 
 /*
-    Inits node, advertises topics, gets params
+    Speed of sound = (331.3 + 0.606 * temp) m/s
+    At 40 deg ~ 355 m/s, -10 ~ 337 m/s
 */
-void initROS()
+
+
+
+/*
+    In milliseconds. Should be long enough to not catch previuos echo
+    At lowest speed in 50ms max distance 8.4m, 40ms - 6.7m
+ */
+
+
+/*
+    NOTE:
+    ISR_PERIOD: In microseconds. Should be long enough to execute
+    pin readouts and leave time for other code(bare minimum 6us per pin)
+    60us might introduce up to 1cm measurement error
+*/
+
+
+
+
+
+// NOTE: Single trig pin triggers all sensors
+
+
+// NOTE: Define echo pins for every sensor
+# 70 "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/distance_sensors_node/distance_sensors_node.ino"
+volatile unsigned long dt[10 /* NOTE: Number of sensors*/]; // Elapsed times in HIGH state
+volatile unsigned long tt;
+
+int state_echo[10 /* NOTE: Number of sensors*/]; // Old echo pin states
+
+// ROS variables
+ros::NodeHandle nh;
+samana_msgs::Sonar sonar_msg;
+ros::Publisher sonar_pub("sonar", &sonar_msg);
+int16_t distances[10 /* NOTE: Number of sensors*/];
+int8_t temperature = 20; // Assuming temperature
+
+void setup()
 {
-    nh.getHardware()->setBaud(1000000 /* Serial communication speed*/);
+    for (int i = 0; i < 10 /* NOTE: Number of sensors*/; ++i)
+        state_echo[i] = -1 /* Pin state when we don't watch pulse state*/;
+
+    FastGPIO::Pin<2>::setOutput(0x0);
+
+    // NOTE: Set echo pins to INPUT mode
+    FastGPIO::Pin<3>::setInput();
+    FastGPIO::Pin<4>::setInput();
+    FastGPIO::Pin<5>::setInput();
+    FastGPIO::Pin<6>::setInput();
+    FastGPIO::Pin<7>::setInput();
+    FastGPIO::Pin<8>::setInput();
+    FastGPIO::Pin<9>::setInput();
+    FastGPIO::Pin<10>::setInput();
+    FastGPIO::Pin<11>::setInput();
+    FastGPIO::Pin<12>::setInput();
+
+    // Serial.begin(230400);
+    // while (!Serial)
+    //     ;
+
+    // ROS serial node setup
+    nh.getHardware()->setBaud(57600 /* 1M looses sync*/);
     nh.initNode();
-
-    nh.advertise(imu_data_pub);
-    nh.advertise(imu_calib_pub);
-    nh.advertiseService(srv_reset);
-
-    while (!nh.connected()) // Wait until connected
-    {
+    nh.advertise(sonar_pub);
+    while (!nh.connected())
         nh.spinOnce();
-    }
+    sonar_msg.dist_length = 10 /* NOTE: Number of sensors*/;
+    sonar_msg.header.frame_id = "base_link";
 
-    if (!nh.getParam("~recal", &recalibrate)) // Gets local param
-    {
-        recalibrate = false;
-    }
-    // Debuging parameters. Brake if not enough dynamic memory
-    // sprintf(log_msg, "%d", recalibrate);
-    // nh.logwarn(log_msg);
+    // Init timer interupt. MAIN LOOP IS AN INTERRUPT multiPulseIn
+    Timer1.initialize(60 /* In us*/);
+    Timer1.attachInterrupt(multiPulseIn);
+}
+
+void loop()
+{
+    // NOTE: Reset dtX values to UNDEF_TIME so it's easy to spot bad data
+    for (int i = 0; i < 10 /* NOTE: Number of sensors*/; ++i)
+        dt[i] = 1234567 /* Undefined dtX time in microseconds*/;
+
+    // Generates 10us trigger for all sensors
+    FastGPIO::Pin<2>::setOutput(0x1);
+    delayMicroseconds(10);
+    FastGPIO::Pin<2>::setOutput(0x0);
+
+    // Set echo pin states LOW for all sensors
+    for (int i = 0; i < 10 /* NOTE: Number of sensors*/; ++i)
+        state_echo[i] = 0x0;
+    // Now timer interrupt will act like pulseIn() for all echo pins
+
+    delay(40 /* In ms*/);
+    // After delay data is collected and can be used
+
+    for (int i = 0; i < 10 /* NOTE: Number of sensors*/; ++i)
+        distances[i] = getDistance(dt[i]);
+
+    // NOTE: Publish data to ros (WARNING: requires custom message for more sensors)
+    sonar_msg.header.stamp = nh.now();
+    sonar_msg.dist = distances;
+    sonar_pub.publish(&sonar_msg);
+    nh.spinOnce();
 }
 
 /*
-    Sends custom IMU message to ROS
+    Interrupt service routine as non-blocking pulseIn for multiple pins
+    Runs on timer interrupt and checks for pins changes
+    Tracks how long pin was in HIGH state
 */
-void sendNewData()
+void multiPulseIn()
 {
-    nh.spinOnce();
-    quat = bno.getQuat();
-    bno.getEvent(&angVel, Adafruit_BNO055::VECTOR_GYROSCOPE);
-    bno.getEvent(&linAcc, Adafruit_BNO055::VECTOR_LINEARACCEL);
+    tt = micros();
+    /*
+        TODO: remove
+        NOTE: Make this block for every sensor change X to a number
+        if (FastGPIO::Pin<PIN_ECHO_X>::isInputHigh() && state_echo_X == LOW) // Rising
+        {
+            state_echo_X = HIGH;
+            dtX = micros();
+        }
+        else if(!FastGPIO::Pin<PIN_ECHO_X>::isInputHigh() && state_echo_X == HIGH) // Falling
+        {
+            state_echo_X = LOW;
+            dtX = micros() - dtX;
+        }
+    */
 
-    // Set data to send
-    imu_data.header.stamp = nh.now();
-    imu_data.header.frame_id = "IMU";
-    imu_data.quaternion_x = quat.x();
-    imu_data.quaternion_y = quat.y();
-    imu_data.quaternion_z = quat.z();
-    imu_data.quaternion_w = quat.w();
-    imu_data.linear_acceleration_x = linAcc.acceleration.x;
-    imu_data.linear_acceleration_y = linAcc.acceleration.y;
-    imu_data.linear_acceleration_z = linAcc.acceleration.z;
-    imu_data.angular_velocity_x = angVel.gyro.x;
-    imu_data.angular_velocity_y = angVel.gyro.y;
-    imu_data.angular_velocity_z = angVel.gyro.z;
-    imu_data_pub.publish(&imu_data);
-    nh.spinOnce();
+    for (int i = 0; i < 10 /* NOTE: Number of sensors*/; ++i)
+    {
+        if (state_echo[i] == 0x0 && pinIsHigh(i))
+        {
+            // High state started record time
+            state_echo[i] = 0x1;
+            dt[i] = micros();
+        }
+        else if (state_echo[i] == 0x1 && !pinIsHigh(i)) // Falling
+        {
+            // High state ended don't change dt until next loop
+            state_echo[i] = -1 /* Pin state when we don't watch pulse state*/;
+            dt[i] = micros() - dt[i];
+        }
+    }
+
+    // if (state_echo[1] == LOW && FastGPIO::Pin<PIN_ECHO_1>::isInputHigh()) // Rising
+    // {
+    //     // High state started record time
+    //     state_echo[1] = HIGH;
+    //     dt[1] = micros();
+    // }
+    // else if (state_echo[1] == HIGH && !FastGPIO::Pin<PIN_ECHO_1>::isInputHigh()) // Falling
+    // {
+    //     // High state ended don't change dt until next loop
+    //     state_echo[1] = STOP;
+    //     dt[1] = micros() - dt[1];
+    // }
+
+    // if (state_echo[2] == LOW && FastGPIO::Pin<PIN_ECHO_2>::isInputHigh()) // Rising
+    // {
+    //     state_echo[2] = HIGH;
+    //     dt[2] = micros();
+    // }
+    // else if (state_echo[2] == HIGH && !FastGPIO::Pin<PIN_ECHO_2>::isInputHigh()) // Falling
+    // {
+    //     state_echo[2] = STOP;
+    //     dt[2] = micros() - dt[2];
+    // }
+
+    // if (state_echo[3] == LOW && FastGPIO::Pin<PIN_ECHO_3>::isInputHigh()) // Rising
+    // {
+    //     state_echo[3] = HIGH;
+    //     dt[3] = micros();
+    // }
+    // else if (state_echo[3] == HIGH && !FastGPIO::Pin<PIN_ECHO_3>::isInputHigh()) // Falling
+    // {
+    //     state_echo[3] = STOP;
+    //     dt[3] = micros() - dt[3];
+    // }
+
+    // if (state_echo[4] == LOW && FastGPIO::Pin<PIN_ECHO_4>::isInputHigh()) // Rising
+    // {
+    //     state_echo[4] = HIGH;
+    //     dt[4] = micros();
+    // }
+    // else if (state_echo[4] == HIGH && !FastGPIO::Pin<PIN_ECHO_4>::isInputHigh()) // Falling
+    // {
+    //     state_echo[4] = STOP;
+    //     dt[4] = micros() - dt[4];
+    // }
+
+    tt = micros() - tt;
+    // char log_msg[20];
+    // sprintf(log_msg, "%d", tt);
+    // nh.loginfo(log_msg);
+    // nh.spinOnce();
 }
+
 /*
-    Sends calibration massage to ROS
+    Returns if pins is high using fastGPIO library and predefined pin values
+    pinIsHigh(0)  ->  return FastGPIO::Pin<PIN_ECHO_1>::isInputHigh(); etc.
 */
-void sendCalibrationStatus()
+bool pinIsHigh(int ind)
 {
-    nh.spinOnce();
-    uint8_t sys, gyr, acc, mag;
-    bno.getCalibration(&sys, &gyr, &acc, &mag);
-
-    imu_calib.sys = sys;
-    imu_calib.gyr = gyr;
-    imu_calib.acc = acc;
-    imu_calib.mag = mag;
-    imu_calib.temp = bno.getTemp();
-    imu_calib_pub.publish(&imu_calib);
-    nh.spinOnce();
-}
-
-/*
-    Connects to IMU with address 0x28 0x29 or restarts Arduino
- */
-void connectToBNO055()
-{
-    // Try to connect to BNO055 with address 0x28
-    bno = Adafruit_BNO055(42 /* IMU sensor id*/, 0x28);
-    if (bno.begin())
+    // NOTE: Add cases for every sensor
+    switch (ind)
     {
-        log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 211 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 211 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 "IMU 0x28"
-# 211 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 ); &__c[0];}))
-# 211 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 ));
-        strcpy(log_msg, log_str.c_str());
-        nh.loginfo(log_msg);
-    }
-    else
-    {
-        // Try to connect to BNO055 with address 0x29
-        bno = Adafruit_BNO055(42 /* IMU sensor id*/, 0x29);
-        if (bno.begin())
-        {
-            log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 221 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                     (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 221 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                     "IMU 0x29"
-# 221 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                     ); &__c[0];}))
-# 221 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                     ));
-            strcpy(log_msg, log_str.c_str());
-            nh.loginfo(log_msg);
-        }
-        else
-        {
-            log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 227 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                     (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 227 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                     "IMU NOT FOUND!"
-# 227 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                     ); &__c[0];}))
-# 227 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                     ));
-            strcpy(log_msg, log_str.c_str());
-            nh.logfatal(log_msg);
-            delay(50);
-            reset();
-        }
+    case 0:
+        return FastGPIO::Pin<3>::isInputHigh();
+    case 1:
+        return FastGPIO::Pin<4>::isInputHigh();
+    case 2:
+        return FastGPIO::Pin<5>::isInputHigh();
+    case 3:
+        return FastGPIO::Pin<6>::isInputHigh();
+    case 4:
+        return FastGPIO::Pin<7>::isInputHigh();
+    case 5:
+        return FastGPIO::Pin<8>::isInputHigh();
+    case 6:
+        return FastGPIO::Pin<9>::isInputHigh();
+    case 7:
+        return FastGPIO::Pin<10>::isInputHigh();
+    case 8:
+        return FastGPIO::Pin<11>::isInputHigh();
+    case 9:
+        return FastGPIO::Pin<12>::isInputHigh();
+
+    default:
+        // Index not in range
+        return 0;
+        break;
     }
 }
 
 /*
-    Reads calibration data from EEPROM if found
+    Returns distanc (mm) given time (us)
+    TODO: add temperature to equation
+
+    @param delta_time: elapsed time between pulse and echo in microseconds (us)
+    @return: distance in mm or -1 if data is invalid
 */
-bool readCalibrationFromEEPROM()
+int getDistance(long delta_time)
 {
-    long eepromID; // ID from EEPROM memory
-    adafruit_bno055_offsets_t calibrationData;
-    sensor_t sensor;
+    /*
+        Check validity of trigger time
+        if 
+    */
+    // if (delta_time >= TRIGGER_PERIOD * 1000 ||
+    //     delta_time <= 80)
+        // return UNDEF_DIST;
 
-    EEPROM.get(0 /* Starting EEPROM addres for calibration data*/, eepromID); // Read ID
-
-    bno.getSensor(&sensor); // Gets sensor info
-    if (eepromID != sensor.sensor_id)
-    {
-        log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 250 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 250 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 "No calib data"
-# 250 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 ); &__c[0];}))
-# 250 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 ));
-        strcpy(log_msg, log_str.c_str());
-        nh.loginfo(log_msg);
-        return false;
-    }
-    else
-    {
-        log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 257 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 257 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 "Calib data found"
-# 257 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                 ); &__c[0];}))
-# 257 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                 ));
-        strcpy(log_msg, log_str.c_str());
-        nh.loginfo(log_msg);
-        EEPROM.get(0 /* Starting EEPROM addres for calibration data*/ + sizeof(long), calibrationData);
-
-        bno.setSensorOffsets(calibrationData);
-
-        return true;
-    }
-}
-
-/*
-    Checks if IMU disconected
-    Assuming data changes to same values when IMU disconnects
-    @param update: if true updates variables to check
-*/
-bool isDataStuck(bool update = false)
-{
-    if (update)
-    {
-        quat = bno.getQuat();
-        bno.getEvent(&angVel, Adafruit_BNO055::VECTOR_GYROSCOPE);
-        bno.getEvent(&linAcc, Adafruit_BNO055::VECTOR_LINEARACCEL);
-    }
-
-    return quat.x() == quat.y() && quat.y() == quat.z() &&
-           linAcc.acceleration.x == linAcc.acceleration.y &&
-           linAcc.acceleration.y == linAcc.acceleration.z &&
-           angVel.gyro.x == angVel.gyro.y &&
-           angVel.gyro.y == angVel.gyro.z;
-}
-
-void fullyCalibrate()
-{
-    static unsigned int counter = 0;
-    sensors_event_t event;
-
-    // Always recalibrate the magnetometer as it goes out of calibration very often
-    while (!isStableCalibrated())
-    {
-        logCalibStatus();
-        sendCalibrationStatus();
-        nh.spinOnce();
-
-        // Check if event is valid or should we reset Arduino
-        if (isDataStuck(true))
-        {
-            counter++;
-            if (counter >= 3) // To filter accidental resets
-                reset();
-        }
-        else
-        {
-            counter = 0;
-        }
-        nh.spinOnce();
-
-        delay(250);
-    }
-
-    log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 317 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-             (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 317 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-             "IMU Calibrated"
-# 317 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-             ); &__c[0];}))
-# 317 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-             ));
-    strcpy(log_msg, log_str.c_str());
-    nh.loginfo(log_msg);
-}
-
-void saveCalibrationToEEPROM()
-{
-    sensor_t sensor;
-
-    bno.getSensor(&sensor);
-    EEPROM.put(0 /* Starting EEPROM addres for calibration data*/, sensor.sensor_id);
-
-    adafruit_bno055_offsets_t newCalib;
-    bno.getSensorOffsets(newCalib);
-    EEPROM.put(0 /* Starting EEPROM addres for calibration data*/ + sizeof(long), newCalib);
-
-    log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 333 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-             (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 333 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-             "Calibration stored"
-# 333 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-             ); &__c[0];}))
-# 333 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-             ));
-    strcpy(log_msg, log_str.c_str());
-    nh.loginfo(log_msg);
-}
-
-/*
-    Checks if full calibration lasted for some time
-    @return status of stable calibration
- */
-bool isStableCalibrated()
-{
-    const int stabilityTime = 1000;
-    static unsigned long firstCalibTime = millis();
-    static bool isCalib = false;
-
-    if (bno.isFullyCalibrated())
-    {
-        if (!isCalib)
-            firstCalibTime = millis();
-        isCalib = true;
-    }
-    else
-    {
-        isCalib = false;
-    }
-
-    if (isCalib && millis() - firstCalibTime >= stabilityTime)
-        return true;
-
-    return false;
-}
-
-void logCalibStatus()
-{
-    bno.getCalibration(&sys, &gyro, &acc, &mag);
-
-    sprintf(log_msg, "S%dG%dA%dM%d", sys, gyro, acc, mag);
-    nh.logdebug(log_msg);
-}
-
-/*
-    Checks if IMU still working while in main loop()
-    If not resets Arduino
- */
-void healthCheck()
-{
-    static int counter = -2; // Because first 2 check always bad
-    // If all data equal to each other or updates don't accure
-    if (isDataStuck(false) || millis() - last_update_time > 500 /* Restart after inactivity in ms*/)
-    { // IMU disconnected
-        if (counter >= 0) // For debuging
-        {
-            log_str = (reinterpret_cast<const __FlashStringHelper *>(
-# 385 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                     (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 385 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                     "Bad data"
-# 385 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino" 3
-                     ); &__c[0];}))
-# 385 "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/imu_node/imu_node.ino"
-                     ));
-            strcpy(log_msg, log_str.c_str());
-            nh.logwarn(log_msg);
-        }
-
-        counter++;
-        if (counter >= 5) // If 5 samples lost then restart
-        {
-            reset();
-        }
-    }
-    else
-    { // IMU working
-        counter = 0;
-    }
-
-    nh.spinOnce();
+    // Speed of sound = (331.3 + 0.606 * temp) m/s
+    return (delta_time * (331.3 + 0.606 * temperature)) / 2000.0;
 }

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_client/CMakeFiles/progress.marks
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_client/CMakeFiles/progress.marks
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/clean
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ _run_tests_rosserial_client: rosserial/rosserial_client/CMakeFiles/_run_tests_ro
 
 # fast build rule for target.
 _run_tests_rosserial_client/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client.dir/build
 .PHONY : _run_tests_rosserial_client/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/float64_test.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/float64_test.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/float64_test.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/float64_test.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ float64_test: rosserial/rosserial_client/CMakeFiles/float64_test.dir/rule
 
 # fast build rule for target.
 float64_test/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/build
 .PHONY : float64_test/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ _run_tests_rosserial_client_gtest_float64_test: rosserial/rosserial_client/CMake
 
 # fast build rule for target.
 _run_tests_rosserial_client_gtest_float64_test/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_float64_test.dir/build
 .PHONY : _run_tests_rosserial_client_gtest_float64_test/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ run_tests_rosserial_client_gtest_float64_test: rosserial/rosserial_client/CMakeF
 
 # fast build rule for target.
 run_tests_rosserial_client_gtest_float64_test/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_float64_test.dir/build
 .PHONY : run_tests_rosserial_client_gtest_float64_test/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ run_tests_rosserial_client_gtest: rosserial/rosserial_client/CMakeFiles/run_test
 
 # fast build rule for target.
 run_tests_rosserial_client_gtest/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest.dir/build
 .PHONY : run_tests_rosserial_client_gtest/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ _run_tests_rosserial_client_gtest: rosserial/rosserial_client/CMakeFiles/_run_te
 
 # fast build rule for target.
 _run_tests_rosserial_client_gtest/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest.dir/build
 .PHONY : _run_tests_rosserial_client_gtest/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ run_tests_rosserial_client: rosserial/rosserial_client/CMakeFiles/run_tests_ross
 
 # fast build rule for target.
 run_tests_rosserial_client/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client.dir/build
 .PHONY : run_tests_rosserial_client/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ run_tests_rosserial_client_gtest_subscriber_test: rosserial/rosserial_client/CMa
 
 # fast build rule for target.
 run_tests_rosserial_client_gtest_subscriber_test/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/run_tests_rosserial_client_gtest_subscriber_test.dir/build
 .PHONY : run_tests_rosserial_client_gtest_subscriber_test/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ clean_test_results_rosserial_client: rosserial/rosserial_client/CMakeFiles/clean
 
 # fast build rule for target.
 clean_test_results_rosserial_client/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/build.make rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/build.make rosserial/rosserial_client/CMakeFiles/clean_test_results_rosserial_client.dir/build
 .PHONY : clean_test_results_rosserial_client/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ subscriber_test: rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/rule
 
 # fast build rule for target.
 subscriber_test/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build
 .PHONY : subscriber_test/fast
 
 # Convenience name for target.
 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/rule
 .PHONY : rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/rule
 
 # Convenience name for target.
@@ -329,7 +329,7 @@ _run_tests_rosserial_client_gtest_subscriber_test: rosserial/rosserial_client/CM
 
 # fast build rule for target.
 _run_tests_rosserial_client_gtest_subscriber_test/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/_run_tests_rosserial_client_gtest_subscriber_test.dir/build
 .PHONY : _run_tests_rosserial_client_gtest_subscriber_test/fast
 
 test/float64_test.o: test/float64_test.cpp.o
@@ -338,7 +338,7 @@ test/float64_test.o: test/float64_test.cpp.o
 
 # target to build an object file
 test/float64_test.cpp.o:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/test/float64_test.cpp.o
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/test/float64_test.cpp.o
 .PHONY : test/float64_test.cpp.o
 
 test/float64_test.i: test/float64_test.cpp.i
@@ -347,7 +347,7 @@ test/float64_test.i: test/float64_test.cpp.i
 
 # target to preprocess a source file
 test/float64_test.cpp.i:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/test/float64_test.cpp.i
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/test/float64_test.cpp.i
 .PHONY : test/float64_test.cpp.i
 
 test/float64_test.s: test/float64_test.cpp.s
@@ -356,7 +356,7 @@ test/float64_test.s: test/float64_test.cpp.s
 
 # target to generate assembly for a file
 test/float64_test.cpp.s:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/test/float64_test.cpp.s
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/float64_test.dir/build.make rosserial/rosserial_client/CMakeFiles/float64_test.dir/test/float64_test.cpp.s
 .PHONY : test/float64_test.cpp.s
 
 test/subscriber_test.o: test/subscriber_test.cpp.o
@@ -365,7 +365,7 @@ test/subscriber_test.o: test/subscriber_test.cpp.o
 
 # target to build an object file
 test/subscriber_test.cpp.o:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/test/subscriber_test.cpp.o
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/test/subscriber_test.cpp.o
 .PHONY : test/subscriber_test.cpp.o
 
 test/subscriber_test.i: test/subscriber_test.cpp.i
@@ -374,7 +374,7 @@ test/subscriber_test.i: test/subscriber_test.cpp.i
 
 # target to preprocess a source file
 test/subscriber_test.cpp.i:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/test/subscriber_test.cpp.i
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/test/subscriber_test.cpp.i
 .PHONY : test/subscriber_test.cpp.i
 
 test/subscriber_test.s: test/subscriber_test.cpp.s
@@ -383,7 +383,7 @@ test/subscriber_test.s: test/subscriber_test.cpp.s
 
 # target to generate assembly for a file
 test/subscriber_test.cpp.s:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/test/subscriber_test.cpp.s
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/build.make rosserial/rosserial_client/CMakeFiles/subscriber_test.dir/test/subscriber_test.cpp.s
 .PHONY : test/subscriber_test.cpp.s
 
 # Help Target
@@ -427,6 +427,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

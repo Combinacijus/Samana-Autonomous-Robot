@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/rosserial_arduino_generate_messages_cpp"
-  "/home/combinacijus/Documents/ROS/samana_ws/devel/include/rosserial_arduino/Adc.h"
-  "/home/combinacijus/Documents/ROS/samana_ws/devel/include/rosserial_arduino/Test.h"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/rosserial_arduino/Adc.h"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/rosserial_arduino/Test.h"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -43,61 +43,61 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for samana_msgs_generate_messages_cpp.
 
 # Include the progress variables for this target.
 include samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/progress.make
 
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Sonar.h
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Sonar.h
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h
 
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h: /opt/ros/melodic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from samana_msgs/Vector3_32.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /opt/ros/melodic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from samana_msgs/Sonar.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /opt/ros/melodic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from samana_msgs/ImuSmall.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h: /opt/ros/melodic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from samana_msgs/Vector4_32.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Sonar.h: /opt/ros/melodic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from samana_msgs/Sonar.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h: /opt/ros/melodic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from samana_msgs/ImuCalib.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h: /opt/ros/melodic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from samana_msgs/Vector4_32.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h: /opt/ros/melodic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from samana_msgs/Vector3_32.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h: /opt/ros/melodic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from samana_msgs/ImuCalib.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h: /opt/ros/melodic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from samana_msgs/ImuSmall.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs && /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs -e /opt/ros/melodic/share/gencpp/cmake/..
 
 samana_msgs_generate_messages_cpp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp
-samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h
-samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h
-samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Sonar.h
-samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h
-samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h
+samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Sonar.h
+samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector4_32.h
+samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuCalib.h
+samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/Vector3_32.h
+samana_msgs_generate_messages_cpp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/samana_msgs/ImuSmall.h
 samana_msgs_generate_messages_cpp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/build.make
 
 .PHONY : samana_msgs_generate_messages_cpp
@@ -108,10 +108,10 @@ samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/build: samana_msgs_
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/build
 
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/samana_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/samana_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/clean
 
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/depend
 

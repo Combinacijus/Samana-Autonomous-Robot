@@ -1,4 +1,4 @@
-/home/combinacijus/Documents/Samana\ Autonomous\ Robot/Arduino/ArduinoOutput/core/wiring_analog.c.o: \
+/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/core/wiring_analog.c.o: \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/wiring_analog.c \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/wiring_private.h \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h \

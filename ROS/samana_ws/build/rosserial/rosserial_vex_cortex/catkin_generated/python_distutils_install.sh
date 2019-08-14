@@ -14,20 +14,20 @@ fi
 
 echo_and_run() { echo "+ $@" ; "$@" ; }
 
-echo_and_run cd "/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_vex_cortex"
+echo_and_run cd "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_vex_cortex"
 
 # ensure that Python install destination exists
-echo_and_run mkdir -p "$DESTDIR/home/combinacijus/Documents/ROS/samana_ws/install/lib/python2.7/dist-packages"
+echo_and_run mkdir -p "$DESTDIR/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/lib/python2.7/dist-packages"
 
 # Note that PYTHONPATH is pulled from the environment to support installing
 # into one location when some dependencies were installed in another
 # location, #123.
 echo_and_run /usr/bin/env \
-    PYTHONPATH="/home/combinacijus/Documents/ROS/samana_ws/install/lib/python2.7/dist-packages:/home/combinacijus/Documents/ROS/samana_ws/build/lib/python2.7/dist-packages:$PYTHONPATH" \
-    CATKIN_BINARY_DIR="/home/combinacijus/Documents/ROS/samana_ws/build" \
+    PYTHONPATH="/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/lib/python2.7/dist-packages:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/lib/python2.7/dist-packages:$PYTHONPATH" \
+    CATKIN_BINARY_DIR="/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build" \
     "/usr/bin/python2" \
-    "/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_vex_cortex/setup.py" \
-    build --build-base "/home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_vex_cortex" \
+    "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_vex_cortex/setup.py" \
+    build --build-base "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_vex_cortex" \
     install \
     $DESTDIR_ARG \
-    --install-layout=deb --prefix="/home/combinacijus/Documents/ROS/samana_ws/install" --install-scripts="/home/combinacijus/Documents/ROS/samana_ws/install/bin"
+    --install-layout=deb --prefix="/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install" --install-scripts="/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/bin"

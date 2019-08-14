@@ -2,7 +2,7 @@
 DEVELSPACE = 'TRUE' == 'TRUE'
 INSTALLSPACE = 'FALSE' == 'TRUE'
 
-CATKIN_DEVEL_PREFIX = '/home/combinacijus/Documents/ROS/samana_ws/devel'
+CATKIN_DEVEL_PREFIX = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel'
 
 CATKIN_GLOBAL_BIN_DESTINATION = 'bin'
 CATKIN_GLOBAL_ETC_DESTINATION = 'etc'
@@ -20,14 +20,14 @@ CATKIN_PACKAGE_LIBEXEC_DESTINATION = ''
 CATKIN_PACKAGE_PYTHON_DESTINATION = 'lib/python2.7/dist-packages/rosserial_arduino'
 CATKIN_PACKAGE_SHARE_DESTINATION = 'share/rosserial_arduino'
 
-CMAKE_BINARY_DIR = '/home/combinacijus/Documents/ROS/samana_ws/build'
-CMAKE_CURRENT_BINARY_DIR = '/home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino'
-CMAKE_CURRENT_SOURCE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino'
-CMAKE_INSTALL_PREFIX = '/home/combinacijus/Documents/ROS/samana_ws/install'
-CMAKE_SOURCE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/src'
+CMAKE_BINARY_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build'
+CMAKE_CURRENT_BINARY_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino'
+CMAKE_CURRENT_SOURCE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino'
+CMAKE_INSTALL_PREFIX = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install'
+CMAKE_SOURCE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src'
 
-PKG_CMAKE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/devel/share/rosserial_arduino/cmake'
+PKG_CMAKE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/rosserial_arduino/cmake'
 
 PROJECT_NAME = 'rosserial_arduino'
-PROJECT_BINARY_DIR = '/home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino'
-PROJECT_SOURCE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino'
+PROJECT_BINARY_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino'
+PROJECT_SOURCE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino'

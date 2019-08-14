@@ -43,33 +43,33 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for rosserial_arduino_generate_messages_nodejs.
 
 # Include the progress variables for this target.
 include rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/progress.make
 
-rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js
-rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js
+rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js
+rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js
 
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js: /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino/msg/Adc.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from rosserial_arduino/Adc.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino && ../../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino/msg/Adc.msg -Irosserial_arduino:/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino/msg -p rosserial_arduino -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino/msg/Adc.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from rosserial_arduino/Adc.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino && ../../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino/msg/Adc.msg -Irosserial_arduino:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino/msg -p rosserial_arduino -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js: /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino/srv/Test.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from rosserial_arduino/Test.srv"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino && ../../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino/srv/Test.srv -Irosserial_arduino:/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino/msg -p rosserial_arduino -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js: /opt/ros/melodic/lib/gennodejs/gen_nodejs.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino/srv/Test.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from rosserial_arduino/Test.srv"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino && ../../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino/srv/Test.srv -Irosserial_arduino:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino/msg -p rosserial_arduino -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv
 
 rosserial_arduino_generate_messages_nodejs: rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs
-rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js
-rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js
+rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/msg/Adc.js
+rosserial_arduino_generate_messages_nodejs: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/gennodejs/ros/rosserial_arduino/srv/Test.js
 rosserial_arduino_generate_messages_nodejs: rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/build.make
 
 .PHONY : rosserial_arduino_generate_messages_nodejs
@@ -80,10 +80,10 @@ rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodej
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/build
 
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/clean
 
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/depend
 

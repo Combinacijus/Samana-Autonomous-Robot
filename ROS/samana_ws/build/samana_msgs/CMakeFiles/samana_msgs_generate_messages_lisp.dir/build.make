@@ -43,56 +43,56 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for samana_msgs_generate_messages_lisp.
 
 # Include the progress variables for this target.
 include samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/progress.make
 
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp
 
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from samana_msgs/Vector3_32.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from samana_msgs/Sonar.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from samana_msgs/ImuSmall.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from samana_msgs/Vector4_32.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from samana_msgs/Sonar.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from samana_msgs/ImuCalib.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from samana_msgs/Vector4_32.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from samana_msgs/Vector3_32.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Lisp code from samana_msgs/ImuCalib.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp: /opt/ros/melodic/lib/genlisp/gen_lisp.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Lisp code from samana_msgs/ImuSmall.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg
 
 samana_msgs_generate_messages_lisp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp
-samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp
-samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp
-samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp
-samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp
-samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp
+samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Sonar.lisp
+samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector4_32.lisp
+samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuCalib.lisp
+samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/Vector3_32.lisp
+samana_msgs_generate_messages_lisp: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/samana_msgs/msg/ImuSmall.lisp
 samana_msgs_generate_messages_lisp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/build.make
 
 .PHONY : samana_msgs_generate_messages_lisp
@@ -103,10 +103,10 @@ samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/build: samana_msgs
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/build
 
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/samana_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/samana_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/clean
 
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/depend
 

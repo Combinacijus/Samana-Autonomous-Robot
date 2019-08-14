@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for rosserial_test_rosserial_lib.
 
@@ -57,8 +57,8 @@ rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib: rosserial/ross
 
 
 rosserial/rosserial_test/include/rosserial:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating include/rosserial"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_test && /home/combinacijus/Documents/ROS/samana_ws/devel/env.sh rosrun rosserial_test generate_client_ros_lib /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_test/include
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating include/rosserial"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_test && /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/env.sh rosrun rosserial_test generate_client_ros_lib /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_test/include
 
 rosserial_test_rosserial_lib: rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib
 rosserial_test_rosserial_lib: rosserial/rosserial_test/include/rosserial
@@ -72,10 +72,10 @@ rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/build: ross
 .PHONY : rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/build
 
 rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_test && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_test_rosserial_lib.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_test && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_test_rosserial_lib.dir/cmake_clean.cmake
 .PHONY : rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/clean
 
 rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_test /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_test /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_test /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_test /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : rosserial/rosserial_test/CMakeFiles/rosserial_test_rosserial_lib.dir/depend
 

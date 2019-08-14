@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for _samana_msgs_generate_messages_check_deps_ImuSmall.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
 include samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/progress.make
 
 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py samana_msgs /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg std_msgs/Header
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg std_msgs/Header
 
 _samana_msgs_generate_messages_check_deps_ImuSmall: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall
 _samana_msgs_generate_messages_check_deps_ImuSmall: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/build.make
@@ -67,10 +67,10 @@ samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/bu
 .PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/build
 
 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/cmake_clean.cmake
 .PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/clean
 
 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/depend
 

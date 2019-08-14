@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_arduino/CMakeFiles/progress.marks
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino/CMakeFiles/progress.marks
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/clean
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ _rosserial_arduino_generate_messages_check_deps_Test: rosserial/rosserial_arduin
 
 # fast build rule for target.
 _rosserial_arduino_generate_messages_check_deps_Test/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/build.make rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/build.make rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Test.dir/build
 .PHONY : _rosserial_arduino_generate_messages_check_deps_Test/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ rosserial_arduino_generate_messages_cpp: rosserial/rosserial_arduino/CMakeFiles/
 
 # fast build rule for target.
 rosserial_arduino_generate_messages_cpp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_cpp.dir/build
 .PHONY : rosserial_arduino_generate_messages_cpp/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ _rosserial_arduino_generate_messages_check_deps_Adc: rosserial/rosserial_arduino
 
 # fast build rule for target.
 _rosserial_arduino_generate_messages_check_deps_Adc/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/build.make rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/build.make rosserial/rosserial_arduino/CMakeFiles/_rosserial_arduino_generate_messages_check_deps_Adc.dir/build
 .PHONY : _rosserial_arduino_generate_messages_check_deps_Adc/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ rosserial_arduino_generate_messages: rosserial/rosserial_arduino/CMakeFiles/ross
 
 # fast build rule for target.
 rosserial_arduino_generate_messages/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages.dir/build
 .PHONY : rosserial_arduino_generate_messages/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ rosserial_arduino_geneus: rosserial/rosserial_arduino/CMakeFiles/rosserial_ardui
 
 # fast build rule for target.
 rosserial_arduino_geneus/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_geneus.dir/build
 .PHONY : rosserial_arduino_geneus/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ rosserial_arduino_gencpp: rosserial/rosserial_arduino/CMakeFiles/rosserial_ardui
 
 # fast build rule for target.
 rosserial_arduino_gencpp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gencpp.dir/build
 .PHONY : rosserial_arduino_gencpp/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ rosserial_arduino_generate_messages_lisp: rosserial/rosserial_arduino/CMakeFiles
 
 # fast build rule for target.
 rosserial_arduino_generate_messages_lisp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_lisp.dir/build
 .PHONY : rosserial_arduino_generate_messages_lisp/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ rosserial_arduino_generate_messages_py: rosserial/rosserial_arduino/CMakeFiles/r
 
 # fast build rule for target.
 rosserial_arduino_generate_messages_py/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_py.dir/build
 .PHONY : rosserial_arduino_generate_messages_py/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ rosserial_arduino_generate_messages_nodejs: rosserial/rosserial_arduino/CMakeFil
 
 # fast build rule for target.
 rosserial_arduino_generate_messages_nodejs/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_nodejs.dir/build
 .PHONY : rosserial_arduino_generate_messages_nodejs/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ rosserial_arduino_gennodejs: rosserial/rosserial_arduino/CMakeFiles/rosserial_ar
 
 # fast build rule for target.
 rosserial_arduino_gennodejs/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_gennodejs.dir/build
 .PHONY : rosserial_arduino_gennodejs/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ rosserial_arduino_genlisp: rosserial/rosserial_arduino/CMakeFiles/rosserial_ardu
 
 # fast build rule for target.
 rosserial_arduino_genlisp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genlisp.dir/build
 .PHONY : rosserial_arduino_genlisp/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ rosserial_arduino_genpy: rosserial/rosserial_arduino/CMakeFiles/rosserial_arduin
 
 # fast build rule for target.
 rosserial_arduino_genpy/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_genpy.dir/build
 .PHONY : rosserial_arduino_genpy/fast
 
 # Convenience name for target.
 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/rule
 .PHONY : rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -359,7 +359,7 @@ rosserial_arduino_generate_messages_eus: rosserial/rosserial_arduino/CMakeFiles/
 
 # fast build rule for target.
 rosserial_arduino_generate_messages_eus/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/build.make rosserial/rosserial_arduino/CMakeFiles/rosserial_arduino_generate_messages_eus.dir/build
 .PHONY : rosserial_arduino_generate_messages_eus/fast
 
 # Help Target
@@ -399,6 +399,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

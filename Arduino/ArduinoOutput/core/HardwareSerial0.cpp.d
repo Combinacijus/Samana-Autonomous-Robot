@@ -1,4 +1,4 @@
-/home/combinacijus/Documents/Samana\ Autonomous\ Robot/Arduino/ArduinoOutput/core/HardwareSerial0.cpp.o: \
+/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/core/HardwareSerial0.cpp.o: \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/HardwareSerial0.cpp \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/binary.h \

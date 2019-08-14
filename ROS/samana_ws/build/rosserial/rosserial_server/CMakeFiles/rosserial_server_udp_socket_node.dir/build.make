@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Include any dependencies generated for this target.
 include rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/depend.make
@@ -58,17 +58,17 @@ include rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.d
 include rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/flags.make
 
 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o: rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/flags.make
-rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o: /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o -c /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp
+rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o -c /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp
 
 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.i"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp > CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.i
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp > CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.i
 
 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.s"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp -o CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.s
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_server/src/udp_socket_node.cpp -o CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.s
 
 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o.requires:
 
@@ -88,34 +88,34 @@ rosserial_server_udp_socket_node_OBJECTS = \
 # External object files for target rosserial_server_udp_socket_node
 rosserial_server_udp_socket_node_EXTERNAL_OBJECTS =
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libtopic_tools.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libroscpp.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_signals.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librosconsole.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librosconsole_log4cxx.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librosconsole_backend_interface.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libroscpp_serialization.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libxmlrpcpp.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librostime.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libcpp_common.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_system.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_thread.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rosserial_server_udp_socket_node.dir/link.txt --verbose=$(VERBOSE)
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libtopic_tools.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libroscpp.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_signals.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librosconsole.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librosconsole_log4cxx.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librosconsole_backend_interface.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_regex.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libroscpp_serialization.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libxmlrpcpp.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/librostime.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /opt/ros/melodic/lib/libcpp_common.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_system.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node: rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rosserial_server_udp_socket_node.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build: /home/combinacijus/Documents/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node
+rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib/rosserial_server/udp_socket_node
 
 .PHONY : rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build
 
@@ -124,10 +124,10 @@ rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/requi
 .PHONY : rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/requires
 
 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_server_udp_socket_node.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_server_udp_socket_node.dir/cmake_clean.cmake
 .PHONY : rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/clean
 
 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_server /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_server /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/depend
 

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for samana_geneus.
 
@@ -63,10 +63,10 @@ samana/CMakeFiles/samana_geneus.dir/build: samana_geneus
 .PHONY : samana/CMakeFiles/samana_geneus.dir/build
 
 samana/CMakeFiles/samana_geneus.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana && $(CMAKE_COMMAND) -P CMakeFiles/samana_geneus.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana && $(CMAKE_COMMAND) -P CMakeFiles/samana_geneus.dir/cmake_clean.cmake
 .PHONY : samana/CMakeFiles/samana_geneus.dir/clean
 
 samana/CMakeFiles/samana_geneus.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/samana /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/samana /home/combinacijus/Documents/ROS/samana_ws/build/samana/CMakeFiles/samana_geneus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana/CMakeFiles/samana_geneus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : samana/CMakeFiles/samana_geneus.dir/depend
 

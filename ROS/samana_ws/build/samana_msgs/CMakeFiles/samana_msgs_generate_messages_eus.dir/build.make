@@ -43,62 +43,62 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for samana_msgs_generate_messages_eus.
 
 # Include the progress variables for this target.
 include samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/progress.make
 
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/manifest.l
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/manifest.l
 
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from samana_msgs/Vector3_32.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from samana_msgs/Sonar.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from samana_msgs/ImuSmall.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from samana_msgs/Vector4_32.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l: /opt/ros/melodic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from samana_msgs/Sonar.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from samana_msgs/ImuCalib.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from samana_msgs/Vector4_32.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/Vector4_32.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from samana_msgs/Vector3_32.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l: /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from samana_msgs/ImuCalib.msg"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg -Isamana_msgs:/home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l: /opt/ros/melodic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from samana_msgs/ImuSmall.msg"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuSmall.msg -Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg -p samana_msgs -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg
 
-/home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/manifest.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp manifest code for samana_msgs"
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs samana_msgs std_msgs geometry_msgs
+/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/manifest.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp manifest code for samana_msgs"
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs samana_msgs std_msgs geometry_msgs
 
 samana_msgs_generate_messages_eus: samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus
-samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l
-samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l
-samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l
-samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l
-samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l
-samana_msgs_generate_messages_eus: /home/combinacijus/Documents/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/manifest.l
+samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Sonar.l
+samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector4_32.l
+samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuCalib.l
+samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/Vector3_32.l
+samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/msg/ImuSmall.l
+samana_msgs_generate_messages_eus: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/roseus/ros/samana_msgs/manifest.l
 samana_msgs_generate_messages_eus: samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/build.make
 
 .PHONY : samana_msgs_generate_messages_eus
@@ -109,10 +109,10 @@ samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/build: samana_msgs_
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/build
 
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/samana_msgs_generate_messages_eus.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs && $(CMAKE_COMMAND) -P CMakeFiles/samana_msgs_generate_messages_eus.dir/cmake_clean.cmake
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/clean
 
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/ROS/samana_ws/build/samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/depend
 

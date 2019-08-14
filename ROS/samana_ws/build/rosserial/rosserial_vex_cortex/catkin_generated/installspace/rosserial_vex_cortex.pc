@@ -1,8 +1,8 @@
-prefix=/home/combinacijus/Documents/ROS/samana_ws/install
+prefix=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install
 
 Name: rosserial_vex_cortex
 Description: Description of rosserial_vex_cortex
 Version: 0.8.0
 Cflags: 
-Libs: -L/home/combinacijus/Documents/ROS/samana_ws/install/lib 
+Libs: -L/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/lib 
 Requires: 

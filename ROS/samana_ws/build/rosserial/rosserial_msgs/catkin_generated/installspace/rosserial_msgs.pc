@@ -1,8 +1,8 @@
-prefix=/home/combinacijus/Documents/ROS/samana_ws/install
+prefix=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install
 
 Name: rosserial_msgs
 Description: Description of rosserial_msgs
 Version: 0.8.0
-Cflags: -I/home/combinacijus/Documents/ROS/samana_ws/install/include
-Libs: -L/home/combinacijus/Documents/ROS/samana_ws/install/lib 
+Cflags: -I/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/include
+Libs: -L/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/lib 
 Requires: message_runtime
