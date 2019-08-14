@@ -7,7 +7,7 @@ from sys import path as sys_path
 
 from pkgutil import extend_path
 
-__extended_path = "/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_arduino/src".split(";")
+__extended_path = "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_arduino/src".split(";")
 for p in reversed(__extended_path):
     sys_path.insert(0, p)
     del p

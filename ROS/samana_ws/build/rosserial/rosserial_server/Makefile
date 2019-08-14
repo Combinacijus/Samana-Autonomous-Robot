@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_server/CMakeFiles/progress.marks
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_server/CMakeFiles/progress.marks
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/clean
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ rosserial_server_udp_socket_node: rosserial/rosserial_server/CMakeFiles/rosseria
 
 # fast build rule for target.
 rosserial_server_udp_socket_node/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build
 .PHONY : rosserial_server_udp_socket_node/fast
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ rosserial_server_socket_node: rosserial/rosserial_server/CMakeFiles/rosserial_se
 
 # fast build rule for target.
 rosserial_server_socket_node/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build
 .PHONY : rosserial_server_socket_node/fast
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ topic_tools_generate_messages_eus: rosserial/rosserial_server/CMakeFiles/topic_t
 
 # fast build rule for target.
 topic_tools_generate_messages_eus/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build
 .PHONY : topic_tools_generate_messages_eus/fast
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ topic_tools_generate_messages_nodejs: rosserial/rosserial_server/CMakeFiles/topi
 
 # fast build rule for target.
 topic_tools_generate_messages_nodejs/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build
 .PHONY : topic_tools_generate_messages_nodejs/fast
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ topic_tools_generate_messages_lisp: rosserial/rosserial_server/CMakeFiles/topic_
 
 # fast build rule for target.
 topic_tools_generate_messages_lisp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
 .PHONY : topic_tools_generate_messages_lisp/fast
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ topic_tools_generate_messages_py: rosserial/rosserial_server/CMakeFiles/topic_to
 
 # fast build rule for target.
 topic_tools_generate_messages_py/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_py.dir/build
 .PHONY : topic_tools_generate_messages_py/fast
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ topic_tools_generate_messages_cpp: rosserial/rosserial_server/CMakeFiles/topic_t
 
 # fast build rule for target.
 topic_tools_generate_messages_cpp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/build.make rosserial/rosserial_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/build
 .PHONY : topic_tools_generate_messages_cpp/fast
 
 # Convenience name for target.
 rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/rule
 .PHONY : rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/rule
 
 # Convenience name for target.
@@ -284,7 +284,7 @@ rosserial_server_serial_node: rosserial/rosserial_server/CMakeFiles/rosserial_se
 
 # fast build rule for target.
 rosserial_server_serial_node/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build
 .PHONY : rosserial_server_serial_node/fast
 
 src/serial_node.o: src/serial_node.cpp.o
@@ -293,7 +293,7 @@ src/serial_node.o: src/serial_node.cpp.o
 
 # target to build an object file
 src/serial_node.cpp.o:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/src/serial_node.cpp.o
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/src/serial_node.cpp.o
 .PHONY : src/serial_node.cpp.o
 
 src/serial_node.i: src/serial_node.cpp.i
@@ -302,7 +302,7 @@ src/serial_node.i: src/serial_node.cpp.i
 
 # target to preprocess a source file
 src/serial_node.cpp.i:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/src/serial_node.cpp.i
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/src/serial_node.cpp.i
 .PHONY : src/serial_node.cpp.i
 
 src/serial_node.s: src/serial_node.cpp.s
@@ -311,7 +311,7 @@ src/serial_node.s: src/serial_node.cpp.s
 
 # target to generate assembly for a file
 src/serial_node.cpp.s:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/src/serial_node.cpp.s
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_serial_node.dir/src/serial_node.cpp.s
 .PHONY : src/serial_node.cpp.s
 
 src/socket_node.o: src/socket_node.cpp.o
@@ -320,7 +320,7 @@ src/socket_node.o: src/socket_node.cpp.o
 
 # target to build an object file
 src/socket_node.cpp.o:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/src/socket_node.cpp.o
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/src/socket_node.cpp.o
 .PHONY : src/socket_node.cpp.o
 
 src/socket_node.i: src/socket_node.cpp.i
@@ -329,7 +329,7 @@ src/socket_node.i: src/socket_node.cpp.i
 
 # target to preprocess a source file
 src/socket_node.cpp.i:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/src/socket_node.cpp.i
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/src/socket_node.cpp.i
 .PHONY : src/socket_node.cpp.i
 
 src/socket_node.s: src/socket_node.cpp.s
@@ -338,7 +338,7 @@ src/socket_node.s: src/socket_node.cpp.s
 
 # target to generate assembly for a file
 src/socket_node.cpp.s:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/src/socket_node.cpp.s
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_socket_node.dir/src/socket_node.cpp.s
 .PHONY : src/socket_node.cpp.s
 
 src/udp_socket_node.o: src/udp_socket_node.cpp.o
@@ -347,7 +347,7 @@ src/udp_socket_node.o: src/udp_socket_node.cpp.o
 
 # target to build an object file
 src/udp_socket_node.cpp.o:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.o
 .PHONY : src/udp_socket_node.cpp.o
 
 src/udp_socket_node.i: src/udp_socket_node.cpp.i
@@ -356,7 +356,7 @@ src/udp_socket_node.i: src/udp_socket_node.cpp.i
 
 # target to preprocess a source file
 src/udp_socket_node.cpp.i:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.i
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.i
 .PHONY : src/udp_socket_node.cpp.i
 
 src/udp_socket_node.s: src/udp_socket_node.cpp.s
@@ -365,7 +365,7 @@ src/udp_socket_node.s: src/udp_socket_node.cpp.s
 
 # target to generate assembly for a file
 src/udp_socket_node.cpp.s:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.s
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/build.make rosserial/rosserial_server/CMakeFiles/rosserial_server_udp_socket_node.dir/src/udp_socket_node.cpp.s
 .PHONY : src/udp_socket_node.cpp.s
 
 # Help Target
@@ -409,6 +409,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

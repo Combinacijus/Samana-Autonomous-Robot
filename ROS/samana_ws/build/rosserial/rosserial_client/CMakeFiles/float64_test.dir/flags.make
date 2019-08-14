@@ -6,5 +6,5 @@ CXX_FLAGS = -g
 
 CXX_DEFINES = -DROS_BUILD_SHARED_LIBS=1
 
-CXX_INCLUDES = -I/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_client/src -I/home/combinacijus/Documents/ROS/samana_ws/devel/include -I/opt/ros/melodic/include -I/usr/src/googletest/googletest/include 
+CXX_INCLUDES = -I/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_client/src -I/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include -I/opt/ros/melodic/include -I/usr/src/googletest/googletest/include 
 

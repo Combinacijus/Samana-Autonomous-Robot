@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial
-# Build directory: /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial
+# Source directory: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial
+# Build directory: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

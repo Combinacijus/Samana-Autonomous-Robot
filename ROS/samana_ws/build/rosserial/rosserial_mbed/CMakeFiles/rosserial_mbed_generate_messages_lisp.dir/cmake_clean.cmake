@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/rosserial_mbed_generate_messages_lisp"
-  "/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/rosserial_mbed/msg/Adc.lisp"
-  "/home/combinacijus/Documents/ROS/samana_ws/devel/share/common-lisp/ros/rosserial_mbed/srv/Test.lisp"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/rosserial_mbed/msg/Adc.lisp"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/common-lisp/ros/rosserial_mbed/srv/Test.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

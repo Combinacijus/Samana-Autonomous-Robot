@@ -1,12 +1,17 @@
 /*
     Gintaras Grebliunas
     Combinacijus@gmail.com
-    ROS node which handles many ultrasonic sensors
+    ROS node which handles many ultrasonic and bump sensors
 
-    Connections:
-    VCC-5V  GND-GND  TRIG-PIN_TRIG_ALL  ECHO-PIN_ECHO_X
-    10k Pulldown resistor to every ECHO pin
-    Single Arduino Nano should be able to handle 10 sensors no problem
+    Connections ultrasonic:
+        VCC-5V  GND-GND  TRIG-PIN_TRIG_ALL  ECHO-PIN_ECHO_X
+        10k Pulldown resistor to every ECHO pin (else random values)
+        A row of pins used from D2 to D12
+
+    Single Arduino Nano should be able to handle 10 distance sensors no problem
+
+    Connections shift register: TODO
+        D13 all bump sensors input (multiplexed)
 
     Times:
     digitalRead()                                 -  4us
@@ -20,44 +25,55 @@
 
 #include <FastGPIO.h>
 #include <TimerOne.h>
-#include <ros.h>
+// ros_sonar.h -> typedef NodeHandle_<ArduinoHardware, 3, 3, 40, 150> NodeHandle;
+#include <ros_sonar.h> // Special ros.h for this library
 #include <samana_msgs/Sonar.h>
 #include <std_msgs/UInt16MultiArray.h>
+#include "shift_register.h"
 
-#define BAUD_RATE 1000000
-#define SENORS_COUNT 4  // NOTE: Number of sensors
+
+#define BAUD_RATE 57600  // Even 2.5k looses sync
+#define SENORS_COUNT 10  // NOTE: Number of sensors
 
 /*
     Speed of sound = (331.3 + 0.606 * temp) m/s
     At 40 deg ~ 355 m/s, -10 ~ 337 m/s
 */
-#define MAX_SOUND_SP 355
 #define MIN_SOUND_SP 337
+#define MAX_SOUND_SP 355
 
 /*
     In milliseconds. Should be long enough to not catch previuos echo
     At lowest speed in 50ms max distance 8.4m, 40ms - 6.7m
  */
-#define TRIGGER_PERIOD 40
+#define TRIGGER_PERIOD 40 // In ms
 
 /*
+    NOTE:
     ISR_PERIOD: In microseconds. Should be long enough to execute
     pin readouts and leave time for other code(bare minimum 6us per pin)
     60us might introduce up to 1cm measurement error
+    Measured: 10 sensors = ~40us
 */
-#define ISR_PERIOD 50
+#define ISR_PERIOD 60      // In us
 #define STOP -1            // Pin state when we don't watch pulse state
 #define UNDEF_TIME 1234567 // Undefined dtX time in microseconds
 #define UNDEF_DIST -1      // Undefined distance
 
 // NOTE: Single trig pin triggers all sensors
-#define PIN_TRIG_ALL 4
+#define PIN_TRIG_ALL 2
 
 // NOTE: Define echo pins for every sensor
-#define PIN_ECHO_1 5
-#define PIN_ECHO_2 6
-#define PIN_ECHO_3 7
-#define PIN_ECHO_4 8
+#define PIN_ECHO_1 3
+#define PIN_ECHO_2 4
+#define PIN_ECHO_3 5
+#define PIN_ECHO_4 6
+#define PIN_ECHO_5 7
+#define PIN_ECHO_6 8
+#define PIN_ECHO_7 9
+#define PIN_ECHO_8 10
+#define PIN_ECHO_9 11
+#define PIN_ECHO_10 12
 
 volatile unsigned long dt[SENORS_COUNT]; // Elapsed times in HIGH state
 volatile unsigned long tt;
@@ -71,12 +87,11 @@ ros::Publisher sonar_pub("sonar", &sonar_msg);
 int16_t distances[SENORS_COUNT];
 int8_t temperature = 20; // Assuming temperature
 
-
 void setup()
 {
     for (int i = 0; i < SENORS_COUNT; ++i)
         state_echo[i] = STOP;
-    
+
     FastGPIO::Pin<PIN_TRIG_ALL>::setOutput(LOW);
 
     // NOTE: Set echo pins to INPUT mode
@@ -84,6 +99,12 @@ void setup()
     FastGPIO::Pin<PIN_ECHO_2>::setInput();
     FastGPIO::Pin<PIN_ECHO_3>::setInput();
     FastGPIO::Pin<PIN_ECHO_4>::setInput();
+    FastGPIO::Pin<PIN_ECHO_5>::setInput();
+    FastGPIO::Pin<PIN_ECHO_6>::setInput();
+    FastGPIO::Pin<PIN_ECHO_7>::setInput();
+    FastGPIO::Pin<PIN_ECHO_8>::setInput();
+    FastGPIO::Pin<PIN_ECHO_9>::setInput();
+    FastGPIO::Pin<PIN_ECHO_10>::setInput();
 
     // Serial.begin(230400);
     // while (!Serial)
@@ -98,7 +119,7 @@ void setup()
     sonar_msg.dist_length = SENORS_COUNT;
     sonar_msg.header.frame_id = "base_link";
 
-    // Init timer interupt
+    // Init timer interupt. MAIN LOOP IS AN INTERRUPT multiPulseIn
     Timer1.initialize(ISR_PERIOD);
     Timer1.attachInterrupt(multiPulseIn);
 }
@@ -139,69 +160,64 @@ void loop()
 */
 void multiPulseIn()
 {
-    //    tt = micros();
-    // TODO: REDUCE REPETITION
-    /*
-        NOTE: Make this block for every sensor change X to a number
-        if (FastGPIO::Pin<PIN_ECHO_X>::isInputHigh() && state_echo_X == LOW) // Rising
+    tt = micros();
+
+    for (int i = 0; i < SENORS_COUNT; ++i)
+    {
+        if (state_echo[i] == LOW && pinIsHigh(i))
         {
-            state_echo_X = HIGH;
-            dtX = micros();
+            // High state started record time
+            state_echo[i] = HIGH;
+            dt[i] = micros();
         }
-        else if(!FastGPIO::Pin<PIN_ECHO_X>::isInputHigh() && state_echo_X == HIGH) // Falling
+        else if (state_echo[i] == HIGH && !pinIsHigh(i)) // Falling
         {
-            state_echo_X = LOW;
-            dtX = micros() - dtX;
+            // High state ended don't change dt until next loop
+            state_echo[i] = STOP;
+            dt[i] = micros() - dt[i];
         }
-    */
-
-    if (state_echo[1] == LOW && FastGPIO::Pin<PIN_ECHO_1>::isInputHigh()) // Rising
-    {
-        // High state started record time
-        state_echo[1] = HIGH;
-        dt[1] = micros();
-    }
-    else if (state_echo[1] == HIGH &&!FastGPIO::Pin<PIN_ECHO_1>::isInputHigh()) // Falling
-    {
-        // High state ended don't change dt until next loop
-        state_echo[1] = STOP;
-        dt[1] = micros() - dt[1];
     }
 
-    if (state_echo[2] == LOW && FastGPIO::Pin<PIN_ECHO_2>::isInputHigh()) // Rising
-    {
-        state_echo[2] = HIGH;
-        dt[2] = micros();
-    }
-    else if (state_echo[2] == HIGH && !FastGPIO::Pin<PIN_ECHO_2>::isInputHigh()) // Falling
-    {
-        state_echo[2] = STOP;
-        dt[2] = micros() - dt[2];
-    }
+    tt = micros() - tt;
+    // char log_msg[20];
+    // sprintf(log_msg, "%d", tt);
+    // nh.loginfo(log_msg);
+    // nh.spinOnce();
+}
 
-    if (state_echo[3] == LOW && FastGPIO::Pin<PIN_ECHO_3>::isInputHigh()) // Rising
+/*
+    Returns if pins is high using fastGPIO library and predefined pin values
+    pinIsHigh(0)  ->  return FastGPIO::Pin<PIN_ECHO_1>::isInputHigh(); etc.
+*/
+bool pinIsHigh(int ind)
+{
+    // NOTE: Add cases for every sensor
+    switch (ind)
     {
-        state_echo[3] = HIGH;
-        dt[3] = micros();
-    }
-    else if (state_echo[3] == HIGH && !FastGPIO::Pin<PIN_ECHO_3>::isInputHigh()) // Falling
-    {
-        state_echo[3] = STOP;
-        dt[3] = micros() - dt[3];
-    }
+    case 0:
+        return FastGPIO::Pin<PIN_ECHO_1>::isInputHigh();
+    case 1:
+        return FastGPIO::Pin<PIN_ECHO_2>::isInputHigh();
+    case 2:
+        return FastGPIO::Pin<PIN_ECHO_3>::isInputHigh();
+    case 3:
+        return FastGPIO::Pin<PIN_ECHO_4>::isInputHigh();
+    case 4:
+        return FastGPIO::Pin<PIN_ECHO_5>::isInputHigh();
+    case 5:
+        return FastGPIO::Pin<PIN_ECHO_6>::isInputHigh();
+    case 6:
+        return FastGPIO::Pin<PIN_ECHO_7>::isInputHigh();
+    case 7:
+        return FastGPIO::Pin<PIN_ECHO_8>::isInputHigh();
+    case 8:
+        return FastGPIO::Pin<PIN_ECHO_9>::isInputHigh();
+    case 9:
+        return FastGPIO::Pin<PIN_ECHO_10>::isInputHigh();
 
-    if (state_echo[4] == LOW && FastGPIO::Pin<PIN_ECHO_4>::isInputHigh()) // Rising
-    {
-        state_echo[4] = HIGH;
-        dt[4] = micros();
+    default: // Index not in range
+        return 0;
     }
-    else if (state_echo[4] == HIGH && !FastGPIO::Pin<PIN_ECHO_4>::isInputHigh()) // Falling
-    {
-        state_echo[4] = STOP;
-        dt[4] = micros() - dt[4];
-    }
-
-    // tt = micros() - tt;
 }
 
 /*
@@ -209,7 +225,7 @@ void multiPulseIn()
     TODO: add temperature to equation
 
     @param delta_time: elapsed time between pulse and echo in microseconds (us)
-    @return: distance in mm or -1 if data is invalid
+    @return: distance in mm or -1 if data is invalid TODO
 */
 int getDistance(long delta_time)
 {
@@ -219,7 +235,7 @@ int getDistance(long delta_time)
     */
     // if (delta_time >= TRIGGER_PERIOD * 1000 ||
     //     delta_time <= 80)
-    //     return UNDEF_DIST;
+        // return UNDEF_DIST;
 
     // Speed of sound = (331.3 + 0.606 * temp) m/s
     return (delta_time * (331.3 + 0.606 * temperature)) / 2000.0;

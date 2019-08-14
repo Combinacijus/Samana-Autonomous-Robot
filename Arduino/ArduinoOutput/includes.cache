@@ -10,67 +10,42 @@
     "Includepath": "/opt/arduino-1.8.9/hardware/arduino/avr/variants/eightanaloginputs"
   },
   {
-    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
-    "Include": "Wire.h",
-    "Includepath": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/Wire/src"
+    "Sourcefile": "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/sketch/distance_sensors_node.ino.cpp",
+    "Include": "FastGPIO.h",
+    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/FastGPIO"
   },
   {
-    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
-    "Include": "Adafruit_Sensor.h",
-    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/Adafruit_Unified_Sensor"
-  },
-  {
-    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
-    "Include": "Adafruit_BNO055.h",
-    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055"
-  },
-  {
-    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
-    "Include": "EEPROM.h",
-    "Includepath": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/EEPROM/src"
-  },
-  {
-    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
-    "Include": "ros.h",
-    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/ros_lib"
-  },
-  {
-    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Sourcefile": "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/sketch/distance_sensors_node.ino.cpp",
     "Include": "TimerOne.h",
     "Includepath": "/home/combinacijus/Documents/Arduino/libraries/TimerOne"
   },
   {
-    "Sourcefile": "/home/combinacijus/Documents/Samana Autonomous Robot/Arduino/ArduinoOutput/sketch/imu_node.ino.cpp",
+    "Sourcefile": "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/sketch/distance_sensors_node.ino.cpp",
+    "Include": "ros_sonar.h",
+    "Includepath": "/home/combinacijus/Documents/Arduino/libraries/ros_lib_sonar"
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/sketch/distance_sensors_node.ino.cpp",
     "Include": "",
     "Includepath": ""
   },
   {
-    "Sourcefile": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/Wire/src/Wire.cpp",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "/opt/arduino-1.8.9/hardware/arduino/avr/libraries/Wire/src/utility/twi.c",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/Adafruit_BNO055/Adafruit_BNO055.cpp",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/ros_lib/duration.cpp",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/ros_lib/time.cpp",
+    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/FastGPIO/FastGPIO.cpp",
     "Include": "",
     "Includepath": ""
   },
   {
     "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/TimerOne/TimerOne.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/ros_lib_sonar/duration.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/combinacijus/Documents/Arduino/libraries/ros_lib_sonar/time.cpp",
     "Include": "",
     "Includepath": ""
   }

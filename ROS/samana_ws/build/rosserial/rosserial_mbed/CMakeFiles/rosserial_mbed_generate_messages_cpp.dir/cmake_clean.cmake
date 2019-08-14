@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/rosserial_mbed_generate_messages_cpp"
-  "/home/combinacijus/Documents/ROS/samana_ws/devel/include/rosserial_mbed/Adc.h"
-  "/home/combinacijus/Documents/ROS/samana_ws/devel/include/rosserial_mbed/Test.h"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/rosserial_mbed/Adc.h"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include/rosserial_mbed/Test.h"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,4 +1,4 @@
-/home/combinacijus/Documents/Samana\ Autonomous\ Robot/Arduino/ArduinoOutput/core/PluggableUSB.cpp.o: \
+/home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/ArduinoOutput/core/PluggableUSB.cpp.o: \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/PluggableUSB.cpp \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/USBAPI.h \
  /opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h \

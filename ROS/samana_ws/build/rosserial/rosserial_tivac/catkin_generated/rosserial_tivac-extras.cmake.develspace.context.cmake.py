@@ -2,7 +2,7 @@
 DEVELSPACE = 'TRUE' == 'TRUE'
 INSTALLSPACE = 'FALSE' == 'TRUE'
 
-CATKIN_DEVEL_PREFIX = '/home/combinacijus/Documents/ROS/samana_ws/devel'
+CATKIN_DEVEL_PREFIX = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel'
 
 CATKIN_GLOBAL_BIN_DESTINATION = 'bin'
 CATKIN_GLOBAL_ETC_DESTINATION = 'etc'
@@ -20,14 +20,14 @@ CATKIN_PACKAGE_LIBEXEC_DESTINATION = ''
 CATKIN_PACKAGE_PYTHON_DESTINATION = 'lib/python2.7/dist-packages/rosserial_tivac'
 CATKIN_PACKAGE_SHARE_DESTINATION = 'share/rosserial_tivac'
 
-CMAKE_BINARY_DIR = '/home/combinacijus/Documents/ROS/samana_ws/build'
-CMAKE_CURRENT_BINARY_DIR = '/home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_tivac'
-CMAKE_CURRENT_SOURCE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_tivac'
-CMAKE_INSTALL_PREFIX = '/home/combinacijus/Documents/ROS/samana_ws/install'
-CMAKE_SOURCE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/src'
+CMAKE_BINARY_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build'
+CMAKE_CURRENT_BINARY_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_tivac'
+CMAKE_CURRENT_SOURCE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_tivac'
+CMAKE_INSTALL_PREFIX = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install'
+CMAKE_SOURCE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src'
 
-PKG_CMAKE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/devel/share/rosserial_tivac/cmake'
+PKG_CMAKE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/share/rosserial_tivac/cmake'
 
 PROJECT_NAME = 'rosserial_tivac'
-PROJECT_BINARY_DIR = '/home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_tivac'
-PROJECT_SOURCE_DIR = '/home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_tivac'
+PROJECT_BINARY_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_tivac'
+PROJECT_SOURCE_DIR = '/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_tivac'

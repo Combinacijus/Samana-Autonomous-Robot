@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/ROS/samana_ws/build/samana/CMakeFiles/progress.marks
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/ROS/samana_ws/build/CMakeFiles 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/samana/CMakeFiles/progress.marks
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/clean
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/preinstall
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 samana/CMakeFiles/samana_geneus.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_geneus.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_geneus.dir/rule
 .PHONY : samana/CMakeFiles/samana_geneus.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ samana_geneus: samana/CMakeFiles/samana_geneus.dir/rule
 
 # fast build rule for target.
 samana_geneus/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_geneus.dir/build.make samana/CMakeFiles/samana_geneus.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_geneus.dir/build.make samana/CMakeFiles/samana_geneus.dir/build
 .PHONY : samana_geneus/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_generate_messages.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages.dir/rule
 .PHONY : samana/CMakeFiles/samana_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ samana_generate_messages: samana/CMakeFiles/samana_generate_messages.dir/rule
 
 # fast build rule for target.
 samana_generate_messages/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages.dir/build.make samana/CMakeFiles/samana_generate_messages.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages.dir/build.make samana/CMakeFiles/samana_generate_messages.dir/build
 .PHONY : samana_generate_messages/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_generate_messages_cpp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_cpp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_cpp.dir/rule
 .PHONY : samana/CMakeFiles/samana_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ samana_generate_messages_cpp: samana/CMakeFiles/samana_generate_messages_cpp.dir
 
 # fast build rule for target.
 samana_generate_messages_cpp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_cpp.dir/build.make samana/CMakeFiles/samana_generate_messages_cpp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_cpp.dir/build.make samana/CMakeFiles/samana_generate_messages_cpp.dir/build
 .PHONY : samana_generate_messages_cpp/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_gencpp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_gencpp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_gencpp.dir/rule
 .PHONY : samana/CMakeFiles/samana_gencpp.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ samana_gencpp: samana/CMakeFiles/samana_gencpp.dir/rule
 
 # fast build rule for target.
 samana_gencpp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_gencpp.dir/build.make samana/CMakeFiles/samana_gencpp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_gencpp.dir/build.make samana/CMakeFiles/samana_gencpp.dir/build
 .PHONY : samana_gencpp/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_genlisp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_genlisp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_genlisp.dir/rule
 .PHONY : samana/CMakeFiles/samana_genlisp.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ samana_genlisp: samana/CMakeFiles/samana_genlisp.dir/rule
 
 # fast build rule for target.
 samana_genlisp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_genlisp.dir/build.make samana/CMakeFiles/samana_genlisp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_genlisp.dir/build.make samana/CMakeFiles/samana_genlisp.dir/build
 .PHONY : samana_genlisp/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_generate_messages_py.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_py.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_py.dir/rule
 .PHONY : samana/CMakeFiles/samana_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ samana_generate_messages_py: samana/CMakeFiles/samana_generate_messages_py.dir/r
 
 # fast build rule for target.
 samana_generate_messages_py/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_py.dir/build.make samana/CMakeFiles/samana_generate_messages_py.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_py.dir/build.make samana/CMakeFiles/samana_generate_messages_py.dir/build
 .PHONY : samana_generate_messages_py/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_generate_messages_nodejs.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_nodejs.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_nodejs.dir/rule
 .PHONY : samana/CMakeFiles/samana_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ samana_generate_messages_nodejs: samana/CMakeFiles/samana_generate_messages_node
 
 # fast build rule for target.
 samana_generate_messages_nodejs/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_nodejs.dir/build.make samana/CMakeFiles/samana_generate_messages_nodejs.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_nodejs.dir/build.make samana/CMakeFiles/samana_generate_messages_nodejs.dir/build
 .PHONY : samana_generate_messages_nodejs/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_generate_messages_lisp.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_lisp.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_lisp.dir/rule
 .PHONY : samana/CMakeFiles/samana_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ samana_generate_messages_lisp: samana/CMakeFiles/samana_generate_messages_lisp.d
 
 # fast build rule for target.
 samana_generate_messages_lisp/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_lisp.dir/build.make samana/CMakeFiles/samana_generate_messages_lisp.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_lisp.dir/build.make samana/CMakeFiles/samana_generate_messages_lisp.dir/build
 .PHONY : samana_generate_messages_lisp/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_gennodejs.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_gennodejs.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_gennodejs.dir/rule
 .PHONY : samana/CMakeFiles/samana_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ samana_gennodejs: samana/CMakeFiles/samana_gennodejs.dir/rule
 
 # fast build rule for target.
 samana_gennodejs/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_gennodejs.dir/build.make samana/CMakeFiles/samana_gennodejs.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_gennodejs.dir/build.make samana/CMakeFiles/samana_gennodejs.dir/build
 .PHONY : samana_gennodejs/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_genpy.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_genpy.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_genpy.dir/rule
 .PHONY : samana/CMakeFiles/samana_genpy.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ samana_genpy: samana/CMakeFiles/samana_genpy.dir/rule
 
 # fast build rule for target.
 samana_genpy/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_genpy.dir/build.make samana/CMakeFiles/samana_genpy.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_genpy.dir/build.make samana/CMakeFiles/samana_genpy.dir/build
 .PHONY : samana_genpy/fast
 
 # Convenience name for target.
 samana/CMakeFiles/samana_generate_messages_eus.dir/rule:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_eus.dir/rule
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_eus.dir/rule
 .PHONY : samana/CMakeFiles/samana_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -329,7 +329,7 @@ samana_generate_messages_eus: samana/CMakeFiles/samana_generate_messages_eus.dir
 
 # fast build rule for target.
 samana_generate_messages_eus/fast:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_eus.dir/build.make samana/CMakeFiles/samana_generate_messages_eus.dir/build
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_eus.dir/build.make samana/CMakeFiles/samana_generate_messages_eus.dir/build
 .PHONY : samana_generate_messages_eus/fast
 
 # Help Target
@@ -367,6 +367,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

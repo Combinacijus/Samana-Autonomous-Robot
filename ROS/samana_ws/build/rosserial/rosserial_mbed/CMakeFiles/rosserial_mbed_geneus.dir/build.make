@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/combinacijus/Documents/ROS/samana_ws/src
+CMAKE_SOURCE_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/combinacijus/Documents/ROS/samana_ws/build
+CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build
 
 # Utility rule file for rosserial_mbed_geneus.
 
@@ -63,10 +63,10 @@ rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/build: rosserial_m
 .PHONY : rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/build
 
 rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/clean:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_mbed && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_mbed_geneus.dir/cmake_clean.cmake
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_mbed && $(CMAKE_COMMAND) -P CMakeFiles/rosserial_mbed_geneus.dir/cmake_clean.cmake
 .PHONY : rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/clean
 
 rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/depend:
-	cd /home/combinacijus/Documents/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/ROS/samana_ws/src /home/combinacijus/Documents/ROS/samana_ws/src/rosserial/rosserial_mbed /home/combinacijus/Documents/ROS/samana_ws/build /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_mbed /home/combinacijus/Documents/ROS/samana_ws/build/rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/rosserial_mbed /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_mbed /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : rosserial/rosserial_mbed/CMakeFiles/rosserial_mbed_geneus.dir/depend
 
