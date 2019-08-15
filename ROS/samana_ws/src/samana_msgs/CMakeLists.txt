@@ -49,6 +49,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate messages in the 'msg' folder
 add_message_files(FILES
+  Bump.msg
   Sonar.msg
   Vector4_32.msg
   Vector3_32.msg

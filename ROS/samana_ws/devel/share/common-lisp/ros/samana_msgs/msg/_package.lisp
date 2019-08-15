@@ -1,6 +1,8 @@
 (cl:defpackage samana_msgs-msg
   (:use )
   (:export
+   "<BUMP>"
+   "BUMP"
    "<IMUCALIB>"
    "IMUCALIB"
    "<IMUSMALL>"

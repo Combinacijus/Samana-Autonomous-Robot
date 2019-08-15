@@ -1,3 +1,4 @@
+from ._Bump import *
 from ._ImuCalib import *
 from ._ImuSmall import *
 from ._Sonar import *
