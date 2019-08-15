@@ -10,8 +10,9 @@
 
     Single Arduino Nano should be able to handle 10 distance sensors no problem
 
-    Connections shift register: TODO
-        D13 all bump sensors input (multiplexed)
+    Connections shift register:
+        See shift_register.h defined values
+        (Might be) A0-A3, D13
 
     Times:
     digitalRead()                                 -  4us
@@ -19,6 +20,8 @@
 
     FastGPIO requires knowledge on pin numbers in compile time
     so we have a lot of copy paste code
+
+    TODO: read current temperature from ROS topic
 
     Use find to read all 'NOTE:' comments
 */
@@ -29,11 +32,11 @@
 #include <ros_sonar.h> // Special ros.h for this library
 #include <samana_msgs/Sonar.h>
 #include <std_msgs/UInt16MultiArray.h>
+#include <samana_msgs/Bump.h>
 #include "shift_register.h"
 
-
-#define BAUD_RATE 57600  // Even 2.5k looses sync
-#define SENORS_COUNT 10  // NOTE: Number of sensors
+#define BAUD_RATE 57600 // Even at 2.5k looses sync
+#define SENORS_COUNT 10 // NOTE: Number of sensors
 
 /*
     Speed of sound = (331.3 + 0.606 * temp) m/s
@@ -41,6 +44,7 @@
 */
 #define MIN_SOUND_SP 337
 #define MAX_SOUND_SP 355
+#define MIN_DIST 20 // Minimum distance ultrasonic can measure
 
 /*
     In milliseconds. Should be long enough to not catch previuos echo
@@ -82,17 +86,23 @@ int state_echo[SENORS_COUNT]; // Old echo pin states
 
 // ROS variables
 ros::NodeHandle nh;
+// Distance sensors
 samana_msgs::Sonar sonar_msg;
 ros::Publisher sonar_pub("sonar", &sonar_msg);
 int16_t distances[SENORS_COUNT];
 int8_t temperature = 20; // Assuming temperature
+// Bump sensors
+samana_msgs::Bump bump_msg;
+ros::Publisher bump_pub("bump", &bump_msg);
+ShiftReg shift_reg(2);    // NOTE: change pins in library header defines
+int16_t bump_sensor_bits; // Each bit means if sensor is triggered or not
 
 void setup()
 {
     for (int i = 0; i < SENORS_COUNT; ++i)
         state_echo[i] = STOP;
 
-    FastGPIO::Pin<PIN_TRIG_ALL>::setOutput(LOW);
+    FastGPIO::Pin<PIN_TRIG_ALL>::setOutputLow();
 
     // NOTE: Set echo pins to INPUT mode
     FastGPIO::Pin<PIN_ECHO_1>::setInput();
@@ -106,22 +116,24 @@ void setup()
     FastGPIO::Pin<PIN_ECHO_9>::setInput();
     FastGPIO::Pin<PIN_ECHO_10>::setInput();
 
-    // Serial.begin(230400);
-    // while (!Serial)
-    //     ;
-
     // ROS serial node setup
     nh.getHardware()->setBaud(BAUD_RATE);
     nh.initNode();
     nh.advertise(sonar_pub);
+    nh.advertise(bump_pub);
     while (!nh.connected())
         nh.spinOnce();
     sonar_msg.dist_length = SENORS_COUNT;
     sonar_msg.header.frame_id = "base_link";
+    bump_msg.header.frame_id = "base_link";
 
     // Init timer interupt. MAIN LOOP IS AN INTERRUPT multiPulseIn
     Timer1.initialize(ISR_PERIOD);
     Timer1.attachInterrupt(multiPulseIn);
+
+    // Serial.begin(BAUD_RATE);
+    // while (!Serial)
+    //     ;
 }
 
 void loop()
@@ -140,8 +152,14 @@ void loop()
         state_echo[i] = LOW;
     // Now timer interrupt will act like pulseIn() for all echo pins
 
-    delay(TRIGGER_PERIOD);
-    // After delay data is collected and can be used
+    // Delay for TRIGGER_PERIOD meanwhile doing bump sensor updates
+    unsigned long long tmp_time = millis();
+    while (millis() - tmp_time < TRIGGER_PERIOD - 1)
+    {
+        bump_sensor_update();
+    }
+
+    // After delay data is already collected by multiPulseIn and can be used
 
     for (int i = 0; i < SENORS_COUNT; ++i)
         distances[i] = getDistance(dt[i]);
@@ -160,7 +178,7 @@ void loop()
 */
 void multiPulseIn()
 {
-    tt = micros();
+    // tt = micros();
 
     for (int i = 0; i < SENORS_COUNT; ++i)
     {
@@ -178,7 +196,7 @@ void multiPulseIn()
         }
     }
 
-    tt = micros() - tt;
+    // tt = micros() - tt;
     // char log_msg[20];
     // sprintf(log_msg, "%d", tt);
     // nh.loginfo(log_msg);
@@ -222,21 +240,39 @@ bool pinIsHigh(int ind)
 
 /*
     Returns distanc (mm) given time (us)
-    TODO: add temperature to equation
 
     @param delta_time: elapsed time between pulse and echo in microseconds (us)
-    @return: distance in mm or -1 if data is invalid TODO
+    @return: distance in mm or -1 if data is invalid
 */
 int getDistance(long delta_time)
 {
-    /*
-        Check validity of trigger time
-        if 
-    */
-    // if (delta_time >= TRIGGER_PERIOD * 1000 ||
-    //     delta_time <= 80)
-        // return UNDEF_DIST;
+    // Check validity of trigger time
 
     // Speed of sound = (331.3 + 0.606 * temp) m/s
-    return (delta_time * (331.3 + 0.606 * temperature)) / 2000.0;
+    int speed_of_sound = 331.3 + 0.606 * temperature;
+    int dist = (delta_time * speed_of_sound) / 2000.0; // In mm
+
+    int max_dist = (TRIGGER_PERIOD * speed_of_sound) / 2000.0; // In mm
+    if (dist >= max_dist || dist < MIN_DIST)
+        return UNDEF_DIST;
+
+    return dist;
+}
+
+/*
+    Reads bump sensor data by multiplexing with shift register
+    and after reading sets outputs as inputs to light up leds
+    Takes about 400us
+*/
+void bump_sensor_update()
+{
+    shift_reg.clear();
+    bump_sensor_bits = shift_reg.read_all();
+    shift_reg.write_all(bump_sensor_bits);
+
+    // Ros publishing
+    bump_msg.header.stamp = nh.now();
+    bump_msg.bump_bits = bump_sensor_bits;
+    bump_pub.publish(&bump_msg);
+    nh.spinOnce();
 }

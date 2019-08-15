@@ -22,6 +22,7 @@
 
 #include <FastGPIO.h>
 
+// NOTE: pin values
 #define PIN_DATA A0
 #define PIN_LATCH A1
 #define PIN_CLOCK A2

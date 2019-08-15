@@ -21,7 +21,7 @@ ShiftReg::ShiftReg(int _bytes_count)
 */
 void ShiftReg::clear()
 {
-	write_all(0);
+	write_all(0, true);
 	// Master reset doesn't work for some reason
 }
 
