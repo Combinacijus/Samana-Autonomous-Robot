@@ -1,7 +1,7 @@
 {
     "board": "arduino:avr:nano",
     "configuration": "cpu=atmega328",
-    "port": "/dev/ttyUSB0",
+    "port": "/dev/ttyUSB1",
     "sketch": "distance_sensors_node.ino",
     "output": "../ArduinoOutput"
 }
