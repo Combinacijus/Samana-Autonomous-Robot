@@ -109,9 +109,10 @@ int ShiftReg::read_all()
 	for (int i = 0; i < 8 * bytes_count; ++i)
 	{
 		write_single_bit(i == 0); // First bit is 1 and shifts to the end
-		delayMicroseconds(2); // Wait for register to update (if delay 1us register skips one read)
+		delayMicroseconds(3); // Wait for register to update (even at 2us skips reads)
 		input = input | (FastGPIO::Pin<PIN_IN>::isInputHigh() << i);
 	}
+	write_single_bit(0); // To turn off last bit
 
 	return input;
 }
