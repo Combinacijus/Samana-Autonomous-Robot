@@ -213,6 +213,21 @@ _samana_msgs_generate_messages_check_deps_ImuSmall/fast:
 .PHONY : _samana_msgs_generate_messages_check_deps_ImuSmall/fast
 
 # Convenience name for target.
+samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/rule
+.PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/rule
+
+# Convenience name for target.
+_samana_msgs_generate_messages_check_deps_Int16Array: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/rule
+
+.PHONY : _samana_msgs_generate_messages_check_deps_Int16Array
+
+# fast build rule for target.
+_samana_msgs_generate_messages_check_deps_Int16Array/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_Int16Array/fast
+
+# Convenience name for target.
 samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 .PHONY : samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
@@ -468,21 +483,6 @@ geometry_msgs_generate_messages_eus/fast:
 .PHONY : geometry_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Sonar.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Sonar.dir/rule
-.PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Sonar.dir/rule
-
-# Convenience name for target.
-_samana_msgs_generate_messages_check_deps_Sonar: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Sonar.dir/rule
-
-.PHONY : _samana_msgs_generate_messages_check_deps_Sonar
-
-# fast build rule for target.
-_samana_msgs_generate_messages_check_deps_Sonar/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Sonar.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Sonar.dir/build
-.PHONY : _samana_msgs_generate_messages_check_deps_Sonar/fast
-
-# Convenience name for target.
 samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
@@ -736,6 +736,7 @@ help:
 	@echo "... samana_msgs_genpy"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... _samana_msgs_generate_messages_check_deps_ImuSmall"
+	@echo "... _samana_msgs_generate_messages_check_deps_Int16Array"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_cpp"
@@ -754,7 +755,6 @@ help:
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... _samana_msgs_generate_messages_check_deps_Sonar"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... samana_msgs_generate_messages"

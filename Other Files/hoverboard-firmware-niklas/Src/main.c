@@ -418,6 +418,10 @@ int main(void)
       setScopeChannel(5, (int)(batteryVoltage * 100.0f)); // 6: for verifying battery voltage calibration
       setScopeChannel(6, (int)board_temp_adc_filtered);   // 7: for board temperature calibration
       setScopeChannel(7, (int)board_temp_deg_c);          // 8: for verifying board temperature calibration
+      // setScopeChannel(1, (int)speedR);  // 1: output speed: 0-1000
+      // setScopeChannel(2, (int)speedL);  // 2: output speed: 0-1000
+      // setScopeChannel(3, (int)(batteryVoltage * 100.0f)); // 3: for verifying battery voltage calibration
+      // setScopeChannel(4, (int)board_temp_deg_c);          // 4: for verifying
       consoleScope();
     }
 

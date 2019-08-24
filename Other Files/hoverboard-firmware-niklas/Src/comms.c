@@ -47,7 +47,7 @@ void consoleScope() {
 
   #if defined DEBUG_SERIAL_ASCII && (defined DEBUG_SERIAL_USART2 || defined DEBUG_SERIAL_USART3)
     memset(uart_buf, 0, sizeof(uart_buf));
-    sprintf(uart_buf, "1:%6i 2:%5i 3:%5i 4:%5i 5:%5i 6:%5i 7:%5i 8:%5i\r\n", ch_buf[0], ch_buf[1], ch_buf[2], ch_buf[3], ch_buf[4], ch_buf[5], ch_buf[6], ch_buf[7]);
+    sprintf(uart_buf, "<1:%i><2:%i><3:%i><4:%i><5:%i><6:%i><7:%i><8:%i>\r\n", ch_buf[0], ch_buf[1], ch_buf[2], ch_buf[3], ch_buf[4], ch_buf[5], ch_buf[6], ch_buf[7]);
 
     if(UART_DMA_CHANNEL->CNDTR == 0) {
       UART_DMA_CHANNEL->CCR &= ~DMA_CCR_EN;

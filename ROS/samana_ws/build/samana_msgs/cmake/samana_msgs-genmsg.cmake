@@ -37,9 +37,9 @@ add_custom_target(_samana_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "samana_msgs" "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" "std_msgs/Header"
 )
 
-get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg" NAME_WE)
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_custom_target(_samana_msgs_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "samana_msgs" "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg" "std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "samana_msgs" "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" "std_msgs/Header"
 )
 
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg" NAME_WE)
@@ -78,7 +78,7 @@ _generate_msg_cpp(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_cpp(samana_msgs
-  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/samana_msgs
@@ -112,7 +112,7 @@ get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousR
 add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg" NAME_WE)
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
@@ -151,7 +151,7 @@ _generate_msg_eus(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_eus(samana_msgs
-  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/samana_msgs
@@ -185,7 +185,7 @@ get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousR
 add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg" NAME_WE)
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
@@ -224,7 +224,7 @@ _generate_msg_lisp(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_lisp(samana_msgs
-  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/samana_msgs
@@ -258,7 +258,7 @@ get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousR
 add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg" NAME_WE)
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
@@ -297,7 +297,7 @@ _generate_msg_nodejs(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_nodejs(samana_msgs
-  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/samana_msgs
@@ -331,7 +331,7 @@ get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousR
 add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg" NAME_WE)
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
@@ -370,7 +370,7 @@ _generate_msg_py(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_py(samana_msgs
-  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg"
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/samana_msgs
@@ -404,7 +404,7 @@ get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousR
 add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Sonar.msg" NAME_WE)
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ImuCalib.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})

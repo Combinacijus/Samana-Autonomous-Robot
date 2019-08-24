@@ -1,5 +1,5 @@
-#ifndef _ROS_samana_msgs_Sonar_h
-#define _ROS_samana_msgs_Sonar_h
+#ifndef _ROS_samana_msgs_Int16Array_h
+#define _ROS_samana_msgs_Int16Array_h
 
 #include <stdint.h>
 #include <string.h>
@@ -10,7 +10,7 @@
 namespace samana_msgs
 {
 
-  class Sonar : public ros::Msg
+  class Int16Array : public ros::Msg
   {
     public:
       typedef std_msgs::Header _header_type;
@@ -20,7 +20,7 @@ namespace samana_msgs
       _dist_type st_dist;
       _dist_type * dist;
 
-    Sonar():
+    Int16Array():
       header(),
       dist_length(0), dist(NULL)
     {
@@ -75,7 +75,7 @@ namespace samana_msgs
      return offset;
     }
 
-    const char * getType(){ return "samana_msgs/Sonar"; };
+    const char * getType(){ return "samana_msgs/Int16Array"; };
     const char * getMD5(){ return "ff005e0bae1d9bc418c95faadd17f36d"; };
 
   };
