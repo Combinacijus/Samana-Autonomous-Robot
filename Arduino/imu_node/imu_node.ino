@@ -9,9 +9,11 @@
     VCC 5V | GND GND | SCL A5 + 4K7 PULLUP | SDA A4 + 4K7 PULLUP | ard_RST D2
     I2C address 0X28 or 0x29
 
-    NOTE: ros.h: typedef NodeHandle_<ArduinoHardware, 1, 2, 30, 90> NodeHandle;
+    NOTE: ros_imu.h: typedef NodeHandle_<ArduinoHardware, 1, 2, 30, 90> NodeHandle;
 
-    @param bool _recal: if true on reset IMU need full recalibration
+    Won't publish /imu_data until full calibration is reached (all four states == 3 for some time)
+
+    @param bool _recal: if true on reset IMU will do full recalibration
     @service reset: resets Arduino
 
     BUG: If IMU looses power Arduino get stuck in infinite loop 
@@ -24,7 +26,7 @@
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 #include <EEPROM.h>
-#include <ros.h>
+#include <ros_imu.h> // typedef NodeHandle_<ArduinoHardware, 1, 2, 30, 90> NodeHandle;
 #include <samana_msgs/ImuSmall.h>
 #include <samana_msgs/ImuCalib.h>
 #include <TimerOne.h>
@@ -33,7 +35,7 @@
 #define IMU_ID 42                // IMU sensor id
 #define EE_ADDRESS 0             // Starting EEPROM addres for calibration data
 #define SAMPLERATE_DELAY_US 3000 // Delay between samples (>4k slows updates)
-#define BAUD_RATE 1000000        // Serial communication speed
+#define BAUD_RATE 115200         // Serial communication speed. 115200 is minimal for maximal 100hz update rate
 #define ISR_PERIOD 40000         // Interrupt service routine period in micro sec
 #define PIN_RESET 2              // GPIO pin which is connected to RST
 #define IMU_UPDATE_TIMEOUT 500   // Restart after inactivity in ms
@@ -121,7 +123,7 @@ void setupRoutine()
     delay(1);
     // \/ Crystal must be configured after loading calibration
     bno.setExtCrystalUse(true);
-    
+
     fullyCalibrate();
     if (!found_calib || recalibrate)
         saveCalibrationToEEPROM();
@@ -379,7 +381,7 @@ void healthCheck()
     static int counter = -2; // Because first 2 check always bad
     // If all data equal to each other or updates don't accure
     if (isDataStuck(false) || millis() - last_update_time > IMU_UPDATE_TIMEOUT)
-    { // IMU disconnected
+    {                     // IMU disconnected
         if (counter >= 0) // For debuging
         {
             log_str = F("Bad data");
