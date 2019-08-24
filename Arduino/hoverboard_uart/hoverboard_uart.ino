@@ -4,7 +4,7 @@
   sending to the computer via USB
 */
 
-#define BAUD_RATE 115200 // Same as in hoveboard firmware
+#define BAUD_RATE 9600  // Same as in hoveboard firmware
 #define RXD2 16          // TX2 pin to hoverboard RX pin
 #define TXD2 17          // RX2 pin to hoverboard TX pin
 

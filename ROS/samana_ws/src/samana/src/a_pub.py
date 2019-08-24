@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''a ROS Node'''
-# license removed for brevity
+
 import rospy
 from std_msgs.msg import String
 
