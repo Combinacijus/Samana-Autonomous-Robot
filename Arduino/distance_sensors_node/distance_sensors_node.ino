@@ -5,7 +5,7 @@
 
     Connections ultrasonic:
         VCC-5V  GND-GND  TRIG-PIN_TRIG_ALL  ECHO-PIN_ECHO_X
-        10k Pulldown resistor to every ECHO pin (else random values)
+        10k (used 6k8) Pulldown resistor to every ECHO pin (else random values)
         A row of pins used from D2 to D12
 
     Single Arduino Nano should be able to handle 10 distance sensors no problem
@@ -252,7 +252,7 @@ int getDistance(long delta_time)
     int speed_of_sound = 331.3 + 0.606 * temperature;
     int dist = (delta_time * speed_of_sound) / 2000.0; // In mm
 
-    int max_dist = (TRIGGER_PERIOD * speed_of_sound) / 2000.0; // In mm
+    int max_dist = (TRIGGER_PERIOD * speed_of_sound) / 2.0; // In mm
     if (dist >= max_dist || dist < MIN_DIST)
         return UNDEF_DIST;
 
