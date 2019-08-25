@@ -9,6 +9,8 @@
    "IMUSMALL"
    "<INT16ARRAY>"
    "INT16ARRAY"
+   "<TELEOP>"
+   "TELEOP"
    "<VECTOR3_32>"
    "VECTOR3_32"
    "<VECTOR4_32>"

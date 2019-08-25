@@ -20,7 +20,7 @@ class Int16Array {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.header = null;
-      this.dist = null;
+      this.data = null;
     }
     else {
       if (initObj.hasOwnProperty('header')) {
@@ -29,11 +29,11 @@ class Int16Array {
       else {
         this.header = new std_msgs.msg.Header();
       }
-      if (initObj.hasOwnProperty('dist')) {
-        this.dist = initObj.dist
+      if (initObj.hasOwnProperty('data')) {
+        this.data = initObj.data
       }
       else {
-        this.dist = [];
+        this.data = [];
       }
     }
   }
@@ -42,8 +42,8 @@ class Int16Array {
     // Serializes a message object of type Int16Array
     // Serialize message field [header]
     bufferOffset = std_msgs.msg.Header.serialize(obj.header, buffer, bufferOffset);
-    // Serialize message field [dist]
-    bufferOffset = _arraySerializer.int16(obj.dist, buffer, bufferOffset, null);
+    // Serialize message field [data]
+    bufferOffset = _arraySerializer.int16(obj.data, buffer, bufferOffset, null);
     return bufferOffset;
   }
 
@@ -53,15 +53,15 @@ class Int16Array {
     let data = new Int16Array(null);
     // Deserialize message field [header]
     data.header = std_msgs.msg.Header.deserialize(buffer, bufferOffset);
-    // Deserialize message field [dist]
-    data.dist = _arrayDeserializer.int16(buffer, bufferOffset, null)
+    // Deserialize message field [data]
+    data.data = _arrayDeserializer.int16(buffer, bufferOffset, null)
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
-    length += 2 * object.dist.length;
+    length += 2 * object.data.length;
     return length + 4;
   }
 
@@ -72,14 +72,14 @@ class Int16Array {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'ff005e0bae1d9bc418c95faadd17f36d';
+    return 'dc47eb145a11cbe02d6c8cb8248a4099';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     std_msgs/Header header
-    int16[] dist
+    int16[] data
     ================================================================================
     MSG: std_msgs/Header
     # Standard metadata for higher-level stamped data types.
@@ -112,11 +112,11 @@ class Int16Array {
       resolved.header = new std_msgs.msg.Header()
     }
 
-    if (msg.dist !== undefined) {
-      resolved.dist = msg.dist;
+    if (msg.data !== undefined) {
+      resolved.data = msg.data;
     }
     else {
-      resolved.dist = []
+      resolved.data = []
     }
 
     return resolved;

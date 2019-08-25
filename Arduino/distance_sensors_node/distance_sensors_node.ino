@@ -30,8 +30,7 @@
 #include <TimerOne.h>
 // ros_sonar.h -> typedef NodeHandle_<ArduinoHardware, 3, 3, 40, 150> NodeHandle;
 #include <ros_sonar.h> // Special ros.h for this library
-#include <samana_msgs/Sonar.h>
-#include <std_msgs/UInt16MultiArray.h>
+#include <samana_msgs/Int16Array.h>
 #include <samana_msgs/Bump.h>
 #include "shift_register.h"
 
@@ -87,7 +86,7 @@ int state_echo[SENORS_COUNT]; // Old echo pin states
 // ROS variables
 ros::NodeHandle nh;
 // Distance sensors
-samana_msgs::Sonar sonar_msg;
+samana_msgs::Int16Array sonar_msg;
 ros::Publisher sonar_pub("sonar", &sonar_msg);
 int16_t distances[SENORS_COUNT];
 int8_t temperature = 20; // Assuming temperature
@@ -123,7 +122,7 @@ void setup()
     nh.advertise(bump_pub);
     while (!nh.connected())
         nh.spinOnce();
-    sonar_msg.dist_length = SENORS_COUNT;
+    sonar_msg.data_length = SENORS_COUNT;
     sonar_msg.header.frame_id = "base_link";
     bump_msg.header.frame_id = "base_link";
 
@@ -166,7 +165,7 @@ void loop()
 
     // NOTE: Publish data to ros (WARNING: requires custom message for more sensors)
     sonar_msg.header.stamp = nh.now();
-    sonar_msg.dist = distances;
+    sonar_msg.data = distances;
     sonar_pub.publish(&sonar_msg);
     nh.spinOnce();
 }

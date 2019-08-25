@@ -5,6 +5,7 @@ from ._Int16Array import *
 from ._Sonar import *
 from ._Sonar9 import *
 from ._Sonic9 import *
+from ._Teleop import *
 from ._Vector3_32 import *
 from ._Vector4_32 import *
 from ._imu_calib import *

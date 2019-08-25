@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "samana_msgs: 6 messages, 0 services")
+message(STATUS "samana_msgs: 7 messages, 0 services")
 
 set(MSG_I_FLAGS "-Isamana_msgs:/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg")
 
@@ -35,6 +35,11 @@ add_custom_target(_samana_msgs_generate_messages_check_deps_${_filename}
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
 add_custom_target(_samana_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "samana_msgs" "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" "std_msgs/Header"
+)
+
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg" NAME_WE)
+add_custom_target(_samana_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "samana_msgs" "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg" ""
 )
 
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
@@ -78,6 +83,12 @@ _generate_msg_cpp(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_cpp(samana_msgs
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/samana_msgs
+)
+_generate_msg_cpp(samana_msgs
   "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -111,6 +122,8 @@ add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_message
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
+add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_cpp _samana_msgs_generate_messages_check_deps_${_filename})
@@ -151,6 +164,12 @@ _generate_msg_eus(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_eus(samana_msgs
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/samana_msgs
+)
+_generate_msg_eus(samana_msgs
   "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -184,6 +203,8 @@ add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_message
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
+add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_eus _samana_msgs_generate_messages_check_deps_${_filename})
@@ -224,6 +245,12 @@ _generate_msg_lisp(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_lisp(samana_msgs
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/samana_msgs
+)
+_generate_msg_lisp(samana_msgs
   "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -257,6 +284,8 @@ add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messag
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
+add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_lisp _samana_msgs_generate_messages_check_deps_${_filename})
@@ -297,6 +326,12 @@ _generate_msg_nodejs(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_nodejs(samana_msgs
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/samana_msgs
+)
+_generate_msg_nodejs(samana_msgs
   "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -330,6 +365,8 @@ add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_mess
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
+add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_nodejs _samana_msgs_generate_messages_check_deps_${_filename})
@@ -370,6 +407,12 @@ _generate_msg_py(samana_msgs
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/samana_msgs
 )
 _generate_msg_py(samana_msgs
+  "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/samana_msgs
+)
+_generate_msg_py(samana_msgs
   "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -403,6 +446,8 @@ add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Vector3_32.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg" NAME_WE)
+add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg" NAME_WE)
 add_dependencies(samana_msgs_generate_messages_py _samana_msgs_generate_messages_check_deps_${_filename})

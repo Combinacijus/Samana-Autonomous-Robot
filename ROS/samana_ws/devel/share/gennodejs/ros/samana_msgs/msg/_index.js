@@ -7,6 +7,7 @@ let Int16Array = require('./Int16Array.js');
 let Bump = require('./Bump.js');
 let Vector4_32 = require('./Vector4_32.js');
 let ImuSmall = require('./ImuSmall.js');
+let Teleop = require('./Teleop.js');
 
 module.exports = {
   Vector3_32: Vector3_32,
@@ -15,4 +16,5 @@ module.exports = {
   Bump: Bump,
   Vector4_32: Vector4_32,
   ImuSmall: ImuSmall,
+  Teleop: Teleop,
 };

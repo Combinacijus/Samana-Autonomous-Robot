@@ -1000,6 +1000,19 @@ samana_msgs_genpy/fast:
 .PHONY : samana_msgs_genpy/fast
 
 #=============================================================================
+# Target rules for targets named samana_msgs_generate_messages_py
+
+# Build rule for target.
+samana_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 samana_msgs_generate_messages_py
+.PHONY : samana_msgs_generate_messages_py
+
+# fast build rule for target.
+samana_msgs_generate_messages_py/fast:
+	$(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_py.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_py.dir/build
+.PHONY : samana_msgs_generate_messages_py/fast
+
+#=============================================================================
 # Target rules for targets named std_msgs_generate_messages_nodejs
 
 # Build rule for target.
@@ -1063,6 +1076,19 @@ rosgraph_msgs_generate_messages_nodejs: cmake_check_build_system
 rosgraph_msgs_generate_messages_nodejs/fast:
 	$(MAKE) -f samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named _samana_msgs_generate_messages_check_deps_Teleop
+
+# Build rule for target.
+_samana_msgs_generate_messages_check_deps_Teleop: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _samana_msgs_generate_messages_check_deps_Teleop
+.PHONY : _samana_msgs_generate_messages_check_deps_Teleop
+
+# fast build rule for target.
+_samana_msgs_generate_messages_check_deps_Teleop/fast:
+	$(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Teleop.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Teleop.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_Teleop/fast
 
 #=============================================================================
 # Target rules for targets named std_msgs_generate_messages_cpp
@@ -1453,19 +1479,6 @@ samana_msgs_genlisp: cmake_check_build_system
 samana_msgs_genlisp/fast:
 	$(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/build.make samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/build
 .PHONY : samana_msgs_genlisp/fast
-
-#=============================================================================
-# Target rules for targets named samana_msgs_generate_messages_py
-
-# Build rule for target.
-samana_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 samana_msgs_generate_messages_py
-.PHONY : samana_msgs_generate_messages_py
-
-# fast build rule for target.
-samana_msgs_generate_messages_py/fast:
-	$(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_py.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_py.dir/build
-.PHONY : samana_msgs_generate_messages_py/fast
 
 #=============================================================================
 # Target rules for targets named samana_geneus
@@ -2155,11 +2168,13 @@ help:
 	@echo "... subscriber_test"
 	@echo "... _run_tests_rosserial_client_gtest_subscriber_test"
 	@echo "... samana_msgs_genpy"
+	@echo "... samana_msgs_generate_messages_py"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... _samana_msgs_generate_messages_check_deps_ImuSmall"
 	@echo "... _samana_msgs_generate_messages_check_deps_Int16Array"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
+	@echo "... _samana_msgs_generate_messages_check_deps_Teleop"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_eus"
@@ -2190,7 +2205,6 @@ help:
 	@echo "... samana_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... samana_msgs_genlisp"
-	@echo "... samana_msgs_generate_messages_py"
 	@echo "... samana_geneus"
 	@echo "... samana_generate_messages"
 	@echo "... samana_generate_messages_cpp"

@@ -9,79 +9,98 @@
 
   AltSoftSerial always uses these pins: TX 9, RX 8 also D10 PWM is unusable
   
-  Note: 5V to  3.3V bidirecrional logic converted needed between Arduino and hoverboard
+  Note: 5V to 3.3V bidirecrional logic converted needed between Arduino and hoverboard
 
   CH1: Roll | CH2: Pitch | CH3: Throtlle | CH4: Yaw
   CH5: Switches | CH6: 2-Pos-Switch | CH7: Knob
+
+  Read all "NOTE:" comments for any modifications
 */
-#define CH_THROT 3
-#define CH_YAW 4
-#define CH_ROLL 1
-#define CH_PITCH 2
-#define CH_KNOB 7
-#define DELAY 20        // Loop delay
-#define PIN_INTERRUPT 2 // For RC PPM
-#define CHANNEL_COUNT 7 // For RC PPM
-int pitch, roll, knob;  // Placeholders for channel values
-float power_coef = 1;
-int cmd_rnd = 0;
+
+// #define CH_THROT 3
+// #define CH_YAW 4
+// #define CH_ROLL 1
+// #define CH_PITCH 2
+// #define CH_KNOB 7
+// int pitch, roll, knob; // Placeholders for channel values
+// float power_coef = 1;
+// int cmd_rnd = 0;
 
 #include <AltSoftSerial.h>
 #include <PPMReader.h>
 #include <ros_motor.h>
-#include <std_msgs/Int16MultiArray.h>
+#include <samana_msgs/Int16Array.h>
+#include <samana_msgs/Teleop.h>
 
 #define BAUD_ROS 115200 // Baud rate for communication with ROS master (NOTE: same as in ROS master software)
 #define BAUD_HOV 9600   // Baud rate for hoverboard UART2 communication (NOTE: same as in hoveboard software)
 
+#define DELAY 20         // Loop delay
+#define PIN_INTERRUPT 2  // For RC PPM
+#define CHANNEL_COUNT 7  // For RC PPM
+#define HOV_DATA_COUNT 8 // Number of hoverboard debug data points
+
 #define COMMAND_START 12838 // Arbitrary value signals that next 2 values will be steer and speed 011001000100110
 #define COMMAND_END 3416    // Arbitrary value signals that data ended                            000110101011000
 
-// Format <1:%i><2:%i>..
+// NOTE: format <1:%i><2:%i>..
 #define START_CHAR '<'  // Of hoverboard data
 #define END_CHAR '>'    // Of hoverboard data
 #define SPACER_CHAR ':' // Of hoverboard data
 
-ros::NodeHandle nh;
-
-
 AltSoftSerial softSerial; // Pins TX9 RX8 hardcoded in library
 PPMReader ppm(PIN_INTERRUPT, CHANNEL_COUNT);
 
-int hov_data[8]; // Hoverboard data received via uart
+ros::NodeHandle nh;
+// Hoverboard debug data received via uart
+samana_msgs::Int16Array hov_msg;
+ros::Publisher hov_pub("hov", &hov_msg);
+int16_t hov_data[HOV_DATA_COUNT];
+// Radio controller input
+samana_msgs::Int16Array rc_msg;
+ros::Publisher rc_pub("rc", &rc_msg);
+int16_t rc_data[CHANNEL_COUNT];
+// Teleoperation commands for controlling motors
+void teleopCb(const samana_msgs::Teleop &msg) { sendCommand(msg.steer, msg.speed); }
+ros::Subscriber<samana_msgs::Teleop> teleop_sub("teleop", &teleopCb);
 
 void setup()
 {
-  Serial.begin(BAUD_ROS);
-  while (!Serial)
-    ;
-
   softSerial.begin(BAUD_HOV);
+
+  // ROS serial node setup
+  nh.getHardware()->setBaud(BAUD_ROS);
+  nh.initNode();
+  nh.advertise(hov_pub);
+  nh.advertise(rc_pub);
+  nh.subscribe(teleop_sub);
+
+  while (!nh.connected())
+    nh.spinOnce();
+
+  // Standard messages info
+  hov_msg.data_length = HOV_DATA_COUNT;
+  hov_msg.header.frame_id = "base_link";
+  rc_msg.data_length = CHANNEL_COUNT;
+  rc_msg.header.frame_id = "base_link";
 }
 
 void loop()
 {
-  // Passthrough hoverbord data to usb serial
-  // while (softSerial.available())
-  //   Serial.write(softSerial.read());
+  publishHovData();
+  publishRCData();
+  // Motor control is done by subscriber callback function teleopCb()
 
-  stripDebugData();
-
-  // pitch = getCommand(CH_PITCH);
-  // roll = getCommand(CH_ROLL);
-  // knob = getCommand(CH_KNOB) + 1000; // [0 .. 2000]
-  // power_coef = knob / 2000.0;
-
-  // // Set motor speed and steering
-  // uint16_t steer = (uint16_t)(roll * power_coef);
-  // uint16_t speed = (uint16_t)(pitch * power_coef);
-
-  // sendCommand(steer, speed);
-
+  nh.spinOnce();
   delay(DELAY);
 }
 
-void stripDebugData()
+/*
+  Continuously reading hoverboard debug data 
+  and after receiving full line publishes to ROS
+*/
+
+void publishHovData()
 {
   static char unit_buf[8];
   static int ind = 0;
@@ -99,12 +118,16 @@ void stripDebugData()
 
       // for (int i = 0; i < 8; ++i)
       // {
-      //   Serial.print(hov_data[i]); 
+      //   Serial.print(hov_data[i]);
       //   Serial.print(", ");
       // }
       // Serial.println("");
 
-      //TODO sent to ROS
+      // Publish data to ROS
+      hov_msg.header.stamp = nh.now();
+      hov_msg.data = hov_data;
+      hov_pub.publish(&hov_msg);
+      nh.spinOnce();
 
       break;
     }
@@ -140,6 +163,68 @@ void stripDebugData()
       }
     }
   }
+
+  nh.spinOnce();
+}
+
+/*
+  Reads input from remote controller
+  And publishes to ROS
+*/
+void publishRCData()
+{
+  static int16_t rc_data_old[CHANNEL_COUNT]; // For checking if RC RX is disconnected
+  static int16_t rc_data_same_counter = 0;   // For checking if RC RX is disconnected
+  static bool failsafe_on = false;
+
+  // Get RC channel values
+  for (int i = 0; i < CHANNEL_COUNT; ++i)
+    rc_data[i] = getCommand(i + 1);
+
+  // For failsafe
+  rc_data_same_counter++;
+  for (int i = 0; i < CHANNEL_COUNT; ++i)
+  {
+    if (rc_data[i] != rc_data_old[i])
+    {
+      rc_data_same_counter = 0;
+      break;
+    }
+  }
+
+  // Set old rc_data
+  for (int i = 0; i < CHANNEL_COUNT; ++i)
+    rc_data_old[i] = rc_data[i];
+
+  // Toogle failsafe
+  if (rc_data_same_counter >= 10)
+  {
+    if (!failsafe_on)
+      nh.logerror("FAILSAFE!");
+    failsafe_on = true;
+  }
+  else
+  {
+    if (failsafe_on)
+      nh.loginfo("RC RECONNECTED");
+    failsafe_on = false;
+  }
+
+  // On failsafe do
+  if (failsafe_on)
+  {
+    rc_data_same_counter = 10; // To stop overflow
+
+    // Do a failsafe (NOTE: same as in a controller)
+    rc_data[0] = rc_data[1] = rc_data[3] = rc_data[4] = rc_data[6] = 0;
+    rc_data[2] = rc_data[5] = -1000;
+  }
+
+  // Publish data to ROS
+  rc_msg.header.stamp = nh.now();
+  rc_msg.data = rc_data;
+  rc_pub.publish(&rc_msg);
+  nh.spinOnce();
 }
 
 /*
@@ -169,11 +254,13 @@ void sendCommand(uint16_t _steer, uint16_t _speed)
 }
 
 /*
-    @return val: pwm command value from RC channel between -1000 and 1000
+  @param channel: 1 to CHANNEL_COUNT
+  @return val: pwm command value from RC channel between -1000 and 1000
 */
 int getCommand(int channel)
 {
   int value = ppm.latestValidChannelValue(channel, 0);
+  // int value = ppm.rawChannelValue(channel);
   if (value == 0)
     return 0;
 
