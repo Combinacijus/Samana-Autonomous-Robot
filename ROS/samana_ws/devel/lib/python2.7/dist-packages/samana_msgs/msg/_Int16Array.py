@@ -8,11 +8,11 @@ import struct
 import std_msgs.msg
 
 class Int16Array(genpy.Message):
-  _md5sum = "ff005e0bae1d9bc418c95faadd17f36d"
+  _md5sum = "dc47eb145a11cbe02d6c8cb8248a4099"
   _type = "samana_msgs/Int16Array"
   _has_header = True #flag to mark the presence of a Header object
   _full_text = """std_msgs/Header header
-int16[] dist
+int16[] data
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -29,7 +29,7 @@ time stamp
 #Frame this data is associated with
 string frame_id
 """
-  __slots__ = ['header','dist']
+  __slots__ = ['header','data']
   _slot_types = ['std_msgs/Header','int16[]']
 
   def __init__(self, *args, **kwds):
@@ -40,7 +40,7 @@ string frame_id
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       header,dist
+       header,data
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -51,11 +51,11 @@ string frame_id
       #message fields cannot be None, assign default values for those that are
       if self.header is None:
         self.header = std_msgs.msg.Header()
-      if self.dist is None:
-        self.dist = []
+      if self.data is None:
+        self.data = []
     else:
       self.header = std_msgs.msg.Header()
-      self.dist = []
+      self.data = []
 
   def _get_types(self):
     """
@@ -77,10 +77,10 @@ string frame_id
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      length = len(self.dist)
+      length = len(self.data)
       buff.write(_struct_I.pack(length))
       pattern = '<%sh'%length
-      buff.write(struct.pack(pattern, *self.dist))
+      buff.write(struct.pack(pattern, *self.data))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -112,7 +112,7 @@ string frame_id
       pattern = '<%sh'%length
       start = end
       end += struct.calcsize(pattern)
-      self.dist = struct.unpack(pattern, str[start:end])
+      self.data = struct.unpack(pattern, str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -133,10 +133,10 @@ string frame_id
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      length = len(self.dist)
+      length = len(self.data)
       buff.write(_struct_I.pack(length))
       pattern = '<%sh'%length
-      buff.write(self.dist.tostring())
+      buff.write(self.data.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -169,7 +169,7 @@ string frame_id
       pattern = '<%sh'%length
       start = end
       end += struct.calcsize(pattern)
-      self.dist = numpy.frombuffer(str[start:end], dtype=numpy.int16, count=length)
+      self.data = numpy.frombuffer(str[start:end], dtype=numpy.int16, count=length)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

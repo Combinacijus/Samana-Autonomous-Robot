@@ -1,2 +1,2 @@
 std_msgs/Header header
-int16[] dist
+int16[] data

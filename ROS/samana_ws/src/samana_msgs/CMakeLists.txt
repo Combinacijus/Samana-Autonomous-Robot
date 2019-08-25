@@ -49,6 +49,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate messages in the 'msg' folder
 add_message_files(FILES
+  Teleop.msg
   Bump.msg
   Int16Array.msg
   Vector4_32.msg

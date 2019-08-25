@@ -26,11 +26,11 @@ struct Int16Array_
 
   Int16Array_()
     : header()
-    , dist()  {
+    , data()  {
     }
   Int16Array_(const ContainerAllocator& _alloc)
     : header(_alloc)
-    , dist(_alloc)  {
+    , data(_alloc)  {
   (void)_alloc;
     }
 
@@ -39,8 +39,8 @@ struct Int16Array_
    typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
   _header_type header;
 
-   typedef std::vector<int16_t, typename ContainerAllocator::template rebind<int16_t>::other >  _dist_type;
-  _dist_type dist;
+   typedef std::vector<int16_t, typename ContainerAllocator::template rebind<int16_t>::other >  _data_type;
+  _data_type data;
 
 
 
@@ -120,12 +120,12 @@ struct MD5Sum< ::samana_msgs::Int16Array_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "ff005e0bae1d9bc418c95faadd17f36d";
+    return "dc47eb145a11cbe02d6c8cb8248a4099";
   }
 
   static const char* value(const ::samana_msgs::Int16Array_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xff005e0bae1d9bc4ULL;
-  static const uint64_t static_value2 = 0x18c95faadd17f36dULL;
+  static const uint64_t static_value1 = 0xdc47eb145a11cbe0ULL;
+  static const uint64_t static_value2 = 0x2d6c8cb8248a4099ULL;
 };
 
 template<class ContainerAllocator>
@@ -145,7 +145,7 @@ struct Definition< ::samana_msgs::Int16Array_<ContainerAllocator> >
   static const char* value()
   {
     return "std_msgs/Header header\n"
-"int16[] dist\n"
+"int16[] data\n"
 "================================================================================\n"
 "MSG: std_msgs/Header\n"
 "# Standard metadata for higher-level stamped data types.\n"
@@ -180,7 +180,7 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.header);
-      stream.next(m.dist);
+      stream.next(m.data);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -202,11 +202,11 @@ struct Printer< ::samana_msgs::Int16Array_<ContainerAllocator> >
     s << indent << "header: ";
     s << std::endl;
     Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
-    s << indent << "dist[]" << std::endl;
-    for (size_t i = 0; i < v.dist.size(); ++i)
+    s << indent << "data[]" << std::endl;
+    for (size_t i = 0; i < v.data.size(); ++i)
     {
-      s << indent << "  dist[" << i << "]: ";
-      Printer<int16_t>::stream(s, indent + "  ", v.dist[i]);
+      s << indent << "  data[" << i << "]: ";
+      Printer<int16_t>::stream(s, indent + "  ", v.data[i]);
     }
   }
 };
