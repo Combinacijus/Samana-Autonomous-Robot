@@ -72,7 +72,7 @@ def control_motors():
     pub = rospy.Publisher('teleop', Teleop, queue_size=2)
 
     # In Hz should be atleast 20. Should be as fast as RC input
-    rate = rospy.Rate(45)
+    rate = rospy.Rate(100)
     while not rospy.is_shutdown():
         teleop = Teleop()
 

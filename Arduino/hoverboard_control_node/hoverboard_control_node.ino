@@ -9,22 +9,23 @@
 
   AltSoftSerial always uses these pins: TX 9, RX 8 also D10 PWM is unusable
   
-  Note: 5V to 3.3V bidirecrional logic converted needed between Arduino and hoverboard
+  Note: 5V to 3.3V bidirectional logic converted needed between Arduino and hoverboard
 
   CH1: Roll | CH2: Pitch | CH3: Throtlle | CH4: Yaw
   CH5: Switches | CH6: 2-Pos-Switch | CH7: Knob
 
+  Connections (using only UART2 (no button side)):
+    HOV-GND -> ARD-GND
+    HOV-GREEN -> 3.3V TO 5V -> D9
+    HOV-BLUE -> 3.3v TO 5V -> D8
+    HOV-RED -x (none)
+    RC-PPM -> D2
+    RC -> 5V and GND
+    RC-SBUS -x (none)
+    Logic converter 5V, 3.3V and GND to coresponding ARD
+
   Read all "NOTE:" comments for any modifications
 */
-
-// #define CH_THROT 3
-// #define CH_YAW 4
-// #define CH_ROLL 1
-// #define CH_PITCH 2
-// #define CH_KNOB 7
-// int pitch, roll, knob; // Placeholders for channel values
-// float power_coef = 1;
-// int cmd_rnd = 0;
 
 #include <AltSoftSerial.h>
 #include <PPMReader.h>
@@ -35,7 +36,7 @@
 #define BAUD_ROS 115200 // Baud rate for communication with ROS master (NOTE: same as in ROS master software)
 #define BAUD_HOV 9600   // Baud rate for hoverboard UART2 communication (NOTE: same as in hoveboard software)
 
-#define DELAY 20         // Loop delay
+#define DELAY 10         // Loop delay NOTE: it slows down RC update rate because it's not needed
 #define PIN_INTERRUPT 2  // For RC PPM
 #define CHANNEL_COUNT 7  // For RC PPM
 #define HOV_DATA_COUNT 8 // Number of hoverboard debug data points
