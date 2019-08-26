@@ -16,8 +16,8 @@
 
   Connections (using only UART2 (no button side)):
     HOV-GND -> ARD-GND
-    HOV-GREEN -> 3.3V TO 5V -> D9
-    HOV-BLUE -> 3.3v TO 5V -> D8
+    HOV-GREEN(RX) -> 3.3V TO 5V -> D9(TX)
+    HOV-BLUE(TX) -> 3.3v TO 5V -> D8(RX)
     HOV-RED -x (none)
     RC-PPM -> D2
     RC -> 5V and GND
@@ -33,10 +33,11 @@
 #include <samana_msgs/Int16Array.h>
 #include <samana_msgs/Teleop.h>
 
-#define BAUD_ROS 115200 // Baud rate for communication with ROS master (NOTE: same as in ROS master software)
+#define BAUD_ROS 57600  // Baud rate for communication with ROS master (NOTE: same as in ROS master software)
 #define BAUD_HOV 9600   // Baud rate for hoverboard UART2 communication (NOTE: same as in hoveboard software)
+// 19200, 38400
 
-#define DELAY 10         // Loop delay NOTE: it slows down RC update rate because it's not needed
+#define DELAY 20         // Loop delay NOTE: it slows down RC update rate because it's not needed
 #define PIN_INTERRUPT 2  // For RC PPM
 #define CHANNEL_COUNT 7  // For RC PPM
 #define HOV_DATA_COUNT 8 // Number of hoverboard debug data points
@@ -92,6 +93,10 @@ void loop()
   publishRCData();
   // Motor control is done by subscriber callback function teleopCb()
 
+  // Serial passthrough test
+  // while (softSerial.available())
+  //   Serial.write(softSerial.read());
+
   nh.spinOnce();
   delay(DELAY);
 }
@@ -100,7 +105,6 @@ void loop()
   Continuously reading hoverboard debug data 
   and after receiving full line publishes to ROS
 */
-
 void publishHovData()
 {
   static char unit_buf[8];
@@ -188,7 +192,7 @@ void publishRCData()
   {
     if (rc_data[i] != rc_data_old[i])
     {
-      rc_data_same_counter = 0;
+      rc_data_same_counter -= 2;
       break;
     }
   }
@@ -200,12 +204,14 @@ void publishRCData()
   // Toogle failsafe
   if (rc_data_same_counter >= 10)
   {
+    rc_data_same_counter = 10; // To stop overflow
     if (!failsafe_on)
       nh.logerror("FAILSAFE!");
     failsafe_on = true;
   }
-  else
+  else if (rc_data_same_counter <= 0)
   {
+    rc_data_same_counter = 0; // To stop overflow
     if (failsafe_on)
       nh.loginfo("RC RECONNECTED");
     failsafe_on = false;
@@ -214,8 +220,6 @@ void publishRCData()
   // On failsafe do
   if (failsafe_on)
   {
-    rc_data_same_counter = 10; // To stop overflow
-
     // Do a failsafe (NOTE: same as in a controller)
     rc_data[0] = rc_data[1] = rc_data[3] = rc_data[4] = rc_data[6] = 0;
     rc_data[2] = rc_data[5] = -1000;

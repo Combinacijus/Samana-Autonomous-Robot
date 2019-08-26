@@ -69,13 +69,15 @@ def control_motors():
     '''Publish to /teleop to control hoverboard motors'''
     global g_speed_rc, g_steer_rc
 
-    pub = rospy.Publisher('teleop', Teleop, queue_size=2)
+    pub = rospy.Publisher('teleop', Teleop, queue_size=10)
 
     # In Hz should be atleast 20. Should be as fast as RC input
-    rate = rospy.Rate(100)
+    # At 50Hz or above sync is lost (softSerial baud 9600)
+    # If faster update rate is needed try higher baud rate for hoverboard serial
+    rate = rospy.Rate(40) # Recommended 40Hz
     while not rospy.is_shutdown():
         teleop = Teleop()
-
+        # TODO Failsafe
         use_rc = rospy.get_param("/use_rc")
         rospy.loginfo(use_rc)
 
@@ -86,7 +88,6 @@ def control_motors():
             teleop.speed = 0
             teleop.steer = 0
 
-        # rospy.loginfo(teleop)
         pub.publish(teleop)
         rate.sleep()
 
