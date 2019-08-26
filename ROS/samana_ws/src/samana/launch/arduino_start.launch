@@ -1,8 +1,7 @@
 <launch>
     <node name="serial_node" pkg="rosserial_arduino" type="serial_node.py" output="screen">
-        <!--<param name="baud" value="57600"/>-->
-        <param name="baud" value="115200"/>
-        <!--<param name="baud" value="9600"/>-->
+        <param name="baud" value="57600"/>
+        <!--<param name="baud" value="115200"/>-->
         <param name="recal" value="false"/>
         <param name="port" value="/dev/ttyUSB0"/>
         <!--<param name="recal" value="false"/>-->
