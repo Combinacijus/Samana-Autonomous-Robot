@@ -19,9 +19,13 @@ flags = [
 '-isystem',
 '/opt/ros/' + os.getenv('ROS_DISTRO') + '/include',
 '-isystem',
-'/home/combinacijus/Documents/ROS/samana_ws/devel/include',
+'/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include',
 '-isystem',
-'/home/combinacijus/Documents/ROS/samana_ws/src/samana/include'
+'/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/rosserial/include',
+'-isystem',
+'/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana/include',
+'-isystem',
+'/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/include'
 ]
 
 compilation_database_folder = ''

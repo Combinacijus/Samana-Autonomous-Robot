@@ -1611,6 +1611,19 @@ samana_genpy/fast:
 .PHONY : samana_genpy/fast
 
 #=============================================================================
+# Target rules for targets named visualize_test
+
+# Build rule for target.
+visualize_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 visualize_test
+.PHONY : visualize_test
+
+# fast build rule for target.
+visualize_test/fast:
+	$(MAKE) -f samana/CMakeFiles/visualize_test.dir/build.make samana/CMakeFiles/visualize_test.dir/build
+.PHONY : visualize_test/fast
+
+#=============================================================================
 # Target rules for targets named samana_generate_messages_eus
 
 # Build rule for target.
@@ -2215,6 +2228,7 @@ help:
 	@echo "... samana_generate_messages_lisp"
 	@echo "... samana_gennodejs"
 	@echo "... samana_genpy"
+	@echo "... visualize_test"
 	@echo "... samana_generate_messages_eus"
 	@echo "... rosserial_server_udp_socket_node"
 	@echo "... rosserial_server_socket_node"
