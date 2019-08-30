@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="samana">
+  	
+	<xacro:property name="rect_width" value="0.446" />
+	<xacro:property name="rect_len" value="0.315" />
+	<xacro:property name="rect_height" value="0.175" />
+	<xacro:property name="thickness" value="0.01" />
+
+	<xacro:property name="hov_width" value="0.18" />
+	<xacro:property name="hov_height" value="0.09" />
+	<xacro:property name="hov_len" value="0.47" />
+
+	<xacro:property name="wheel_radius" value="0.08" />
+	<xacro:property name="wheel_width" value="0.065" />
+
+	<xacro:property name="robot_total_height" value="0.175" />
+
+	<xacro:property name="alpha" value="0.8" />
+
+	<material name="plywood">
+		<color rgba="0.8 0.6 0.0 ${alpha}"/>
+  	</material>
+	<material name="hoverboard">
+    	<color rgba="1 1 0.0 ${alpha}"/>
+  	</material>
+	<material name="wheel">
+    	<color rgba="0.1 0.1 0.1 ${alpha}"/>
+  	</material>
+	<material name="ultrasonic">
+    	<color rgba="0.1 0.1 0.7 ${alpha}"/>
+  	</material>
+  
+	<link name="base_link">
+		<!--Main plywood-->
+		<visual>
+          	<geometry>
+              	<box size="${rect_len} ${rect_width} ${thickness}"/>
+              	<!--<box size="0.315 0.446 0.01"/>-->
+        	</geometry>
+          	<origin xyz="${-rect_len/2 + 0.08} 0 ${-thickness/2}"/>
+          <material name="plywood"/>
+        </visual>
+		
+		<!--Gear holder-->
+  		<visual>
+          	<geometry>
+              	<box size="0.06 0.135 0.045"/>
+              	<!--<box size="0.315 0.446 0.01"/>-->
+        	</geometry>
+          	<origin xyz="${0.08 + 0.06/2} 0 ${-thickness - 0.0225}"/>
+          <material name="plywood"/>
+        </visual>
+
+		<!--Plywood triangle-->
+		<visual>
+          	<geometry>
+              	<box size="${rect_width/sqrt(2)} ${rect_width/sqrt(2)} ${thickness}"/>
+              	<!--<box size="0.315 0.315 0.01"/>-->
+        	</geometry>
+          	<origin rpy="0 0 0.785398" xyz="-0.2375 0 ${-thickness/2}"/>
+			<material name="plywood"/>
+  		</visual>
+  	</link>
+
+	<link name="hoverboard">
+		<visual>
+          	<geometry>
+              	<box size="${hov_width} ${hov_len} ${hov_height}"/>
+        	</geometry>
+          	<origin xyz="0 0 0"/>
+          <material name="hoverboard"/>
+        </visual>
+	</link>
+
+	<!--Wheels macro-->
+	<xacro:macro name="wheel" params="prefix reflect offx:=0">
+    <link name="${prefix}_wheel">
+        <visual>
+            <geometry>
+                <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+            </geometry>
+            <origin xyz="${offx} 0 0" rpy="${pi/2} 0 0"/>
+            <material name="wheel"/>
+        </visual>
+    </link>
+
+    <joint name="base_to_${prefix}_wheel" type="fixed">
+        <parent link="hoverboard"/>
+        <child link="${prefix}_wheel"/>
+        <origin xyz="0 ${reflect*(wheel_width/2 + hov_len/2)} 0" />
+    </joint>
+	</xacro:macro>
+	<!--Wheels-->
+	<xacro:wheel prefix="right" reflect="-1"/>
+	<xacro:wheel prefix="left" reflect="1"/>
+	<!--Not a caster wheel-->
+	<xacro:wheel prefix="middle" reflect="0" offx="-0.34"/> 
+
+	<!--Ultrasonic distance sensors macro-->
+	<xacro:macro name="ultrasonic" params="prefix offx offy angle_deg">
+    <link name="ultrasonic_${prefix}">
+        <visual>
+            <geometry>
+                <box size="0.03 0.02 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+            <material name="ultrasonic"/>
+        </visual>
+    </link>
+
+    <joint name="base_to_sonic_${prefix}" type="fixed">
+        <parent link="base_link"/>
+        <child link="ultrasonic_${prefix}"/>
+        <origin xyz="${offx} ${offy} 0.045" rpy="0 0 ${angle_deg/180*pi}"/>
+    </joint>
+	</xacro:macro>
+
+	<!--Ultrasonic sensors description-->
+	<xacro:ultrasonic prefix="1" offx="0" offy="-0.1" angle_deg="0"/>
+	<xacro:ultrasonic prefix="10" offx="0" offy="0.1" angle_deg="0"/>
+
+	<!--Joint descriptions-->
+
+	<joint name="hov_base_joint" type="fixed">
+		<origin xyz="0 0 ${wheel_radius - robot_total_height}" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="hoverboard"/>
+	</joint>
+</robot>
+

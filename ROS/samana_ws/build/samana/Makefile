@@ -68,6 +68,18 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -122,18 +134,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -318,6 +318,21 @@ samana_genpy/fast:
 .PHONY : samana_genpy/fast
 
 # Convenience name for target.
+samana/CMakeFiles/visualize_test.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/visualize_test.dir/rule
+.PHONY : samana/CMakeFiles/visualize_test.dir/rule
+
+# Convenience name for target.
+visualize_test: samana/CMakeFiles/visualize_test.dir/rule
+
+.PHONY : visualize_test
+
+# fast build rule for target.
+visualize_test/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/visualize_test.dir/build.make samana/CMakeFiles/visualize_test.dir/build
+.PHONY : visualize_test/fast
+
+# Convenience name for target.
 samana/CMakeFiles/samana_generate_messages_eus.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana/CMakeFiles/samana_generate_messages_eus.dir/rule
 .PHONY : samana/CMakeFiles/samana_generate_messages_eus.dir/rule
@@ -332,6 +347,33 @@ samana_generate_messages_eus/fast:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/samana_generate_messages_eus.dir/build.make samana/CMakeFiles/samana_generate_messages_eus.dir/build
 .PHONY : samana_generate_messages_eus/fast
 
+src/visualize_test.o: src/visualize_test.cpp.o
+
+.PHONY : src/visualize_test.o
+
+# target to build an object file
+src/visualize_test.cpp.o:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/visualize_test.dir/build.make samana/CMakeFiles/visualize_test.dir/src/visualize_test.cpp.o
+.PHONY : src/visualize_test.cpp.o
+
+src/visualize_test.i: src/visualize_test.cpp.i
+
+.PHONY : src/visualize_test.i
+
+# target to preprocess a source file
+src/visualize_test.cpp.i:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/visualize_test.dir/build.make samana/CMakeFiles/visualize_test.dir/src/visualize_test.cpp.i
+.PHONY : src/visualize_test.cpp.i
+
+src/visualize_test.s: src/visualize_test.cpp.s
+
+.PHONY : src/visualize_test.s
+
+# target to generate assembly for a file
+src/visualize_test.cpp.s:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana/CMakeFiles/visualize_test.dir/build.make samana/CMakeFiles/visualize_test.dir/src/visualize_test.cpp.s
+.PHONY : src/visualize_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -339,6 +381,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/local"
+	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... samana_geneus"
 	@echo "... test"
@@ -352,10 +395,13 @@ help:
 	@echo "... samana_gennodejs"
 	@echo "... install/strip"
 	@echo "... samana_genpy"
+	@echo "... visualize_test"
 	@echo "... edit_cache"
 	@echo "... samana_generate_messages_eus"
 	@echo "... rebuild_cache"
-	@echo "... install"
+	@echo "... src/visualize_test.o"
+	@echo "... src/visualize_test.i"
+	@echo "... src/visualize_test.s"
 .PHONY : help
 
 
