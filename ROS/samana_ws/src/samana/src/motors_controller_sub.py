@@ -79,7 +79,7 @@ def control_motors():
         teleop = Teleop()
         # TODO Failsafe
         use_rc = rospy.get_param("/use_rc")
-        rospy.loginfo(use_rc)
+        # rospy.loginfo(use_rc)
 
         if use_rc is True:
             teleop.speed = g_speed_rc
@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     rospy.set_param("/use_rc", True)  # Also inits parameter
     try:
-        control_motors()
+        control_motors() # Infinite loop
     except rospy.ROSInterruptException:
         pass
 
