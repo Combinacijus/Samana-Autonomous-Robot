@@ -2,7 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="samana">
   	
 	<xacro:property name="rect_width" value="0.446" />
-	<xacro:property name="rect_len" value="0.315" />
+	<xacro:property name="rect_len" value="0.41" />
+	<!--<xacro:property name="rect_len" value="0.315" />-->
 	<xacro:property name="rect_height" value="0.175" />
 	<xacro:property name="thickness" value="0.01" />
 
@@ -29,6 +30,12 @@
 	<material name="ultrasonic">
     	<color rgba="0.1 0.1 0.7 ${alpha}"/>
   	</material>
+	<material name="bump">
+    	<color rgba="0.9 0.9 0.9 0.2"/>
+  	</material>
+	<material name="green">
+    	<color rgba="0.2 0.9 0.2 ${alpha}"/>
+  	</material>
   
 	<link name="base_link">
 		<!--Main plywood-->
@@ -45,19 +52,26 @@
   		<visual>
           	<geometry>
               	<box size="0.06 0.135 0.045"/>
-              	<!--<box size="0.315 0.446 0.01"/>-->
         	</geometry>
           	<origin xyz="${0.08 + 0.06/2} 0 ${-thickness - 0.0225}"/>
           <material name="plywood"/>
         </visual>
 
-		<!--Plywood triangle-->
+		<!--Rear rectangle 1-->
 		<visual>
           	<geometry>
-              	<box size="${rect_width/sqrt(2)} ${rect_width/sqrt(2)} ${thickness}"/>
-              	<!--<box size="0.315 0.315 0.01"/>-->
+              	<box size="${rect_width - 0.06} 0.08 ${thickness}"/>
         	</geometry>
-          	<origin rpy="0 0 0.785398" xyz="-0.2375 0 ${-thickness/2}"/>
+          	<origin rpy="0 0 ${pi/2}" xyz="-${rect_len - 0.08 + 0.04} 0 ${-thickness/2}"/>
+			<material name="plywood"/>
+  		</visual>
+
+		<!--Rear rectangle 2-->
+		<visual>
+          	<geometry>
+              	<box size="0.16 0.06 ${thickness}"/>
+        	</geometry>
+          	<origin rpy="0 0 ${pi/2}" xyz="-${rect_len - 0.08 + 0.04 + 0.07} 0 ${-thickness/2}"/>
 			<material name="plywood"/>
   		</visual>
   	</link>
@@ -69,6 +83,17 @@
         	</geometry>
           	<origin xyz="0 0 0"/>
           <material name="hoverboard"/>
+        </visual>
+	</link>
+
+	<!--Imu sensor-->
+	<link name="imu_link">
+		<visual>
+          	<geometry>
+              	<box size="0.02 0.01 0.002"/>
+        	</geometry>
+          	<origin xyz="0 0 0"/>
+          <material name="green"/>
         </visual>
 	</link>
 
@@ -116,15 +141,66 @@
 	</xacro:macro>
 
 	<!--Ultrasonic sensors description-->
-	<xacro:ultrasonic prefix="1" offx="0" offy="-0.1" angle_deg="0"/>
-	<xacro:ultrasonic prefix="10" offx="0" offy="0.1" angle_deg="0"/>
+	<xacro:ultrasonic prefix="1" offx="0.1" offy="-0.07" angle_deg="0"/>
+	<xacro:ultrasonic prefix="2" offx="0.053" offy="-0.1525" angle_deg="-20"/>
+	<xacro:ultrasonic prefix="3" offx="-0.035" offy="-0.2125" angle_deg="-45"/>
+	<xacro:ultrasonic prefix="4" offx="-0.252" offy="-0.1825" angle_deg="-90"/>
+	<xacro:ultrasonic prefix="5" offx="-0.35" offy="-0.1325" angle_deg="-155"/>
+	<xacro:ultrasonic prefix="6" offx="-0.34" offy="0.1325" angle_deg="155"/>
+	<xacro:ultrasonic prefix="7" offx="-0.25" offy="0.1875" angle_deg="90"/>
+	<xacro:ultrasonic prefix="8" offx="-0.027" offy="0.2175" angle_deg="45"/>
+	<xacro:ultrasonic prefix="9" offx="0.057" offy="0.1475" angle_deg="20"/>
+	<xacro:ultrasonic prefix="10" offx="0.1" offy="0.07" angle_deg="0"/>
+
+	<!--Bump sensors macro-->
+	<xacro:macro name="bump" params="prefix offx offy">
+    <link name="bump_${prefix}">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.01"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="bump"/>
+        </visual>
+    </link>
+
+    <joint name="base_to_bump_${prefix}" type="fixed">
+        <parent link="base_link"/>
+        <child link="bump_${prefix}"/>
+        <origin xyz="${offx} ${offy} 0.0" rpy="0 0 0"/>
+    </joint>
+	</xacro:macro>
+
+	<!--Bump sensors description-->
+	<xacro:bump prefix="1" offx="0.14" offy="-0.09"/>
+	<xacro:bump prefix="2" offx="0.16" offy="-0.14"/>
+	<!--TODO 3 and 4 mixed?-->
+	<xacro:bump prefix="4" offx="0.10" offy="-0.22"/>
+	<xacro:bump prefix="3" offx="-0.03" offy="-0.31"/>
+	<xacro:bump prefix="5" offx="-0.19" offy="-0.23"/>
+	<xacro:bump prefix="6" offx="-0.36" offy="-0.22"/>
+	<xacro:bump prefix="7" offx="-0.44" offy="-0.11"/>
+	<xacro:bump prefix="8" offx="-0.49" offy="0.00"/>
+	<xacro:bump prefix="9" offx="-0.44" offy="0.11"/>
+	<xacro:bump prefix="10" offx="-0.36" offy="0.22"/>
+	<xacro:bump prefix="11" offx="-0.19" offy="0.23"/>
+	<xacro:bump prefix="12" offx="-0.03" offy="0.31"/>
+	<xacro:bump prefix="13" offx="0.10" offy="0.22"/>
+	<xacro:bump prefix="14" offx="0.16" offy="0.14"/>
+	<xacro:bump prefix="15" offx="0.14" offy="0.09"/>
+
 
 	<!--Joint descriptions-->
-
-	<joint name="hov_base_joint" type="fixed">
+	<joint name="base_to_hoverboard" type="fixed">
 		<origin xyz="0 0 ${wheel_radius - robot_total_height}" rpy="0 0 0"/>
 		<parent link="base_link"/>
 		<child link="hoverboard"/>
+	</joint>
+
+	<joint name="base_to_imu" type="fixed">
+		<origin xyz="0 0 0.1" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="imu_link"/>
 	</joint>
 </robot>
 
