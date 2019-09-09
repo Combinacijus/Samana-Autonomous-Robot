@@ -11,7 +11,7 @@
 		{
 			"taskName": "Debug",
 			"args": [
-				"catkin_make --pkg samana samana_msgs -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+				"catkin_make --pkg samana rviz_satellite rviz_imu_plugin -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
 			],
 			"problemMatcher": [
 				{
@@ -107,7 +107,7 @@
 		{
 			"taskName": "Release",
 			"args": [
-				"catkin_make --pkg samana samana_msgs -C ${workspaceRoot}"
+				"catkin_make --pkg samana rviz_satellite rviz_imu_plugin -C ${workspaceRoot}"
 			],
 			"problemMatcher": [
 				{
@@ -202,7 +202,7 @@
 		{
 			"taskName": "Debug (isolated)",
 			"args": [
-				"catkin_make_isolated --pkg samana samana_msgs -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+				"catkin_make_isolated --pkg samana rviz_satellite rviz_imu_plugin -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
 			],
 			"problemMatcher": [
 				{
@@ -297,7 +297,7 @@
 		{
 			"taskName": "Release (isolated)",
 			"args": [
-				"catkin_make_isolated --pkg samana samana_msgs -C ${workspaceRoot}"
+				"catkin_make_isolated --pkg samana rviz_satellite rviz_imu_plugin -C ${workspaceRoot}"
 			],
 			"problemMatcher": [
 				{
@@ -772,7 +772,7 @@
 		{
 			"taskName": "Debug (catkin)",
 			"args": [
-				"catkin build samana samana_msgs -w ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+				"catkin build samana rviz_satellite rviz_imu_plugin -w ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
 			],
 			"problemMatcher": [
 				{
@@ -867,7 +867,7 @@
 		{
 			"taskName": "Release (catkin)",
 			"args": [
-				"catkin build samana samana_msgs -w ${workspaceRoot}"
+				"catkin build samana rviz_satellite rviz_imu_plugin -w ${workspaceRoot}"
 			],
 			"problemMatcher": [
 				{
