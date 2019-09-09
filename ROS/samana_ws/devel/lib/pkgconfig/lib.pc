@@ -1,0 +1,8 @@
+prefix=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel
+
+Name: lib
+Description: Description of lib
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib 
+Requires: 

@@ -15,4 +15,8 @@
   <node name="distance_viz" pkg="samana" type="visualize_distances.py" output="screen"/>
   <!--Distances bag-->
   
+  <!--Map-->
+  <!-- Static fake TF transform -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake" args="0 0 0 0 0 0 map base_link" />
+
 </launch>
