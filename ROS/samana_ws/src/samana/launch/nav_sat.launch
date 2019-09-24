@@ -1,15 +1,23 @@
 <launch>
 
-  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake2" args="0 0 0 0 0 0 base_link imu" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake3" args="0 0 0 0 0 0 base_link gps" />
+    
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true" output="screen">
 
     <param name="magnetic_declination_radians" value="0"/>
 
     <param name="yaw_offset" value="0"/>
+    <param name="broadcast_utm_transform" value="true"/>
+    <param name="publish_filtered_gps" value="true"/>
 
-    <remap from="/imu/data" to="/your/imu/topic" />
-    <remap from="/gps/fix" to="/your/gps/fix/topic" />
-    <remap from="/odometry/filtered" to="/your/robot_localization/output/topic" />
+
+    <remap from="/imu/data" to="/imu" />
+    <remap from="/gps/fix" to="/android/fix" />
+    <remap from="/odometry/filtered" to="/odometry/filtered" />
 
   </node>
+
+  <node pkg="rviz" type="rviz" name="rviz"/>
 
 </launch>

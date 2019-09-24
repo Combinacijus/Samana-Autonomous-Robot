@@ -1,0 +1,7 @@
+{
+    "board": "arduino:avr:nano",
+    "configuration": "cpu=atmega328old",
+    "output": "../ArduinoOutput",
+    "port": "/dev/ttyUSB0",
+    "sketch": "arm_control_node.ino"
+}
