@@ -19,12 +19,14 @@ private:
     int pin_input;    // Input pin name
     int value;        // Raw value read from sensor
     int mid_val;      // Value of 0 current
+    int offset;       // Offset to add to current in mA
     int dir;          // Direction of possitive current
     float calib_mult; // Calibration multiplyer if sensor (if on by 100% set calib_mult to 2)
-
-public:
     float current = 0; // Current in miliamperes
 
-    CurrentSensor(int _pin, int _dir = -1, float _calib = 2.3, int _mid = 512);
+public:
+
+    CurrentSensor(int _pin, int _dir = -1, float _calib = 2.3, int _mid = 512, int _offset = 0);
     void update();
+    float get_current();
 };
