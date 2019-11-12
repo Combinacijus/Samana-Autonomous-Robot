@@ -1,29 +1,44 @@
 /*
-  Gintaras Grebliunas
-  combinacijus@gmail.com
+	Gintaras Grebliunas
+	combinacijus@gmail.com
 
-  Odometry ROS node
-  CW
-  A 11001100
-  B 01100110
-  + 13201320
-  A+2B
+	Odometry ROS node
+  
+	For pins check interrupt function ISR(). Input pins need internal pullup
+
+	Connections:
+		Encoder1: A(GREEN) - D8, B(WHITE) - D9, GND(BLACK) - GND, VCC(RED) - 5V
+		Encoder2: A(GREEN) - D6, B(WHITE) - D7, GND(BLACK) - GND, VCC(RED) - 5V
+
+	It uses pin change interrupts on ports B and D and hardcoded pins.
+	Clockwise direction is positive.
+	Max rotations per second 38 but above ~20rps it starts to skip steps
+	also no skip is not guaranteed.
+	(Tested with only main loop printinh speeds and counts every 150ms)
+
+	TODO: to handle counter overflow (mess up speed)
 */
 
 int pin_a = 6;
 int pin_b = 7;
 unsigned long last_update_time = 0;
 
-int counter = 0;
-byte curr_state = 0b00000000;
-byte last_state = 0b00000000;
+volatile int counter1 = 0;
+volatile int counter2 = 0;
 
-volatile int value = 0;
+const float ticks_to_rot = 1000000.0 / 2400.0;
 
 void setup()
 {
+	// Enable pullup for all pins
+	DDRB = 0b00000000;   // Input
+	DDRC = 0b00000000;   // Input
+	DDRD = 0b00000000;   // Input
+	PORTB |= 0b11111111; // Pullup
+	PORTC |= 0b11111111; // Pullup
+	PORTD |= 0b11111100; // Pullup leave last bits because it's TX and RX
+
 	Serial.begin(115200);
-	//   delay(10);
 	Serial.print("Start");
 
 	encoder_setup();
@@ -31,98 +46,114 @@ void setup()
 
 void loop()
 {
-	static int c = 0;
+	static unsigned long last_time = 0;
+	static unsigned long dt = -1;
+	static unsigned int last_count1 = 0;
+	static unsigned int last_count2 = 0;
+	static long dc1 = 0;
+	static long dc2 = 0;
+	static float speed1 = 0;
+	static float speed2 = 0;
+
 	//  Serial.print(digitalRead(pin_a));
 	//	Serial.println(value);
-	Serial.println(counter);
+
+	dt = micros() - last_time;
+	last_time = micros();
+	dc1 = counter1 - last_count1;
+	last_count1 = counter1;
+	dc2 = counter2 - last_count2;
+	last_count2 = counter2;
+
+	speed1 = dc1 * ticks_to_rot / dt;
+	speed2 = dc2 * ticks_to_rot / dt;
+	Serial.println("A" + String(speed1));
+	Serial.println("B" + String(speed2));
+
+	Serial.println("A" + String((long)last_count1));
+	Serial.println("B" + String((long)last_count2));
+	Serial.println("");
+
 	delay(150);
 }
 
 void encoder_setup()
 {
-	pinMode(pin_a, INPUT_PULLUP);
-	pinMode(pin_b, INPUT_PULLUP);
-
 	cli();
+	// NOTE: hardcoded
 	// Pin change interrupt register for ports
 	PCICR |= 0b00000001; // turn on port b  13-8
-						 //	PCICR |= 0b00000010;    // turn on port c  A5-A0
 	PCICR |= 0b00000100; // turn on port d  7-0(2)
+	//	PCICR |= 0b00000010;    // turn on port c  A5-A0
 
 	// Pin change mask for pins of the port
-	PCMSK0 |= 0b11111111; // 13-8
-	PCMSK1 |= 0b11111111; // A5-A0
-	PCMSK2 |= 0b11111100; // 7-0(2)
+	PCMSK0 |= 0b00000011; // 13-8
+	PCMSK2 |= 0b11000000; // 7-0(2)
+	// PCMSK1 |= 0b11111111; // A5-A0
 	sei();
 }
 
-// PortB interrupt
+// PortB interrupt. Max speed - 38 rotations per second
 ISR(PCINT0_vect)
 {
-}
+	/*
+		CW rotation 013201320
+		Decision matrix:
+		               Y            X
+		decisions[last_state][current_state] =
+		.|  0| 1| 2| 3| X
+		--------------
+		0|  0| 1|-1| *|
+		1| -1| 0| *| 1|
+		2|  1| *| 0|-1|
+		3|  *|-1| 1| 0|
+		Y
 
-// PortD interrupt
-ISR(PCINT2_vect)
-{
-	//	CW
-	//  A 11001100
-	//  B 01100110
-	//  + 13201320
-	// D6 and D7 PIND
-	// 0 64 192 128 0 64 192 128
+		* means impossible transition for implementation should be 0
+	*/
+
+	static byte curr_state = 0b00000000;
+	static byte last_state = 0b00000000;
+	static const int decision_matrix[4][4] = {
+		{0, 1, -1, 0},
+		{-1, 0, 0, 1},
+		{1, 0, 0, -1},
+		{0, -1, 1, 0}};
 
 	last_state = curr_state;
-	curr_state = PIND & 0b11000000; // D7 and D6
-
-	if (last_state == 0)
-	{
-		if (curr_state == 64)
-			++counter;
-		else if (curr_state == 128)
-			--counter;
-	}
-
-	if (last_state == 64)
-	{
-		if (curr_state == 192)
-			++counter;
-		else if (curr_state == 0)
-			--counter;
-	}
-
-	if (last_state == 192)
-	{
-		if (curr_state == 128)
-			++counter;
-		else if (curr_state == 64)
-			--counter;
-	}
-
-	if (last_state == 128)
-	{
-		if (curr_state == 0)
-			++counter;
-		else if (curr_state == 192)
-			--counter;
-	}
-
-	// if (last_state ^ curr_state < 0b00000011)
-	// {
-	// 	// Serial.println("g");
-	// }
-	// else
-	// {
-	// 	// Serial.println("bad");
-	// 	// Serial.println("a" + String(a));
-	// 	// Serial.println("b" + String(b));
-	// 	// Serial.println("ls" + String(last_state));
-	// }
-	// Serial.println("cs" + String(curr_state));
+	curr_state = (PINB & 0b0000011); // Read D9 and D8. NOTE: hardcoded
+	// Serial.println(curr_state);
+	counter1 += decision_matrix[last_state][curr_state];
 }
 
-// PortC interrupt
-// ISR(PCINT1_vect)
-// {
-//  Serial.print("C");
-//  Serial.println(PINC);
-// }
+// PortD interrupt. Max speed - 38 rotations per second
+ISR(PCINT2_vect)
+{
+	/*
+		CW rotation 013201320
+		Decision matrix:
+		               Y            X
+		decisions[last_state][current_state] =
+		.|  0| 1| 2| 3| X
+		--------------
+		0|  0| 1|-1| *|
+		1| -1| 0| *| 1|
+		2|  1| *| 0|-1|
+		3|  *|-1| 1| 0|
+		Y
+
+		* means impossible transition for implementation should be 0
+	*/
+	static byte curr_state = 0b00000000;
+	static byte last_state = 0b00000000;
+	static const int decision_matrix[4][4] = {
+		{0, 1, -1, 0},
+		{-1, 0, 0, 1},
+		{1, 0, 0, -1},
+		{0, -1, 1, 0}};
+
+	last_state = curr_state;
+	curr_state = (PIND & 0b11000000) >> 6; // Read D7 and D6 and push to LSB. NOTE: hardcoded
+	// Serial.println(curr_state);
+	counter2 += decision_matrix[last_state][curr_state];
+}
