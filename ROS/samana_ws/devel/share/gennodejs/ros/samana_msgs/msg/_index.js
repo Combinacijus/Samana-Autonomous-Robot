@@ -8,6 +8,7 @@ let Bump = require('./Bump.js');
 let Vector4_32 = require('./Vector4_32.js');
 let ImuSmall = require('./ImuSmall.js');
 let Teleop = require('./Teleop.js');
+let OdometrySmall = require('./OdometrySmall.js');
 
 module.exports = {
   Vector3_32: Vector3_32,
@@ -17,4 +18,5 @@ module.exports = {
   Vector4_32: Vector4_32,
   ImuSmall: ImuSmall,
   Teleop: Teleop,
+  OdometrySmall: OdometrySmall,
 };

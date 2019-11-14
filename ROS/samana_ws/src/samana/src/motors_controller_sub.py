@@ -3,7 +3,7 @@
 Gintaras Grebliunas
 combinacijus@gmail.com
 motors_controller ROS Node
-Gathers data from sensors and tells motors what to do
+Gathers data from sensors and tells hoverboard motors what to do
 '''
 
 import rospy
