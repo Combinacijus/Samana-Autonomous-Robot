@@ -1,0 +1,7 @@
+{
+    "board": "Arduino_STM32:STM32F1:genericSTM32F103C",
+    "configuration": "device_variant=STM32F103C8,upload_method=serialMethod,cpu_speed=speed_72mhz,opt=osstd",
+    "output": "../ArduinoOutput",
+    "sketch": "encoder_reader_stm32.ino",
+    "port": "/dev/ttyUSB0"
+}
