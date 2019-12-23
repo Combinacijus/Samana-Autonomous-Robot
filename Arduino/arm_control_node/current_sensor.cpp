@@ -30,9 +30,9 @@ void CurrentSensor::calibrate()
     }
 
     cur_now /= counter; // Average current
-    Serial.println("Ofdset delta: " + String(cur_now));
+    Serial.println("Offset delta: " + String(cur_now));
     offset -= cur_now;  // Update offset
-    Serial.println("Ofdset: " + String(offset));
+    Serial.println("Offset: " + String(offset));
 }
 
 /*
