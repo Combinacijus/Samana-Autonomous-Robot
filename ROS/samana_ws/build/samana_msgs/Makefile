@@ -80,16 +80,6 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -111,6 +101,16 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -198,6 +198,21 @@ samana_msgs_generate_messages_py/fast:
 .PHONY : samana_msgs_generate_messages_py/fast
 
 # Convenience name for target.
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule
+.PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+samana_msgs_generate_messages_nodejs: samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : samana_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+samana_msgs_generate_messages_nodejs/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build
+.PHONY : samana_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
 samana_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : samana_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
@@ -228,6 +243,21 @@ _samana_msgs_generate_messages_check_deps_ImuSmall/fast:
 .PHONY : _samana_msgs_generate_messages_check_deps_ImuSmall/fast
 
 # Convenience name for target.
+samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/rule
+.PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/rule
+
+# Convenience name for target.
+_samana_msgs_generate_messages_check_deps_ArmData: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/rule
+
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmData
+
+# fast build rule for target.
+_samana_msgs_generate_messages_check_deps_ArmData/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmData/fast
+
+# Convenience name for target.
 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/rule
 .PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/rule
@@ -241,6 +271,36 @@ _samana_msgs_generate_messages_check_deps_Int16Array: samana_msgs/CMakeFiles/_sa
 _samana_msgs_generate_messages_check_deps_Int16Array/fast:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Int16Array.dir/build
 .PHONY : _samana_msgs_generate_messages_check_deps_Int16Array/fast
+
+# Convenience name for target.
+samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule
+.PHONY : samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule
+
+# Convenience name for target.
+samana_msgs_gennodejs: samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule
+
+.PHONY : samana_msgs_gennodejs
+
+# fast build rule for target.
+samana_msgs_gennodejs/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/build.make samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/build
+.PHONY : samana_msgs_gennodejs/fast
+
+# Convenience name for target.
+samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+.PHONY : samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_eus: samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+.PHONY : std_msgs_generate_messages_eus
+
+# fast build rule for target.
+std_msgs_generate_messages_eus/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+.PHONY : std_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
@@ -316,36 +376,6 @@ rosgraph_msgs_generate_messages_eus: samana_msgs/CMakeFiles/rosgraph_msgs_genera
 rosgraph_msgs_generate_messages_eus/fast:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make samana_msgs/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make samana_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule
-.PHONY : samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule
-
-# Convenience name for target.
-samana_msgs_gennodejs: samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/rule
-
-.PHONY : samana_msgs_gennodejs
-
-# fast build rule for target.
-samana_msgs_gennodejs/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/build.make samana_msgs/CMakeFiles/samana_msgs_gennodejs.dir/build
-.PHONY : samana_msgs_gennodejs/fast
 
 # Convenience name for target.
 samana_msgs/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
@@ -633,19 +663,19 @@ _samana_msgs_generate_messages_check_deps_Vector3_32/fast:
 .PHONY : _samana_msgs_generate_messages_check_deps_Vector3_32/fast
 
 # Convenience name for target.
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule
-.PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule
+samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/rule
+.PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/rule
 
 # Convenience name for target.
-samana_msgs_generate_messages_nodejs: samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/rule
+_samana_msgs_generate_messages_check_deps_ArmCmd: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/rule
 
-.PHONY : samana_msgs_generate_messages_nodejs
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmCmd
 
 # fast build rule for target.
-samana_msgs_generate_messages_nodejs/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build
-.PHONY : samana_msgs_generate_messages_nodejs/fast
+_samana_msgs_generate_messages_check_deps_ArmCmd/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmCmd/fast
 
 # Convenience name for target.
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule:
@@ -745,21 +775,23 @@ help:
 	@echo "... depend"
 	@echo "... install/local"
 	@echo "... install"
-	@echo "... list_install_components"
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... samana_msgs_genpy"
 	@echo "... samana_msgs_generate_messages_py"
+	@echo "... samana_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... _samana_msgs_generate_messages_check_deps_ImuSmall"
+	@echo "... list_install_components"
+	@echo "... _samana_msgs_generate_messages_check_deps_ArmData"
 	@echo "... _samana_msgs_generate_messages_check_deps_Int16Array"
+	@echo "... samana_msgs_gennodejs"
+	@echo "... std_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... _samana_msgs_generate_messages_check_deps_Teleop"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... std_msgs_generate_messages_eus"
-	@echo "... samana_msgs_gennodejs"
 	@echo "... rebuild_cache"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... _samana_msgs_generate_messages_check_deps_ImuCalib"
@@ -781,7 +813,7 @@ help:
 	@echo "... _samana_msgs_generate_messages_check_deps_Vector4_32"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... _samana_msgs_generate_messages_check_deps_Vector3_32"
-	@echo "... samana_msgs_generate_messages_nodejs"
+	@echo "... _samana_msgs_generate_messages_check_deps_ArmCmd"
 	@echo "... samana_msgs_generate_messages_cpp"
 	@echo "... _samana_msgs_generate_messages_check_deps_Bump"
 	@echo "... samana_msgs_gencpp"

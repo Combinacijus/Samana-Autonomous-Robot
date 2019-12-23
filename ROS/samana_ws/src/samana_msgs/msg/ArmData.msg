@@ -1,0 +1,3 @@
+int16 current_grabber
+int16 current_lifter
+uint8 limit_switches
