@@ -37,6 +37,9 @@
     NOTE: read arm_abstraction.* files
 */
 
+#include <ros_arm.h>
+#include <samana_msgs/ArmData.h>
+#include <samana_msgs/ArmCmd.h>
 #include "current_sensor.h"
 #include "arm_abstraction.h"
 #include <TimerOne.h>
@@ -46,11 +49,11 @@
 #define MAIN_LOOP_PERIOD 50    // In miliseconds
 #define SERIAL_BAUD 115200
 
-// NOTE: pins
+// NOTE: current sensor pins
 #define PIN_CUR_SENS_1 A0
 #define PIN_CUR_SENS_2 A1
 
-// Arm control states
+// NOTE: Arm control states must be same as in ROS node
 #define GRABBER_STOP 0
 #define GRABBER_OPEN 1
 #define GRABBER_CLOSE 2
@@ -62,7 +65,7 @@
 #define OVERCURRENT_GRABBER 1500 // In mA
 #define OVERCURRENT_LIFTER 1900  // In mA
 #define OVERCURRENT_TIMEOUT 300  // In ms
-#define UNDEF -1 // Undefined overcurrent time
+#define UNDEF -1                 // Undefined overcurrent start time
 
 int grabber_action = 0; // Tells which action grabber is doing
 int lifter_action = 0;  // Tells which action lifter is doing
@@ -73,22 +76,36 @@ unsigned long overcurrent_lifter_time = UNDEF;
 CurrentSensor ampmeter_grabber(PIN_CUR_SENS_2, 1, 2.3, 512);
 CurrentSensor ampmeter_lifter(PIN_CUR_SENS_1, -1, 2.3, 512);
 
+// ROS
+ros::NodeHandle nh;
+samana_msgs::ArmData arm_data;
+samana_msgs::ArmCmd arm_cmd;
+ros::Publisher arm_data_pub("arm_data", &arm_data);
+
+void arm_cmd_callback(const samana_msgs::ArmCmd &msg)
+{
+  // Control arm from ROS
+  grabber_action = msg.grabber_cmd;
+  lifter_action = msg.lifter_cmd;
+}
+ros::Subscriber<samana_msgs::ArmCmd> arm_cmd_sub("arm_cmd", &arm_cmd_callback);
+
 /*
   Periodically called funtion by timer1
   Updates current reading
 */
 void timer_interrupt()
 {
-  ampmeter_lifter.update();
   ampmeter_grabber.update();
+  ampmeter_lifter.update();
 }
 
 void setup()
 {
-  Serial.begin(SERIAL_BAUD);
-  while (!Serial)
-    ;
-  Serial.println("START");
+  // Serial.begin(SERIAL_BAUD);
+  // while (!Serial)
+  //   ;
+  // Serial.println("START");
 
   // Set limit swithches input pins
   pinMode(PIN_GO, INPUT_PULLUP);
@@ -103,7 +120,7 @@ void setup()
   ampmeter_lifter.calibrate();
   ampmeter_grabber.calibrate();
 
-  lifter_up();
+  initROS();
 
   // Timer interrupt for updating current reading
   Timer1.initialize(INTERRUPT_PERIOD);
@@ -115,34 +132,49 @@ void loop()
   // Current sensor updates in timer interrupt routine
 
   // Control arm via serial port
-  if (Serial.available())
-  {
-    char c = Serial.read() - '0';
-    if (c >= 0 && c <= 2)
-      lifter_action = c;
-    if (c >= 5 && c <= 8)
-      grabber_action = c - 5;
-  }
+  // if (Serial.available())
+  // {
+  //   char c = Serial.read() - '0';
+  //   if (c >= 0 && c <= 2)
+  //     lifter_action = c;
+  //   if (c >= 5 && c <= 8)
+  //     grabber_action = c - 5;
+  // }
   // Serial.println("G:" + String(grabber_action) + " L:" + String(lifter_action));
 
-  
   overcurrent_protection();
   arm_actions_controller();
+  publish_arm_data();
 
-  Serial.println("Amp: " + String(ampmeter_grabber.get_current()) + " " + String(ampmeter_lifter.get_current()));
+  // Serial.println("Amp: " + String(ampmeter_grabber.get_current()) + " " + String(ampmeter_lifter.get_current()));
   // Serial.println("Amp: " + String(ampmeter_lifter.get_current()));
-#ifdef DEBUG
+  // Serial.println("GO: " + String(is_grabber_opened()));
+  // Serial.println("GC: " + String(is_grabber_closed()));
+  // Serial.println("GM: " + String(is_grabber_moving()));
+  // Serial.println("LU: " + String(is_lifter_up()));
+  // Serial.println("LD: " + String(is_lifter_down()));
+  // Serial.println("LM: " + String(is_lifter_moving()));
+  // Serial.println("------");
 
-  Serial.println("GO: " + String(is_grabber_opened()));
-  Serial.println("GC: " + String(is_grabber_closed()));
-  Serial.println("GM: " + String(is_grabber_moving()));
-  Serial.println("LU: " + String(is_lifter_up()));
-  Serial.println("LD: " + String(is_lifter_down()));
-  Serial.println("LM: " + String(is_lifter_moving()));
-  Serial.println("------");
-#endif
-
+  nh.spinOnce();
   delay(MAIN_LOOP_PERIOD);
+}
+
+/*
+    Inits node, advertises topics, gets params
+*/
+void initROS()
+{
+  nh.getHardware()->setBaud(SERIAL_BAUD);
+  nh.initNode();
+
+  nh.advertise(arm_data_pub);
+  nh.subscribe(arm_cmd_sub);
+
+  while (!nh.connected()) // Wait until connected
+    nh.spinOnce();
+
+  nh.logwarn("Start arm");
 }
 
 /*
@@ -230,4 +262,21 @@ void arm_actions_controller()
   default:
     lifter_stop();
   }
+}
+
+void publish_arm_data()
+{
+  nh.spinOnce();
+
+  arm_data.current_grabber = ampmeter_grabber.get_current();
+  arm_data.current_lifter = ampmeter_lifter.get_current();
+  // NOTE: Encode limit switches to bits must be same as in ROS node decoder
+  arm_data.limit_switches = 0;
+  arm_data.limit_switches |= is_grabber_opened() << 0;
+  arm_data.limit_switches |= is_grabber_closed() << 1;
+  arm_data.limit_switches |= is_lifter_up() << 2;
+  arm_data.limit_switches |= is_lifter_down() << 3;
+
+  arm_data_pub.publish(&arm_data);
+  nh.spinOnce();
 }
