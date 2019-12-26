@@ -1013,6 +1013,19 @@ samana_msgs_generate_messages_py/fast:
 .PHONY : samana_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named samana_msgs_generate_messages_nodejs
+
+# Build rule for target.
+samana_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 samana_msgs_generate_messages_nodejs
+.PHONY : samana_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+samana_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build
+.PHONY : samana_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
 # Target rules for targets named std_msgs_generate_messages_nodejs
 
 # Build rule for target.
@@ -1037,6 +1050,19 @@ _samana_msgs_generate_messages_check_deps_ImuSmall: cmake_check_build_system
 _samana_msgs_generate_messages_check_deps_ImuSmall/fast:
 	$(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ImuSmall.dir/build
 .PHONY : _samana_msgs_generate_messages_check_deps_ImuSmall/fast
+
+#=============================================================================
+# Target rules for targets named _samana_msgs_generate_messages_check_deps_ArmData
+
+# Build rule for target.
+_samana_msgs_generate_messages_check_deps_ArmData: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _samana_msgs_generate_messages_check_deps_ArmData
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmData
+
+# fast build rule for target.
+_samana_msgs_generate_messages_check_deps_ArmData/fast:
+	$(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmData.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmData/fast
 
 #=============================================================================
 # Target rules for targets named _samana_msgs_generate_messages_check_deps_Int16Array
@@ -1390,17 +1416,17 @@ _samana_msgs_generate_messages_check_deps_Vector3_32/fast:
 .PHONY : _samana_msgs_generate_messages_check_deps_Vector3_32/fast
 
 #=============================================================================
-# Target rules for targets named samana_msgs_generate_messages_nodejs
+# Target rules for targets named _samana_msgs_generate_messages_check_deps_ArmCmd
 
 # Build rule for target.
-samana_msgs_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 samana_msgs_generate_messages_nodejs
-.PHONY : samana_msgs_generate_messages_nodejs
+_samana_msgs_generate_messages_check_deps_ArmCmd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _samana_msgs_generate_messages_check_deps_ArmCmd
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmCmd
 
 # fast build rule for target.
-samana_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_nodejs.dir/build
-.PHONY : samana_msgs_generate_messages_nodejs/fast
+_samana_msgs_generate_messages_check_deps_ArmCmd/fast:
+	$(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_ArmCmd.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_ArmCmd/fast
 
 #=============================================================================
 # Target rules for targets named _samana_msgs_generate_messages_check_deps_OdometrySmall
@@ -2559,8 +2585,10 @@ help:
 	@echo "... _run_tests_rosserial_client_gtest_subscriber_test"
 	@echo "... samana_msgs_genpy"
 	@echo "... samana_msgs_generate_messages_py"
+	@echo "... samana_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... _samana_msgs_generate_messages_check_deps_ImuSmall"
+	@echo "... _samana_msgs_generate_messages_check_deps_ArmData"
 	@echo "... _samana_msgs_generate_messages_check_deps_Int16Array"
 	@echo "... samana_msgs_gennodejs"
 	@echo "... std_msgs_generate_messages_eus"
@@ -2590,6 +2618,7 @@ help:
 	@echo "... _samana_msgs_generate_messages_check_deps_Vector3_32"
 	@echo "... samana_msgs_generate_messages_nodejs"
 	@echo "... _samana_msgs_generate_messages_check_deps_OdometrySmall"
+	@echo "... _samana_msgs_generate_messages_check_deps_ArmCmd"
 	@echo "... samana_msgs_generate_messages_cpp"
 	@echo "... _samana_msgs_generate_messages_check_deps_Bump"
 	@echo "... samana_msgs_gencpp"
