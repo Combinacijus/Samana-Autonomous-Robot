@@ -13,6 +13,8 @@
     (:file "_package_ImuSmall" :depends-on ("_package"))
     (:file "Int16Array" :depends-on ("_package_Int16Array"))
     (:file "_package_Int16Array" :depends-on ("_package"))
+    (:file "OdometrySmall" :depends-on ("_package_OdometrySmall"))
+    (:file "_package_OdometrySmall" :depends-on ("_package"))
     (:file "Teleop" :depends-on ("_package_Teleop"))
     (:file "_package_Teleop" :depends-on ("_package"))
     (:file "Vector3_32" :depends-on ("_package_Vector3_32"))

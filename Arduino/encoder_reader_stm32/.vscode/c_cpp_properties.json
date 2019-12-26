@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "defines": [
+                "ARDUINO=10800",
+                "USBCON"
+            ],
+            "includePath": [
+                "/home/combinacijus/Documents/Arduino/libraries/FastGPIO",
+                "/home/combinacijus/Documents/Arduino/hardware/Arduino_STM32/STM32F1/**",
+                "${workspaceRoot}",
+                "/opt/arduino-1.8.9/hardware/arduino/avr/**",
+                "/opt/arduino-1.8.9/tools/**",
+                "/opt/arduino-1.8.9/hardware/tools/**",
+                "/opt/arduino-1.8.9/libraries/**",
+                "/home/combinacijus/Documents/Arduino/hardware/tools/**",
+                "/home/combinacijus/Documents/Arduino/libraries/**"
+            ],
+            "forcedInclude": [
+                "/home/combinacijus/.arduino15/packages/arduino/hardware/avr/1.8.2/cores/arduino/Arduino.h"
+            ],
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
