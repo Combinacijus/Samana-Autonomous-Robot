@@ -1,6 +1,10 @@
 (cl:defpackage samana_msgs-msg
   (:use )
   (:export
+   "<ARMCMD>"
+   "ARMCMD"
+   "<ARMDATA>"
+   "ARMDATA"
    "<BUMP>"
    "BUMP"
    "<IMUCALIB>"
@@ -9,6 +13,8 @@
    "IMUSMALL"
    "<INT16ARRAY>"
    "INT16ARRAY"
+   "<ODOMETRYSMALL>"
+   "ODOMETRYSMALL"
    "<TELEOP>"
    "TELEOP"
    "<VECTOR3_32>"

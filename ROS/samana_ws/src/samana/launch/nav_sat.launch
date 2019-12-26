@@ -62,7 +62,6 @@
   <param name="print_diagnostics" value="true"/>
   <param name="debug"           value="false"/>
   <param name="debug_out_file"  value="~/adroid_files/debug_ekf_localization.txt"/>
-
 </node>
 
 </launch>
