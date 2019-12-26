@@ -1,15 +1,37 @@
 <launch>
-
+<!---->
 <node name="bl_gps" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 1 base_link gps" />
 <node name="bl_imu" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 1 base_link imu" />
 
+<!--**************************************NAV****************************************--->
+<node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true" output="screen">
+  <param name="magnetic_declination_radians" value="0.36878808"/>
+  <param name="zero_altitude" value="false"/>
+  <param name="publish_filtered_gps" value="true"/>
+  <param name="broadcast_utm_transform" value="true"/>
+  <param name="wait_for_datum" value="false"/>
 
+  <remap from="/imu/data" to="/android/imu/fixed"/>
+  <remap from="/gps/fix" to="/android/fix/fixed"/>
+  <remap from="/odometry/filtered" to="/odometry/gps"/>
+
+  <!--<remap from="/gps/fix" to="/android/fix/fixed"/>
+  <remap from="/imu/data" to="/android/imu/fixed"/>
+  <remap from="/odometry/filtered" to="/odometry/filtered"/>-->
+</node>
+
+
+<!--**************************************EKF****************************************--->
 <node pkg="robot_localization" type="ekf_localization_node"  name="ekf_odom" clear_params="true">
   <!--INPUTS-->
   <param name="imu0" value="/android/imu/fixed"/>
-  <param name="odom0" value="/odometry/gps"/>
+  <param name="odom0" value="/odometry/filtered_ekf"/>
 
-  <!--OUTPUT /odometry/filtered-->
+  <!--<param name="imu0" value="/android/imu/fixed"/>
+  <param name="odom0" value="/odometry/gps"/>-->
+
+  <!--OUTPUT-->
+  <!--<remap from="/odometry/filtered" to="/odometry/filtered_ekf"/>-->
 
   <param name="frequency" value="30"/>
   <param name="sensor_timeout" value="2"/>
@@ -21,10 +43,10 @@
   <param name="world_frame" value="odom"/>
 
   <rosparam param="imu0_config">[false, false, false,
-                                 true, true, true,
+                                 false, false, true,
                                  false, false, false,
-                                 true, true, true,
-                                 true, true, true]</rosparam>
+                                 false, false, true,
+                                 true, false, false]</rosparam>
 
   <param name="imu0_differential" value="false"/>
   <param name="imu0_remove_gravitational_acceleration" value="true"/>
@@ -42,20 +64,13 @@
   <param name="debug_out_file"  value="~/adroid_files/debug_ekf_localization.txt"/>
 </node>
 
-
-<node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true" output="screen">
-  <param name="magnetic_declination_radians" value="0.36878808"/>
-  <param name="zero_altitude" value="false"/>
-  <param name="publish_filtered_gps" value="true"/>
-  <param name="broadcast_utm_transform" value="true"/>
-  <param name="wait_for_datum" value="false"/>
-
-  <!--INPUTS-->
-  <remap from="/imu/data" to="/android/imu/fixed"/>
-  <remap from="/gps/fix" to="/android/fix/fixed"/>
-  <remap from="/odometry/filtered" to="/odometry/filtered"/>
-
-  <!--OUTPUT /odometry/gps-->
-</node>
-
 </launch>
+
+<!--.
+TODO rewrite to launch file
+fix /android/imu frame_id
+rosrun topic_tools transform /android/imu /android/imu/fixed sensor_msgs/Imu 'sensor_msgs.msg.Imu(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id="imu"),orientation=m.orientation, orientation_covariance=m.orientation_covariance, angular_velocity=m.angular_velocity, angular_velocity_covariance=m.angular_velocity_covariance, linear_acceleration=m.linear_acceleration, linear_acceleration_covariance=m.linear_acceleration_covariance)' --import sensor_msgs std_msgs
+
+fix /android/fix frame_id (not needed?)
+rosrun topic_tools transform /android/fix /android/fix/fixed sensor_msgs/NavSatFix 'sensor_msgs.msg.NavSatFix(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id="gps"), status=m.status, latitude=m.latitude, longitude=m.longitude, altitude=m.altitude, position_covariance=m.position_covariance, position_covariance_type=m.position_covariance_type)' --import sensor_msgs std_msgs
+.-->
