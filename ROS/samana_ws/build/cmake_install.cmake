@@ -147,6 +147,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_embeddedlinux/cmake_install.cmake")
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_test/cmake_install.cmake")
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_windows/cmake_install.cmake")
+  include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rviz_imu_plugin/cmake_install.cmake")
+  include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rviz_satellite/cmake_install.cmake")
 
 endif()
 

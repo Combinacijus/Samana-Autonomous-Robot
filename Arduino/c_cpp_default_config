@@ -7,6 +7,8 @@
                 "USBCON"
             ],
             "includePath": [
+                "/home/combinacijus/.arduino15/packages/arduino/tools/**",
+                "/home/combinacijus/.arduino15/packages/arduino/hardware/avr/1.8.2/**",
                 "${workspaceRoot}",
                 "/opt/arduino-1.8.9/hardware/arduino/avr/**",
                 "/opt/arduino-1.8.9/tools/**",
@@ -16,12 +18,12 @@
                 "/home/combinacijus/Documents/Arduino/libraries/**"
             ],
             "forcedInclude": [
-                "/opt/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h"
+                "/home/combinacijus/.arduino15/packages/arduino/hardware/avr/1.8.2/cores/arduino/Arduino.h"
             ],
-            "intelliSenseMode": "clang-x64",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
-            "cppStandard": "c++17",
-            "compilerPath": "/usr/bin/gcc"
+            "cppStandard": "c++17"
         }
     ],
     "version": 4

@@ -123,6 +123,29 @@ foreach(library ${libraries})
     list(APPEND rosserial_vex_cortex_LIBRARIES ${library})
   elseif(${library} MATCHES "^-l")
     list(APPEND rosserial_vex_cortex_LIBRARIES ${library})
+  elseif(${library} MATCHES "^-")
+    # This is a linker flag/option (like -pthread)
+    # There's no standard variable for these, so create an interface library to hold it
+    if(NOT rosserial_vex_cortex_NUM_DUMMY_TARGETS)
+      set(rosserial_vex_cortex_NUM_DUMMY_TARGETS 0)
+    endif()
+    # Make sure the target name is unique
+    set(interface_target_name "catkin::rosserial_vex_cortex::wrapped-linker-option${rosserial_vex_cortex_NUM_DUMMY_TARGETS}")
+    while(TARGET "${interface_target_name}")
+      math(EXPR rosserial_vex_cortex_NUM_DUMMY_TARGETS "${rosserial_vex_cortex_NUM_DUMMY_TARGETS}+1")
+      set(interface_target_name "catkin::rosserial_vex_cortex::wrapped-linker-option${rosserial_vex_cortex_NUM_DUMMY_TARGETS}")
+    endwhile()
+    add_library("${interface_target_name}" INTERFACE IMPORTED)
+    if("${CMAKE_VERSION}" VERSION_LESS "3.13.0")
+      set_property(
+        TARGET
+        "${interface_target_name}"
+        APPEND PROPERTY
+        INTERFACE_LINK_LIBRARIES "${library}")
+    else()
+      target_link_options("${interface_target_name}" INTERFACE "${library}")
+    endif()
+    list(APPEND rosserial_vex_cortex_LIBRARIES "${interface_target_name}")
   elseif(TARGET ${library})
     list(APPEND rosserial_vex_cortex_LIBRARIES ${library})
   elseif(IS_ABSOLUTE ${library})
@@ -131,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/lib;/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/lib;/home/combinacijus/Documents/ROS/learning_tf_ws/devel/lib;/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
