@@ -16,7 +16,7 @@
 
 (defclass samana_msgs::OdometrySmall
   :super ros::object
-  :slots (_header _ticks1 _ticks2 _speed1 _speed2 ))
+  :slots (_header _ticks1 _ticks2 _rps1 _rps2 ))
 
 (defmethod samana_msgs::OdometrySmall
   (:init
@@ -24,15 +24,15 @@
     ((:header __header) (instance std_msgs::Header :init))
     ((:ticks1 __ticks1) 0)
     ((:ticks2 __ticks2) 0)
-    ((:speed1 __speed1) 0.0)
-    ((:speed2 __speed2) 0.0)
+    ((:rps1 __rps1) 0.0)
+    ((:rps2 __rps2) 0.0)
     )
    (send-super :init)
    (setq _header __header)
    (setq _ticks1 (round __ticks1))
    (setq _ticks2 (round __ticks2))
-   (setq _speed1 (float __speed1))
-   (setq _speed2 (float __speed2))
+   (setq _rps1 (float __rps1))
+   (setq _rps2 (float __rps2))
    self)
   (:header
    (&rest __header)
@@ -47,12 +47,12 @@
   (:ticks2
    (&optional __ticks2)
    (if __ticks2 (setq _ticks2 __ticks2)) _ticks2)
-  (:speed1
-   (&optional __speed1)
-   (if __speed1 (setq _speed1 __speed1)) _speed1)
-  (:speed2
-   (&optional __speed2)
-   (if __speed2 (setq _speed2 __speed2)) _speed2)
+  (:rps1
+   (&optional __rps1)
+   (if __rps1 (setq _rps1 __rps1)) _rps1)
+  (:rps2
+   (&optional __rps2)
+   (if __rps2 (setq _rps2 __rps2)) _rps2)
   (:serialization-length
    ()
    (+
@@ -62,9 +62,9 @@
     2
     ;; uint16 _ticks2
     2
-    ;; float32 _speed1
+    ;; float32 _rps1
     4
-    ;; float32 _speed2
+    ;; float32 _rps2
     4
     ))
   (:serialize
@@ -77,10 +77,10 @@
        (write-word _ticks1 s)
      ;; uint16 _ticks2
        (write-word _ticks2 s)
-     ;; float32 _speed1
-       (sys::poke _speed1 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
-     ;; float32 _speed2
-       (sys::poke _speed2 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; float32 _rps1
+       (sys::poke _rps1 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; float32 _rps2
+       (sys::poke _rps2 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -91,22 +91,22 @@
      (setq _ticks1 (sys::peek buf ptr- :short)) (incf ptr- 2)
    ;; uint16 _ticks2
      (setq _ticks2 (sys::peek buf ptr- :short)) (incf ptr- 2)
-   ;; float32 _speed1
-     (setq _speed1 (sys::peek buf ptr- :float)) (incf ptr- 4)
-   ;; float32 _speed2
-     (setq _speed2 (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; float32 _rps1
+     (setq _rps1 (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; float32 _rps2
+     (setq _rps2 (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;;
    self)
   )
 
-(setf (get samana_msgs::OdometrySmall :md5sum-) "66d5c83f5380a539385185906d186ae9")
+(setf (get samana_msgs::OdometrySmall :md5sum-) "eac9f20217e8b1524f88ba55f5ff1284")
 (setf (get samana_msgs::OdometrySmall :datatype-) "samana_msgs/OdometrySmall")
 (setf (get samana_msgs::OdometrySmall :definition-)
       "std_msgs/Header header
 uint16 ticks1
 uint16 ticks2
-float32 speed1
-float32 speed2
+float32 rps1
+float32 rps2
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -127,6 +127,6 @@ string frame_id
 
 
 
-(provide :samana_msgs/OdometrySmall "66d5c83f5380a539385185906d186ae9")
+(provide :samana_msgs/OdometrySmall "eac9f20217e8b1524f88ba55f5ff1284")
 
 

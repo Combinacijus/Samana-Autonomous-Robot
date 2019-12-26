@@ -15,9 +15,9 @@ namespace samana_msgs
     public:
       typedef std_msgs::Header _header_type;
       _header_type header;
-      typedef int16_t _ticks1_type;
+      typedef uint16_t _ticks1_type;
       _ticks1_type ticks1;
-      typedef int16_t _ticks2_type;
+      typedef uint16_t _ticks2_type;
       _ticks2_type ticks2;
       typedef float _rps1_type;
       _rps1_type rps1;
@@ -37,21 +37,11 @@ namespace samana_msgs
     {
       int offset = 0;
       offset += this->header.serialize(outbuffer + offset);
-      union {
-        int16_t real;
-        uint16_t base;
-      } u_ticks1;
-      u_ticks1.real = this->ticks1;
-      *(outbuffer + offset + 0) = (u_ticks1.base >> (8 * 0)) & 0xFF;
-      *(outbuffer + offset + 1) = (u_ticks1.base >> (8 * 1)) & 0xFF;
+      *(outbuffer + offset + 0) = (this->ticks1 >> (8 * 0)) & 0xFF;
+      *(outbuffer + offset + 1) = (this->ticks1 >> (8 * 1)) & 0xFF;
       offset += sizeof(this->ticks1);
-      union {
-        int16_t real;
-        uint16_t base;
-      } u_ticks2;
-      u_ticks2.real = this->ticks2;
-      *(outbuffer + offset + 0) = (u_ticks2.base >> (8 * 0)) & 0xFF;
-      *(outbuffer + offset + 1) = (u_ticks2.base >> (8 * 1)) & 0xFF;
+      *(outbuffer + offset + 0) = (this->ticks2 >> (8 * 0)) & 0xFF;
+      *(outbuffer + offset + 1) = (this->ticks2 >> (8 * 1)) & 0xFF;
       offset += sizeof(this->ticks2);
       union {
         float real;
@@ -80,23 +70,11 @@ namespace samana_msgs
     {
       int offset = 0;
       offset += this->header.deserialize(inbuffer + offset);
-      union {
-        int16_t real;
-        uint16_t base;
-      } u_ticks1;
-      u_ticks1.base = 0;
-      u_ticks1.base |= ((uint16_t) (*(inbuffer + offset + 0))) << (8 * 0);
-      u_ticks1.base |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
-      this->ticks1 = u_ticks1.real;
+      this->ticks1 =  ((uint16_t) (*(inbuffer + offset)));
+      this->ticks1 |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
       offset += sizeof(this->ticks1);
-      union {
-        int16_t real;
-        uint16_t base;
-      } u_ticks2;
-      u_ticks2.base = 0;
-      u_ticks2.base |= ((uint16_t) (*(inbuffer + offset + 0))) << (8 * 0);
-      u_ticks2.base |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
-      this->ticks2 = u_ticks2.real;
+      this->ticks2 =  ((uint16_t) (*(inbuffer + offset)));
+      this->ticks2 |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
       offset += sizeof(this->ticks2);
       union {
         float real;
@@ -124,7 +102,7 @@ namespace samana_msgs
     }
 
     const char * getType(){ return "samana_msgs/OdometrySmall"; };
-    const char * getMD5(){ return "ae1df5c5a8337951090ccf08be442d3d"; };
+    const char * getMD5(){ return "eac9f20217e8b1524f88ba55f5ff1284"; };
 
   };
 
