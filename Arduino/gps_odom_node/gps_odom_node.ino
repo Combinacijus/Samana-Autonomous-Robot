@@ -8,7 +8,7 @@
 
     Connections (Arduino - Logic level converter - STM32):
         (SDA) A4 ---5V---3V3--- B7
-        (SCL) A5 ---5V---3V3--- 67
+        (SCL) A5 ---5V---3V3--- B6
         GND - GND
 
     digitalRead max speed 28RPS and >24RPS without skips with both encoders (good communication)
@@ -57,16 +57,19 @@ void init_ros()
 
 void loop()
 {
-    static unsigned long loop_start_time = 0;
-    static unsigned long last_time = 0;
+    static unsigned long loop_start_time = 0; // In ms
+    static unsigned long last_time = 0;       // In us
     static int16_t last_ticks1 = 0;
     static int16_t last_ticks2 = 0;
+    static int16_t delta_ticks1;
+    static int16_t delta_ticks2;
     static int16_t ticks1 = 0;
     static int16_t ticks2 = 0;
-    static int16_t k1 = 0;
-    static int16_t k2 = 0;
+    // static int16_t k1 = 0;
+    // static int16_t k2 = 0;
     static float rps1 = 0; // Rotations per second
     static float rps2 = 0; // Rotations per second
+    static float dt = 0;   // Delta time in us
 
     // Read ticks from STM32
     Wire.requestFrom(ODOM_SLAVE_ADDR, 4);
@@ -75,34 +78,36 @@ void loop()
     ticks2 = Wire.read();
     ticks2 += Wire.read() << 8;
 
-    // Rotations per second. delta_ticks / (ticks_per_rotation * delta_time)
+    // Rotations per second. delta_ticks / (ticks_per_rotation * delta_time_s)
     // Overflow handles itself: delta_ticks is correct on overflow
-    int16_t delta_ticks1 = ticks1 - last_ticks1;
-    int16_t delta_ticks2 = ticks2 - last_ticks2;
-    rps1 = delta_ticks1 / (2.4 * (millis() - last_time));
-    rps2 = delta_ticks2 / (2.4 * (millis() - last_time));
+    delta_ticks1 = ticks1 - last_ticks1;
+    delta_ticks2 = ticks2 - last_ticks2;
+    dt = micros() - last_time;
+    last_time = micros();
+    rps1 = delta_ticks1 / (0.0024 * dt);
+    rps2 = delta_ticks2 / (0.0024 * dt);
 
     // Count how many times counter overflowed
-    if (delta_ticks1 > 0 && ticks1 < last_ticks1)
-        ++k1;
-    else if (delta_ticks1 < 0 && ticks1 > last_ticks1)
-        --k1;
-    if (delta_ticks2 > 0 && ticks2 < last_ticks2)
-        ++k2;
-    else if (delta_ticks2 < 0 && ticks2 > last_ticks2)
-        --k2;
+    // if (delta_ticks1 > 0 && ticks1 < last_ticks1)
+    //     ++k1;
+    // else if (delta_ticks1 < 0 && ticks1 > last_ticks1)
+    //     --k1;
+    // if (delta_ticks2 > 0 && ticks2 < last_ticks2)
+    //     ++k2;
+    // else if (delta_ticks2 < 0 && ticks2 > last_ticks2)
+    //     --k2;
 
     last_ticks1 = ticks1;
     last_ticks2 = ticks2;
-    last_time = millis();
 
     // Output odom message to ROS
     odometry_msg.header.stamp = nh.now();
     odometry_msg.header.frame_id = "odom";
-    odometry_msg.ticks1 = last_ticks1;
-    odometry_msg.ticks2 = last_ticks2;
+    odometry_msg.delta_ticks1 = delta_ticks1;
+    odometry_msg.delta_ticks2 = delta_ticks2;
     odometry_msg.rps1 = rps1;
     odometry_msg.rps2 = rps2;
+    odometry_msg.dt = dt;
     odometry_pub.publish(&odometry_msg);
     nh.spinOnce();
 
@@ -115,7 +120,7 @@ void loop()
     int sleep_time = MAIN_LOOP_PERIOD - (millis() - loop_start_time);
     if (sleep_time < MIN_DELAY)
         sleep_time = MIN_DELAY;
-    
+
     // char log_msg[20];
     // sprintf(log_msg, "S:%d", sleep_time);
     // nh.logwarn(log_msg);
