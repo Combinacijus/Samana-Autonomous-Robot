@@ -19,17 +19,17 @@ namespace samana_msgs
       _ticks1_type ticks1;
       typedef uint16_t _ticks2_type;
       _ticks2_type ticks2;
-      typedef float _speed1_type;
-      _speed1_type speed1;
-      typedef float _speed2_type;
-      _speed2_type speed2;
+      typedef float _rps1_type;
+      _rps1_type rps1;
+      typedef float _rps2_type;
+      _rps2_type rps2;
 
     OdometrySmall():
       header(),
       ticks1(0),
       ticks2(0),
-      speed1(0),
-      speed2(0)
+      rps1(0),
+      rps2(0)
     {
     }
 
@@ -46,23 +46,23 @@ namespace samana_msgs
       union {
         float real;
         uint32_t base;
-      } u_speed1;
-      u_speed1.real = this->speed1;
-      *(outbuffer + offset + 0) = (u_speed1.base >> (8 * 0)) & 0xFF;
-      *(outbuffer + offset + 1) = (u_speed1.base >> (8 * 1)) & 0xFF;
-      *(outbuffer + offset + 2) = (u_speed1.base >> (8 * 2)) & 0xFF;
-      *(outbuffer + offset + 3) = (u_speed1.base >> (8 * 3)) & 0xFF;
-      offset += sizeof(this->speed1);
+      } u_rps1;
+      u_rps1.real = this->rps1;
+      *(outbuffer + offset + 0) = (u_rps1.base >> (8 * 0)) & 0xFF;
+      *(outbuffer + offset + 1) = (u_rps1.base >> (8 * 1)) & 0xFF;
+      *(outbuffer + offset + 2) = (u_rps1.base >> (8 * 2)) & 0xFF;
+      *(outbuffer + offset + 3) = (u_rps1.base >> (8 * 3)) & 0xFF;
+      offset += sizeof(this->rps1);
       union {
         float real;
         uint32_t base;
-      } u_speed2;
-      u_speed2.real = this->speed2;
-      *(outbuffer + offset + 0) = (u_speed2.base >> (8 * 0)) & 0xFF;
-      *(outbuffer + offset + 1) = (u_speed2.base >> (8 * 1)) & 0xFF;
-      *(outbuffer + offset + 2) = (u_speed2.base >> (8 * 2)) & 0xFF;
-      *(outbuffer + offset + 3) = (u_speed2.base >> (8 * 3)) & 0xFF;
-      offset += sizeof(this->speed2);
+      } u_rps2;
+      u_rps2.real = this->rps2;
+      *(outbuffer + offset + 0) = (u_rps2.base >> (8 * 0)) & 0xFF;
+      *(outbuffer + offset + 1) = (u_rps2.base >> (8 * 1)) & 0xFF;
+      *(outbuffer + offset + 2) = (u_rps2.base >> (8 * 2)) & 0xFF;
+      *(outbuffer + offset + 3) = (u_rps2.base >> (8 * 3)) & 0xFF;
+      offset += sizeof(this->rps2);
       return offset;
     }
 
@@ -79,30 +79,30 @@ namespace samana_msgs
       union {
         float real;
         uint32_t base;
-      } u_speed1;
-      u_speed1.base = 0;
-      u_speed1.base |= ((uint32_t) (*(inbuffer + offset + 0))) << (8 * 0);
-      u_speed1.base |= ((uint32_t) (*(inbuffer + offset + 1))) << (8 * 1);
-      u_speed1.base |= ((uint32_t) (*(inbuffer + offset + 2))) << (8 * 2);
-      u_speed1.base |= ((uint32_t) (*(inbuffer + offset + 3))) << (8 * 3);
-      this->speed1 = u_speed1.real;
-      offset += sizeof(this->speed1);
+      } u_rps1;
+      u_rps1.base = 0;
+      u_rps1.base |= ((uint32_t) (*(inbuffer + offset + 0))) << (8 * 0);
+      u_rps1.base |= ((uint32_t) (*(inbuffer + offset + 1))) << (8 * 1);
+      u_rps1.base |= ((uint32_t) (*(inbuffer + offset + 2))) << (8 * 2);
+      u_rps1.base |= ((uint32_t) (*(inbuffer + offset + 3))) << (8 * 3);
+      this->rps1 = u_rps1.real;
+      offset += sizeof(this->rps1);
       union {
         float real;
         uint32_t base;
-      } u_speed2;
-      u_speed2.base = 0;
-      u_speed2.base |= ((uint32_t) (*(inbuffer + offset + 0))) << (8 * 0);
-      u_speed2.base |= ((uint32_t) (*(inbuffer + offset + 1))) << (8 * 1);
-      u_speed2.base |= ((uint32_t) (*(inbuffer + offset + 2))) << (8 * 2);
-      u_speed2.base |= ((uint32_t) (*(inbuffer + offset + 3))) << (8 * 3);
-      this->speed2 = u_speed2.real;
-      offset += sizeof(this->speed2);
+      } u_rps2;
+      u_rps2.base = 0;
+      u_rps2.base |= ((uint32_t) (*(inbuffer + offset + 0))) << (8 * 0);
+      u_rps2.base |= ((uint32_t) (*(inbuffer + offset + 1))) << (8 * 1);
+      u_rps2.base |= ((uint32_t) (*(inbuffer + offset + 2))) << (8 * 2);
+      u_rps2.base |= ((uint32_t) (*(inbuffer + offset + 3))) << (8 * 3);
+      this->rps2 = u_rps2.real;
+      offset += sizeof(this->rps2);
      return offset;
     }
 
     const char * getType(){ return "samana_msgs/OdometrySmall"; };
-    const char * getMD5(){ return "66d5c83f5380a539385185906d186ae9"; };
+    const char * getMD5(){ return "eac9f20217e8b1524f88ba55f5ff1284"; };
 
   };
 

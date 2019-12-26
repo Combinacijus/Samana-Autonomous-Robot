@@ -22,14 +22,14 @@
     :initarg :ticks2
     :type cl:fixnum
     :initform 0)
-   (speed1
-    :reader speed1
-    :initarg :speed1
+   (rps1
+    :reader rps1
+    :initarg :rps1
     :type cl:float
     :initform 0.0)
-   (speed2
-    :reader speed2
-    :initarg :speed2
+   (rps2
+    :reader rps2
+    :initarg :rps2
     :type cl:float
     :initform 0.0))
 )
@@ -57,15 +57,15 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader samana_msgs-msg:ticks2-val is deprecated.  Use samana_msgs-msg:ticks2 instead.")
   (ticks2 m))
 
-(cl:ensure-generic-function 'speed1-val :lambda-list '(m))
-(cl:defmethod speed1-val ((m <OdometrySmall>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader samana_msgs-msg:speed1-val is deprecated.  Use samana_msgs-msg:speed1 instead.")
-  (speed1 m))
+(cl:ensure-generic-function 'rps1-val :lambda-list '(m))
+(cl:defmethod rps1-val ((m <OdometrySmall>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader samana_msgs-msg:rps1-val is deprecated.  Use samana_msgs-msg:rps1 instead.")
+  (rps1 m))
 
-(cl:ensure-generic-function 'speed2-val :lambda-list '(m))
-(cl:defmethod speed2-val ((m <OdometrySmall>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader samana_msgs-msg:speed2-val is deprecated.  Use samana_msgs-msg:speed2 instead.")
-  (speed2 m))
+(cl:ensure-generic-function 'rps2-val :lambda-list '(m))
+(cl:defmethod rps2-val ((m <OdometrySmall>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader samana_msgs-msg:rps2-val is deprecated.  Use samana_msgs-msg:rps2 instead.")
+  (rps2 m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <OdometrySmall>) ostream)
   "Serializes a message object of type '<OdometrySmall>"
   (roslisp-msg-protocol:serialize (cl:slot-value msg 'header) ostream)
@@ -73,12 +73,12 @@
   (cl:write-byte (cl:ldb (cl:byte 8 8) (cl:slot-value msg 'ticks1)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'ticks2)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 8) (cl:slot-value msg 'ticks2)) ostream)
-  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'speed1))))
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'rps1))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'speed2))))
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'rps2))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -96,13 +96,13 @@
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'speed1) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:setf (cl:slot-value msg 'rps1) (roslisp-utils:decode-single-float-bits bits)))
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'speed2) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:setf (cl:slot-value msg 'rps2) (roslisp-utils:decode-single-float-bits bits)))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<OdometrySmall>)))
@@ -113,16 +113,16 @@
   "samana_msgs/OdometrySmall")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<OdometrySmall>)))
   "Returns md5sum for a message object of type '<OdometrySmall>"
-  "66d5c83f5380a539385185906d186ae9")
+  "eac9f20217e8b1524f88ba55f5ff1284")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'OdometrySmall)))
   "Returns md5sum for a message object of type 'OdometrySmall"
-  "66d5c83f5380a539385185906d186ae9")
+  "eac9f20217e8b1524f88ba55f5ff1284")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<OdometrySmall>)))
   "Returns full string definition for message of type '<OdometrySmall>"
-  (cl:format cl:nil "std_msgs/Header header~%uint16 ticks1~%uint16 ticks2~%float32 speed1~%float32 speed2~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%~%"))
+  (cl:format cl:nil "std_msgs/Header header~%uint16 ticks1~%uint16 ticks2~%float32 rps1~%float32 rps2~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'OdometrySmall)))
   "Returns full string definition for message of type 'OdometrySmall"
-  (cl:format cl:nil "std_msgs/Header header~%uint16 ticks1~%uint16 ticks2~%float32 speed1~%float32 speed2~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%~%"))
+  (cl:format cl:nil "std_msgs/Header header~%uint16 ticks1~%uint16 ticks2~%float32 rps1~%float32 rps2~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <OdometrySmall>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'header))
@@ -137,6 +137,6 @@
     (cl:cons ':header (header msg))
     (cl:cons ':ticks1 (ticks1 msg))
     (cl:cons ':ticks2 (ticks2 msg))
-    (cl:cons ':speed1 (speed1 msg))
-    (cl:cons ':speed2 (speed2 msg))
+    (cl:cons ':rps1 (rps1 msg))
+    (cl:cons ':rps2 (rps2 msg))
 ))

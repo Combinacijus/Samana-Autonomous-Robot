@@ -15,10 +15,18 @@
 
     <!--Remote control arduino serial-->
     <node name="serial_node_rc" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
+        <param name="port" value="/dev/ttyUSB4"/>
+        <param name="baud" value="57600"/>
+    </node>
+
+    <!--GPS and Odometry sensors arduino serial-->
+    <node name="serial_node_gps_odom" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
         <param name="port" value="/dev/ttyUSB0"/>
         <param name="baud" value="57600"/>
     </node>
 
     <!--Motors controller-->
     <node name="motors_controller" pkg="samana" type="motors_controller_sub.py" output="screen" respawn="true"/>
+
+    
 </launch>

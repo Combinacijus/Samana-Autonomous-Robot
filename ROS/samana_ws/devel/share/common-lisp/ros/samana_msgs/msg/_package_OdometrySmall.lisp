@@ -5,8 +5,8 @@
           TICKS1
           TICKS2-VAL
           TICKS2
-          SPEED1-VAL
-          SPEED1
-          SPEED2-VAL
-          SPEED2
+          RPS1-VAL
+          RPS1
+          RPS2-VAL
+          RPS2
 ))

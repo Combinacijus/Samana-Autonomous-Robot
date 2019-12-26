@@ -22,8 +22,8 @@ class OdometrySmall {
       this.header = null;
       this.ticks1 = null;
       this.ticks2 = null;
-      this.speed1 = null;
-      this.speed2 = null;
+      this.rps1 = null;
+      this.rps2 = null;
     }
     else {
       if (initObj.hasOwnProperty('header')) {
@@ -44,17 +44,17 @@ class OdometrySmall {
       else {
         this.ticks2 = 0;
       }
-      if (initObj.hasOwnProperty('speed1')) {
-        this.speed1 = initObj.speed1
+      if (initObj.hasOwnProperty('rps1')) {
+        this.rps1 = initObj.rps1
       }
       else {
-        this.speed1 = 0.0;
+        this.rps1 = 0.0;
       }
-      if (initObj.hasOwnProperty('speed2')) {
-        this.speed2 = initObj.speed2
+      if (initObj.hasOwnProperty('rps2')) {
+        this.rps2 = initObj.rps2
       }
       else {
-        this.speed2 = 0.0;
+        this.rps2 = 0.0;
       }
     }
   }
@@ -67,10 +67,10 @@ class OdometrySmall {
     bufferOffset = _serializer.uint16(obj.ticks1, buffer, bufferOffset);
     // Serialize message field [ticks2]
     bufferOffset = _serializer.uint16(obj.ticks2, buffer, bufferOffset);
-    // Serialize message field [speed1]
-    bufferOffset = _serializer.float32(obj.speed1, buffer, bufferOffset);
-    // Serialize message field [speed2]
-    bufferOffset = _serializer.float32(obj.speed2, buffer, bufferOffset);
+    // Serialize message field [rps1]
+    bufferOffset = _serializer.float32(obj.rps1, buffer, bufferOffset);
+    // Serialize message field [rps2]
+    bufferOffset = _serializer.float32(obj.rps2, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -84,10 +84,10 @@ class OdometrySmall {
     data.ticks1 = _deserializer.uint16(buffer, bufferOffset);
     // Deserialize message field [ticks2]
     data.ticks2 = _deserializer.uint16(buffer, bufferOffset);
-    // Deserialize message field [speed1]
-    data.speed1 = _deserializer.float32(buffer, bufferOffset);
-    // Deserialize message field [speed2]
-    data.speed2 = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [rps1]
+    data.rps1 = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [rps2]
+    data.rps2 = _deserializer.float32(buffer, bufferOffset);
     return data;
   }
 
@@ -104,7 +104,7 @@ class OdometrySmall {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '66d5c83f5380a539385185906d186ae9';
+    return 'eac9f20217e8b1524f88ba55f5ff1284';
   }
 
   static messageDefinition() {
@@ -113,8 +113,8 @@ class OdometrySmall {
     std_msgs/Header header
     uint16 ticks1
     uint16 ticks2
-    float32 speed1
-    float32 speed2
+    float32 rps1
+    float32 rps2
     ================================================================================
     MSG: std_msgs/Header
     # Standard metadata for higher-level stamped data types.
@@ -161,18 +161,18 @@ class OdometrySmall {
       resolved.ticks2 = 0
     }
 
-    if (msg.speed1 !== undefined) {
-      resolved.speed1 = msg.speed1;
+    if (msg.rps1 !== undefined) {
+      resolved.rps1 = msg.rps1;
     }
     else {
-      resolved.speed1 = 0.0
+      resolved.rps1 = 0.0
     }
 
-    if (msg.speed2 !== undefined) {
-      resolved.speed2 = msg.speed2;
+    if (msg.rps2 !== undefined) {
+      resolved.rps2 = msg.rps2;
     }
     else {
-      resolved.speed2 = 0.0
+      resolved.rps2 = 0.0
     }
 
     return resolved;
