@@ -28,15 +28,15 @@ struct OdometrySmall_
     : header()
     , ticks1(0)
     , ticks2(0)
-    , speed1(0.0)
-    , speed2(0.0)  {
+    , rps1(0.0)
+    , rps2(0.0)  {
     }
   OdometrySmall_(const ContainerAllocator& _alloc)
     : header(_alloc)
     , ticks1(0)
     , ticks2(0)
-    , speed1(0.0)
-    , speed2(0.0)  {
+    , rps1(0.0)
+    , rps2(0.0)  {
   (void)_alloc;
     }
 
@@ -51,11 +51,11 @@ struct OdometrySmall_
    typedef uint16_t _ticks2_type;
   _ticks2_type ticks2;
 
-   typedef float _speed1_type;
-  _speed1_type speed1;
+   typedef float _rps1_type;
+  _rps1_type rps1;
 
-   typedef float _speed2_type;
-  _speed2_type speed2;
+   typedef float _rps2_type;
+  _rps2_type rps2;
 
 
 
@@ -135,12 +135,12 @@ struct MD5Sum< ::samana_msgs::OdometrySmall_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "66d5c83f5380a539385185906d186ae9";
+    return "eac9f20217e8b1524f88ba55f5ff1284";
   }
 
   static const char* value(const ::samana_msgs::OdometrySmall_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x66d5c83f5380a539ULL;
-  static const uint64_t static_value2 = 0x385185906d186ae9ULL;
+  static const uint64_t static_value1 = 0xeac9f20217e8b152ULL;
+  static const uint64_t static_value2 = 0x4f88ba55f5ff1284ULL;
 };
 
 template<class ContainerAllocator>
@@ -162,8 +162,8 @@ struct Definition< ::samana_msgs::OdometrySmall_<ContainerAllocator> >
     return "std_msgs/Header header\n"
 "uint16 ticks1\n"
 "uint16 ticks2\n"
-"float32 speed1\n"
-"float32 speed2\n"
+"float32 rps1\n"
+"float32 rps2\n"
 "================================================================================\n"
 "MSG: std_msgs/Header\n"
 "# Standard metadata for higher-level stamped data types.\n"
@@ -200,8 +200,8 @@ namespace serialization
       stream.next(m.header);
       stream.next(m.ticks1);
       stream.next(m.ticks2);
-      stream.next(m.speed1);
-      stream.next(m.speed2);
+      stream.next(m.rps1);
+      stream.next(m.rps2);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -227,10 +227,10 @@ struct Printer< ::samana_msgs::OdometrySmall_<ContainerAllocator> >
     Printer<uint16_t>::stream(s, indent + "  ", v.ticks1);
     s << indent << "ticks2: ";
     Printer<uint16_t>::stream(s, indent + "  ", v.ticks2);
-    s << indent << "speed1: ";
-    Printer<float>::stream(s, indent + "  ", v.speed1);
-    s << indent << "speed2: ";
-    Printer<float>::stream(s, indent + "  ", v.speed2);
+    s << indent << "rps1: ";
+    Printer<float>::stream(s, indent + "  ", v.rps1);
+    s << indent << "rps2: ";
+    Printer<float>::stream(s, indent + "  ", v.rps2);
   }
 };
 
