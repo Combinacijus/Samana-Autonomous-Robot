@@ -40,6 +40,8 @@ endif()
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/samana_msgs/msg" TYPE FILE FILES
     "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/OdometrySmall.msg"
+    "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ArmCmd.msg"
+    "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/ArmData.msg"
     "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Teleop.msg"
     "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Bump.msg"
     "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana_msgs/msg/Int16Array.msg"

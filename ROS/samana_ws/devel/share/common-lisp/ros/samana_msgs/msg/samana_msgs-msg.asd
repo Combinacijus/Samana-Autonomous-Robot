@@ -5,6 +5,10 @@
   :depends-on (:roslisp-msg-protocol :roslisp-utils :std_msgs-msg
 )
   :components ((:file "_package")
+    (:file "ArmCmd" :depends-on ("_package_ArmCmd"))
+    (:file "_package_ArmCmd" :depends-on ("_package"))
+    (:file "ArmData" :depends-on ("_package_ArmData"))
+    (:file "_package_ArmData" :depends-on ("_package"))
     (:file "Bump" :depends-on ("_package_Bump"))
     (:file "_package_Bump" :depends-on ("_package"))
     (:file "ImuCalib" :depends-on ("_package_ImuCalib"))
