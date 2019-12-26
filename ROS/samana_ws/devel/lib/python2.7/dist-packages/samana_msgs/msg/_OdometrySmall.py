@@ -8,14 +8,14 @@ import struct
 import std_msgs.msg
 
 class OdometrySmall(genpy.Message):
-  _md5sum = "66d5c83f5380a539385185906d186ae9"
+  _md5sum = "eac9f20217e8b1524f88ba55f5ff1284"
   _type = "samana_msgs/OdometrySmall"
   _has_header = True #flag to mark the presence of a Header object
   _full_text = """std_msgs/Header header
 uint16 ticks1
 uint16 ticks2
-float32 speed1
-float32 speed2
+float32 rps1
+float32 rps2
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -32,7 +32,7 @@ time stamp
 #Frame this data is associated with
 string frame_id
 """
-  __slots__ = ['header','ticks1','ticks2','speed1','speed2']
+  __slots__ = ['header','ticks1','ticks2','rps1','rps2']
   _slot_types = ['std_msgs/Header','uint16','uint16','float32','float32']
 
   def __init__(self, *args, **kwds):
@@ -43,7 +43,7 @@ string frame_id
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       header,ticks1,ticks2,speed1,speed2
+       header,ticks1,ticks2,rps1,rps2
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -58,16 +58,16 @@ string frame_id
         self.ticks1 = 0
       if self.ticks2 is None:
         self.ticks2 = 0
-      if self.speed1 is None:
-        self.speed1 = 0.
-      if self.speed2 is None:
-        self.speed2 = 0.
+      if self.rps1 is None:
+        self.rps1 = 0.
+      if self.rps2 is None:
+        self.rps2 = 0.
     else:
       self.header = std_msgs.msg.Header()
       self.ticks1 = 0
       self.ticks2 = 0
-      self.speed1 = 0.
-      self.speed2 = 0.
+      self.rps1 = 0.
+      self.rps2 = 0.
 
   def _get_types(self):
     """
@@ -90,7 +90,7 @@ string frame_id
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2H2f().pack(_x.ticks1, _x.ticks2, _x.speed1, _x.speed2))
+      buff.write(_get_struct_2H2f().pack(_x.ticks1, _x.ticks2, _x.rps1, _x.rps2))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -119,7 +119,7 @@ string frame_id
       _x = self
       start = end
       end += 12
-      (_x.ticks1, _x.ticks2, _x.speed1, _x.speed2,) = _get_struct_2H2f().unpack(str[start:end])
+      (_x.ticks1, _x.ticks2, _x.rps1, _x.rps2,) = _get_struct_2H2f().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -141,7 +141,7 @@ string frame_id
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2H2f().pack(_x.ticks1, _x.ticks2, _x.speed1, _x.speed2))
+      buff.write(_get_struct_2H2f().pack(_x.ticks1, _x.ticks2, _x.rps1, _x.rps2))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -171,7 +171,7 @@ string frame_id
       _x = self
       start = end
       end += 12
-      (_x.ticks1, _x.ticks2, _x.speed1, _x.speed2,) = _get_struct_2H2f().unpack(str[start:end])
+      (_x.ticks1, _x.ticks2, _x.rps1, _x.rps2,) = _get_struct_2H2f().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

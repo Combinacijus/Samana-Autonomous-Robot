@@ -6,8 +6,8 @@
     and send it to master arduino on request
 
     Connections:
-		Encoder1: A(GREEN) - A1, B(WHITE) - A2, GND(BLACK) - GND, VCC(RED) - 5V
-		Encoder2: A(GREEN) - A3, B(WHITE) - A4, GND(BLACK) - GND, VCC(RED) - 5V
+		Encoder1: A(GREEN) - A0, B(WHITE) - A1, GND(BLACK) - GND, VCC(RED) - 5V
+		Encoder2: A(GREEN) - A2, B(WHITE) - A3, GND(BLACK) - GND, VCC(RED) - 5V
     
         (Arduino - Logic level converter - STM32):
         (SDA) A4 ---5V---3V3--- B7
@@ -61,9 +61,9 @@ void setup()
     pinMode(PIN_A2, INPUT_PULLUP);
     pinMode(PIN_B2, INPUT_PULLUP);
 
-    Serial.begin(BAUD_RATE);
-    while (!Serial)
-        ;
+    // Serial.begin(BAUD_RATE);
+    // while (!Serial)
+    //     ;
 
     Wire.begin(ODOM_SLAVE_ADDR);
     Wire.onRequest(request_event);
