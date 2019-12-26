@@ -1,0 +1,41 @@
+ekf_localization_node:
+	Sensors input:
+		and -> (/android/imu/fixed) <param name="imu0" value="robot/imu/data"/>
+		nav -> (/odometry/gps)      <param name="odom0" value="wheel_encoder/odometry"/> 
+		
+	Published Topics:
+		odometry/filtered (nav_msgs/Odometry) TODO WON'T PUBLISH
+		accel/filtered (geometry_msgs/AccelWithCovarianceStamped) (if enabled)
+
+
+navsat_transform_node:
+
+ 	Inputs 3:
+		(/android/fix/fixed) A sensor_msgs/NavSatFix message with raw GPS coordinates in it. 
+		(/android/imu/fixed) A sensor_msgs/Imu message with an absolute (earth-referenced) heading.
+		(ekf/output/???????) A nav_msgs/Odometry message that contains the robot’s current position estimate in the frame specified by its start location (typically the output of a robot_localization state estimation node).
+
+	Subscribed topics:
+		and -> (/android/fix/fixed) imu/data             A sensor_msgs/Imu message with orientation data
+		and -> (/android/imu/fixed) gps/fix              A sensor_msgs/NavSatFix message containing your robot’s GPS coordinates
+		ekf -> (/odometry/filtered) odometry/filtered    A nav_msgs/Odometry message of your robot’s current position. This is needed in the event that your first GPS reading comes after your robot has attained some non-zero pose.
+
+
+	It produces an odometry message in coordinates that are consistent with your robot’s world frame.
+
+	Published topics:
+		odometry/gps              A nav_msgs/Odometry message containing the GPS coordinates of your robot, transformed into its world coordinate frame. This message can be directly fused into robot_localization‘s state estimation nodes.
+		gps/filtered (optional)   A sensor_msgs/NavSatFix message containing your robot’s world frame position, transformed into GPS coordinates
+	
+
+	X,      Y,    Z,
+	roll, pitch, yaw,
+	X˙,     Y˙,   Z˙,
+	roll˙,pitch˙,yaw˙,
+	X¨,     Y¨,   Z¨ 
+
+
+fix /android/imu frame_id
+rosrun topic_tools transform /android/imu /android/imu/fixed sensor_msgs/Imu 'sensor_msgs.msg.Imu(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id="imu"),orientation=m.orientation, orientation_covariance=m.orientation_covariance, angular_velocity=m.angular_velocity, angular_velocity_covariance=m.angular_velocity_covariance, linear_acceleration=m.linear_acceleration, linear_acceleration_covariance=m.linear_acceleration_covariance)' --import sensor_msgs std_msgs
+fix /android/fix frame_id (not needed?)
+rosrun topic_tools transform /android/fix /android/fix/fixed sensor_msgs/NavSatFix 'sensor_msgs.msg.NavSatFix(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id="gps"), status=m.status, latitude=m.latitude, longitude=m.longitude, altitude=m.altitude, position_covariance=m.position_covariance, position_covariance_type=m.position_covariance_type)' --import sensor_msgs std_msgs

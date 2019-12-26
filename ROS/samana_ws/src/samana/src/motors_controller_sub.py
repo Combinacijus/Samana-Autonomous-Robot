@@ -3,7 +3,7 @@
 Gintaras Grebliunas
 combinacijus@gmail.com
 motors_controller ROS Node
-Gathers data from sensors and tells motors what to do
+Gathers data from sensors and tells hoverboard motors what to do
 '''
 
 import rospy
@@ -42,8 +42,8 @@ def rc_calback(rc):
     g_speed_rc = rc.data[1] * power_coef
 
     # Adding throttle channel
-    if (rc.data[2] > 0 and power_coef >= 0.2):
-        g_speed_rc += rc.data[2] / 4.0
+    # if (rc.data[2] > 0 and power_coef >= 0.2):
+    #     g_speed_rc += rc.data[2] / 4.0
 
     if (abs(g_steer_rc) < 20):
         g_steer_rc = 0

@@ -2,6 +2,7 @@
 	"activePkgName": [
 		"samana",
 		"rviz_satellite",
-		"rviz_imu_plugin"
+		"rviz_imu_plugin",
+		"samana_msgs"
 	]
 }
