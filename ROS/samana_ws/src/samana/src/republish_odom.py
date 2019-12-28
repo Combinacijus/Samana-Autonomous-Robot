@@ -10,28 +10,32 @@ from samana_msgs.msg import OdometrySmall
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Quaternion
 from tf.transformations import quaternion_from_euler
+from std_srvs.srv import Empty, EmptyResponse
 import math
 
 
 class OdomRepub:
     def __init__(self):
-        self.posx = 0
-        self.posy = 0
-        self.theta = 0
-
+        self.reset_vals()
         self.get_params_or_default()
 
         # ROS stuff
         try:
             rospy.init_node("odom_repub", anonymous=True)
 
-            if rospy.has_param('base_width'):
-                pass
-
+            s = rospy.Service("reset_vals", Empty, self.handle_reset_vals)
             rospy.Subscriber("odom", OdometrySmall, self.odom_cb)
             rospy.spin()
         except rospy.ROSInterruptException:
             pass
+
+    def reset_vals(self):
+        self.posx = 0
+        self.posy = 0
+        self.theta = 0
+        self.theta_debug = 0
+        self.rot1 = 0
+        self.rot2 = 0
 
     def get_params_or_default(self):
         '''
@@ -39,9 +43,14 @@ class OdomRepub:
             if not found sets default values
         '''
         # Default params
-        self.base_width = 0.8  # In meters
-        self.rot_per_m_left = 2.1
-        self.rot_per_m_right = 2.1
+        # base_width = 1, -3600deg:
+        # -1885.885155 -1886.326100
+        self.base_width = 0.523856988
+        # 4m straight track rotation:
+        # 15.985200 15.980833 15.968500 15.985000 15.987700
+        # 15.936250 15.929167 15.991667 15.959583 15.974167
+        self.rot_per_m_left = 3.99536165
+        self.rot_per_m_right = 3.9895417
 
         # Updated params from param server if available
         if rospy.has_param("base_width"):
@@ -99,6 +108,20 @@ class OdomRepub:
         pub = rospy.Publisher("odom_raw", Odometry, queue_size=10)
         pub.publish(msg)
 
+        self.calibration_debug_data(odom_data)
+
+    def calibration_debug_data(self, od):
+        v_left = od.rps1 / self.rot_per_m_right  # Wheel speed in m/s
+        v_right = od.rps2 / self.rot_per_m_left  # Wheel speed in m/s
+        omega = v_right - v_left  # Angular speed in rad/s
+        self.theta_debug += omega * od.dt / 1000000.0
+        self.rot1 += od.delta_ticks1 / 2400.0
+        self.rot2 += od.delta_ticks2 / 2400.0
+        print("r1: %f, r2: %f, th: %f, thd: %f" % (self.rot1, self.rot2, self.theta * 180 / math.pi, self.theta_debug * 180 / math.pi))
+
+    def handle_reset_vals(self, _):
+        self.reset_vals()
+        return EmptyResponse()
 
 if __name__ == "__main__":
     odom_repub = OdomRepub()  # Goes into infinte loop for ROS
