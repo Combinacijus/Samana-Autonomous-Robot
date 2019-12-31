@@ -26,17 +26,19 @@ struct OdometrySmall_
 
   OdometrySmall_()
     : header()
-    , ticks1(0)
-    , ticks2(0)
+    , delta_ticks1(0)
+    , delta_ticks2(0)
     , rps1(0.0)
-    , rps2(0.0)  {
+    , rps2(0.0)
+    , dt(0)  {
     }
   OdometrySmall_(const ContainerAllocator& _alloc)
     : header(_alloc)
-    , ticks1(0)
-    , ticks2(0)
+    , delta_ticks1(0)
+    , delta_ticks2(0)
     , rps1(0.0)
-    , rps2(0.0)  {
+    , rps2(0.0)
+    , dt(0)  {
   (void)_alloc;
     }
 
@@ -45,17 +47,20 @@ struct OdometrySmall_
    typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
   _header_type header;
 
-   typedef uint16_t _ticks1_type;
-  _ticks1_type ticks1;
+   typedef int16_t _delta_ticks1_type;
+  _delta_ticks1_type delta_ticks1;
 
-   typedef uint16_t _ticks2_type;
-  _ticks2_type ticks2;
+   typedef int16_t _delta_ticks2_type;
+  _delta_ticks2_type delta_ticks2;
 
    typedef float _rps1_type;
   _rps1_type rps1;
 
    typedef float _rps2_type;
   _rps2_type rps2;
+
+   typedef int16_t _dt_type;
+  _dt_type dt;
 
 
 
@@ -135,12 +140,12 @@ struct MD5Sum< ::samana_msgs::OdometrySmall_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "eac9f20217e8b1524f88ba55f5ff1284";
+    return "98004b29be7f03ed0afbf8488b6e7875";
   }
 
   static const char* value(const ::samana_msgs::OdometrySmall_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xeac9f20217e8b152ULL;
-  static const uint64_t static_value2 = 0x4f88ba55f5ff1284ULL;
+  static const uint64_t static_value1 = 0x98004b29be7f03edULL;
+  static const uint64_t static_value2 = 0x0afbf8488b6e7875ULL;
 };
 
 template<class ContainerAllocator>
@@ -160,10 +165,11 @@ struct Definition< ::samana_msgs::OdometrySmall_<ContainerAllocator> >
   static const char* value()
   {
     return "std_msgs/Header header\n"
-"uint16 ticks1\n"
-"uint16 ticks2\n"
+"int16 delta_ticks1\n"
+"int16 delta_ticks2\n"
 "float32 rps1\n"
 "float32 rps2\n"
+"int16 dt\n"
 "================================================================================\n"
 "MSG: std_msgs/Header\n"
 "# Standard metadata for higher-level stamped data types.\n"
@@ -198,10 +204,11 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.header);
-      stream.next(m.ticks1);
-      stream.next(m.ticks2);
+      stream.next(m.delta_ticks1);
+      stream.next(m.delta_ticks2);
       stream.next(m.rps1);
       stream.next(m.rps2);
+      stream.next(m.dt);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -223,14 +230,16 @@ struct Printer< ::samana_msgs::OdometrySmall_<ContainerAllocator> >
     s << indent << "header: ";
     s << std::endl;
     Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
-    s << indent << "ticks1: ";
-    Printer<uint16_t>::stream(s, indent + "  ", v.ticks1);
-    s << indent << "ticks2: ";
-    Printer<uint16_t>::stream(s, indent + "  ", v.ticks2);
+    s << indent << "delta_ticks1: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.delta_ticks1);
+    s << indent << "delta_ticks2: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.delta_ticks2);
     s << indent << "rps1: ";
     Printer<float>::stream(s, indent + "  ", v.rps1);
     s << indent << "rps2: ";
     Printer<float>::stream(s, indent + "  ", v.rps2);
+    s << indent << "dt: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.dt);
   }
 };
 

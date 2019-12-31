@@ -15,21 +15,24 @@ namespace samana_msgs
     public:
       typedef std_msgs::Header _header_type;
       _header_type header;
-      typedef uint16_t _ticks1_type;
-      _ticks1_type ticks1;
-      typedef uint16_t _ticks2_type;
-      _ticks2_type ticks2;
+      typedef int16_t _delta_ticks1_type;
+      _delta_ticks1_type delta_ticks1;
+      typedef int16_t _delta_ticks2_type;
+      _delta_ticks2_type delta_ticks2;
       typedef float _rps1_type;
       _rps1_type rps1;
       typedef float _rps2_type;
       _rps2_type rps2;
+      typedef int16_t _dt_type;
+      _dt_type dt;
 
     OdometrySmall():
       header(),
-      ticks1(0),
-      ticks2(0),
+      delta_ticks1(0),
+      delta_ticks2(0),
       rps1(0),
-      rps2(0)
+      rps2(0),
+      dt(0)
     {
     }
 
@@ -37,12 +40,22 @@ namespace samana_msgs
     {
       int offset = 0;
       offset += this->header.serialize(outbuffer + offset);
-      *(outbuffer + offset + 0) = (this->ticks1 >> (8 * 0)) & 0xFF;
-      *(outbuffer + offset + 1) = (this->ticks1 >> (8 * 1)) & 0xFF;
-      offset += sizeof(this->ticks1);
-      *(outbuffer + offset + 0) = (this->ticks2 >> (8 * 0)) & 0xFF;
-      *(outbuffer + offset + 1) = (this->ticks2 >> (8 * 1)) & 0xFF;
-      offset += sizeof(this->ticks2);
+      union {
+        int16_t real;
+        uint16_t base;
+      } u_delta_ticks1;
+      u_delta_ticks1.real = this->delta_ticks1;
+      *(outbuffer + offset + 0) = (u_delta_ticks1.base >> (8 * 0)) & 0xFF;
+      *(outbuffer + offset + 1) = (u_delta_ticks1.base >> (8 * 1)) & 0xFF;
+      offset += sizeof(this->delta_ticks1);
+      union {
+        int16_t real;
+        uint16_t base;
+      } u_delta_ticks2;
+      u_delta_ticks2.real = this->delta_ticks2;
+      *(outbuffer + offset + 0) = (u_delta_ticks2.base >> (8 * 0)) & 0xFF;
+      *(outbuffer + offset + 1) = (u_delta_ticks2.base >> (8 * 1)) & 0xFF;
+      offset += sizeof(this->delta_ticks2);
       union {
         float real;
         uint32_t base;
@@ -63,6 +76,14 @@ namespace samana_msgs
       *(outbuffer + offset + 2) = (u_rps2.base >> (8 * 2)) & 0xFF;
       *(outbuffer + offset + 3) = (u_rps2.base >> (8 * 3)) & 0xFF;
       offset += sizeof(this->rps2);
+      union {
+        int16_t real;
+        uint16_t base;
+      } u_dt;
+      u_dt.real = this->dt;
+      *(outbuffer + offset + 0) = (u_dt.base >> (8 * 0)) & 0xFF;
+      *(outbuffer + offset + 1) = (u_dt.base >> (8 * 1)) & 0xFF;
+      offset += sizeof(this->dt);
       return offset;
     }
 
@@ -70,12 +91,24 @@ namespace samana_msgs
     {
       int offset = 0;
       offset += this->header.deserialize(inbuffer + offset);
-      this->ticks1 =  ((uint16_t) (*(inbuffer + offset)));
-      this->ticks1 |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
-      offset += sizeof(this->ticks1);
-      this->ticks2 =  ((uint16_t) (*(inbuffer + offset)));
-      this->ticks2 |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
-      offset += sizeof(this->ticks2);
+      union {
+        int16_t real;
+        uint16_t base;
+      } u_delta_ticks1;
+      u_delta_ticks1.base = 0;
+      u_delta_ticks1.base |= ((uint16_t) (*(inbuffer + offset + 0))) << (8 * 0);
+      u_delta_ticks1.base |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
+      this->delta_ticks1 = u_delta_ticks1.real;
+      offset += sizeof(this->delta_ticks1);
+      union {
+        int16_t real;
+        uint16_t base;
+      } u_delta_ticks2;
+      u_delta_ticks2.base = 0;
+      u_delta_ticks2.base |= ((uint16_t) (*(inbuffer + offset + 0))) << (8 * 0);
+      u_delta_ticks2.base |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
+      this->delta_ticks2 = u_delta_ticks2.real;
+      offset += sizeof(this->delta_ticks2);
       union {
         float real;
         uint32_t base;
@@ -98,11 +131,20 @@ namespace samana_msgs
       u_rps2.base |= ((uint32_t) (*(inbuffer + offset + 3))) << (8 * 3);
       this->rps2 = u_rps2.real;
       offset += sizeof(this->rps2);
+      union {
+        int16_t real;
+        uint16_t base;
+      } u_dt;
+      u_dt.base = 0;
+      u_dt.base |= ((uint16_t) (*(inbuffer + offset + 0))) << (8 * 0);
+      u_dt.base |= ((uint16_t) (*(inbuffer + offset + 1))) << (8 * 1);
+      this->dt = u_dt.real;
+      offset += sizeof(this->dt);
      return offset;
     }
 
     const char * getType(){ return "samana_msgs/OdometrySmall"; };
-    const char * getMD5(){ return "eac9f20217e8b1524f88ba55f5ff1284"; };
+    const char * getMD5(){ return "98004b29be7f03ed0afbf8488b6e7875"; };
 
   };
 
