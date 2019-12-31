@@ -30,7 +30,7 @@ L298N::L298N(int ena, int enb, int in1, int in2, int in3, int in4, int dir1, int
     pwm: -255 - 255
     dir: -1, 1
 */
-void L298N::run_motor1(int pwm, int dir)
+void L298N::run_motor_pwm1(int pwm, int dir)
 {
     dir *= dir1; // Direction calibration
 
@@ -58,12 +58,18 @@ void L298N::run_motor1(int pwm, int dir)
     analogWrite(pin_ena, pwm);
 }
 
+// For NON-PWM pins
+void L298N::run_motor1(int dir)
+{
+    run_motor_pwm1(255, dir);
+}
+
 /*
     Run motor on OUT3 and OUT4 pins
     pwm: -255 - 255
     dir: -1, 1
 */
-void L298N::run_motor2(int pwm, int dir)
+void L298N::run_motor_pwm2(int pwm, int dir)
 {
     dir *= dir2; // Direction calibration
 
@@ -88,6 +94,12 @@ void L298N::run_motor2(int pwm, int dir)
     }
 
     analogWrite(pin_enb, pwm);
+}
+
+// For NON-PWM pins
+void L298N::run_motor2(int dir)
+{
+    run_motor_pwm2(255, dir);
 }
 
 /*

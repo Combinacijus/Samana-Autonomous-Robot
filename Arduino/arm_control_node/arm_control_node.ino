@@ -17,41 +17,78 @@
       +5V - A_5V
 
       OUT2 & OUT3 - through current sensor to motors
-      OUT1 & OUT$ - to motors
+      OUT1 & OUT4 - to motors
 
-      ENA - D5 (PWM) Be carefull with pwm pins because TimerOne disables some
-      ENB - D6 (PWM)
-      IN1 - D7
-      IN2 - D8
-      IN3 - D9
-      IN4 - D10
+      ENA - D8 (NON-PWM) Be carefull with pwm pins because TimerOne disables some
+      IN1 - D9
+      IN2 - D10
+
+      ENB - D5 (PWM)
+      IN3 - D7
+      IN4 - D6
+
+    Limit Switches (PULLED UP normally HIHG):
+      A2 - Lifter up
+      A3 - Lifter down
+      A4 - Grabber open
+      A5 - Grabber closed
 
     Read all NOTE: for more info
+    NOTE: read arm_abstraction.* files
 */
 
+#include <ros_arm.h>
+#include <samana_msgs/ArmData.h>
+#include <samana_msgs/ArmCmd.h>
 #include "current_sensor.h"
-#include "l298n.h"
+#include "arm_abstraction.h"
 #include <TimerOne.h>
 
+// #define DEBUG
+#define INTERRUPT_PERIOD 10000 // Timer interrupt period in micro seconds
+#define MAIN_LOOP_PERIOD 50    // In miliseconds
 #define SERIAL_BAUD 115200
 
-// NOTE: pins
+// NOTE: current sensor pins
 #define PIN_CUR_SENS_1 A0
 #define PIN_CUR_SENS_2 A1
-#define PIN_ENA 5
-#define PIN_ENB 6
-#define PIN_IN1 7
-#define PIN_IN2 8
-#define PIN_IN3 9
-#define PIN_IN4 10
 
-#define INTERRUPT_PERIOD 3000 // Timer interrupt period in micro seconds
+// NOTE: Arm control states must be same as in ROS node
+#define GRABBER_STOP 0
+#define GRABBER_OPEN 1
+#define GRABBER_CLOSE 2
+#define LIFTER_STOP 0
+#define LIFTER_RAISE 1
+#define LIFTER_LOWER 2
+
+// NOTE: Stall current depends on motor voltage
+#define OVERCURRENT_GRABBER 1500 // In mA
+#define OVERCURRENT_LIFTER 1900  // In mA
+#define OVERCURRENT_TIMEOUT 300  // In ms
+#define UNDEF -1                 // Undefined overcurrent start time
+
+int grabber_action = 0; // Tells which action grabber is doing
+int lifter_action = 0;  // Tells which action lifter is doing
+unsigned long overcurrent_grabber_time = UNDEF;
+unsigned long overcurrent_lifter_time = UNDEF;
 
 // NOTE: curent sensors calibration
-CurrentSensor ampmeter1(PIN_CUR_SENS_1, -1, 2.3, 512);
-CurrentSensor ampmeter2(PIN_CUR_SENS_2, 1, 2.3, 512);
+CurrentSensor ampmeter_grabber(PIN_CUR_SENS_2, 1, 2.3, 512);
+CurrentSensor ampmeter_lifter(PIN_CUR_SENS_1, -1, 2.3, 512);
 
-L298N l298n(PIN_ENA, PIN_ENB, PIN_IN1, PIN_IN2, PIN_IN3, PIN_IN4, 1, -1);
+// ROS
+ros::NodeHandle nh;
+samana_msgs::ArmData arm_data;
+samana_msgs::ArmCmd arm_cmd;
+ros::Publisher arm_data_pub("arm_data", &arm_data);
+
+void arm_cmd_callback(const samana_msgs::ArmCmd &msg)
+{
+  // Control arm from ROS
+  grabber_action = msg.grabber_cmd;
+  lifter_action = msg.lifter_cmd;
+}
+ros::Subscriber<samana_msgs::ArmCmd> arm_cmd_sub("arm_cmd", &arm_cmd_callback);
 
 /*
   Periodically called funtion by timer1
@@ -59,30 +96,33 @@ L298N l298n(PIN_ENA, PIN_ENB, PIN_IN1, PIN_IN2, PIN_IN3, PIN_IN4, 1, -1);
 */
 void timer_interrupt()
 {
-  // Update current reading
-  ampmeter1.update();
-  ampmeter2.update();
-
-  // Serial.print(ampmeter1.get_current());
-  // Serial.print(" ");
-  // Serial.println(ampmeter2.get_current());
+  ampmeter_grabber.update();
+  ampmeter_lifter.update();
 }
 
 void setup()
 {
-  Serial.begin(SERIAL_BAUD);
-  while (!Serial)
-    ;
-  Serial.println("START");
+  // Serial.begin(SERIAL_BAUD);
+  // while (!Serial)
+  //   ;
+  // Serial.println("START");
+
+  // Set limit swithches input pins
+  pinMode(PIN_GO, INPUT_PULLUP);
+  pinMode(PIN_GC, INPUT_PULLUP);
+  pinMode(PIN_LU, INPUT_PULLUP);
+  pinMode(PIN_LD, INPUT_PULLUP);
 
   // Calibrate current sesors
   l298n.stop_motor1();
   l298n.stop_motor2();
-  delay(100);
-  ampmeter1.calibrate();
-  ampmeter2.calibrate();
+  delay(250);
+  ampmeter_lifter.calibrate();
+  ampmeter_grabber.calibrate();
 
-  // Timer interrupt for updateing current reading
+  initROS();
+
+  // Timer interrupt for updating current reading
   Timer1.initialize(INTERRUPT_PERIOD);
   Timer1.attachInterrupt(timer_interrupt);
 }
@@ -91,19 +131,152 @@ void loop()
 {
   // Current sensor updates in timer interrupt routine
 
-  // TODO: Connect it to computer or to master Arduino
-  // TODO: Current limiting?
+  // Control arm via serial port
+  // if (Serial.available())
+  // {
+  //   char c = Serial.read() - '0';
+  //   if (c >= 0 && c <= 2)
+  //     lifter_action = c;
+  //   if (c >= 5 && c <= 8)
+  //     grabber_action = c - 5;
+  // }
+  // Serial.println("G:" + String(grabber_action) + " L:" + String(lifter_action));
 
-  Serial.print(ampmeter1.get_current());
-  Serial.print(" ");
-  Serial.println(ampmeter2.get_current());
+  overcurrent_protection();
+  arm_actions_controller();
+  publish_arm_data();
 
-  l298n.run_motor1(255);
-  l298n.run_motor2(255);
-  delay(200);
-  l298n.stop_motor1();
-  l298n.stop_motor2();
-  delay(500);
+  // Serial.println("Amp: " + String(ampmeter_grabber.get_current()) + " " + String(ampmeter_lifter.get_current()));
+  // Serial.println("Amp: " + String(ampmeter_lifter.get_current()));
+  // Serial.println("GO: " + String(is_grabber_opened()));
+  // Serial.println("GC: " + String(is_grabber_closed()));
+  // Serial.println("GM: " + String(is_grabber_moving()));
+  // Serial.println("LU: " + String(is_lifter_up()));
+  // Serial.println("LD: " + String(is_lifter_down()));
+  // Serial.println("LM: " + String(is_lifter_moving()));
+  // Serial.println("------");
 
-  delay(1);
+  nh.spinOnce();
+  delay(MAIN_LOOP_PERIOD);
+}
+
+/*
+    Inits node, advertises topics, gets params
+*/
+void initROS()
+{
+  nh.getHardware()->setBaud(SERIAL_BAUD);
+  nh.initNode();
+
+  nh.advertise(arm_data_pub);
+  nh.subscribe(arm_cmd_sub);
+
+  while (!nh.connected()) // Wait until connected
+    nh.spinOnce();
+
+  nh.logwarn("Start arm");
+}
+
+/*
+  Overcurrent/Stall protection. Disables lifter or grabber motor if in stall for some time
+*/
+void overcurrent_protection()
+{
+  // Grabber
+  if (abs(ampmeter_grabber.get_current()) > OVERCURRENT_GRABBER)
+  {
+    if (overcurrent_grabber_time == UNDEF)
+      overcurrent_grabber_time = millis();
+
+    // Stop grabber when overcurrent time is exceeded
+    if (millis() - overcurrent_grabber_time > OVERCURRENT_TIMEOUT)
+      grabber_action = GRABBER_STOP;
+  }
+  else
+  {
+    overcurrent_grabber_time = UNDEF;
+  }
+
+  // Lifter
+  if (abs(ampmeter_lifter.get_current()) > OVERCURRENT_LIFTER)
+  {
+    if (overcurrent_lifter_time == UNDEF)
+      overcurrent_lifter_time = millis();
+
+    // Stop lifter when overcurrent time is exceeded
+    if (millis() - overcurrent_lifter_time > OVERCURRENT_TIMEOUT)
+      lifter_action = LIFTER_STOP;
+  }
+  else
+  {
+    overcurrent_lifter_time = UNDEF;
+  }
+}
+
+/*
+  Given grabber or lifter action decides what to do
+  Spins motor to specified position until limit switch is reached
+*/
+void arm_actions_controller()
+{
+  switch (grabber_action)
+  {
+  case GRABBER_STOP:
+    grabber_stop();
+    break;
+
+  case GRABBER_OPEN:
+    grabber_open();
+    if (is_grabber_opened())
+      grabber_action = GRABBER_STOP;
+    break;
+
+  case GRABBER_CLOSE:
+    grabber_close();
+    if (is_grabber_closed())
+      grabber_action = GRABBER_STOP;
+    break;
+
+  default:
+    grabber_stop();
+  }
+
+  switch (lifter_action)
+  {
+  case LIFTER_STOP:
+    lifter_stop();
+    break;
+
+  case LIFTER_RAISE:
+    lifter_up();
+    if (is_lifter_up())
+      lifter_action = LIFTER_STOP;
+    break;
+
+  case LIFTER_LOWER:
+    lifter_down();
+    if (is_lifter_down())
+      lifter_action = LIFTER_STOP;
+    break;
+
+  default:
+    lifter_stop();
+  }
+}
+
+void publish_arm_data()
+{
+  nh.spinOnce();
+
+  arm_data.current_grabber = ampmeter_grabber.get_current();
+  arm_data.current_lifter = ampmeter_lifter.get_current();
+  // NOTE: Encode limit switches to bits must be same as in ROS node decoder
+  arm_data.limit_switches = 0;
+  arm_data.limit_switches |= is_grabber_opened() << 0;
+  arm_data.limit_switches |= is_grabber_closed() << 1;
+  arm_data.limit_switches |= is_lifter_up() << 2;
+  arm_data.limit_switches |= is_lifter_down() << 3;
+
+  arm_data_pub.publish(&arm_data);
+  nh.spinOnce();
 }

@@ -4,3 +4,4 @@ ln -sv /home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/libraries/ros_
 ln -sv /home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/libraries/ros_lib_imu/ /home/combinacijus/Documents/Arduino/libraries/
 ln -sv /home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/libraries/ros_lib_motor/ /home/combinacijus/Documents/Arduino/libraries/
 ln -sv /home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/libraries/ros_lib_odom/ /home/combinacijus/Documents/Arduino/libraries/
+ln -sv /home/combinacijus/Documents/SamanaAutonomousRobot/Arduino/libraries/ros_lib_arm/ /home/combinacijus/Documents/Arduino/libraries/

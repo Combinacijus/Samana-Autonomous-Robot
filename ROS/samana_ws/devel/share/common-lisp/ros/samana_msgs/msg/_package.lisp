@@ -1,6 +1,10 @@
 (cl:defpackage samana_msgs-msg
   (:use )
   (:export
+   "<ARMCMD>"
+   "ARMCMD"
+   "<ARMDATA>"
+   "ARMDATA"
    "<BUMP>"
    "BUMP"
    "<IMUCALIB>"
