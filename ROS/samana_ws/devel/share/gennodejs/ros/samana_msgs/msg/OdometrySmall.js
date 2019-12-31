@@ -20,10 +20,11 @@ class OdometrySmall {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.header = null;
-      this.ticks1 = null;
-      this.ticks2 = null;
+      this.delta_ticks1 = null;
+      this.delta_ticks2 = null;
       this.rps1 = null;
       this.rps2 = null;
+      this.dt = null;
     }
     else {
       if (initObj.hasOwnProperty('header')) {
@@ -32,17 +33,17 @@ class OdometrySmall {
       else {
         this.header = new std_msgs.msg.Header();
       }
-      if (initObj.hasOwnProperty('ticks1')) {
-        this.ticks1 = initObj.ticks1
+      if (initObj.hasOwnProperty('delta_ticks1')) {
+        this.delta_ticks1 = initObj.delta_ticks1
       }
       else {
-        this.ticks1 = 0;
+        this.delta_ticks1 = 0;
       }
-      if (initObj.hasOwnProperty('ticks2')) {
-        this.ticks2 = initObj.ticks2
+      if (initObj.hasOwnProperty('delta_ticks2')) {
+        this.delta_ticks2 = initObj.delta_ticks2
       }
       else {
-        this.ticks2 = 0;
+        this.delta_ticks2 = 0;
       }
       if (initObj.hasOwnProperty('rps1')) {
         this.rps1 = initObj.rps1
@@ -56,6 +57,12 @@ class OdometrySmall {
       else {
         this.rps2 = 0.0;
       }
+      if (initObj.hasOwnProperty('dt')) {
+        this.dt = initObj.dt
+      }
+      else {
+        this.dt = 0;
+      }
     }
   }
 
@@ -63,14 +70,16 @@ class OdometrySmall {
     // Serializes a message object of type OdometrySmall
     // Serialize message field [header]
     bufferOffset = std_msgs.msg.Header.serialize(obj.header, buffer, bufferOffset);
-    // Serialize message field [ticks1]
-    bufferOffset = _serializer.uint16(obj.ticks1, buffer, bufferOffset);
-    // Serialize message field [ticks2]
-    bufferOffset = _serializer.uint16(obj.ticks2, buffer, bufferOffset);
+    // Serialize message field [delta_ticks1]
+    bufferOffset = _serializer.int16(obj.delta_ticks1, buffer, bufferOffset);
+    // Serialize message field [delta_ticks2]
+    bufferOffset = _serializer.int16(obj.delta_ticks2, buffer, bufferOffset);
     // Serialize message field [rps1]
     bufferOffset = _serializer.float32(obj.rps1, buffer, bufferOffset);
     // Serialize message field [rps2]
     bufferOffset = _serializer.float32(obj.rps2, buffer, bufferOffset);
+    // Serialize message field [dt]
+    bufferOffset = _serializer.int16(obj.dt, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -80,21 +89,23 @@ class OdometrySmall {
     let data = new OdometrySmall(null);
     // Deserialize message field [header]
     data.header = std_msgs.msg.Header.deserialize(buffer, bufferOffset);
-    // Deserialize message field [ticks1]
-    data.ticks1 = _deserializer.uint16(buffer, bufferOffset);
-    // Deserialize message field [ticks2]
-    data.ticks2 = _deserializer.uint16(buffer, bufferOffset);
+    // Deserialize message field [delta_ticks1]
+    data.delta_ticks1 = _deserializer.int16(buffer, bufferOffset);
+    // Deserialize message field [delta_ticks2]
+    data.delta_ticks2 = _deserializer.int16(buffer, bufferOffset);
     // Deserialize message field [rps1]
     data.rps1 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [rps2]
     data.rps2 = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [dt]
+    data.dt = _deserializer.int16(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
-    return length + 12;
+    return length + 14;
   }
 
   static datatype() {
@@ -104,17 +115,18 @@ class OdometrySmall {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'eac9f20217e8b1524f88ba55f5ff1284';
+    return '98004b29be7f03ed0afbf8488b6e7875';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     std_msgs/Header header
-    uint16 ticks1
-    uint16 ticks2
+    int16 delta_ticks1
+    int16 delta_ticks2
     float32 rps1
     float32 rps2
+    int16 dt
     ================================================================================
     MSG: std_msgs/Header
     # Standard metadata for higher-level stamped data types.
@@ -147,18 +159,18 @@ class OdometrySmall {
       resolved.header = new std_msgs.msg.Header()
     }
 
-    if (msg.ticks1 !== undefined) {
-      resolved.ticks1 = msg.ticks1;
+    if (msg.delta_ticks1 !== undefined) {
+      resolved.delta_ticks1 = msg.delta_ticks1;
     }
     else {
-      resolved.ticks1 = 0
+      resolved.delta_ticks1 = 0
     }
 
-    if (msg.ticks2 !== undefined) {
-      resolved.ticks2 = msg.ticks2;
+    if (msg.delta_ticks2 !== undefined) {
+      resolved.delta_ticks2 = msg.delta_ticks2;
     }
     else {
-      resolved.ticks2 = 0
+      resolved.delta_ticks2 = 0
     }
 
     if (msg.rps1 !== undefined) {
@@ -173,6 +185,13 @@ class OdometrySmall {
     }
     else {
       resolved.rps2 = 0.0
+    }
+
+    if (msg.dt !== undefined) {
+      resolved.dt = msg.dt;
+    }
+    else {
+      resolved.dt = 0
     }
 
     return resolved;

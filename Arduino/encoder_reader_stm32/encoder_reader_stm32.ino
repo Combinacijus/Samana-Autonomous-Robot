@@ -88,7 +88,7 @@ void request_event()
     Wire.write(ticks1 >> 8);
     Wire.write(ticks2);
     Wire.write(ticks2 >> 8);
-    Serial.println(String(ticks1) + " | " + String(ticks2));
+    // Serial.println(String(ticks1) + " | " + String(ticks2));
 }
 
 void a1_change_int()

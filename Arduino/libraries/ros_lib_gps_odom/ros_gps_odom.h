@@ -45,7 +45,7 @@
 
 namespace ros
 {
-  typedef NodeHandle_<ArduinoHardware, 4, 4, 100, 100> NodeHandle;
+  typedef NodeHandle_<ArduinoHardware, 2, 3, 70, 150> NodeHandle;
 }
 
 #endif

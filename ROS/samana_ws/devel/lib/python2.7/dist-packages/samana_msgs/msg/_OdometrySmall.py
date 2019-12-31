@@ -8,14 +8,15 @@ import struct
 import std_msgs.msg
 
 class OdometrySmall(genpy.Message):
-  _md5sum = "eac9f20217e8b1524f88ba55f5ff1284"
+  _md5sum = "98004b29be7f03ed0afbf8488b6e7875"
   _type = "samana_msgs/OdometrySmall"
   _has_header = True #flag to mark the presence of a Header object
   _full_text = """std_msgs/Header header
-uint16 ticks1
-uint16 ticks2
+int16 delta_ticks1
+int16 delta_ticks2
 float32 rps1
 float32 rps2
+int16 dt
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -32,8 +33,8 @@ time stamp
 #Frame this data is associated with
 string frame_id
 """
-  __slots__ = ['header','ticks1','ticks2','rps1','rps2']
-  _slot_types = ['std_msgs/Header','uint16','uint16','float32','float32']
+  __slots__ = ['header','delta_ticks1','delta_ticks2','rps1','rps2','dt']
+  _slot_types = ['std_msgs/Header','int16','int16','float32','float32','int16']
 
   def __init__(self, *args, **kwds):
     """
@@ -43,7 +44,7 @@ string frame_id
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       header,ticks1,ticks2,rps1,rps2
+       header,delta_ticks1,delta_ticks2,rps1,rps2,dt
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -54,20 +55,23 @@ string frame_id
       #message fields cannot be None, assign default values for those that are
       if self.header is None:
         self.header = std_msgs.msg.Header()
-      if self.ticks1 is None:
-        self.ticks1 = 0
-      if self.ticks2 is None:
-        self.ticks2 = 0
+      if self.delta_ticks1 is None:
+        self.delta_ticks1 = 0
+      if self.delta_ticks2 is None:
+        self.delta_ticks2 = 0
       if self.rps1 is None:
         self.rps1 = 0.
       if self.rps2 is None:
         self.rps2 = 0.
+      if self.dt is None:
+        self.dt = 0
     else:
       self.header = std_msgs.msg.Header()
-      self.ticks1 = 0
-      self.ticks2 = 0
+      self.delta_ticks1 = 0
+      self.delta_ticks2 = 0
       self.rps1 = 0.
       self.rps2 = 0.
+      self.dt = 0
 
   def _get_types(self):
     """
@@ -90,7 +94,7 @@ string frame_id
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2H2f().pack(_x.ticks1, _x.ticks2, _x.rps1, _x.rps2))
+      buff.write(_get_struct_2h2fh().pack(_x.delta_ticks1, _x.delta_ticks2, _x.rps1, _x.rps2, _x.dt))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -118,8 +122,8 @@ string frame_id
         self.header.frame_id = str[start:end]
       _x = self
       start = end
-      end += 12
-      (_x.ticks1, _x.ticks2, _x.rps1, _x.rps2,) = _get_struct_2H2f().unpack(str[start:end])
+      end += 14
+      (_x.delta_ticks1, _x.delta_ticks2, _x.rps1, _x.rps2, _x.dt,) = _get_struct_2h2fh().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -141,7 +145,7 @@ string frame_id
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2H2f().pack(_x.ticks1, _x.ticks2, _x.rps1, _x.rps2))
+      buff.write(_get_struct_2h2fh().pack(_x.delta_ticks1, _x.delta_ticks2, _x.rps1, _x.rps2, _x.dt))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -170,8 +174,8 @@ string frame_id
         self.header.frame_id = str[start:end]
       _x = self
       start = end
-      end += 12
-      (_x.ticks1, _x.ticks2, _x.rps1, _x.rps2,) = _get_struct_2H2f().unpack(str[start:end])
+      end += 14
+      (_x.delta_ticks1, _x.delta_ticks2, _x.rps1, _x.rps2, _x.dt,) = _get_struct_2h2fh().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -186,9 +190,9 @@ def _get_struct_3I():
     if _struct_3I is None:
         _struct_3I = struct.Struct("<3I")
     return _struct_3I
-_struct_2H2f = None
-def _get_struct_2H2f():
-    global _struct_2H2f
-    if _struct_2H2f is None:
-        _struct_2H2f = struct.Struct("<2H2f")
-    return _struct_2H2f
+_struct_2h2fh = None
+def _get_struct_2h2fh():
+    global _struct_2h2fh
+    if _struct_2h2fh is None:
+        _struct_2h2fh = struct.Struct("<2h2fh")
+    return _struct_2h2fh
