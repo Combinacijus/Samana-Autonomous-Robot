@@ -169,7 +169,7 @@ void sendNewData()
 
     // Set data to send
     imu_data.header.stamp = nh.now();
-    imu_data.header.frame_id = "IMU";
+    imu_data.header.frame_id = "imu";
     imu_data.quaternion_x = quat.x();
     imu_data.quaternion_y = quat.y();
     imu_data.quaternion_z = quat.z();

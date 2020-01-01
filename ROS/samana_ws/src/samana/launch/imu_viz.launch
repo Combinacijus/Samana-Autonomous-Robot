@@ -1,12 +1,11 @@
 <launch>
     <!--IMU arduino serial-->
-    <node name="serial_node_imu" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
-        <param name="port" value="/dev/ttyUSB0"/>
-        <param name="baud" value="115200"/>
-        <param name="recal" value="false"/>
-    </node>
-
-    <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake" args="0 0 0 0 0 0 map imu_link" />
-
+    <!--<node name="serial_node_imu" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">-->
+        <!--<param name="port" value="/dev/ttyUSB0"/>-->
+        <!--<param name="baud" value="115200"/>-->
+        <!--<param name="recal" value="false"/>-->
+    <!--</node>-->
+    
     <node name="repub_imu" pkg="samana" type="republish_imu.py" output="screen"/>
-</launch>
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake" args="0 0.0 0.3 0 0 - base_link imu_link" />-->
+</launch> 

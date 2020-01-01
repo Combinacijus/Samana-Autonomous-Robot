@@ -17,9 +17,9 @@ def imu_callback(imu_data):
         return tuple(tmp)
     
     # Add covariances 
-    imu_data.orientation_covariance = set_covariances(imu_data.orientation_covariance, 21)
-    imu_data.angular_velocity_covariance = set_covariances(imu_data.angular_velocity_covariance, 21)
-    imu_data.linear_acceleration_covariance = set_covariances(imu_data.linear_acceleration_covariance, 21)
+    imu_data.orientation_covariance = set_covariances(imu_data.orientation_covariance, 0.01)
+    imu_data.angular_velocity_covariance = set_covariances(imu_data.angular_velocity_covariance, 0.01)
+    imu_data.linear_acceleration_covariance = set_covariances(imu_data.linear_acceleration_covariance, 0.01)
 
     # print(imu_data)
     # print(imu_data.orientation_covariance)

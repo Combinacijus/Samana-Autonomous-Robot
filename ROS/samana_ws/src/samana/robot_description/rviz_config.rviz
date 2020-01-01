@@ -8,11 +8,14 @@ Panels:
         - /Status1
         - /RobotModel1
         - /Range1
+        - /TF1
+        - /TF1/Frames1
         - /TF1/Tree1
         - /MarkerArray1
         - /MarkerArray1/Namespaces1
         - /AerialMapDisplay1
-        - /AerialMapDisplay1/Status1
+        - /Imu1
+        - /Imu1/Axes properties1
       Splitter Ratio: 0.6200527548789978
     Tree Height: 416
   - Class: rviz/Selection
@@ -66,12 +69,12 @@ Visualization Manager:
       Links:
         All Links Enabled: true
         Expand Joint Details: false
-        Expand Link Details: true
+        Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
         base_link:
           Alpha: 1
-          Show Axes: true
+          Show Axes: false
           Show Trail: false
           Value: true
         bump_1:
@@ -241,43 +244,190 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
+        base_link:
+          Value: true
+        bump_1:
+          Value: true
+        bump_10:
+          Value: true
+        bump_11:
+          Value: true
+        bump_12:
+          Value: true
+        bump_13:
+          Value: true
+        bump_14:
+          Value: true
+        bump_15:
+          Value: true
+        bump_2:
+          Value: true
+        bump_3:
+          Value: true
+        bump_4:
+          Value: true
+        bump_5:
+          Value: true
+        bump_6:
+          Value: true
+        bump_7:
+          Value: true
+        bump_8:
+          Value: true
+        bump_9:
+          Value: true
+        hoverboard:
+          Value: true
+        imu_link:
+          Value: true
+        left_wheel:
+          Value: true
+        map:
+          Value: true
+        middle_wheel:
+          Value: true
+        right_wheel:
+          Value: true
+        ultrasonic_1:
+          Value: true
+        ultrasonic_10:
+          Value: true
+        ultrasonic_2:
+          Value: true
+        ultrasonic_3:
+          Value: true
+        ultrasonic_4:
+          Value: true
+        ultrasonic_5:
+          Value: true
+        ultrasonic_6:
+          Value: true
+        ultrasonic_7:
+          Value: true
+        ultrasonic_8:
+          Value: true
+        ultrasonic_9:
+          Value: true
       Marker Scale: 0.18000000715255737
       Name: TF
-      Show Arrows: true
+      Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        map:
+          base_link:
+            bump_1:
+              {}
+            bump_10:
+              {}
+            bump_11:
+              {}
+            bump_12:
+              {}
+            bump_13:
+              {}
+            bump_14:
+              {}
+            bump_15:
+              {}
+            bump_2:
+              {}
+            bump_3:
+              {}
+            bump_4:
+              {}
+            bump_5:
+              {}
+            bump_6:
+              {}
+            bump_7:
+              {}
+            bump_8:
+              {}
+            bump_9:
+              {}
+            hoverboard:
+              left_wheel:
+                {}
+              middle_wheel:
+                {}
+              right_wheel:
+                {}
+            imu_link:
+              {}
+            ultrasonic_1:
+              {}
+            ultrasonic_10:
+              {}
+            ultrasonic_2:
+              {}
+            ultrasonic_3:
+              {}
+            ultrasonic_4:
+              {}
+            ultrasonic_5:
+              {}
+            ultrasonic_6:
+              {}
+            ultrasonic_7:
+              {}
+            ultrasonic_8:
+              {}
+            ultrasonic_9:
+              {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: visualization_marker_array
       Name: MarkerArray
       Namespaces:
-        bump: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 0.699999988079071
       Blocks: 1
       Class: rviz_plugins/AerialMapDisplay
       Draw Behind: true
-      Enabled: true
+      Enabled: false
       Frame Convention: XYZ -> ENU
       Name: AerialMapDisplay
       Object URI: https://tile.openstreetmap.org/{z}/{x}/{y}.png
       Topic: /android/fix
-      Value: true
+      Value: false
       Zoom: 16
+    - Acceleration properties:
+        Acc. vector alpha: 0.25
+        Acc. vector color: 255; 0; 0
+        Acc. vector scale: 0.05000000074505806
+        Derotate acceleration: true
+        Enable acceleration: true
+      Axes properties:
+        Axes scale: 0.07000000029802322
+        Enable axes: true
+      Box properties:
+        Box alpha: 1
+        Box color: 255; 0; 0
+        Enable box: false
+        x_scale: 1
+        y_scale: 1
+        z_scale: 1
+      Class: rviz_imu_plugin/Imu
+      Enabled: true
+      Name: Imu
+      Topic: /imu
+      Unreliable: false
+      Value: true
+      fixed_frame_orientation: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base_link
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -301,25 +451,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 6.212970733642578
+      Distance: 1.7604578733444214
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.487638920545578
+        Y: -0.24507282674312592
+        Z: -0.2818525433540344
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7853981852531433
+      Pitch: 0.6197971105575562
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 0.7853981852531433
+      Yaw: 0.9953832626342773
     Saved: ~
 Window Geometry:
   Displays:
@@ -327,7 +477,7 @@ Window Geometry:
   Height: 713
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001560000022bfc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000022b000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000022bfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d0000022b000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005560000003efc0100000002fb0000000800540069006d0065010000000000000556000002eb00fffffffb0000000800540069006d00650100000000000004500000000000000000000002e50000022b00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001560000022bfc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000022b000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000022bfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d0000022b000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000052f0000003efc0100000002fb0000000800540069006d006501000000000000052f000002eb00fffffffb0000000800540069006d00650100000000000004500000000000000000000002be0000022b00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -336,6 +486,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1366
-  X: 0
-  Y: 27
+  Width: 1327
+  X: 194
+  Y: 1077
