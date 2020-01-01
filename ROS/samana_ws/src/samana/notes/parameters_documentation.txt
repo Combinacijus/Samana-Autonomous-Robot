@@ -1,5 +1,6 @@
 There is described all ROS parameters which could be change to tune robot
 
+--------------------------NEVER UPDATED IF CHANGED----------------------------------------
 base_width - distance between hoverboard wheels in meters
 rot_per_m_left  - (float) left encoder rotation per meter; must be found experimentally
 rot_per_m_right - (float) right encoder rotation per meter; must be found experimentally

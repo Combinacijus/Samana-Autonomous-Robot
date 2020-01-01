@@ -42,6 +42,7 @@ class OdomRepub:
             Reads parameters from parameter server or
             if not found sets default values
         '''
+        # NOTE: odom tuning
         # Default params
         # base_width = 1, -3600deg:
         # -1885.885155 -1886.326100

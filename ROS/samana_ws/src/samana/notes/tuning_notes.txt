@@ -1,0 +1,14 @@
+This file is guide of how to find tuning parameter for the robot
+
+Search for "NOTE:" and "tuning" in comments to find important places
+
+
+IMU tuning:
+    samana.xml - imu mounting position and orientation
+    republish_imu.py - imu covariances tuning
+
+Odometry tuning:
+    republish_odom.py - encoders tuning
+
+TextToSpeech:
+    text_to_speech - words per minute tuning
