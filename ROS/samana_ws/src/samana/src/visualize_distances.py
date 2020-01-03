@@ -9,11 +9,21 @@ from visualization_msgs.msg import MarkerArray
 import math
 
 range_msg = Range()
+sonar_counter = 0
+bump_counter = 0
 
 # ------------------------------- FUNTIONS -------------------------------
 
 
 def sonar_callback(range_data):
+    global sonar_counter
+
+    sonar_counter += 1 # Skip some callbacks
+    if sonar_counter > 2:
+        sonar_counter = 0
+    else:
+        return
+
     for i in range(10):
         publish_range(i+1, range_data.data[i] / 1000.0)  # Convert to meters
 
@@ -29,13 +39,21 @@ def publish_range(index, range):
 
 
 def bump_callback(bump_data):
+    global bump_counter
+
+    bump_counter += 1 # Skip some callbacks
+    if bump_counter > 12:
+        bump_counter = 0
+    else:
+        return
+
     BUMP_SENSORS_COUNT = 15
     # Static variable exivalent bin_data_old
     try:
         bump_callback.bin_data_old  # Checks if variable exists
     except AttributeError:
         bump_callback.bin_data_old = '0' * BUMP_SENSORS_COUNT
-        print("DEFINED")
+        # print("DEFINED")
 
     # Converting int16 to string of len 15
     bin_data = '{data:0{width}b}'.format(

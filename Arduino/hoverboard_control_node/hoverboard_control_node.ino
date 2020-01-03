@@ -33,7 +33,7 @@
 #include <samana_msgs/Int16Array.h>
 #include <samana_msgs/Teleop.h>
 
-#define BAUD_ROS 57600  // Baud rate for communication with ROS master (NOTE: same as in ROS master software)
+#define BAUD_ROS 115200 // Baud rate for communication with ROS master (NOTE: same as in ROS master software)
 #define BAUD_HOV 9600   // Baud rate for hoverboard UART2 communication (NOTE: same as in hoveboard software)
 // 19200, 38400
 

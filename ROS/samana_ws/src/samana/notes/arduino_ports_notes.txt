@@ -1,0 +1,45 @@
+This file describes how to connect Arduinos to usb hub
+
+
+Every usb port have unique number assigned to it
+Connecting hub to usb creates a tree (lsusb -t):
+
+    /:  Bus 03.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 480M
+    |__ Port 1: Dev 114, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 1: Dev 114, If 1, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 2: Dev 70, If 0, Class=Hub, Driver=hub/4p, 480M
+        |__ Port 1: Dev 71, If 0, Class=Vendor Specific Class, Driver=ch341, 12M
+        |__ Port 3: Dev 72, If 0, Class=Vendor Specific Class, Driver=ch341, 12M
+        |__ Port 4: Dev 73, If 0, Class=Vendor Specific Class, Driver=ch341, 12M
+
+
+To rename specific usb port in a tree on Ubuntu we use devpath attribute in UDEV rules file
+(in this case our rule file is /etc/udev/rules.d/99-usb-serial.rules)
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{devpath}=="2.1", SYMLINK+="ttyUSB-arduino1"
+
+    ATTRS{devpath}=="2.1" - means choose device on Port 2 --> Port 1
+    SYMLINK+="ttyUSB-arduino1" - assigns "/dev/ttyUSB-arduino1" path to the device which meets all ATTRS values
+
+This UDEV rule gives persistent names for Arduinos which are connected to the same port and connection order doesn't matter
+
+Creating UDEV rule:
+                                 <any_name.rules>
+    sudo nano /etc/udev/rules.d/99-usb-serial.rules
+    write your rule eg.
+                                                                            from ports tree (lsusb -t)     <any_new_name>
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{devpath}=="2.1", SYMLINK+="ttyUSB-arduino1"
+    sudo udevadm control --reload
+
+    Replug devices and they will be be given new names by UDEV rules
+
+
+Current UDEV rules (which works for any devpath):
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttyUSB-arduino%s{/devpath}"
+
+This gives names like:
+    /dev/ttyUSB-arduino2.1  /dev/ttyUSB-arduino2.3.3  /dev/ttyUSB-arduino1
+Number after ttyUSB-arduino means devpath or port number in a tree eg. 2.3.3 means Port2 on laptop, Port3 on hub1, Port3 on hub2
+which are connected laptop->hub1->hub2
+
+More on my own answer:
+https://arduino.stackexchange.com/a/71410/59111

@@ -62,8 +62,8 @@
 #define LIFTER_LOWER 2
 
 // NOTE: Stall current depends on motor voltage
-#define OVERCURRENT_GRABBER 1500 // In mA
-#define OVERCURRENT_LIFTER 1900  // In mA
+#define OVERCURRENT_GRABBER 1350 // In mA
+#define OVERCURRENT_LIFTER 1800  // In mA
 #define OVERCURRENT_TIMEOUT 300  // In ms
 #define UNDEF -1                 // Undefined overcurrent start time
 

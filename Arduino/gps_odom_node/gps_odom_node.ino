@@ -31,7 +31,7 @@
 #include <NeoSWSerial.h>
 #include <TinyGPS.h>
 
-#define BAUD_RATE 57600
+#define BAUD_RATE 115200
 #define ODOM_SLAVE_ADDR 8          // NOTE: check if address is correct
 #define MAIN_LOOP_PERIOD 10        // In ms
 #define MIN_DELAY 2                // In ms
@@ -44,7 +44,7 @@
 ros::NodeHandle nh;
 samana_msgs::OdometrySmall odometry_msg;
 sensor_msgs::NavSatFix gps_msg;
-ros::Publisher odometry_pub("odom", &odometry_msg);
+ros::Publisher odometry_pub("odom_data", &odometry_msg);
 ros::Publisher gps_pub("fix", &gps_msg);
 
 NeoSWSerial ss(PIN_SS_RX, PIN_SS_TX);
@@ -212,9 +212,16 @@ void handle_gps_messages()
         gps_msg.longitude = lon;
         gps_msg.altitude = gps.f_altitude();
 
+        // Fix for rviz because lat = 1000 is invalid for a plugin
+        if (millis() - last_msg_time > FORCED_GPS_MSG_PERIOD && gps_msg.status.status == gps_msg.status.STATUS_NO_FIX)
+        {
+            gps_msg.latitude = 0;
+            gps_msg.longitude = 0;
+        }
+
         // Aproximating covariance matrix from hdop
         float var = IDEAL_MES_ERR * hdop; // Standard deviation
-        var *= var;                             // Convert to variance
+        var *= var;                       // Convert to variance
 
         // Diagonal of covariance matrix
         gps_msg.position_covariance[0] = var;
@@ -225,6 +232,6 @@ void handle_gps_messages()
 
         gps_pub.publish(&gps_msg);
     }
-    
+
     nh.spinOnce();
 }

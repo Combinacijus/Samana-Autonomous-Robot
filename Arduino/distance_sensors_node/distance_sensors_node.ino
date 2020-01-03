@@ -34,8 +34,8 @@
 #include <samana_msgs/Bump.h>
 #include "shift_register.h"
 
-#define BAUD_RATE 57600 // Even at 2.5k looses sync
-#define SENORS_COUNT 10 // NOTE: Number of sensors
+#define BAUD_RATE 115200 // Even at 2.5k looses sync
+#define SENORS_COUNT 10  // NOTE: Number of sensors
 
 /*
     Speed of sound = (331.3 + 0.606 * temp) m/s

@@ -19,12 +19,12 @@ class OdomRepub:
         self.reset_vals()
         self.get_params_or_default()
 
-        # ROS stuff
+    def init_ros(self):
         try:
             rospy.init_node("odom_repub", anonymous=True)
 
             s = rospy.Service("reset_vals", Empty, self.handle_reset_vals)
-            rospy.Subscriber("odom", OdometrySmall, self.odom_cb)
+            rospy.Subscriber("odom_data", OdometrySmall, self.odom_cb)
             rospy.spin()
         except rospy.ROSInterruptException:
             pass
@@ -63,7 +63,7 @@ class OdomRepub:
 
     def odom_cb(self, odom_data):
         '''
-            Converts OdometrySmall to Odometry message and publishes to odom_raw topic
+            Converts OdometrySmall to Odometry message and publishes to odom topic
         '''
         dt = odom_data.dt / 1000000.0  # Delta time converted to seconds
 
@@ -106,10 +106,10 @@ class OdomRepub:
         # Angular speed
         msg.twist.twist.angular.z = omega
 
-        pub = rospy.Publisher("odom_raw", Odometry, queue_size=10)
+        pub = rospy.Publisher("odom", Odometry, queue_size=10)
         pub.publish(msg)
 
-        self.calibration_debug_data(odom_data)
+        # self.calibration_debug_data(odom_data)
 
     def calibration_debug_data(self, od):
         v_left = od.rps1 / self.rot_per_m_right  # Wheel speed in m/s
@@ -125,4 +125,8 @@ class OdomRepub:
         return EmptyResponse()
 
 if __name__ == "__main__":
-    odom_repub = OdomRepub()  # Goes into infinte loop for ROS
+    try:
+        odom_repub = OdomRepub()  # Goes into infinte loop for ROS
+        odom_repub.init_ros()
+    except rospy.ROSInterruptException:
+        pass
