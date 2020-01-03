@@ -1,0 +1,81 @@
+Updated 2020-01-03
+
+Distance and Bump sensors:
+    Arduino:
+        Publishes: 
+            /sonar  							int[10]     		10 distances in mm
+            /bump   							uint16      		15 bump sensors on/off in bits from LS
+        Subscribes: None
+    Nodes:
+        visualize_distances.py:
+        	Publishes:
+        		/range_data 					msg.Range 			range messages for later use in rviz or elsewhere
+        		/visualization_marker_array		msg.MarkerArray 	for bump sensors visualization
+        	Subscribes:
+        		/sonar
+        		/bump
+
+GPS and Odometry sensors:
+	Arduino:
+        Publishes:
+        	/odom_data 	stamped; delta_ticks, rotations_per_sec, delta_t 	for both encoders
+        	/fix		msg.NavSatFix										if no fix pubslihes every 2 seconds 0, 0
+        Subscribes: None
+    Nodes:
+        republish_odom.py:
+        	Publishes:
+        		/odom 	msg.Odometry										standard ROS odometry message
+        	Subscribes: 
+        		/odom_data
+
+Hoverboard controller and Remote receiver:
+	Arduino:
+        Publishes:
+        	/rc 			int[7]		number in range [-1000 .. 1000] of every channel of the receiver
+        	/hov 			int[8]		data from internal hoverboard controller
+        	hov.msg: [0: 0, 1: 0, 2: l_pwm(*-1), 3: r_pwm(*-1), 4: bat_calib, 5: bat_voltage*100, 6: temp_calib, 7: temp in C]
+        Subscribes:
+        	/teleop
+    Nodes:
+        motors_controller.py:
+        	Publishes:
+        		/teleop 	int x2		speed and steer commands should be in range of [-1000 .. 1000]
+        	Subscribes:
+        		/rc
+        		/hov
+        	Notes:
+        		Potentiometer on tx for max speed regulation
+
+IMU sensor:
+	Arduino:
+        Publishes:
+        	/imu_data		quat, lin_acc, ang_acc		for all 3 directions, lin_acc in ms, ang_acc in rad/s
+        	/imu_calib		int x4 calib, int8 temp 	calibration data of gyro, acc, mag and system
+        Subscribes: None
+        Service:
+        	/reset			srv.Empty					(never used) it should restart Arduino by triggering rst pin itself
+    Nodes:
+        republish_imu.py:
+        	Publishes:
+        		/imu 		msg.IMU 					standard imu message used for localization on visualization
+        	Subscribes:
+        		/imu_data
+
+Arm controller:
+	Arduino:
+        Publishes:
+        	/arm_data		int16 x2, uint8 bits	current of motors and 4 limit switches on/off bits from LS
+        Subscribes:
+        	/arm_cmd
+        Notes:
+        	Stops action if senses overcurrent
+    Nodes:
+        arm_controller.py:
+        	Publishes:
+        		/arm_cmd	int8 x2					for lifter and grabber 0 - stop, 1 - open/raise, 2 - close/lower
+        	Subscribes:
+        		/arm_data
+        		/rc
+        	Notes:
+        		param mode1: force commands
+        		param mode2: drive motor until limit switch

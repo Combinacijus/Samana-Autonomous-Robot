@@ -16,8 +16,8 @@ navsat_transform_node:
 		(ekf/output/???????) A nav_msgs/Odometry message that contains the robot’s current position estimate in the frame specified by its start location (typically the output of a robot_localization state estimation node).
 
 	Subscribed topics:
-		and -> (/android/fix/fixed) imu/data             A sensor_msgs/Imu message with orientation data
-		and -> (/android/imu/fixed) gps/fix              A sensor_msgs/NavSatFix message containing your robot’s GPS coordinates
+		and -> (/android/imu/fixed) imu/data             A sensor_msgs/Imu message with orientation data
+		and -> (/android/fix/fixed) gps/fix              A sensor_msgs/NavSatFix message containing your robot’s GPS coordinates
 		ekf -> (/odometry/filtered) odometry/filtered    A nav_msgs/Odometry message of your robot’s current position. This is needed in the event that your first GPS reading comes after your robot has attained some non-zero pose.
 
 

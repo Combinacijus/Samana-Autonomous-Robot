@@ -412,16 +412,13 @@ int main(void)
       setScopeChannel(0, (int)adc_buffer.l_tx2); // 1: ADC1
       setScopeChannel(1, (int)adc_buffer.l_rx2); // 2: ADC2
 #endif
-      setScopeChannel(2, (int)speedR);  // 3: output speed: 0-1000
-      setScopeChannel(3, (int)speedL);  // 4: output speed: 0-1000
+      // TODO set speedR and speedL to negative because now postice speed drives backwards
+      setScopeChannel(2, (int)speedR);  // 3: output speed: -1000 - 1000
+      setScopeChannel(3, (int)speedL);  // 4: output speed: -1000 - 1000
       setScopeChannel(4, (int)adc_buffer.batt1);  // 5: for battery voltage calibration
       setScopeChannel(5, (int)(batteryVoltage * 100.0f)); // 6: for verifying battery voltage calibration
       setScopeChannel(6, (int)board_temp_adc_filtered);   // 7: for board temperature calibration
       setScopeChannel(7, (int)board_temp_deg_c);          // 8: for verifying board temperature calibration
-      // setScopeChannel(1, (int)speedR);  // 1: output speed: 0-1000
-      // setScopeChannel(2, (int)speedL);  // 2: output speed: 0-1000
-      // setScopeChannel(3, (int)(batteryVoltage * 100.0f)); // 3: for verifying battery voltage calibration
-      // setScopeChannel(4, (int)board_temp_deg_c);          // 4: for verifying
       consoleScope();
     }
 

@@ -2,7 +2,7 @@
     <!--IMU arduino serial-->
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake" args="0.5 0 0 0 0 0 base_link imu_link" />-->
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_fake" args="0 0 0 0 0 0 map imu_link" />-->
-    <!--<node name="repub_imu" pkg="samana" type="republish_imu.py" output="screen"/>-->
+    <node name="repub_imu" pkg="samana" type="republish_imu.py" output="screen"/>
     <node name="serial_node_imu" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
         <!--IMU baud-->
         <param name="port" value="/dev/ttyUSB0"/>

@@ -9,7 +9,6 @@ Gathers data from sensors and tells hoverboard motors what to do
 import rospy
 from samana_msgs.msg import Int16Array
 from samana_msgs.msg import Teleop
-from helpers import clamp
 
 # Global constants
 MAX_SPEED = 1000
@@ -19,6 +18,9 @@ MAX_STEER = 1000
 g_speed_rc = 0
 g_steer_rc = 0
 
+
+def clamp(_val, _min, _max):
+    return min(_max, max(_min, _val))
 
 def rc_calback(rc):
     '''

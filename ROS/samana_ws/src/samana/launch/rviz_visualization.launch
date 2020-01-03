@@ -13,6 +13,8 @@
 
   <!--Distances-->
   <node name="distance_viz" pkg="samana" type="visualize_distances.py" output="screen"/>
-  <!--Distances bag-->
+  
+  <!--IMU visualization-->
+  <!--<node name="repub_imu" pkg="samana" type="republish_imu.py" output="screen"/>-->
 
 </launch>

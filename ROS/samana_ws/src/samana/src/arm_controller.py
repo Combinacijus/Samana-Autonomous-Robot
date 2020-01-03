@@ -95,7 +95,7 @@ def control_arm():
 
     pub = rospy.Publisher('arm_cmd', ArmCmd, queue_size=10)
 
-    rate = rospy.Rate(20)
+    rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         # Setup message for pusblishing
         arm_cmd = ArmCmd()
