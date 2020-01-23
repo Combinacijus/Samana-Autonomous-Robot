@@ -79,3 +79,8 @@ Arm controller:
         	Notes:
         		param mode1: force commands
         		param mode2: drive motor until limit switch
+
+Text-to-speech engine node:
+	Publishes: None
+	Subscribes:
+		/text_to_speech		std_msgs.String			Whatever published there will be read out loud

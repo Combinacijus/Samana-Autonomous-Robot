@@ -7,7 +7,7 @@ project(samana)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS message_generation roscpp rospy samana_msgs)
+find_package(catkin REQUIRED COMPONENTS message_generation roscpp rospy samana_msgs tf)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -199,5 +199,13 @@ add_executable(visualize_test
 )
 add_dependencies(visualize_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(visualize_test
+  ${catkin_LIBRARIES}
+)
+
+add_executable(odom_tf
+  src/odom_tf.cpp
+)
+add_dependencies(odom_tf ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(odom_tf
   ${catkin_LIBRARIES}
 )

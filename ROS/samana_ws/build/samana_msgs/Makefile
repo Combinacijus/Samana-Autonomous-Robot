@@ -213,6 +213,36 @@ samana_msgs_generate_messages_nodejs/fast:
 .PHONY : samana_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
+.PHONY : samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
+
+# Convenience name for target.
+samana_msgs_genlisp: samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
+
+.PHONY : samana_msgs_genlisp
+
+# fast build rule for target.
+samana_msgs_genlisp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/build.make samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/build
+.PHONY : samana_msgs_genlisp/fast
+
+# Convenience name for target.
+samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+.PHONY : samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_py: samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+
+.PHONY : std_msgs_generate_messages_py
+
+# fast build rule for target.
+std_msgs_generate_messages_py/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build.make samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build
+.PHONY : std_msgs_generate_messages_py/fast
+
+# Convenience name for target.
 samana_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : samana_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
@@ -752,36 +782,6 @@ samana_msgs_generate_messages_eus/fast:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/build
 .PHONY : samana_msgs_generate_messages_eus/fast
 
-# Convenience name for target.
-samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build.make samana_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
-.PHONY : samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
-
-# Convenience name for target.
-samana_msgs_genlisp: samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
-
-.PHONY : samana_msgs_genlisp
-
-# fast build rule for target.
-samana_msgs_genlisp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/build.make samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/build
-.PHONY : samana_msgs_genlisp/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -795,6 +795,8 @@ help:
 	@echo "... samana_msgs_genpy"
 	@echo "... samana_msgs_generate_messages_py"
 	@echo "... samana_msgs_generate_messages_nodejs"
+	@echo "... samana_msgs_genlisp"
+	@echo "... std_msgs_generate_messages_py"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... _samana_msgs_generate_messages_check_deps_ImuSmall"
 	@echo "... list_install_components"
@@ -828,15 +830,12 @@ help:
 	@echo "... _samana_msgs_generate_messages_check_deps_Vector4_32"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... _samana_msgs_generate_messages_check_deps_Vector3_32"
-	@echo "... samana_msgs_generate_messages_nodejs"
-	@echo "... _samana_msgs_generate_messages_check_deps_OdometrySmall"
 	@echo "... _samana_msgs_generate_messages_check_deps_ArmCmd"
+	@echo "... _samana_msgs_generate_messages_check_deps_OdometrySmall"
 	@echo "... samana_msgs_generate_messages_cpp"
 	@echo "... _samana_msgs_generate_messages_check_deps_Bump"
 	@echo "... samana_msgs_gencpp"
 	@echo "... samana_msgs_generate_messages_eus"
-	@echo "... std_msgs_generate_messages_py"
-	@echo "... samana_msgs_genlisp"
 .PHONY : help
 
 
