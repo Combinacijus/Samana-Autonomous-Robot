@@ -39,13 +39,13 @@ def publish_range(index, range):
 
 
 def bump_callback(bump_data):
-    global bump_counter
-
-    bump_counter += 1 # Skip some callbacks
-    if bump_counter > 12:
-        bump_counter = 0
-    else:
-        return
+    
+    # global bump_counter
+    # bump_counter += 1 # Skip some callbacks
+    # if bump_counter > 12:
+    #     bump_counter = 0
+    # else:
+    #     return
 
     BUMP_SENSORS_COUNT = 15
     # Static variable exivalent bin_data_old
@@ -64,7 +64,8 @@ def bump_callback(bump_data):
     for i in range(BUMP_SENSORS_COUNT):
         # Static marker data
         marker = Marker()
-        marker.header.stamp = bump_data.header.stamp
+        # marker.header.stamp = bump_data.header.stamp
+        marker.header.stamp = rospy.Time.now()
         marker.ns = "bump"  # Namespace
         marker.type = marker.SPHERE
         marker.action = marker.ADD
@@ -86,10 +87,12 @@ def bump_callback(bump_data):
         marker.id = i + 1  # Must be different for all markers (if same overrides it)
 
         # On of off with simple filter (2 frames on = on)
-        if (bin_data[i] == '1' and bump_callback.bin_data_old[i] == '1'):
+        # if (bin_data[i] == '1' and bump_callback.bin_data_old[i] == '1'):
+        if bin_data[i] == '1':
             marker.action = marker.ADD
         else:
             marker.action = marker.DELETE
+        
 
         # Append to markers array
         marker_array.markers.append(marker)
