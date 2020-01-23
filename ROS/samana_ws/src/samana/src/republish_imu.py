@@ -43,7 +43,7 @@ def imu_callback(imu_data):
     imu_pub.publish(imu_msg)
 
     # Transform map to imu_link -----------------------------------------------------------------
-    if True:  # Make it false to disable manual TF for IMU in rviz
+    if False:  # Make it false to disable manual TF for IMU in rviz
         FRAME_ID = "map"
         CHILD_FRAME_ID = "base_link"
 

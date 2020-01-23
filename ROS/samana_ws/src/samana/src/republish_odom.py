@@ -16,20 +16,21 @@ import math
 
 class OdomRepub:
     def __init__(self):
-        self.reset_vals()
+        self.reset_odom()
         self.get_params_or_default()
+        self.debug = False  # NOTE: set tot true for more debug info
 
     def init_ros(self):
         try:
             rospy.init_node("odom_repub", anonymous=True)
 
-            s = rospy.Service("reset_vals", Empty, self.handle_reset_vals)
+            s = rospy.Service("reset_odom", Empty, self.handle_reset_odom)
             rospy.Subscriber("odom_data", OdometrySmall, self.odom_cb)
             rospy.spin()
         except rospy.ROSInterruptException:
             pass
 
-    def reset_vals(self):
+    def reset_odom(self):
         self.posx = 0
         self.posy = 0
         self.theta = 0
@@ -109,7 +110,8 @@ class OdomRepub:
         pub = rospy.Publisher("odom", Odometry, queue_size=10)
         pub.publish(msg)
 
-        # self.calibration_debug_data(odom_data)
+        if self.debug is True:
+            self.calibration_debug_data(odom_data)
 
     def calibration_debug_data(self, od):
         v_left = od.rps1 / self.rot_per_m_right  # Wheel speed in m/s
@@ -120,8 +122,8 @@ class OdomRepub:
         self.rot2 += od.delta_ticks2 / 2400.0
         print("r1: %f, r2: %f, th: %f, thd: %f" % (self.rot1, self.rot2, self.theta * 180 / math.pi, self.theta_debug * 180 / math.pi))
 
-    def handle_reset_vals(self, _):
-        self.reset_vals()
+    def handle_reset_odom(self, _):
+        self.reset_odom()
         return EmptyResponse()
 
 if __name__ == "__main__":

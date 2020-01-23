@@ -1,5 +1,10 @@
 There is described all ROS parameters which could be change to tune robot
 
+/arm_mode (int)
+    0: No move
+    1: arm commands will be forced
+    2: arm will move until limit or overcurrent switch or disarm
+
 --------------------------NEVER UPDATED IF CHANGED----------------------------------------
 base_width - distance between hoverboard wheels in meters
 rot_per_m_left  - (float) left encoder rotation per meter; must be found experimentally
