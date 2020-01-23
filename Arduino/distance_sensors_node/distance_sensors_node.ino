@@ -49,7 +49,8 @@
     In milliseconds. Should be long enough to not catch previuos echo
     At lowest speed in 50ms max distance 8.4m, 40ms - 6.7m
  */
-#define TRIGGER_PERIOD 40 // In ms
+#define TRIGGER_PERIOD 40      // In ms
+#define BUMP_PERIOD_FORCE  100 // In ms. In this time bump message is forced to send
 
 /*
     NOTE:
@@ -95,6 +96,7 @@ samana_msgs::Bump bump_msg;
 ros::Publisher bump_pub("bump", &bump_msg);
 ShiftReg shift_reg(2);    // NOTE: change pins in library header defines
 int16_t bump_sensor_bits; // Each bit means if sensor is triggered or not
+int16_t bump_sensor_bits_old = -1;
 
 void setup()
 {
@@ -152,8 +154,8 @@ void loop()
     // Now timer interrupt will act like pulseIn() for all echo pins
 
     // Delay for TRIGGER_PERIOD meanwhile doing bump sensor updates
-    unsigned long long tmp_time = millis();
-    while (millis() - tmp_time < TRIGGER_PERIOD - 1)
+    unsigned long long tmp_dist_time = millis();
+    while (millis() - tmp_dist_time < TRIGGER_PERIOD - 1)
     {
         bump_sensor_update();
     }
@@ -238,7 +240,7 @@ bool pinIsHigh(int ind)
 }
 
 /*
-    Returns distanc (mm) given time (us)
+    Returns distance (mm) given time (us)
 
     @param delta_time: elapsed time between pulse and echo in microseconds (us)
     @return: distance in mm or -1 if data is invalid
@@ -262,16 +264,25 @@ int getDistance(long delta_time)
     Reads bump sensor data by multiplexing with shift register
     and after reading sets outputs as inputs to light up leds
     Takes about 400us
+    Will update only if any of bump sensors changed or in defined period
 */
 void bump_sensor_update()
 {
+    static unsigned long last_update_t = 0;
+    
     shift_reg.clear();
     bump_sensor_bits = shift_reg.read_all();
     shift_reg.write_all(bump_sensor_bits);
 
-    // Ros publishing
-    bump_msg.header.stamp = nh.now();
-    bump_msg.bump_bits = bump_sensor_bits;
-    bump_pub.publish(&bump_msg);
-    nh.spinOnce();
+    if (bump_sensor_bits != bump_sensor_bits_old || millis() - last_update_t >= BUMP_PERIOD_FORCE)
+    {
+        // ROS publishing
+        bump_msg.header.stamp = nh.now();
+        bump_msg.bump_bits = bump_sensor_bits;
+        bump_pub.publish(&bump_msg);
+        nh.spinOnce();
+        last_update_t = millis();
+    }
+
+    bump_sensor_bits_old = bump_sensor_bits;
 }
