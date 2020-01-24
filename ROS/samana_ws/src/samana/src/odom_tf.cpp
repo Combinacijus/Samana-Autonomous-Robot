@@ -2,7 +2,13 @@
 #include <tf/transform_broadcaster.h>
 #include <nav_msgs/Odometry.h>
 
+// #include <tf2/LinearMath/Quaternion.h>
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/TransformStamped.h>
+
 void odomCb(const nav_msgs::Odometry::ConstPtr& msg);
+
+int a = 0;
 
 int main(int argc, char** argv)
 {
@@ -12,31 +18,31 @@ int main(int argc, char** argv)
     ros::spin();
 }
 
+/*
+    Publishes tf transform from odometry topic
+*/
 void odomCb(const nav_msgs::Odometry::ConstPtr& msg)
 {
+    static tf2_ros::TransformBroadcaster br;
+    geometry_msgs::TransformStamped transformStamped;
+
+    transformStamped.header.stamp = ros::Time::now();
+    transformStamped.header.frame_id = "odom";
+    transformStamped.child_frame_id = "base_link";
+
+    transformStamped.transform.translation.x = msg->pose.pose.position.x;
+    transformStamped.transform.translation.y = msg->pose.pose.position.y;
+    transformStamped.transform.translation.z = msg->pose.pose.position.z;
+
+    transformStamped.transform.rotation.x = msg->pose.pose.orientation.x;
+    transformStamped.transform.rotation.y = msg->pose.pose.orientation.y;
+    transformStamped.transform.rotation.z = msg->pose.pose.orientation.z;
+    transformStamped.transform.rotation.w = msg->pose.pose.orientation.w;
+
+    br.sendTransform(transformStamped);
+
     // ROS_INFO("Seq: [%d]", msg->header.seq);
 	// ROS_INFO("Position-> x: [%f], y: [%f], z: [%f]", msg->pose.pose.position.x,msg->pose.pose.position.y, msg->pose.pose.position.z);
 	// ROS_INFO("Orientation-> x: [%f], y: [%f], z: [%f], w: [%f]", msg->pose.pose.orientation.x, msg->pose.pose.orientation.y, msg->pose.pose.orientation.z, msg->pose.pose.orientation.w);
 	// ROS_INFO("Vel-> Linear: [%f], Angular: [%f]", msg->twist.twist.linear.x,msg->twist.twist.angular.z);
-
-    //first, we'll publish the transform over tf
-    tf::TransformBroadcaster odom_broadcaster;
-    geometry_msgs::TransformStamped odom_trans;
-
-    odom_trans.header.stamp = ros::Time::now();
-    odom_trans.header.frame_id = msg->header.frame_id;
-    odom_trans.child_frame_id = msg->child_frame_id;
-
-    odom_trans.transform.translation.x = msg->pose.pose.position.x;
-    odom_trans.transform.translation.y = msg->pose.pose.position.y;
-    odom_trans.transform.translation.z = msg->pose.pose.position.z;
-    odom_trans.transform.rotation.x = msg->pose.pose.orientation.x;
-    odom_trans.transform.rotation.y = msg->pose.pose.orientation.y;
-    odom_trans.transform.rotation.z = msg->pose.pose.orientation.z;
-    odom_trans.transform.rotation.w = msg->pose.pose.orientation.w;
-
-    // Send the transform
-    odom_broadcaster.sendTransform(odom_trans);
-    // ros::spinOnce();
-    // ROS_INFO("TF ----");
 }
