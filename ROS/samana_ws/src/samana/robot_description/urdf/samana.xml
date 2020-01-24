@@ -38,6 +38,9 @@
 	<material name="green">
     	<color rgba="0.2 0.9 0.2 ${alpha}"/>
   	</material>
+	<material name="blue">
+    	<color rgba="0.2 0.2 0.9 ${alpha}"/>
+  	</material>
   
 	<link name="base_link">
 		<!--Main plywood-->
@@ -98,6 +101,21 @@
         </visual>
 	</link>
 
+	<!--GPS sensor-->
+	<link name="gps_link">
+		<visual>
+          	<geometry>
+              	<box size="0.02 0.01 0.002"/>
+        	</geometry>
+          	<origin xyz="0 0 0"/>
+          <material name="green"/>
+        </visual>
+	</link>
+
+	<!--Sonic base for a tree structure-->
+	<link name="base_sonic_link"/>
+	<link name="base_bump_link"/>
+
 	<!--Wheels macro-->
 	<xacro:macro name="wheel" params="prefix reflect offx:=0">
     <link name="${prefix}_wheel">
@@ -135,7 +153,7 @@
     </link>
 
     <joint name="base_to_sonic_${prefix}" type="fixed">
-        <parent link="base_link"/>
+        <parent link="base_sonic_link"/>
         <child link="ultrasonic_${prefix}"/>
         <origin xyz="${offx} ${offy} ${0.045 + body_offz}" rpy="0 0 ${angle_deg/180*pi}"/>
     </joint>
@@ -166,7 +184,7 @@
     </link>
 
     <joint name="base_to_bump_${prefix}" type="fixed">
-        <parent link="base_link"/>
+        <parent link="base_bump_link"/>
         <child link="bump_${prefix}"/>
         <origin xyz="${offx} ${offy} ${body_offz}" rpy="0 0 0"/>
     </joint>
@@ -196,6 +214,24 @@
 		<origin xyz="0 0 0.45" rpy="0 0 ${pi/2}"/>
 		<parent link="base_link"/>
 		<child link="imu_link"/>
+	</joint>
+
+	<joint name="base_to_gps" type="fixed">
+		<origin xyz="0 -0.18 0.45" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="gps_link"/>
+	</joint>
+
+	<joint name="base_to_sonic" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="base_sonic_link"/>
+	</joint>
+
+	<joint name="base_to_bump" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="base_bump_link"/>
 	</joint>
 </robot>
 
