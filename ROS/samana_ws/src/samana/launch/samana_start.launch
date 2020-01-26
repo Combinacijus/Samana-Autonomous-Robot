@@ -1,0 +1,10 @@
+<launch>
+    <include file="$(find samana)/launch/arduino_start.launch"/>
+    <include file="$(find samana)/launch/rviz_visualization.launch"/>
+    
+    <!--Publish odometry transform-->
+    <node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>
+   
+    <!--Path from odometry-->
+    <!--<node name="path_odom" pkg="samana" type="odom_to_path.py" output="screen" respawn="true"/>-->
+</launch>
