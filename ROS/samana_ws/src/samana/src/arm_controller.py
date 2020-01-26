@@ -36,6 +36,7 @@ class ArmController:
         self.switch_ld = -1
         self.rc_data = []
         self.last_arm_mode = 0
+        self.use_rc = False
         self.last_use_rc = False
 
     def init_ros(self):
@@ -46,7 +47,7 @@ class ArmController:
         self.init_subscribers()
 
         # Different RC control modes
-        rospy.set_param("/use_rc", False)
+        # rospy.set_param("/use_rc", False)
         rospy.set_param("/arm_mode", 0)
 
         # Infinite loop
@@ -66,10 +67,12 @@ class ArmController:
             self.rc_data.append(d)
 
         # Arming. Switch RC control on or of by 2 pos-switch
-        if (rc.data[5] < -50):
-            rospy.set_param("/use_rc", False)
-        elif (rc.data[5] > 50):
-            rospy.set_param("/use_rc", True)
+        if (rc.data[5] <= -1000):
+            # rospy.set_param("/use_rc", False)
+            self.use_rc = False
+        elif (rc.data[5] >= 1000):
+            # rospy.set_param("/use_rc", True)
+            self.use_rc = True
 
         # Both switches down or both up
         if (rc.data[4] < -950):
@@ -115,12 +118,12 @@ class ArmController:
             arm_cmd = ArmCmd()
 
             # Say if armmed or disarmed
-            use_rc = rospy.get_param("/use_rc")
-            if use_rc != self.last_use_rc:
-                self.last_use_rc = use_rc
+            # use_rc = rospy.get_param("/use_rc")
+            if self.use_rc != self.last_use_rc:
+                self.last_use_rc = self.use_rc
                 postfix = ["disarmed", "armed"]
                 txt = "Arm "
-                if use_rc:
+                if self.use_rc is True:
                     txt += "armmed "
                     if rospy.get_param("/arm_mode") == 0:
                         txt += "no mode selected"
@@ -131,7 +134,7 @@ class ArmController:
                 self.pub_audio.publish(txt)
             
             # RC control
-            if use_rc is True:  
+            if self.use_rc is True:  
                 # Say arm mode
                 arm_mode = rospy.get_param("/arm_mode")
                 if arm_mode != self.last_arm_mode and arm_mode != 0:
