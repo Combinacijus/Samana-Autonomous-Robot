@@ -67,11 +67,19 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base_bump_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+        base_sonic_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         bump_1:
           Alpha: 1
           Show Axes: false
@@ -143,6 +151,11 @@ Visualization Manager:
           Show Trail: false
           Value: true
         bump_9:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gps_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -283,11 +296,11 @@ Visualization Manager:
         y_scale: 1
         z_scale: 1
       Class: rviz_imu_plugin/Imu
-      Enabled: true
+      Enabled: false
       Name: Imu
       Topic: /imu
       Unreliable: false
-      Value: true
+      Value: false
       fixed_frame_orientation: false
     - Angle Tolerance: 0.20000000298023224
       Class: rviz/Odometry
@@ -327,8 +340,8 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: map
-    Frame Rate: 60
+    Fixed Frame: odom
+    Frame Rate: 30
   Name: root
   Tools:
     - Class: rviz/Interact
@@ -387,5 +400,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1327
-  X: 196
-  Y: 1077
+  X: 39
+  Y: 0
