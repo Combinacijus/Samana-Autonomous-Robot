@@ -25,6 +25,10 @@ class ArmController:
         self.LIFTER_RAISE = 1
         self.LIFTER_LOWER = 2
 
+        # Other constants
+        self.CHANNEL_TRIG = 900  # Trigger continuous value as switch
+        self.SWITCH_TRIG = 950  # Trigger value for a switch
+
         # Variables
         self.grabber_cmd = 0  # 0 - stop; 1 - open; 2 - close
         self.lifter_cmd = 0  # 0 - stop; 1 - raise; 2 - lower
@@ -41,7 +45,8 @@ class ArmController:
 
     def init_ros(self):
         self.pub_arm = rospy.Publisher('arm_cmd', ArmCmd, queue_size=10)
-        self.pub_audio = rospy.Publisher('text_to_speech', String, queue_size=10)
+        self.pub_audio = rospy.Publisher(
+            'text_to_speech', String, queue_size=10)
 
         rospy.init_node('arm_controller', anonymous=True)
         self.init_subscribers()
@@ -67,17 +72,17 @@ class ArmController:
             self.rc_data.append(d)
 
         # Arming. Switch RC control on or of by 2 pos-switch
-        if (rc.data[5] <= -1000):
-            # rospy.set_param("/use_rc", False)
-            self.use_rc = False
-        elif (rc.data[5] >= 1000):
+        if (rc.data[5] >= self.SWITCH_TRIG):
             # rospy.set_param("/use_rc", True)
             self.use_rc = True
+        else:
+            # rospy.set_param("/use_rc", False)
+            self.use_rc = False
 
         # Both switches down or both up
-        if (rc.data[4] < -950):
+        if (rc.data[4] < -self.SWITCH_TRIG):
             rospy.set_param("/arm_mode", 1)
-        elif (rc.data[4] > 950):
+        elif (rc.data[4] > self.SWITCH_TRIG):
             rospy.set_param("/arm_mode", 2)
         else:
             rospy.set_param("/arm_mode", 0)
@@ -130,50 +135,48 @@ class ArmController:
                 else:
                     txt += "disarmed "
 
-                print(txt)
                 self.pub_audio.publish(txt)
-            
+
             # RC control
-            if self.use_rc is True:  
+            if self.use_rc is True:
                 # Say arm mode
                 arm_mode = rospy.get_param("/arm_mode")
                 if arm_mode != self.last_arm_mode and arm_mode != 0:
                     self.last_arm_mode = arm_mode
-                    
+
                     # Assemble message
                     postfix = ["nothing", "force", "auto stop"]
                     txt = "Arm %s" % (postfix[arm_mode])
-                    print(txt)
                     self.pub_audio.publish(txt)
-                
+
                 # Execute commands from RC
                 if arm_mode == 1:  # Force commands
                     # Yaw channel controls grabber
-                    if self.rc_data[3] < -600:
+                    if self.rc_data[3] < -self.CHANNEL_TRIG:
                         self.grabber_cmd = self.GRABBER_OPEN
-                    elif self.rc_data[3] > 600:
+                    elif self.rc_data[3] > self.CHANNEL_TRIG:
                         self.grabber_cmd = self.GRABBER_CLOSE
                     else:
                         self.grabber_cmd = self.GRABBER_STOP
 
                     # Throttle channel controls lifter
-                    if self.rc_data[2] > 600:
+                    if self.rc_data[2] > self.CHANNEL_TRIG:
                         self.lifter_cmd = self.LIFTER_LOWER
-                    elif self.rc_data[2] < -600:
+                    elif self.rc_data[2] < -self.CHANNEL_TRIG:
                         self.lifter_cmd = self.LIFTER_RAISE
                     else:
                         self.lifter_cmd = self.LIFTER_STOP
                 elif arm_mode == 2:  # Drive until limit switch
                     # Yaw channel controls grabber
-                    if self.rc_data[3] < -600 and not self.switch_go:
+                    if self.rc_data[3] < -self.CHANNEL_TRIG and not self.switch_go:
                         self.grabber_cmd = self.GRABBER_OPEN
-                    elif self.rc_data[3] > 600 and not self.switch_gc:
+                    elif self.rc_data[3] > self.CHANNEL_TRIG and not self.switch_gc:
                         self.grabber_cmd = self.GRABBER_CLOSE
 
                     # Throttle channel controls lifter
-                    if self.rc_data[2] > 600 and not self.switch_lu:
+                    if self.rc_data[2] > self.CHANNEL_TRIG and not self.switch_lu:
                         self.lifter_cmd = self.LIFTER_LOWER
-                    elif self.rc_data[2] < -600 and not self.switch_ld:
+                    elif self.rc_data[2] < -self.CHANNEL_TRIG and not self.switch_ld:
                         self.lifter_cmd = self.LIFTER_RAISE
 
                     # Stop when limit switch is hit

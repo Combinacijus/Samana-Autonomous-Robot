@@ -1,5 +1,12 @@
 <launch>
-    <node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>
+    <!--<node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>-->
+
+    <include file="$(find samana)/launch/nav_sat.launch"/>
+
+    <arg name="file" default="/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/bags/Full_room_drive_no_tf.bag" />
+    <node pkg="rosbag" type="play" name="drive" output="screen" args="--clock $(arg file) -r 1"/>
+
+
     <!--Arm control arduino serial and controller-->
     <!--<node name="arm_controller" pkg="samana" type="arm_controller.py" output="screen" respawn="true"/>
     <node name="serial_node_arm" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
