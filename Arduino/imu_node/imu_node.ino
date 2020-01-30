@@ -177,9 +177,9 @@ void sendNewData()
     imu_data.linear_acceleration_x = linAcc.acceleration.x;
     imu_data.linear_acceleration_y = linAcc.acceleration.y;
     imu_data.linear_acceleration_z = linAcc.acceleration.z;
-    imu_data.angular_velocity_x = radians(angVel.gyro.x);
-    imu_data.angular_velocity_y = radians(angVel.gyro.y);
-    imu_data.angular_velocity_z = radians(angVel.gyro.z);
+    imu_data.angular_velocity_x = angVel.gyro.x;
+    imu_data.angular_velocity_y = angVel.gyro.y;
+    imu_data.angular_velocity_z = angVel.gyro.z;
     imu_data_pub.publish(&imu_data);
     nh.spinOnce();
 }
