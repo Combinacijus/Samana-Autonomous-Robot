@@ -37,8 +37,10 @@ class TTS:
     def tts_cb(self, txt):
         '''
             Save text from /text_to_speech topic to queue
+            And print the text
         '''
         self.queue.append(txt.data)
+        rospy.loginfo(txt.data)
 
     def read_queue(self):
         '''
