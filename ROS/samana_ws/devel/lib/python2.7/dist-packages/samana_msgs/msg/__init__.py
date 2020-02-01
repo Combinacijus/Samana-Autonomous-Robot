@@ -5,6 +5,8 @@ from ._ImuCalib import *
 from ._ImuSmall import *
 from ._Int16Array import *
 from ._OdometrySmall import *
+from ._RCModes import *
+from ._RCState import *
 from ._Sonar import *
 from ._Sonar9 import *
 from ._Sonic9 import *

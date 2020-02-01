@@ -4,5 +4,5 @@ Name: rviz_satellite
 Description: Description of rviz_satellite
 Version: 1.2.0
 Cflags: 
-Libs: -L/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib 
+Libs: -L${prefix}/lib 
 Requires: nav_msgs sensor_msgs

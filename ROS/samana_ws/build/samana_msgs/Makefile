@@ -213,6 +213,21 @@ samana_msgs_generate_messages_nodejs/fast:
 .PHONY : samana_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule
+.PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+samana_msgs_generate_messages_lisp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : samana_msgs_generate_messages_lisp
+
+# fast build rule for target.
+samana_msgs_generate_messages_lisp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/build
+.PHONY : samana_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
 samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_genlisp.dir/rule
@@ -498,21 +513,6 @@ geometry_msgs_generate_messages_nodejs/fast:
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule
-.PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-samana_msgs_generate_messages_lisp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : samana_msgs_generate_messages_lisp
-
-# fast build rule for target.
-samana_msgs_generate_messages_lisp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_lisp.dir/build
-.PHONY : samana_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
 samana_msgs/CMakeFiles/roscpp_generate_messages_py.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : samana_msgs/CMakeFiles/roscpp_generate_messages_py.dir/rule
@@ -571,36 +571,6 @@ geometry_msgs_generate_messages_eus: samana_msgs/CMakeFiles/geometry_msgs_genera
 geometry_msgs_generate_messages_eus/fast:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make samana_msgs/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
 .PHONY : geometry_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-.PHONY : samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-geometry_msgs_generate_messages_cpp: samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : geometry_msgs_generate_messages_cpp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_cpp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-.PHONY : samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-geometry_msgs_generate_messages_lisp: samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : geometry_msgs_generate_messages_lisp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_lisp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
-.PHONY : geometry_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 samana_msgs/CMakeFiles/samana_msgs_generate_messages.dir/rule:
@@ -708,34 +678,49 @@ _samana_msgs_generate_messages_check_deps_ArmCmd/fast:
 .PHONY : _samana_msgs_generate_messages_check_deps_ArmCmd/fast
 
 # Convenience name for target.
-samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule
-.PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule
+samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+.PHONY : samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-_samana_msgs_generate_messages_check_deps_OdometrySmall: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule
+geometry_msgs_generate_messages_cpp: samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 
-.PHONY : _samana_msgs_generate_messages_check_deps_OdometrySmall
+.PHONY : geometry_msgs_generate_messages_cpp
 
 # fast build rule for target.
-_samana_msgs_generate_messages_check_deps_OdometrySmall/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/build
-.PHONY : _samana_msgs_generate_messages_check_deps_OdometrySmall/fast
+geometry_msgs_generate_messages_cpp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make samana_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
-samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule
-.PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule
+samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+.PHONY : samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-samana_msgs_generate_messages_cpp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule
+geometry_msgs_generate_messages_lisp: samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 
-.PHONY : samana_msgs_generate_messages_cpp
+.PHONY : geometry_msgs_generate_messages_lisp
 
 # fast build rule for target.
-samana_msgs_generate_messages_cpp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/build
-.PHONY : samana_msgs_generate_messages_cpp/fast
+geometry_msgs_generate_messages_lisp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make samana_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+.PHONY : geometry_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_RCModes.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_RCModes.dir/rule
+.PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_RCModes.dir/rule
+
+# Convenience name for target.
+_samana_msgs_generate_messages_check_deps_RCModes: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_RCModes.dir/rule
+
+.PHONY : _samana_msgs_generate_messages_check_deps_RCModes
+
+# fast build rule for target.
+_samana_msgs_generate_messages_check_deps_RCModes/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_RCModes.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_RCModes.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_RCModes/fast
 
 # Convenience name for target.
 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_Bump.dir/rule:
@@ -768,6 +753,36 @@ samana_msgs_gencpp/fast:
 .PHONY : samana_msgs_gencpp/fast
 
 # Convenience name for target.
+samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule
+.PHONY : samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule
+
+# Convenience name for target.
+_samana_msgs_generate_messages_check_deps_OdometrySmall: samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/rule
+
+.PHONY : _samana_msgs_generate_messages_check_deps_OdometrySmall
+
+# fast build rule for target.
+_samana_msgs_generate_messages_check_deps_OdometrySmall/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/build.make samana_msgs/CMakeFiles/_samana_msgs_generate_messages_check_deps_OdometrySmall.dir/build
+.PHONY : _samana_msgs_generate_messages_check_deps_OdometrySmall/fast
+
+# Convenience name for target.
+samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule
+.PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+samana_msgs_generate_messages_cpp: samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : samana_msgs_generate_messages_cpp
+
+# fast build rule for target.
+samana_msgs_generate_messages_cpp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/build.make samana_msgs/CMakeFiles/samana_msgs_generate_messages_cpp.dir/build
+.PHONY : samana_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
 samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/rule:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/rule
 .PHONY : samana_msgs/CMakeFiles/samana_msgs_generate_messages_eus.dir/rule
@@ -795,6 +810,7 @@ help:
 	@echo "... samana_msgs_genpy"
 	@echo "... samana_msgs_generate_messages_py"
 	@echo "... samana_msgs_generate_messages_nodejs"
+	@echo "... samana_msgs_generate_messages_lisp"
 	@echo "... samana_msgs_genlisp"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... std_msgs_generate_messages_nodejs"
@@ -816,13 +832,10 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_nodejs"
-	@echo "... samana_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... geometry_msgs_generate_messages_cpp"
-	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... samana_msgs_generate_messages"
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... install/strip"
@@ -831,10 +844,13 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... _samana_msgs_generate_messages_check_deps_Vector3_32"
 	@echo "... _samana_msgs_generate_messages_check_deps_ArmCmd"
-	@echo "... _samana_msgs_generate_messages_check_deps_OdometrySmall"
-	@echo "... samana_msgs_generate_messages_cpp"
+	@echo "... geometry_msgs_generate_messages_cpp"
+	@echo "... geometry_msgs_generate_messages_lisp"
+	@echo "... _samana_msgs_generate_messages_check_deps_RCModes"
 	@echo "... _samana_msgs_generate_messages_check_deps_Bump"
 	@echo "... samana_msgs_gencpp"
+	@echo "... _samana_msgs_generate_messages_check_deps_OdometrySmall"
+	@echo "... samana_msgs_generate_messages_cpp"
 	@echo "... samana_msgs_generate_messages_eus"
 .PHONY : help
 

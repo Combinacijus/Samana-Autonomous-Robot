@@ -19,6 +19,8 @@
     (:file "_package_Int16Array" :depends-on ("_package"))
     (:file "OdometrySmall" :depends-on ("_package_OdometrySmall"))
     (:file "_package_OdometrySmall" :depends-on ("_package"))
+    (:file "RCModes" :depends-on ("_package_RCModes"))
+    (:file "_package_RCModes" :depends-on ("_package"))
     (:file "Teleop" :depends-on ("_package_Teleop"))
     (:file "_package_Teleop" :depends-on ("_package"))
     (:file "Vector3_32" :depends-on ("_package_Vector3_32"))

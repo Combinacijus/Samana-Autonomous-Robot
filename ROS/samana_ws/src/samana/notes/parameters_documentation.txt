@@ -1,11 +1,22 @@
 There is described all ROS parameters which could be change to tune robot
 
 /arm_mode (int)
-    0: No move
-    1: arm commands will be forced
-    2: arm will move until limit or overcurrent switch or disarm
+    0: no move
+    1: arm commands will be forced, both swithes up
+    2: arm will move until limit or overcurrent switch or disarm, both swithes down
+
+/armed (bool)       arm state set by arm switch
+/auton_mode (bool)  if true robot goes into autonomous mode rc is ignored
+
+/hoverboard/max_speed (int)     max speed command; clamped before sending to hoverboard
+/hoverboard/max_steer (int)     max steer command; clamped before sending to hoverboard
+
 
 --------------------------NEVER UPDATED IF CHANGED----------------------------------------
 base_width - distance between hoverboard wheels in meters
 rot_per_m_left  - (float) left encoder rotation per meter; must be found experimentally
 rot_per_m_right - (float) right encoder rotation per meter; must be found experimentally
+
+/init_allow_rc (bool)    if false any RC input will be ignored works only on init 
+                         can be changed with service /set_allow_rc e.g.
+                         rosservice call /set_allow_rc "data: true"
