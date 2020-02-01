@@ -6,10 +6,10 @@ arm_controller ROS Node
 Gathers data from sensors and tells arm what to do
 '''
 # TODO overcurrent limit switch
-# TODO control via parameters
 
 import rospy
 from samana_msgs.msg import Int16Array
+from samana_msgs.msg import RCModes
 from samana_msgs.msg import ArmData
 from samana_msgs.msg import ArmCmd
 from std_msgs.msg import String
@@ -17,17 +17,16 @@ from std_msgs.msg import String
 
 class ArmController:
     def __init__(self):
-        # NOTE: important constants for arm commands
+        # NOTE: must be same as in rc_main.py
+        self.ARM_MODE_NONE = 0
+        self.ARM_MODE_FORCE = 1
+        self.ARM_MODE_LIMIT = 2
         self.GRABBER_STOP = 0
         self.GRABBER_OPEN = 1
         self.GRABBER_CLOSE = 2
         self.LIFTER_STOP = 0
         self.LIFTER_RAISE = 1
         self.LIFTER_LOWER = 2
-
-        # Other constants
-        self.CHANNEL_TRIG = 900  # Trigger continuous value as switch
-        self.SWITCH_TRIG = 950  # Trigger value for a switch
 
         # Variables
         self.grabber_cmd = 0  # 0 - stop; 1 - open; 2 - close
@@ -39,24 +38,47 @@ class ArmController:
         self.switch_lu = -1
         self.switch_ld = -1
         self.rc_data = []
-        self.last_arm_mode = 0
-        self.use_rc = False
-        self.last_use_rc = False
+        self.last_rc_arm_cmd_update = rospy.Time()
+
+        # Modes
+        self.allow_rc = False
+        self.armed = False
+        self.auton_mode = False
+        self.arm_mode = 0
 
     def init_ros(self):
+        rospy.init_node('arm_controller', anonymous=True)
+
+        # Publishers
         self.pub_arm = rospy.Publisher('arm_cmd', ArmCmd, queue_size=10)
         self.pub_audio = rospy.Publisher(
             'text_to_speech', String, queue_size=10)
 
-        rospy.init_node('arm_controller', anonymous=True)
-        self.init_subscribers()
+        # Messages
+        self.arm_cmd_msg = ArmCmd()
+        self.rc_arm_cmd_msg = ArmCmd()
 
-        # Different RC control modes
-        # rospy.set_param("/use_rc", False)
-        rospy.set_param("/arm_mode", 0)
+        # Subscribers
+        rospy.Subscriber("arm_data", ArmData, self.arm_data_callback)
+        rospy.Subscriber("rc/modes", RCModes, self.rc_modes_calback)
+        rospy.Subscriber("rc/arm_cmd", ArmCmd, self.rc_arm_cmd_callback)
+        rospy.Subscriber("rc", Int16Array, self.rc_calback)
 
         # Infinite loop
         self.control_arm()
+
+    def rc_modes_calback(self, modes):
+        '''
+            Updates RC modes
+        '''
+        self.allow_rc = modes.allow_rc
+        self.armed = modes.armed
+        self.auton_mode = modes.auton_mode
+        self.arm_mode = modes.arm_mode
+
+    def rc_arm_cmd_callback(self, data):
+        self.rc_arm_cmd_msg = data
+        self.last_rc_arm_cmd_update = rospy.Time()
 
     def rc_calback(self, rc):
         '''
@@ -70,22 +92,6 @@ class ArmController:
         self.rc_data = []
         for d in rc.data:
             self.rc_data.append(d)
-
-        # Arming. Switch RC control on or of by 2 pos-switch
-        if (rc.data[5] >= self.SWITCH_TRIG):
-            # rospy.set_param("/use_rc", True)
-            self.use_rc = True
-        else:
-            # rospy.set_param("/use_rc", False)
-            self.use_rc = False
-
-        # Both switches down or both up
-        if (rc.data[4] < -self.SWITCH_TRIG):
-            rospy.set_param("/arm_mode", 1)
-        elif (rc.data[4] > self.SWITCH_TRIG):
-            rospy.set_param("/arm_mode", 2)
-        else:
-            rospy.set_param("/arm_mode", 0)
 
     def arm_data_callback(self, msg):
         '''Arm data callback function'''
@@ -103,11 +109,6 @@ class ArmController:
         self.switch_lu = int(bin_data[2])
         self.switch_ld = int(bin_data[3])
 
-    def init_subscribers(self):
-        '''Subscribe to all required topics'''
-        rospy.Subscriber("arm_data", ArmData, self.arm_data_callback)
-        rospy.Subscriber("rc", Int16Array, self.rc_calback)
-
     def control_arm(self):
         '''
             Publish to /arm_cmd to control arm motors
@@ -119,83 +120,32 @@ class ArmController:
 
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
-            # Setup message for pusblishing
-            arm_cmd = ArmCmd()
-
-            # Say if armmed or disarmed
-            # use_rc = rospy.get_param("/use_rc")
-            if self.use_rc != self.last_use_rc:
-                self.last_use_rc = self.use_rc
-                postfix = ["disarmed", "armed"]
-                txt = "Arm "
-                if self.use_rc is True:
-                    txt += "armmed "
-                    if rospy.get_param("/arm_mode") == 0:
-                        txt += "no mode selected"
-                else:
-                    txt += "disarmed "
-
-                self.pub_audio.publish(txt)
-
-            # RC control
-            if self.use_rc is True:
-                # Say arm mode
-                arm_mode = rospy.get_param("/arm_mode")
-                if arm_mode != self.last_arm_mode and arm_mode != 0:
-                    self.last_arm_mode = arm_mode
-
-                    # Assemble message
-                    postfix = ["nothing", "force", "auto stop"]
-                    txt = "Arm %s" % (postfix[arm_mode])
-                    self.pub_audio.publish(txt)
-
-                # Execute commands from RC
-                if arm_mode == 1:  # Force commands
-                    # Yaw channel controls grabber
-                    if self.rc_data[3] < -self.CHANNEL_TRIG:
-                        self.grabber_cmd = self.GRABBER_OPEN
-                    elif self.rc_data[3] > self.CHANNEL_TRIG:
-                        self.grabber_cmd = self.GRABBER_CLOSE
-                    else:
-                        self.grabber_cmd = self.GRABBER_STOP
-
-                    # Throttle channel controls lifter
-                    if self.rc_data[2] > self.CHANNEL_TRIG:
-                        self.lifter_cmd = self.LIFTER_LOWER
-                    elif self.rc_data[2] < -self.CHANNEL_TRIG:
-                        self.lifter_cmd = self.LIFTER_RAISE
-                    else:
-                        self.lifter_cmd = self.LIFTER_STOP
-                elif arm_mode == 2:  # Drive until limit switch
-                    # Yaw channel controls grabber
-                    if self.rc_data[3] < -self.CHANNEL_TRIG and not self.switch_go:
-                        self.grabber_cmd = self.GRABBER_OPEN
-                    elif self.rc_data[3] > self.CHANNEL_TRIG and not self.switch_gc:
-                        self.grabber_cmd = self.GRABBER_CLOSE
-
-                    # Throttle channel controls lifter
-                    if self.rc_data[2] > self.CHANNEL_TRIG and not self.switch_lu:
-                        self.lifter_cmd = self.LIFTER_LOWER
-                    elif self.rc_data[2] < -self.CHANNEL_TRIG and not self.switch_ld:
-                        self.lifter_cmd = self.LIFTER_RAISE
+            if self.allow_rc is True and self.armed is True and self.arm_mode != self.ARM_MODE_NONE:
+                if self.arm_mode == self.ARM_MODE_FORCE:  # Force commands
+                    self.grabber_cmd = self.rc_arm_cmd_msg.grabber_cmd
+                    self.lifter_cmd = self.rc_arm_cmd_msg.lifter_cmd
+                elif self.arm_mode == self.ARM_MODE_LIMIT:  # Drive until limit switch
+                    # This or gives ability to get in undefined state which needs rearming to get out
+                    # It's not fixed so it blocks motors from being reversed instantly which is bad for motors
+                    self.grabber_cmd |= self.rc_arm_cmd_msg.grabber_cmd
+                    self.lifter_cmd |= self.rc_arm_cmd_msg.lifter_cmd
 
                     # Stop when limit switch is hit
-                    if self.grabber_cmd == self.GRABBER_OPEN and self.switch_go:
+                    if (self.grabber_cmd == self.GRABBER_OPEN and self.switch_go) or \
+                            (self.grabber_cmd == self.GRABBER_CLOSE and self.switch_gc):
                         self.grabber_cmd = self.GRABBER_STOP
-                    elif self.grabber_cmd == self.GRABBER_CLOSE and self.switch_gc:
-                        self.grabber_cmd = self.GRABBER_STOP
-                    if self.lifter_cmd == self.LIFTER_RAISE and self.switch_lu:
+                    if (self.lifter_cmd == self.LIFTER_RAISE and self.switch_lu) or \
+                            (self.lifter_cmd == self.LIFTER_LOWER and self.switch_ld):
                         self.lifter_cmd = self.LIFTER_STOP
-                    elif self.lifter_cmd == self.LIFTER_LOWER and self.switch_ld:
-                        self.lifter_cmd = self.LIFTER_STOP
-            else:  # No RC control
+            else:  # Fully disarmed no control
+                # Stop the arm
                 self.grabber_cmd = self.GRABBER_STOP
                 self.lifter_cmd = self.LIFTER_STOP
 
-            arm_cmd.grabber_cmd = self.grabber_cmd
-            arm_cmd.lifter_cmd = self.lifter_cmd
+            self.arm_cmd_msg.grabber_cmd = self.grabber_cmd
+            self.arm_cmd_msg.lifter_cmd = self.lifter_cmd
 
-            self.pub_arm.publish(arm_cmd)
+            self.pub_arm.publish(self.arm_cmd_msg)
             rate.sleep()
 
 

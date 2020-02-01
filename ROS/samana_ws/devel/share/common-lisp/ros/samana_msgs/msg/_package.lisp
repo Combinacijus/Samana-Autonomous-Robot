@@ -15,6 +15,8 @@
    "INT16ARRAY"
    "<ODOMETRYSMALL>"
    "ODOMETRYSMALL"
+   "<RCMODES>"
+   "RCMODES"
    "<TELEOP>"
    "TELEOP"
    "<VECTOR3_32>"

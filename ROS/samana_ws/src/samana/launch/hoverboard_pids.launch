@@ -1,0 +1,69 @@
+ <launch>
+    <!--<node name="setpoint" pkg="pid" type="setpoint_node" output="screen"/>-->
+
+    <!--Rqt-->
+    <node name="pos_vel_plot"
+        pkg="rqt_plot"
+        type="rqt_plot"
+        args="
+                /setpoint/data
+                /state/data
+                /right_wheel/state
+                /left_wheel/state
+                /right_wheel/control_effort
+                /left_wheel/control_effort
+             "
+              />
+    
+    <!--Velocity PID-->
+    <node name="controller" pkg="pid" type="controller" ns="vel_pid" output="screen" >
+      <rosparam>
+        node_name: vel_pid_node
+        Kp: 0.01
+        Ki: 0.0001
+        Kd: 0.0
+        upper_limit: 100
+        lower_limit: -100
+        windup_limit: 70
+        topic_from_controller: control_effort_vel
+        topic_from_plant: state_vel
+        setpoint_topic: setpoint_vel
+        max_loop_frequency: 80.0
+        min_loop_frequency: 120.0
+        setpoint_timeout: 0.1
+      </rosparam>
+
+      <remap from="setpoint_vel" to="/setpoint_vel" />
+     </node>
+
+    <!--<node name="servo_sim_node" pkg="pid" type="plant_sim" ns="left_wheel" output="screen" >
+      <param name="plant_order" value="2" />
+    </node>-->
+
+    <!--Yaw PID-->
+    <node name="controller" pkg="pid" type="controller" ns="yaw_pid" output="screen" >
+      <rosparam>
+        node_name: yaw_pid_node
+        Kp: 0.01
+        Ki: 0.0001
+        Kd: 0.0
+        upper_limit: 100
+        lower_limit: -100
+        windup_limit: 70
+        topic_from_controller: control_effort_yaw
+        topic_from_plant: state_yaw
+        setpoint_topic: setpoint_yaw
+        max_loop_frequency: 80.0
+        min_loop_frequency: 120.0
+        angle_error: false
+        angle_wrap: 2.0*3.14159
+        setpoint_timeout: 0.1
+      </rosparam>
+      <remap from="setpoint_yaw" to="/setpoint_yaw" />
+     </node>
+
+    <!--<node name="servo_sim_node" pkg="pid" type="plant_sim" ns="right_wheel" output="screen" >
+      <param name="plant_order" value="2" />
+      <param name="reverse_acting" value="true" />
+    </node>-->
+</launch>

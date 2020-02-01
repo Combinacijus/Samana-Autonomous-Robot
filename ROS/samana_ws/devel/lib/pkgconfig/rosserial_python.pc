@@ -4,5 +4,5 @@ Name: rosserial_python
 Description: Description of rosserial_python
 Version: 0.8.0
 Cflags: 
-Libs: -L/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/lib 
+Libs: -L${prefix}/lib 
 Requires: 

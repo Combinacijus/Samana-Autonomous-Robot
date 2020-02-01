@@ -9,6 +9,7 @@ let Bump = require('./Bump.js');
 let Vector4_32 = require('./Vector4_32.js');
 let ImuSmall = require('./ImuSmall.js');
 let Teleop = require('./Teleop.js');
+let RCModes = require('./RCModes.js');
 let ArmData = require('./ArmData.js');
 let OdometrySmall = require('./OdometrySmall.js');
 
@@ -21,6 +22,7 @@ module.exports = {
   Vector4_32: Vector4_32,
   ImuSmall: ImuSmall,
   Teleop: Teleop,
+  RCModes: RCModes,
   ArmData: ArmData,
   OdometrySmall: OdometrySmall,
 };

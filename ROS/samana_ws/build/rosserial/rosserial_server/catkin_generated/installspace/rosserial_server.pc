@@ -3,6 +3,6 @@ prefix=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install
 Name: rosserial_server
 Description: Description of rosserial_server
 Version: 0.8.0
-Cflags: -I/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/include
-Libs: -L/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install/lib 
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
 Requires: roscpp rosserial_msgs std_msgs topic_tools

@@ -1,0 +1,11 @@
+<launch>
+    <rosparam>
+        /allow_rc: true
+        /armed: false
+        /auton_mode: false
+        x: 2
+    </rosparam>
+
+    <node name="teleop_rc" pkg="samana" type="teleop_rc.py" output="screen" /> 
+
+</launch>

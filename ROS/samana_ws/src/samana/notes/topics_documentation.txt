@@ -1,4 +1,6 @@
-Updated 2020-01-03
+Updated 2020-01-31
+
+NOTE: if /<name> is not described ctrl+F for description
 
 Distance and Bump sensors:
     Arduino:
@@ -39,12 +41,13 @@ Hoverboard controller and Remote receiver:
     Nodes:
         motors_controller.py:
         	Publishes:
-        		/teleop 	int x2		speed and steer commands should be in range of [-1000 .. 1000]
+        		/teleop 	int x2		speed and steer commands should be in range of [-1000 .. 1000] set to hoverboard
         	Subscribes:
-        		/rc
-        		/hov
+        		/rc/modes
+				/rc/teleop
+        		/cmd_vel
         	Notes:
-        		Potentiometer on tx for max speed regulation
+        		Us potentiometer on TX for max_speed regulation
 
 IMU sensor:
 	Arduino:
@@ -63,24 +66,39 @@ IMU sensor:
 
 Arm controller:
 	Arduino:
-        Publishes:
-        	/arm_data		int16 x2, uint8 bits	current of motors and 4 limit switches on/off bits from LS
-        Subscribes:
-        	/arm_cmd
-        Notes:
-        	Stops action if senses overcurrent
-    Nodes:
-        arm_controller.py:
-        	Publishes:
-        		/arm_cmd	int8 x2					for lifter and grabber 0 - stop, 1 - open/raise, 2 - close/lower
-        	Subscribes:
-        		/arm_data
-        		/rc
-        	Notes:
-        		param mode1: force commands
-        		param mode2: drive motor until limit switch
+		Publishes:
+			/arm_data		int16 x2, uint8 bits	current of motors and 4 limit switches on/off bits from LS
+		Subscribes:
+			/arm_cmd
+		Notes:
+			Stops action if senses overcurrent
+	Nodes:
+		arm_controller.py:
+			Publishes:
+				/arm_cmd	int8 x2							for lifter and grabber 0 - stop, 1 - open/raise, 2 - close/lower
+			Subscribes:
+				/arm_data
+				/rc/modes
+				/rc/teleop
+				/rc
+			Notes:
+											param mode1: force commands
+											param mode2: drive motor until limit switch
 
 Text-to-speech engine node:
 	Publishes: None
 	Subscribes:
 		/text_to_speech		std_msgs.String			Whatever published there will be read out loud
+
+
+rc_main.py:
+	Publishes:
+		/rc/modes (latched)			allow_rc, armed, auton_mode 	bool x3, used for global rc modes
+									arm_mode: 0 - none, 1 - force, 2 - limit
+		/rc/teleop (latched)		just like /teleop				teleop from rc, might not be used by controller
+		/rc/arm_cmd (latched)		just like /arm_cmd
+		/text_to_speech
+	Subscribes:
+		/rc
+	Service:
+		/set_allow_rc	SetBool							sets allow_rc project-global variable

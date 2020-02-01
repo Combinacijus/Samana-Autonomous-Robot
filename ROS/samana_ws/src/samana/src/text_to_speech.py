@@ -10,7 +10,7 @@ class TTS:
         self.queue = []  # String lists
         self.reading = False
         self.max_queue_size = 15
-        self.wpm = 220  # NOTE: tunnign
+        self.wpm = 220  # NOTE: tunning
         self.wpm_fast = 330
 
         self.tts = pyttsx3.init()
