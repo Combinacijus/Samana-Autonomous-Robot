@@ -30,3 +30,5 @@ Object recognision:
 
 - YoloV3 training algorithm will automatically re-scale image to sizes between 288 to 488
 
+Full notes at:
+https://docs.google.com/document/d/1WqVWaR66RMRgIv_ah-wefOJhGpMpV45cRNhDmXKyMco/edit#
