@@ -1,0 +1,6 @@
+<launch>
+    <node name="serial_node_rc" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
+        <param name="port" value="/dev/ttyUSB-arduino2"/>
+        <param name="baud" value="115200"/>
+    </node>
+</launch>
