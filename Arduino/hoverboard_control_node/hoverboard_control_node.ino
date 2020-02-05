@@ -6,6 +6,7 @@
     reads radio reciever data and sends it to ROS master
     reads hoverboard debug info and sends it to ROS master
     receives ROS master motor commands and sends to hoverboard
+    recieves ROS master camara servo commands and controls servo
 
   AltSoftSerial always uses these pins: TX 9, RX 8 also D10 PWM is unusable
   
@@ -23,24 +24,32 @@
     RC -> 5V and GND
     RC-SBUS -x (none)
     Logic converter 5V, 3.3V and GND to coresponding ARD
+    SERVO-GND - GND
+    SERVO-5V - 5V
+    SERVO-SIGNAL - D9 (Only D9 works)
 
   Read all "NOTE:" comments for any modifications
 */
 
 #include <AltSoftSerial.h>
 #include <PPMReader.h>
+#include <PWMServo.h>
 #include <ros_motor.h>
 #include <samana_msgs/Int16Array.h>
 #include <samana_msgs/Teleop.h>
+#include <std_msgs/UInt8.h>
 
 #define BAUD_ROS 115200 // Baud rate for communication with ROS master (NOTE: same as in ROS master software)
 #define BAUD_HOV 9600   // Baud rate for hoverboard UART2 communication (NOTE: same as in hoveboard software)
 // 19200, 38400
 
 #define DELAY 20         // Loop delay NOTE: it slows down RC update rate because it's not needed
+#define PIN_SERVO 9      // For camera servo (must be pwm capable pin)
 #define PIN_INTERRUPT 2  // For RC PPM
 #define CHANNEL_COUNT 7  // For RC PPM
 #define HOV_DATA_COUNT 8 // Number of hoverboard debug data points
+#define MIN_SERVO 5      // Min servo value deg
+#define MAX_SERVO 175    // Max servo value deg
 
 #define COMMAND_START 12838 // Arbitrary value signals that next 2 values will be steer and speed 011001000100110
 #define COMMAND_END 3416    // Arbitrary value signals that data ended                            000110101011000
@@ -52,6 +61,8 @@
 
 AltSoftSerial softSerial; // Pins TX9 RX8 hardcoded in library
 PPMReader ppm(PIN_INTERRUPT, CHANNEL_COUNT);
+
+PWMServo servo; // Servo motor mounted to the camera
 
 ros::NodeHandle nh;
 // Hoverboard debug data received via uart
@@ -65,10 +76,15 @@ int16_t rc_data[CHANNEL_COUNT];
 // Teleoperation commands for controlling motors
 void teleopCb(const samana_msgs::Teleop &msg) { sendCommand(msg.steer, msg.speed); }
 ros::Subscriber<samana_msgs::Teleop> teleop_sub("teleop", &teleopCb);
+// Servo control
+void servoCb(const std_msgs::UInt8 &msg) { controlServo(msg.data); }
+ros::Subscriber<std_msgs::UInt8> servo_sub("servo", &servoCb);
 
 void setup()
 {
   softSerial.begin(BAUD_HOV);
+
+  servo.attach(PIN_SERVO);
 
   // ROS serial node setup
   nh.getHardware()->setBaud(BAUD_ROS);
@@ -76,6 +92,7 @@ void setup()
   nh.advertise(hov_pub);
   nh.advertise(rc_pub);
   nh.subscribe(teleop_sub);
+  nh.subscribe(servo_sub);
 
   while (!nh.connected())
     nh.spinOnce();
@@ -92,6 +109,7 @@ void loop()
   publishHovData();
   publishRCData();
   // Motor control is done by subscriber callback function teleopCb()
+  // Servo control is done by subscriber callback function servoCb()
 
   // Serial passthrough test
   // while (softSerial.available())
@@ -230,6 +248,16 @@ void publishRCData()
   rc_msg.data = rc_data;
   rc_pub.publish(&rc_msg);
   nh.spinOnce();
+}
+
+/*
+  Receives commands from ROS topic clamps it
+  And controls servo
+*/
+void controlServo(uint8_t deg)
+{
+  deg = clamp(deg, MIN_SERVO, MAX_SERVO);
+  servo.write(deg);
 }
 
 /*
