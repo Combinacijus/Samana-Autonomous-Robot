@@ -46,6 +46,8 @@ class ServoController:
                 self.servo_msg.data = self.SERVO_POS1
 
             self.servo_pub.publish(self.servo_msg)
+
+            rate.sleep()
     
 
 if __name__ == '__main__':
