@@ -16,6 +16,8 @@ from samana_msgs.msg import Teleop
 from samana_msgs.msg import RCModes
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
+from std_msgs.msg import Float64
+from nav_msgs.msg import Odometry
 
 
 class MotorsController:
@@ -23,8 +25,11 @@ class MotorsController:
         # Constants
         self.MAX_SPEED = rospy.get_param("hoverboard/max_speed", 200)
         self.MAX_STEER = rospy.get_param("hoverboard/max_steer", 150)
-        self.CMD_VEL_TIMEOUT = rospy.Duration(0.3)
+        self.MAX_ACCEL_LIN = rospy.get_param("hoverboard/max_accel_lin", 150)
+        self.MAX_ACCEL_ANG = rospy.get_param("hoverboard/max_accel_ang", 100)
+        self.CMD_VEL_TIMEOUT = rospy.Duration(4)  # TODO Change to 0.3
         self.SWITCH_TRIG = 950  # Trigger value for a switch
+        self.TELEOP_RATE = 40  # Command sending to motor frequency
 
         # Variables for motor control
         self.speed_rc = 0
@@ -42,18 +47,34 @@ class MotorsController:
 
         # Publishers
         self.teleop_pub = rospy.Publisher('teleop', Teleop, queue_size=10)
+        self.setpoint_vel_pub = rospy.Publisher(
+            'vel_pid/setpoint', Float64, queue_size=1)
+        self.state_vel_pub = rospy.Publisher(
+            'vel_pid/state', Float64, queue_size=1)
+        self.setpoint_yaw_pub = rospy.Publisher(
+            'yaw_pid/setpoint', Float64, queue_size=1)
+        self.state_yaw_pub = rospy.Publisher(
+            'yaw_pid/state', Float64, queue_size=1)
         self.pub_audio = rospy.Publisher(
             'text_to_speech', String, queue_size=5)
 
         # Messages
         self.cmd_vel = Twist()
         self.teleop = Teleop()
-        self.rc_teleop = Teleop()  # Placeholder for rc commands
+        self.teleop_prev = Teleop() # Used for measuring change
+        self.rc_teleop = Teleop()
+        self.pid_teleop = Teleop()
+        self.float64 = Float64()
 
         # Subscribers
         rospy.Subscriber("rc/modes", RCModes, self.rc_modes_calback)
         rospy.Subscriber("rc/teleop", Teleop, self.rc_teleop_callback)
         rospy.Subscriber("cmd_vel", Twist, self.cmd_vel_callback)
+        rospy.Subscriber("odom", Odometry, self.odom_callback)
+        rospy.Subscriber("vel_pid/control_effort",
+                         Float64, self.pid_vel_callback)
+        rospy.Subscriber("yaw_pid/control_effort",
+                         Float64, self.pid_yaw_callback)
 
         # Infinite loop
         self.control_motors()
@@ -74,9 +95,36 @@ class MotorsController:
         self.last_rc_teleop_update = rospy.Time()
 
     def cmd_vel_callback(self, cmd_vel):
-        ''' Save cmd_vel to a variable for later use in control funciton'''
+        '''
+            Save cmd_vel to a variable for later use in control funciton
+            Publish velocity and yaw speed for a pid node if auton_mode is true
+        '''
         self.cmd_vel = cmd_vel
         self.last_cmd_vel_update = rospy.Time()
+
+        if self.auton_mode is True:
+            # Velocity setpoint
+            self.float64.data = cmd_vel.linear.x
+            self.setpoint_vel_pub.publish(self.float64)
+
+            # Yaw speed setpoint
+            self.float64.data = cmd_vel.angular.z
+            self.setpoint_yaw_pub.publish(self.float64)
+
+    def odom_callback(self, odom):
+        # State for velocity PID
+        self.float64.data = odom.twist.twist.linear.x
+        self.state_vel_pub.publish(self.float64)
+
+        # State for yaw speed PID
+        self.float64.data = odom.twist.twist.angular.z
+        self.state_yaw_pub.publish(self.float64)
+
+    def pid_vel_callback(self, effort):
+        self.pid_teleop.speed = effort.data * 1000
+
+    def pid_yaw_callback(self, effort):
+        self.pid_teleop.steer = effort.data * 1000
 
     def control_motors(self):
         '''
@@ -85,46 +133,80 @@ class MotorsController:
         Mode Autonomous: Reads data from /cmd_vel
         '''
 
+        def limit_teleop_accel():
+            '''
+                Limits self.teleop speed and steer change in unit/sec^2
+            '''
+            # TODO TEST
+            sign = lambda x: math.copysign(1, x) # sign function
+
+            # Limit linear acceleration
+            max_accel_lin = self.MAX_ACCEL_LIN / self.TELEOP_RATE
+            teleop_accel_lin = self.teleop.speed - self.teleop_prev.speed
+            if abs(teleop_accel_lin) > max_accel_lin: # To fast accel
+                self.teleop.speed = self.teleop_prev.speed + (max_accel_lin * sign(teleop_accel_lin))
+
+            # Limit angular acceleration
+            max_accel_ang = self.MAX_ACCEL_ANG / self.TELEOP_RATE
+            teleop_accel_ang = self.teleop.steer - self.teleop_prev.steer
+            if abs(teleop_accel_ang) > max_accel_ang: # To fast accel
+                self.teleop.steer = self.teleop_prev.steer + (max_accel_ang * sign(teleop_accel_ang))
+
         # In Hz should be atleast 20. Should be as fast as RC input
         # At 50Hz or above sync is lost! (softSerial baud 9600)
         # If faster update rate is needed try higher baud rate for hoverboard serial
-        rate = rospy.Rate(40)  # Recommended 40Hz
-
-        while not rospy.is_shutdown():  # Infinite loop
+        rate = rospy.Rate(self.TELEOP_RATE)  # Recommended 40Hz
+        while not rospy.is_shutdown():  # ---------------------------Infinite loop
             if self.allow_rc is True and self.armed is True:
                 self.teleop = self.rc_teleop
-            elif self.auton_mode is True:  # Autonomous control
+            elif self.auton_mode is True:  # ------------------------Autonomous control
                 # Brief: Executes /cmd_vel commands
                 # Reads /cmd_vel in callback
                 # Uses PID to find apropriate teleop commands
                 # Sets teleop commands
 
-                if rospy.Time.now() - self.last_cmd_vel_update > self.CMD_VEL_TIMEOUT:
-                    # /cmd_vel is stale and should not be used
-                    # rospy.loginfo_throttle(1, "cmd_vel stale!")
+                # Check if /cmd_vel is stale and should not be used
+                # if rospy.Time.now() - self.last_cmd_vel_update > self.CMD_VEL_TIMEOUT: # cmd_vel is stale
+                #     if self.last_cmd_vel_stale is not True: # Audio feedback
+                #         self.pub_audio.publish("Velocity command stale")
+                #     self.last_cmd_vel_stale = True
 
-                    # Audio feedback
-                    if self.last_cmd_vel_stale is not True:
-                        self.pub_audio.publish("Velocity command stale")
-                    self.last_cmd_vel_stale = True
+                #     self.teleop.speed = 0
+                #     self.teleop.steer = 0
+                # else:  # cmd_vel is good
+                #     # ONLY IF AUTON MODE IS TRUE
+                #     # Publish cmd_vel velocity to setpoint topic
+                #     # Sub and Publish state vel to state_vel topic
+                #     # Sub to effort_vel topic
+                #     # Set effort to teleop
 
-                    self.teleop.speed = 0
-                    self.teleop.steer = 0
-                else:  # cmd_vel is good
-                    self.last_cmd_vel_stale = False
-                    self.teleop.speed = self.cmd_vel.linear.x
-                    self.teleop.steer = self.cmd_vel.angular.z
+                #     self.last_cmd_vel_stale = False
 
-            else:  # Fully disarmed no control
+                #     self.teleop.speed = self.pid_teleop.speed
+                #     print('auton')
+                #     print(self.teleop.speed)
+                #     # self.teleop.speed = self.cmd_vel.linear.x
+                #     # self.teleop.steer = self.cmd_vel.angular.z
+
+                self.teleop.speed = self.pid_teleop.speed
+                self.teleop.steer = self.pid_teleop.steer
+                print('auton')
+                print(self.teleop.speed)
+                print(self.teleop.steer)
+
+            else:  # ------------------------------------------------Fully disarmed no control
                 self.teleop.speed = 0
                 self.teleop.steer = 0
+
+            # Limit teleop acceleration linear and angular
+            limit_teleop_accel()
 
             # Global clamp
             self.teleop.speed = self.clamp(
                 self.teleop.speed, -self.MAX_SPEED, self.MAX_SPEED)
             self.teleop.steer = self.clamp(
                 self.teleop.steer, -self.MAX_STEER, self.MAX_STEER)
-            
+
             # Publish teleop to hoverboard
             self.teleop_pub.publish(self.teleop)
 
