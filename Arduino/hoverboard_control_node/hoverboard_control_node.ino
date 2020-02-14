@@ -6,7 +6,11 @@
     reads radio reciever data and sends it to ROS master
     reads hoverboard debug info and sends it to ROS master
     receives ROS master motor commands and sends to hoverboard
-    recieves ROS master camara servo commands and controls servo
+    recieves ROS master camera servo commands and controls servo
+
+  To boot in no ROS mode restart Arduino while pressing button (on pin A2)
+  no ROS mode is good because you can drive hoverboard without computer
+  if no ROS mode is activated builtin LED will be on
 
   AltSoftSerial always uses these pins: TX 9, RX 8 also D10 PWM is unusable
   
@@ -43,13 +47,16 @@
 #define BAUD_HOV 9600   // Baud rate for hoverboard UART2 communication (NOTE: same as in hoveboard software)
 // 19200, 38400
 
-#define DELAY 20         // Loop delay NOTE: it slows down RC update rate because it's not needed
-#define PIN_SERVO 9      // For camera servo (must be pwm capable pin)
-#define PIN_INTERRUPT 2  // For RC PPM
-#define CHANNEL_COUNT 7  // For RC PPM
-#define HOV_DATA_COUNT 8 // Number of hoverboard debug data points
-#define MIN_SERVO 5      // Min servo value deg
-#define MAX_SERVO 175    // Max servo value deg
+#define DELAY 20          // Loop delay NOTE: it slows down RC update rate because it's not needed
+#define PIN_BUTTON A2     // Button to boot in no ROS mode
+#define PIN_SERVO 6       // For camera servo (must be pwm capable pin)
+#define PIN_INTERRUPT 2   // For RC PPM
+#define CHANNEL_COUNT 7   // For RC PPM
+#define HOV_DATA_COUNT 8  // Number of hoverboard debug data points
+#define MIN_SERVO 5       // Min servo value deg
+#define MAX_SERVO 175     // Max servo value deg
+#define SWITCH_TRIG 900   // Value when it considered that switch channel is triggered
+#define SPEED_DEADZONE 20 // Deadzone for hoverboard speed
 
 #define COMMAND_START 12838 // Arbitrary value signals that next 2 values will be steer and speed 011001000100110
 #define COMMAND_END 3416    // Arbitrary value signals that data ended                            000110101011000
@@ -76,47 +83,112 @@ int16_t rc_data[CHANNEL_COUNT];
 // Teleoperation commands for controlling motors
 void teleopCb(const samana_msgs::Teleop &msg) { sendCommand(msg.steer, msg.speed); }
 ros::Subscriber<samana_msgs::Teleop> teleop_sub("teleop", &teleopCb);
+
+bool ros_mode = true; // If true connect to ROS
+
 // Servo control
-void servoCb(const std_msgs::UInt8 &msg) { controlServo(msg.data); }
-ros::Subscriber<std_msgs::UInt8> servo_sub("servo", &servoCb);
+// void servoCb(const std_msgs::UInt8 &msg) { controlServo(msg.data); }
+// ros::Subscriber<std_msgs::UInt8> servo_sub("servo", &servoCb);
 
 void setup()
 {
+  pinMode(PIN_BUTTON, INPUT_PULLUP);
+  pinMode(LED_BUILTIN, OUTPUT);
+  ros_mode = getRosMode();
+  digitalWrite(LED_BUILTIN, !ros_mode);
+
   softSerial.begin(BAUD_HOV);
+  // servo.attach(PIN_SERVO);
 
-  servo.attach(PIN_SERVO);
+  // ros_mode = true;
+  if (ros_mode)
+  {
+    // ROS serial node setup
+    nh.getHardware()->setBaud(BAUD_ROS);
+    nh.initNode();
+    nh.advertise(hov_pub);
+    nh.advertise(rc_pub);
+    nh.subscribe(teleop_sub);
+    // nh.subscribe(servo_sub);
 
-  // ROS serial node setup
-  nh.getHardware()->setBaud(BAUD_ROS);
-  nh.initNode();
-  nh.advertise(hov_pub);
-  nh.advertise(rc_pub);
-  nh.subscribe(teleop_sub);
-  nh.subscribe(servo_sub);
+    while (!nh.connected())
+      nh.spinOnce();
 
-  while (!nh.connected())
-    nh.spinOnce();
-
-  // Standard messages info
-  hov_msg.data_length = HOV_DATA_COUNT;
-  hov_msg.header.frame_id = "base_link";
-  rc_msg.data_length = CHANNEL_COUNT;
-  rc_msg.header.frame_id = "base_link";
+    // Standard messages info
+    hov_msg.data_length = HOV_DATA_COUNT;
+    hov_msg.header.frame_id = "base_link";
+    rc_msg.data_length = CHANNEL_COUNT;
+    rc_msg.header.frame_id = "base_link";
+  }
 }
 
 void loop()
 {
-  publishHovData();
-  publishRCData();
-  // Motor control is done by subscriber callback function teleopCb()
-  // Servo control is done by subscriber callback function servoCb()
+  if (ros_mode)
+  {
+    publishHovData();
+    publishRCData();
+    // Motor control is done by subscriber callback function teleopCb()
+    // Servo control is done by subscriber callback function servoCb()
 
-  // Serial passthrough test
-  // while (softSerial.available())
-  //   Serial.write(softSerial.read());
+    // Serial passthrough test
+    // while (softSerial.available())
+    //   Serial.write(softSerial.read());
 
-  nh.spinOnce();
-  delay(DELAY);
+    nh.spinOnce();
+    delay(DELAY);
+  }
+  else // No ROS mode
+  {
+    static int16_t speed = 0, steer = 0;
+    static bool armed = false;
+    static float power_coef = 0;
+
+    readRC();
+    armed = rc_data[5] >= SWITCH_TRIG; // Switch arm by 2 pos-switch
+
+    if (armed)
+    {
+      power_coef = (rc_data[6] + 1000) / 2000.0; // Knob channel
+      speed = rc_data[1] * power_coef;           // Pitch
+      steer = rc_data[0] * power_coef;           // Roll
+
+      // Add deadzone
+      if (abs(speed) < SPEED_DEADZONE)
+        speed = 0;
+      if (abs(steer) < SPEED_DEADZONE)
+        steer = 0;
+
+      // Clamp values to accepted range
+      speed = clamp(speed, -1000, 1000);
+      steer = clamp(steer, -1000, 1000);
+    }
+    else
+    {
+      speed = 0;
+      steer = 0;
+    }
+
+    sendCommand(steer, speed);
+    delay(DELAY);
+  }
+}
+
+/*
+  Returns false if button is pressed
+  Note that button is pulled-up by default
+*/
+bool getRosMode()
+{
+  bool mode = true;
+
+  delay(50);
+  if (digitalRead(PIN_BUTTON) == HIGH)
+    mode = true;
+  else
+    mode = false;
+
+  return mode;
 }
 
 /*
@@ -191,10 +263,9 @@ void publishHovData()
 }
 
 /*
-  Reads input from remote controller
-  And publishes to ROS
+  Reads input from remote controller to a global rc_data array
 */
-void publishRCData()
+int16_t *readRC()
 {
   static int16_t rc_data_old[CHANNEL_COUNT]; // For checking if RC RX is disconnected
   static int16_t rc_data_same_counter = 0;   // For checking if RC RX is disconnected
@@ -242,7 +313,15 @@ void publishRCData()
     rc_data[0] = rc_data[1] = rc_data[3] = rc_data[4] = rc_data[6] = 0;
     rc_data[2] = rc_data[5] = -1000;
   }
+}
 
+/*
+  Publishes rc input to ROS
+*/
+void publishRCData()
+{
+  readRC();
+  
   // Publish data to ROS
   rc_msg.header.stamp = nh.now();
   rc_msg.data = rc_data;

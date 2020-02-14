@@ -3,4 +3,7 @@
         <param name="port" value="/dev/ttyUSB-arduino2"/>
         <param name="baud" value="115200"/>
     </node>
+
+    <node name="motors_controller" pkg="samana" type="motors_controller.py" output="screen" respawn="true"/>
+    <node name="rc_main" pkg="samana" type="rc_main.py" output="screen" respawn="true"/>
 </launch>

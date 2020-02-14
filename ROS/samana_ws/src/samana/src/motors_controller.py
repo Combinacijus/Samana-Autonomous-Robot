@@ -11,6 +11,7 @@ On failsafe should go to autonomous mode because failsafe values of RX
 '''
 
 import rospy
+import math
 from samana_msgs.msg import Int16Array
 from samana_msgs.msg import Teleop
 from samana_msgs.msg import RCModes
@@ -24,9 +25,9 @@ class MotorsController:
     def __init__(self):
         # Constants
         self.MAX_SPEED = rospy.get_param("hoverboard/max_speed", 200)
-        self.MAX_STEER = rospy.get_param("hoverboard/max_steer", 150)
-        self.MAX_ACCEL_LIN = rospy.get_param("hoverboard/max_accel_lin", 150)
-        self.MAX_ACCEL_ANG = rospy.get_param("hoverboard/max_accel_ang", 100)
+        self.MAX_STEER = rospy.get_param("hoverboard/max_steer", 170)
+        self.MAX_ACCEL_LIN = rospy.get_param("hoverboard/max_accel_lin", 400)
+        self.MAX_ACCEL_ANG = rospy.get_param("hoverboard/max_accel_ang", 400)
         self.CMD_VEL_TIMEOUT = rospy.Duration(4)  # TODO Change to 0.3
         self.SWITCH_TRIG = 950  # Trigger value for a switch
         self.TELEOP_RATE = 40  # Command sending to motor frequency
@@ -133,24 +134,29 @@ class MotorsController:
         Mode Autonomous: Reads data from /cmd_vel
         '''
 
-        def limit_teleop_accel():
+        def limit_accel():
             '''
                 Limits self.teleop speed and steer change in unit/sec^2
             '''
-            # TODO TEST
             sign = lambda x: math.copysign(1, x) # sign function
 
+            print(self.MAX_ACCEL_LIN)
             # Limit linear acceleration
             max_accel_lin = self.MAX_ACCEL_LIN / self.TELEOP_RATE
             teleop_accel_lin = self.teleop.speed - self.teleop_prev.speed
             if abs(teleop_accel_lin) > max_accel_lin: # To fast accel
                 self.teleop.speed = self.teleop_prev.speed + (max_accel_lin * sign(teleop_accel_lin))
+            self.teleop_prev.speed = self.teleop.speed
+
 
             # Limit angular acceleration
             max_accel_ang = self.MAX_ACCEL_ANG / self.TELEOP_RATE
             teleop_accel_ang = self.teleop.steer - self.teleop_prev.steer
             if abs(teleop_accel_ang) > max_accel_ang: # To fast accel
                 self.teleop.steer = self.teleop_prev.steer + (max_accel_ang * sign(teleop_accel_ang))
+            self.teleop_prev.steer = self.teleop.steer
+
+            
 
         # In Hz should be atleast 20. Should be as fast as RC input
         # At 50Hz or above sync is lost! (softSerial baud 9600)
@@ -190,16 +196,13 @@ class MotorsController:
 
                 self.teleop.speed = self.pid_teleop.speed
                 self.teleop.steer = self.pid_teleop.steer
-                print('auton')
-                print(self.teleop.speed)
-                print(self.teleop.steer)
 
+                limit_accel() # Limit acceleration from pid linear and angular
+
+                print('auton %f %f' % (self.teleop.speed, self.teleop.steer))
             else:  # ------------------------------------------------Fully disarmed no control
                 self.teleop.speed = 0
                 self.teleop.steer = 0
-
-            # Limit teleop acceleration linear and angular
-            limit_teleop_accel()
 
             # Global clamp
             self.teleop.speed = self.clamp(

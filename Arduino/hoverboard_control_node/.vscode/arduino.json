@@ -1,7 +1,7 @@
 {
     "board": "arduino:avr:nano",
     "configuration": "cpu=atmega328",
-    "port": "/dev/ttyUSB3",
+    "port": "/dev/ttyUSB0",
     "sketch": "hoverboard_control_node.ino",
     "output": "../ArduinoOutput"
 }
