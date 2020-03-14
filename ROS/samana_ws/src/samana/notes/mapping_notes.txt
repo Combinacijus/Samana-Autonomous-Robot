@@ -1,0 +1,9 @@
+Some maybe usefull tags:
+	base_controller   base_local_planner
+	costmad_2d(odom rolling_window)  map_server
+	range_sensor_layer
+
+
+Static map - .pgm grayscale file with thin walls
+Global map - Inflated static map		|	Used for global planner (high level path)
+Local map  - Generated from senor data uses rolling window  |	Used for local planner (current path)
