@@ -15,7 +15,19 @@ DIR_MODEL = "detection_model-ex-58--loss-1.79.h5"
 DIR_CONFIG = "detection_config.json"
 
 # Find usb webcam
-cap = cv2.VideoCapture(2)
+cap = None
+cap_i = 0
+for i in range(1, 11):
+    try:
+        print(i)
+        cap = cv2.VideoCapture(i)
+        _, frame = cap.read()
+        cv2.imshow("aa", frame)
+        cv2.destroyAllWindows()
+        cap_i = i
+        break
+    except Exception:
+        pass
 
 detector = CustomObjectDetection()
 detector.setModelTypeAsYOLOv3()
@@ -61,7 +73,7 @@ while cv2.waitKey(1) != ord('q'):
     frame_out = cv2.putText(frame_out, debug_str, org, font,
                             fontScale, color, thickness, cv2.LINE_AA)
 
-    # cv2.imshow("Gold bag detector", frame_out)
+    cv2.imshow("Gold bag detector", frame_out)
     # cv2.imwrite("file%d.jpg" % num, frame_out)
 
 cap.release()
