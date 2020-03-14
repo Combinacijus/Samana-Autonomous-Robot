@@ -2,67 +2,176 @@
     Gintaras Grebliunas
     combinacijus@gmail.com
 
-    This script draws bounding box around gold bag and calculates
-    center position of the box
+    Detects gold bag in a video stream, finds bounding box
+    and sends this data via TCP/IP to a server
 
     NOTE: Before use update DIR_MODEL and DIR_CONFIG
 """
 
-from imageai.Detection.Custom import CustomObjectDetection
-import cv2, time
+# from imageai.Detection.Custom import CustomObjectDetection
+# import cv2 as cv
+import time
+import socket
+import pickle
 
-DIR_MODEL = "detection_model-ex-58--loss-1.79.h5"
-DIR_CONFIG = "detection_config.json"
 
-# Find usb webcam
-cap = cv2.VideoCapture(2)
+class Detector:
+    """
+        Handles object detection
+    """
 
-detector = CustomObjectDetection()
-detector.setModelTypeAsYOLOv3()
-detector.setJsonPath(DIR_CONFIG)
-detector.setModelPath(DIR_MODEL)
-detector.loadModel()
+    def __init__(self):
+        # NOTE: Change to update model
+        self.DIR_MODEL = "detection_model-ex-58--loss-1.79.h5"
+        self.DIR_CONFIG = "detection_config.json"
+        self.MIN_PROB = 0.2  # NOTE: Change to sensible value
 
-# cap2 = VideoCapture2(cap_i)
+        # Variables
+        self.num = 1
 
-start_t = time.time()
-num = 1
-while cv2.waitKey(1) != ord('q'):
-    # Timming
-    end_t = time.time()
-    dt = end_t - start_t
-    debug_str = "Frame: %2d   dt:%4f   FPS: %2.3f" % (num, dt, 1 / dt)
-    print(debug_str)
-    start_t = time.time()
-    num += 1
+        self.init_object_detection()
 
-    try:
-        for i in range(7):  # Cleans buffer and reads current frame
-            _, frame = cap.read()  # Get new frame from camera
+    def init_object_detection(self):
+        # Find usb webcam | NOTE: make sure it's working
+        print("Starting video capture...")
+        self.cap = cv.VideoCapture(2)
+        if self.cap is None or not self.cap.isOpened():
+            print("CRITICAL ERROR: CAMERA NOT FOUND!")
+        else:
+            print("Video capture started")
 
-        # detections = detector.detectObjectsFromImage(input_type="array", input_image=frame,
-        #                                              output_image_path="image2new.jpg",
-        #                                              minimum_percentage_probability=50)
-        frame_out, detections = detector.detectObjectsFromImage(input_type="array", input_image=frame,
-                                                                output_type="array", minimum_percentage_probability=1)
-        for det in detections:
-            print(det["name"], " : ", det["percentage_probability"], " : ", det["box_points"])
-    except Exception:
-        num -= 1
-        print("Error in detection. Skipping frame")
-        break
+        print("Initializing object detection model...")
+        self.detector = CustomObjectDetection()
+        self.detector.setModelTypeAsYOLOv3()
+        self.detector.setJsonPath(self.DIR_CONFIG)
+        self.detector.setModelPath(self.DIR_MODEL)
+        self.detector.loadModel()
+        print("Model loaded")
 
-    # Debug text on image
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    org = (5, 20)
-    fontScale = 0.4
-    color = (255, 0, 0)
-    thickness = 1
-    frame_out = cv2.putText(frame_out, debug_str, org, font,
-                            fontScale, color, thickness, cv2.LINE_AA)
+    def detect_objects(self):
+        '''
+            return: ImageAI detection dictionary of highest probability detection
+            or returns None if nothing detected
+        '''
 
-    # cv2.imshow("Gold bag detector", frame_out)
-    # cv2.imwrite("file%d.jpg" % num, frame_out)
+        start_t = time.time()  # Timming
 
-cap.release()
-cv2.destroyAllWindows()
+        try:
+            for i in range(7):  # Cleans buffer and reads current frame
+                _, frame = self.cap.read()  # Get new frame from camera
+
+            # Detect from image
+            frame_out, detections = self.detector.detectObjectsFromImage(
+                input_type="array", input_image=frame, output_type="array", minimum_percentage_probability=self.MIN_PROB)
+
+            # Get highest probability detection
+            best_det = None
+            if detections:
+                best_det = max(detections, key=lambda x: x['percentage_probability'])
+
+            # Print all detections
+            # print("All detections:")
+            # for det in detections:
+            #   self.print_detection(det)
+        except Exception as e:
+            print("ERROR: failed detection. Skipping frame {}".format(self.num))
+            print(e)
+        else:
+            dt = time.time() - start_t  # Timming
+            print("Frame: %2d   dt:%4.4f   FPS: %2.3f" % (self.num, dt, 1 / dt))
+            self.num += 1
+
+        return best_det
+
+    def print_detection(self, d):
+        if d:
+            print(d["name"], " : ", d["percentage_probability"], " : ", d["box_points"])
+        else:
+            print("Not detected")
+
+    def __del__(self):
+        self.cap.release()
+        print("Capture realeased")
+
+
+class TcpClient:
+    """
+        Handles tcp communication with a server
+        Tries to reconnect if disconnected
+    """
+
+    def __init__(self):
+        # Constants
+        self.TCP_IP = '127.0.0.1'
+        self.TCP_PORT = 5005
+        self.BUFFER_SIZE = 256
+
+        self.wait_for_server()
+
+    def wait_for_server(self):
+        """
+            Tries every second to connect to the sever
+        """
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # Main socket
+        connected = False
+        while not connected:  # Try to connect to the server
+            try:
+                self.s.connect((self.TCP_IP, self.TCP_PORT))
+                connected = True
+            except Exception:
+                print("Waiting for server at {}:{}".format(self.TCP_IP, self.TCP_PORT))
+                time.sleep(1)
+            else:
+                print("Connected to the server {}:{}".format(self.TCP_IP, self.TCP_PORT))
+
+    def detection_requested(self):
+        '''
+            return: True if received bool value "True" from the server
+        '''
+        try:
+            data = self.s.recv(self.BUFFER_SIZE)
+
+            if data:
+                data = pickle.loads(data)
+                print("received: {}".format(data))
+
+            if data is True:
+                return True
+            else:
+                return False
+
+        except Exception:
+            print("Server connection lost!")
+            self.wait_for_server()
+            return False
+
+    def send(self, msg):
+        try:
+            self.s.send(msg)
+        except Exception:
+            print("Server connection lost!")
+            self.wait_for_server()
+
+
+if __name__ == "__main__":
+    client = TcpClient() # TODO  CHAAAAAAAAAAAAAAAAAAAAAAANGE--------------------------------------------
+    # detector = Detector()
+    print("Everything working. Responding to requests...")
+
+    while True:  # Respond to detection requests
+        try:
+            if client.detection_requested():
+                # detection = detector.detect_objects()
+                # detector.print_detection(detection)
+
+                # Send data to the server
+                time.sleep(1)
+                detection = "asdasdsa"
+                det_data = pickle.dumps(detection, protocol=2)
+                client.send(det_data)
+            else:  # Detection is not requested. Wait
+                time.sleep(0.01)
+        except Exception:
+            pass  # Hope it won't crash
+
+    print("Program finished.")
