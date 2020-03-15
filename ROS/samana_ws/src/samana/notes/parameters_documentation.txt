@@ -1,6 +1,6 @@
 There is described all ROS parameters which could be change to tune robot
 
-/arm_mode (int)
+/arm_mode (int) (not a parameter)
     0: no move
     1: arm commands will be forced, both swithes up
     2: arm will move until limit or overcurrent switch or disarm, both swithes down
