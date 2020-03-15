@@ -101,4 +101,12 @@ rc_main.py:
 	Subscribes:
 		/rc
 	Service:
-		/set_allow_rc	SetBool							sets allow_rc project-global variable
+		/set_allow_rc				SetBool							sets allow_rc project-global variable
+
+
+object_detection.py:
+	Publishes:
+	Subscribes:
+		via TCP/IP Client			[x1, y1, x2, y2] and other			ImageAI detection dictionary (socket ip in code)
+	Service:
+		/set_debug_image			SetBool								if true object detection most recent image will be save to disk and loaded with image viewer
