@@ -1,0 +1,11 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~enabled" : \b [bool] Whether to apply this plugin or not  min: False, default: True, max: True
+- \b "~cutoff" : \b [double] Smallest value to publish on costmap adjustments min: 1.0, default: 10.0, max: 254.0
+- \b "~amplitude" : \b [double] Amplitude of adjustments at peak min: 0.0, default: 77.0, max: 254.0
+- \b "~covariance" : \b [double] Covariance of adjustments min: 0.0, default: 0.25, max: 5.0
+- \b "~factor" : \b [double] Factor with which to scale the velocity min: 0.0, default: 5.0, max: 20.0
+- \b "~keep_time" : \b [double] Pause before clearing leg list min: 0.0, default: 0.75, max: 2.0
+

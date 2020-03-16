@@ -9,9 +9,10 @@
     <include file="$(find samana)/launch/nav_sat.launch"/>
 
     <!--Mapping and path planning-->
-    <include file="$(find samana)/launch/move_base.launch"/>
+    <!--<include file="$(find samana)/launch/move_base.launch"/>-->
     
 
-    <!--Publish transform from odom to base_link using odometry data-->
-    <node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>
+    <!--Publish transform from odom to base_link using raw odometry data-->
+    <!--Obsolete because ekf_localization_node publishes it's own tf of odemetry-->
+    <!--<node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>-->
 </launch>

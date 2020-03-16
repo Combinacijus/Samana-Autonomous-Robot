@@ -1,0 +1,12 @@
+\subsubsection usage Usage
+\verbatim
+<node name="social_navigation_layers" pkg="social_navigation_layers" type="social_navigation_layers">
+  <param name="enabled" type="bool" value="True" />
+  <param name="cutoff" type="double" value="10.0" />
+  <param name="amplitude" type="double" value="77.0" />
+  <param name="covariance" type="double" value="0.25" />
+  <param name="factor" type="double" value="5.0" />
+  <param name="keep_time" type="double" value="0.75" />
+</node>
+\endverbatim
+

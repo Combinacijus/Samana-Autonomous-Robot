@@ -131,6 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/gtest/cmake_install.cmake")
+  include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/navigation_layers/navigation_layers/cmake_install.cmake")
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial/cmake_install.cmake")
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_arduino/cmake_install.cmake")
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_mbed/cmake_install.cmake")
@@ -149,6 +150,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_windows/cmake_install.cmake")
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rviz_imu_plugin/cmake_install.cmake")
   include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rviz_satellite/cmake_install.cmake")
+  include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/navigation_layers/range_sensor_layer/cmake_install.cmake")
+  include("/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/navigation_layers/social_navigation_layers/cmake_install.cmake")
 
 endif()
 
