@@ -56,18 +56,6 @@ CMAKE_BINARY_DIR = /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -79,27 +67,6 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -135,6 +102,39 @@ test/fast: test
 
 .PHONY : test/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # The main all target
 all: cmake_check_build_system
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/CMakeFiles /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/rosserial/rosserial_msgs/CMakeFiles/progress.marks
@@ -168,199 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-_rosserial_msgs_generate_messages_check_deps_RequestParam: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule
+rosserial_msgs_generate_messages_py: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule
 
-.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestParam
+.PHONY : rosserial_msgs_generate_messages_py
 
 # fast build rule for target.
-_rosserial_msgs_generate_messages_check_deps_RequestParam/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/build
-.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestParam/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule
-
-# Convenience name for target.
-_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule
-
-.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestMessageInfo
-
-# fast build rule for target.
-_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/build
-.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestMessageInfo/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_generate_messages: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule
-
-.PHONY : rosserial_msgs_generate_messages
-
-# fast build rule for target.
-rosserial_msgs_generate_messages/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/build
-.PHONY : rosserial_msgs_generate_messages/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule
-
-# Convenience name for target.
-_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule
-
-.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestServiceInfo
-
-# fast build rule for target.
-_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/build
-.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestServiceInfo/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_generate_messages_lisp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : rosserial_msgs_generate_messages_lisp
-
-# fast build rule for target.
-rosserial_msgs_generate_messages_lisp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/build
-.PHONY : rosserial_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_gencpp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule
-
-.PHONY : rosserial_msgs_gencpp
-
-# fast build rule for target.
-rosserial_msgs_gencpp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/build
-.PHONY : rosserial_msgs_gencpp/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_generate_messages_eus: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosserial_msgs_generate_messages_eus
-
-# fast build rule for target.
-rosserial_msgs_generate_messages_eus/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/build
-.PHONY : rosserial_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_generate_messages_nodejs: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : rosserial_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-rosserial_msgs_generate_messages_nodejs/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosserial_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_generate_messages_cpp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : rosserial_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosserial_msgs_generate_messages_cpp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/build
-.PHONY : rosserial_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_geneus: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule
-
-.PHONY : rosserial_msgs_geneus
-
-# fast build rule for target.
-rosserial_msgs_geneus/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/build
-.PHONY : rosserial_msgs_geneus/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule
-
-# Convenience name for target.
-_rosserial_msgs_generate_messages_check_deps_TopicInfo: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule
-
-.PHONY : _rosserial_msgs_generate_messages_check_deps_TopicInfo
-
-# fast build rule for target.
-_rosserial_msgs_generate_messages_check_deps_TopicInfo/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/build
-.PHONY : _rosserial_msgs_generate_messages_check_deps_TopicInfo/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule
-
-# Convenience name for target.
-rosserial_msgs_genlisp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule
-
-.PHONY : rosserial_msgs_genlisp
-
-# fast build rule for target.
-rosserial_msgs_genlisp/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/build
-.PHONY : rosserial_msgs_genlisp/fast
-
-# Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule
-
-# Convenience name for target.
-_rosserial_msgs_generate_messages_check_deps_Log: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule
-
-.PHONY : _rosserial_msgs_generate_messages_check_deps_Log
-
-# fast build rule for target.
-_rosserial_msgs_generate_messages_check_deps_Log/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/build
-.PHONY : _rosserial_msgs_generate_messages_check_deps_Log/fast
+rosserial_msgs_generate_messages_py/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/build
+.PHONY : rosserial_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gennodejs.dir/rule:
@@ -378,19 +198,19 @@ rosserial_msgs_gennodejs/fast:
 .PHONY : rosserial_msgs_gennodejs/fast
 
 # Convenience name for target.
-rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule
-.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
-rosserial_msgs_generate_messages_py: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/rule
+rosserial_msgs_generate_messages_nodejs: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/rule
 
-.PHONY : rosserial_msgs_generate_messages_py
+.PHONY : rosserial_msgs_generate_messages_nodejs
 
 # fast build rule for target.
-rosserial_msgs_generate_messages_py/fast:
-	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_py.dir/build
-.PHONY : rosserial_msgs_generate_messages_py/fast
+rosserial_msgs_generate_messages_nodejs/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_nodejs.dir/build
+.PHONY : rosserial_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genpy.dir/rule:
@@ -407,35 +227,215 @@ rosserial_msgs_genpy/fast:
 	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genpy.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genpy.dir/build
 .PHONY : rosserial_msgs_genpy/fast
 
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule
+
+# Convenience name for target.
+_rosserial_msgs_generate_messages_check_deps_RequestParam: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/rule
+
+.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestParam
+
+# fast build rule for target.
+_rosserial_msgs_generate_messages_check_deps_RequestParam/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestParam.dir/build
+.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestParam/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+rosserial_msgs_generate_messages_cpp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : rosserial_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosserial_msgs_generate_messages_cpp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_cpp.dir/build
+.PHONY : rosserial_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule
+
+# Convenience name for target.
+rosserial_msgs_gencpp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/rule
+
+.PHONY : rosserial_msgs_gencpp
+
+# fast build rule for target.
+rosserial_msgs_gencpp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_gencpp.dir/build
+.PHONY : rosserial_msgs_gencpp/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule
+
+# Convenience name for target.
+rosserial_msgs_geneus: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/rule
+
+.PHONY : rosserial_msgs_geneus
+
+# fast build rule for target.
+rosserial_msgs_geneus/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_geneus.dir/build
+.PHONY : rosserial_msgs_geneus/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule
+
+# Convenience name for target.
+_rosserial_msgs_generate_messages_check_deps_Log: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/rule
+
+.PHONY : _rosserial_msgs_generate_messages_check_deps_Log
+
+# fast build rule for target.
+_rosserial_msgs_generate_messages_check_deps_Log/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_Log.dir/build
+.PHONY : _rosserial_msgs_generate_messages_check_deps_Log/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule
+
+# Convenience name for target.
+_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/rule
+
+.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestServiceInfo
+
+# fast build rule for target.
+_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestServiceInfo.dir/build
+.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestServiceInfo/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule
+
+# Convenience name for target.
+_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/rule
+
+.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestMessageInfo
+
+# fast build rule for target.
+_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_RequestMessageInfo.dir/build
+.PHONY : _rosserial_msgs_generate_messages_check_deps_RequestMessageInfo/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule
+
+# Convenience name for target.
+_rosserial_msgs_generate_messages_check_deps_TopicInfo: rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/rule
+
+.PHONY : _rosserial_msgs_generate_messages_check_deps_TopicInfo
+
+# fast build rule for target.
+_rosserial_msgs_generate_messages_check_deps_TopicInfo/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/build.make rosserial/rosserial_msgs/CMakeFiles/_rosserial_msgs_generate_messages_check_deps_TopicInfo.dir/build
+.PHONY : _rosserial_msgs_generate_messages_check_deps_TopicInfo/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule
+
+# Convenience name for target.
+rosserial_msgs_generate_messages: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/rule
+
+.PHONY : rosserial_msgs_generate_messages
+
+# fast build rule for target.
+rosserial_msgs_generate_messages/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages.dir/build
+.PHONY : rosserial_msgs_generate_messages/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+rosserial_msgs_generate_messages_eus: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/rule
+
+.PHONY : rosserial_msgs_generate_messages_eus
+
+# fast build rule for target.
+rosserial_msgs_generate_messages_eus/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_eus.dir/build
+.PHONY : rosserial_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule
+
+# Convenience name for target.
+rosserial_msgs_genlisp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/rule
+
+.PHONY : rosserial_msgs_genlisp
+
+# fast build rule for target.
+rosserial_msgs_genlisp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_genlisp.dir/build
+.PHONY : rosserial_msgs_genlisp/fast
+
+# Convenience name for target.
+rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f CMakeFiles/Makefile2 rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule
+.PHONY : rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+rosserial_msgs_generate_messages_lisp: rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : rosserial_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosserial_msgs_generate_messages_lisp/fast:
+	cd /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build && $(MAKE) -f rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/build.make rosserial/rosserial_msgs/CMakeFiles/rosserial_msgs_generate_messages_lisp.dir/build
+.PHONY : rosserial_msgs_generate_messages_lisp/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... rebuild_cache"
-	@echo "... _rosserial_msgs_generate_messages_check_deps_RequestParam"
-	@echo "... _rosserial_msgs_generate_messages_check_deps_RequestMessageInfo"
-	@echo "... list_install_components"
-	@echo "... rosserial_msgs_generate_messages"
 	@echo "... edit_cache"
-	@echo "... _rosserial_msgs_generate_messages_check_deps_RequestServiceInfo"
-	@echo "... rosserial_msgs_generate_messages_lisp"
-	@echo "... rosserial_msgs_gencpp"
-	@echo "... rosserial_msgs_generate_messages_eus"
-	@echo "... rosserial_msgs_generate_messages_nodejs"
-	@echo "... rosserial_msgs_generate_messages_cpp"
-	@echo "... rosserial_msgs_geneus"
-	@echo "... _rosserial_msgs_generate_messages_check_deps_TopicInfo"
-	@echo "... rosserial_msgs_genlisp"
-	@echo "... install"
-	@echo "... _rosserial_msgs_generate_messages_check_deps_Log"
-	@echo "... rosserial_msgs_gennodejs"
-	@echo "... test"
 	@echo "... rosserial_msgs_generate_messages_py"
+	@echo "... install"
+	@echo "... rosserial_msgs_gennodejs"
+	@echo "... rosserial_msgs_generate_messages_nodejs"
 	@echo "... rosserial_msgs_genpy"
+	@echo "... _rosserial_msgs_generate_messages_check_deps_RequestParam"
+	@echo "... test"
+	@echo "... rosserial_msgs_generate_messages_cpp"
+	@echo "... rosserial_msgs_gencpp"
+	@echo "... rosserial_msgs_geneus"
+	@echo "... rebuild_cache"
+	@echo "... _rosserial_msgs_generate_messages_check_deps_Log"
+	@echo "... _rosserial_msgs_generate_messages_check_deps_RequestServiceInfo"
+	@echo "... _rosserial_msgs_generate_messages_check_deps_RequestMessageInfo"
+	@echo "... _rosserial_msgs_generate_messages_check_deps_TopicInfo"
+	@echo "... rosserial_msgs_generate_messages"
+	@echo "... rosserial_msgs_generate_messages_eus"
+	@echo "... install/strip"
+	@echo "... list_install_components"
+	@echo "... rosserial_msgs_genlisp"
+	@echo "... rosserial_msgs_generate_messages_lisp"
 .PHONY : help
 
 

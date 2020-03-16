@@ -1,10 +1,17 @@
 <launch>
+    <!--Data reading and decoding from Arduinos-->
     <include file="$(find samana)/launch/arduino_start.launch"/>
+
+    <!--Rviz visualization for debug-->
     <include file="$(find samana)/launch/rviz_visualization.launch"/>
+
+    <!--Robot localization-->
+    <include file="$(find samana)/launch/nav_sat.launch"/>
+
+    <!--Mapping and path planning-->
+    <include file="$(find samana)/launch/move_base.launch"/>
     
-    <!--Publish odometry transform-->
+
+    <!--Publish transform from odom to base_link using odometry data-->
     <node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>
-   
-    <!--Path from odometry-->
-    <!--<node name="path_odom" pkg="samana" type="odom_to_path.py" output="screen" respawn="true"/>-->
 </launch>

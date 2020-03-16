@@ -7,3 +7,11 @@ Some maybe usefull tags:
 Static map - .pgm grayscale file with thin walls
 Global map - Inflated static map		|	Used for global planner (high level path)
 Local map  - Generated from senor data uses rolling window  |	Used for local planner (current path)
+
+
+Plugins/Layers:
+	Static Map Layer
+	Inflation Layer
+	Range Sensor Layer
+	[Not Needed] Obstacle Map Layer - because it uses lidar
+	[Not Needed] amcl - used for localization using known map and laserscan
