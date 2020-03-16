@@ -140,7 +140,7 @@ class MotorsController:
             '''
             sign = lambda x: math.copysign(1, x) # sign function
 
-            print(self.MAX_ACCEL_LIN)
+            # print(self.MAX_ACCEL_LIN)
             # Limit linear acceleration
             max_accel_lin = self.MAX_ACCEL_LIN / self.TELEOP_RATE
             teleop_accel_lin = self.teleop.speed - self.teleop_prev.speed
@@ -199,7 +199,7 @@ class MotorsController:
 
                 limit_accel() # Limit acceleration from pid linear and angular
 
-                print('auton %f %f' % (self.teleop.speed, self.teleop.steer))
+                # print('auton %f %f' % (self.teleop.speed, self.teleop.steer))
             else:  # ------------------------------------------------Fully disarmed no control
                 self.teleop.speed = 0
                 self.teleop.steer = 0
