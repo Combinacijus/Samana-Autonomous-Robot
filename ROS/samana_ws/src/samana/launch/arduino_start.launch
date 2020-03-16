@@ -38,6 +38,7 @@
     </node>
 
     <!--Distance and bump sensors arduino serial-->
+    <node name="repub_sonar_bump" pkg="samana" type="republish_sonar_bump.py" output="screen" respawn="true"/>
     <node name="serial_node_dist" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
         <param name="port" value="/dev/ttyUSB-arduino$(arg port).4"/>
         <param name="baud" value="$(arg baud)"/>

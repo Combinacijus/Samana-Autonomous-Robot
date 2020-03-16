@@ -34,7 +34,7 @@ def publish_range(index, range):
     range_msg.header.stamp = rospy.Time.now()
     range_msg.range = range
 
-    pub = rospy.Publisher("range_data", Range, queue_size=10)
+    pub = rospy.Publisher("range_data_viz", Range, queue_size=10)
     pub.publish(range_msg)
 
 

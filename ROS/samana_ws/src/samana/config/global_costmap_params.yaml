@@ -3,3 +3,7 @@ global_costmap:
   robot_base_frame: base_link
   update_frequency: 5.0
   static_map: true  # Will use map served by the map_server
+
+  plugins:
+      - {name: static_layer, type: 'costmap_2d::StaticLayer'}
+      - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}

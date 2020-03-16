@@ -5,6 +5,7 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("gtest")
+subdirs("navigation_layers/navigation_layers")
 subdirs("rosserial/rosserial")
 subdirs("rosserial/rosserial_arduino")
 subdirs("rosserial/rosserial_mbed")
@@ -23,3 +24,5 @@ subdirs("rosserial/rosserial_test")
 subdirs("rosserial/rosserial_windows")
 subdirs("rviz_imu_plugin")
 subdirs("rviz_satellite")
+subdirs("navigation_layers/range_sensor_layer")
+subdirs("navigation_layers/social_navigation_layers")

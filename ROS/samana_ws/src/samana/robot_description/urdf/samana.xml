@@ -172,11 +172,11 @@
 	<xacro:ultrasonic prefix="10" offx="0.1" offy="0.07" angle_deg="0"/>
 
 	<!--Bump sensors macro-->
-	<xacro:macro name="bump" params="prefix offx offy">
+	<xacro:macro name="bump" params="prefix offx offy rotz">
     <link name="bump_${prefix}">
         <visual>
             <geometry>
-                <box size="0.01 0.01 0.01"/>
+                <box size="0.02 0.01 0.01"/>
             </geometry>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <material name="bump"/>
@@ -186,27 +186,29 @@
     <joint name="base_to_bump_${prefix}" type="fixed">
         <parent link="base_bump_link"/>
         <child link="bump_${prefix}"/>
-        <origin xyz="${offx} ${offy} ${body_offz}" rpy="0 0 0"/>
+        <origin xyz="${offx} ${offy} ${body_offz}" rpy="0 0 ${rotz}"/>
     </joint>
 	</xacro:macro>
 
 	<!--Bump sensors description-->
-	<xacro:bump prefix="1" offx="0.14" offy="-0.09"/>
-	<xacro:bump prefix="2" offx="0.16" offy="-0.14"/>
-	<!--TODO 3 and 4 mixed?--> <!--TODO fix prefix="8" offx?-->
-	<xacro:bump prefix="4" offx="0.10" offy="-0.22"/>
-	<xacro:bump prefix="3" offx="-0.03" offy="-0.31"/>
-	<xacro:bump prefix="5" offx="-0.19" offy="-0.23"/>
-	<xacro:bump prefix="6" offx="-0.36" offy="-0.22"/>
-	<xacro:bump prefix="7" offx="-0.44" offy="-0.11"/>
-	<xacro:bump prefix="8" offx="-0.48" offy="0.00"/> 
-	<xacro:bump prefix="9" offx="-0.44" offy="0.11"/>
-	<xacro:bump prefix="10" offx="-0.36" offy="0.22"/>
-	<xacro:bump prefix="11" offx="-0.19" offy="0.23"/>
-	<xacro:bump prefix="12" offx="-0.03" offy="0.31"/>
-	<xacro:bump prefix="13" offx="0.10" offy="0.22"/>
-	<xacro:bump prefix="14" offx="0.16" offy="0.14"/>
-	<xacro:bump prefix="15" offx="0.14" offy="0.09"/>
+	<xacro:bump prefix="1" offx="0.14" offy="-0.09" rotz="0.00"/>
+	<xacro:bump prefix="2" offx="0.16" offy="-0.14" rotz="0.00"/>
+	<!--3 and 4 are mixed up in hardware-->
+	<xacro:bump prefix="4" offx="0.10" offy="-0.22" rotz="-0.5"/>
+	<xacro:bump prefix="3" offx="-0.03" offy="-0.31" rotz="-1.57"/>
+	<xacro:bump prefix="5" offx="-0.19" offy="-0.23" rotz="-1.57"/>
+	<xacro:bump prefix="6" offx="-0.36" offy="-0.22" rotz="-1.57"/>
+	<xacro:bump prefix="7" offx="-0.44" offy="-0.11" rotz="-2.35"/>
+
+	<xacro:bump prefix="8" offx="-0.48" offy="0.00" rotz="3.14"/> 
+
+	<xacro:bump prefix="9" offx="-0.44" offy="0.11" rotz="2.35"/>
+	<xacro:bump prefix="10" offx="-0.36" offy="0.22" rotz="1.57"/>
+	<xacro:bump prefix="11" offx="-0.19" offy="0.23" rotz="1.57"/>
+	<xacro:bump prefix="12" offx="-0.03" offy="0.31" rotz="1.57"/>
+	<xacro:bump prefix="13" offx="0.10" offy="0.22" rotz="0.5"/>
+	<xacro:bump prefix="14" offx="0.16" offy="0.14" rotz="0.00"/>
+	<xacro:bump prefix="15" offx="0.14" offy="0.09" rotz="0.00"/>
 
 
 	<!--NOTE: IMU position and orientation tuning-->

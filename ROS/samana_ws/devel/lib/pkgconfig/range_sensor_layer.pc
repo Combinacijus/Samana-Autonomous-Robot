@@ -1,0 +1,8 @@
+prefix=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel
+
+Name: range_sensor_layer
+Description: Description of range_sensor_layer
+Version: 0.5.0
+Cflags: -I/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel/include -I/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/navigation_layers/range_sensor_layer/include
+Libs: -L${prefix}/lib -lrange_sensor_layer
+Requires: angles costmap_2d dynamic_reconfigure geometry_msgs pluginlib roscpp sensor_msgs
