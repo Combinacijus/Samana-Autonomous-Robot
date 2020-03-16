@@ -1,6 +1,7 @@
 <launch>
     <!--NOTE: Please read notes/arduino_ports_notes.txt file to connect Arduinos to correct usb ports-->
 
+    <!--NOTE: Change port is conneting to different usb port-->
     <arg name="port" value="2" />
     <arg name="baud" value="115200" />
 
@@ -29,7 +30,7 @@
 
     <!--Remote control arduino serial and controller-->
     <node name="motors_controller" pkg="samana" type="motors_controller.py" output="screen" respawn="true"/>
-    <include file="$(find samana)/launch/hoverboard_pids.launch"/>
+    <!--<include file="$(find samana)/launch/hoverboard_pids.launch"/>-->
     <node name="rc_main" pkg="samana" type="rc_main.py" output="screen" respawn="true"/>
     <node name="serial_node_rc" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
         <param name="port" value="/dev/ttyUSB-arduino$(arg port).1.3"/>
