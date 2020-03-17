@@ -10,11 +10,14 @@ from samana_msgs.msg import Int16Array
 from samana_msgs.msg import Bump
 import math
 
+SONAR_COUNT = 10
+sonar_hist = [[], ]*SONAR_COUNT
+
 range_sonar_msg = Range()
 range_bump_msg = Range()
-sonar_max_ranges = [0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.5, 0.5]  # NOTE: Found experimentally
-# sonar_max_ranges = [7.7, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.7]  # NOTE: Found experimentally
-bump_counter = 0
+sonar_max_ranges = [0.4] + [0.5,]*8 + [0.4]  # NOTE: Found experimentally
+# sonar_max_ranges = [0.5, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.5]  # NOTE: Found experimentally
+# sonar_max_ranges = [7.7, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.7]  # For testing
 sonar_pub = rospy.Publisher("range_sonar", Range, queue_size=10)
 bump_pub1 = rospy.Publisher("range_bump1", Range, queue_size=10)
 bump_pub2 = rospy.Publisher("range_bump2", Range, queue_size=10)
@@ -25,27 +28,52 @@ def sonar_callback(range_data):
     '''
         Republished received distances array to Range messages
     '''
-    global sonar_pub, range_sonar_msg, sonar_max_ranges
-    for i in range(10):
+    global sonar_pub, range_sonar_msg, sonar_max_ranges, sonar_hist
+    global SONAR_COUNT
+    pub1 = rospy.Publisher("sonar1", Range, queue_size=5)  # TODO: delete
+    for i in range(SONAR_COUNT):
+        # Setup message info
         range_sonar_msg.header.frame_id = "ultrasonic_%d" % (i+1)
         range_sonar_msg.header.stamp = rospy.Time.now()
-        range_sonar_msg.range = range_data.data[i] / 1000.0  # Converted to meters
-        range_sonar_msg.max_range = sonar_max_ranges[i]  # Set each range different
+        range_sonar_msg.max_range = sonar_max_ranges[i]  # Set each max range different
+        dist = range_data.data[i] / 1000.0  # Distance in meters
+        range_sonar_msg.range = dist
+        # If distance more than max set it to max. (For map clearing) doesn't work
+        # if dist > sonar_max_ranges[i] and sonar_max_ranges[i] - dist <= 0.04:
+        #     range_sonar_msg.range = sonar_max_ranges[i]
 
-        sonar_pub.publish(range_sonar_msg)
+        # Filter range data
+
+        # Keep short history of ranges
+        HIST_COUNT = 2  # NOTE: tuning range filter. Sonar range history count. 2 Looks good
+        sonar_hist[i].append(dist)
+        if len(sonar_hist[i]) > HIST_COUNT:
+            sonar_hist[i].pop(0)
+
+        # Outlier filter: all values is history must be similar to the last one
+        # NOTE: tuning range filter. Threshold in meters.
+        # All history values must be is this range compare to latest one
+        RANGE_THRESH = 0.15
+        outlier = False
+        for sh in sonar_hist[i]:
+            # If atleast one reading isn't in range don't send the message
+            if abs(dist - sh) > RANGE_THRESH:
+                outlier = True
+                break
+        
+        if outlier is False:
+            # Reading passed outlier filter
+            sonar_pub.publish(range_sonar_msg)
+        
+        range_sonar_msg.max_range = 10.0
+        pub1.publish(range_sonar_msg)  # TODO: delete pub to debug topic
 
 
 def bump_callback(bump_data):
     '''
         Republishes received bitmask to Range messages of fixed distance ranger
     '''
-    global bump_pub1, bump_pub2, range_bump_msg, bump_counter
-
-    # bump_counter += 1
-    # if bump_counter < 2:
-    #     return
-    # else:
-    #     bump_counter = 0
+    global bump_pub1, bump_pub2, range_bump_msg
 
     BUMP_SENSORS_COUNT = 15
     # Static variable equivalent bin_data_old
@@ -64,10 +92,10 @@ def bump_callback(bump_data):
         r = float("inf")  # +inf - no detection
         if bin_data[i] == '1' and bump_callback.bin_data_old[i] == '1':
             r = float("-inf")  # -inf - detection bumped
-        
+
         # if bin_data[i] == '1':
         #     r = float("-inf")  # -inf - detection bumped
-        
+
         # Publish bump as fixed Range
         range_bump_msg.header.frame_id = "bump_%d" % (i+1)
         range_bump_msg.header.stamp = rospy.Time.now()
