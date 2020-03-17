@@ -1,24 +1,17 @@
-# obstacle_range: 0.3
-# raytrace_range: 0.3
 footprint: [[0.14, -0.0625], [0.09, -0.0625], [0.09, -0.3], [-0.07, -0.3], [-0.07, -0.235], [-0.32, -0.235], [-0.47, 0], [-0.32, 0.235], [-0.07, 0.235], [-0.07, 0.3], [0.09, 0.3], [0.09, 0.0625], [0.14, 0.0625]]
 footprint_padding: 0.01
 # robot_radius: 0.55
-# inflation_radius: 0.4  # TODO: Change if needed
-
-
-
-obstacle_layer:
-  obstacle_range: 1.4  # Look like it does nothing?
-  raytrace_range: 1.2  # Look like it does nothing?
 
 sonar_layer:
   ns: ""
   frame: ultrasound
+  # topics: ["/range_bump1", "/range_bump2"]
+  # topics: ["/range_sonar"]
   topics: ["/range_sonar", "/range_bump1", "/range_bump2"]
-  no_readings_timeout: 1.0
+  no_readings_timeout: 3.0
   clear_threshold: 0.2
-  mark_threshold: 0.80
-  clear_on_max_reading: false  # Won't clear cone if max reading
+  mark_threshold: 0.9
+  clear_on_max_reading: false
 
 inflation_layer:
-  inflation_radius: 0.4
+  inflation_radius: 0.55
