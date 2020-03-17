@@ -10,7 +10,7 @@ class TTS:
         self.queue = []  # String lists
         self.reading = False
         self.max_queue_size = 15
-        self.wpm = 220  # NOTE: tunning
+        self.wpm = 220  # NOTE: tuning
         self.wpm_fast = 330
 
         self.tts = pyttsx3.init()
@@ -61,7 +61,7 @@ class TTS:
                 self.tts.setProperty('rate', self.wpm_fast)
                 self.queue[0] = "pop " + self.queue[0]
 
-            # Make speech faster if queue is fuller # NOTE: tunning
+            # Make speech faster if queue is fuller # NOTE: tuning
             self.tts.setProperty('rate', self.wpm + len(self.queue) * 13)
             
             # Say what is in the queue
