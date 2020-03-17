@@ -7,10 +7,10 @@
 
     <rosparam>
         /init_allow_rc: true
-        /hoverboard/max_speed: 1000
-        /hoverboard/max_steer: 1000
-        hoverboard/max_accel_lin: 400
-        hoverboard/max_accel_ang: 400
+        /hoverboard/max_speed: 100
+        /hoverboard/max_steer: 90
+        /hoverboard/max_accel_lin: 650
+        /hoverboard/max_accel_ang: 550
     </rosparam>
     
     <!--GPS and Odometry sensors arduino serial and republisher-->
