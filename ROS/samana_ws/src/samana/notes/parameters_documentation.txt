@@ -8,8 +8,10 @@ There is described all ROS parameters which could be change to tune robot
 /armed (bool)       arm state set by arm switch
 /auton_mode (bool)  if true robot goes into autonomous mode rc is ignored
 
-/hoverboard/max_speed (int)     max speed command; clamped before sending to hoverboard
-/hoverboard/max_steer (int)     max steer command; clamped before sending to hoverboard
+/hoverboard/max_speed (int)         max speed command; unit/s [0..1000] ;clamped before sending to hoverboard 
+/hoverboard/max_steer (int)         max steer command; unit/s [0..1000] ;clamped before sending to hoverboard
+/hoverboard/max_accel_lin (int)     max speed acceleration; unit/s^2 [0..1000]
+/hoverboard/max_accel_ang (int)     max steer acceleration; unit/s^2 [0..1000]
 
 
 --------------------------NEVER UPDATED IF CHANGED----------------------------------------

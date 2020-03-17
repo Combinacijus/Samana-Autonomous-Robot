@@ -11,4 +11,7 @@ Odometry tuning:
     republish_odom.py - encoders tuning
 
 TextToSpeech:
-    text_to_speech - words per minute tuning
+    text_to_speech.py - words per minute tuning
+
+SonarAndBump:
+    republish_sonar_bump.py - sonar range filter

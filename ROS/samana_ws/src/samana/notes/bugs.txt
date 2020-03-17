@@ -1,8 +1,13 @@
+SOFTWARE:
 ekf_odometry will drift if Arduinos disconnect and after reconnect it will be far away from true position
 sonars detects bag as an obstacle. Fix by reducing max distance (to around 25cm so it wont detect low obstacles) and disabling lower front sonars
 sonars detects low obstacles
 sonars randomly triggers needs some filtering
+after restarting STM32 odometry jumps a bit
+
+HARDWARE:
 STM32 requires reset for odometry to work
+Voltage regulator for lift motor sometimes stops working
 
 
 Fixed:
