@@ -26,7 +26,7 @@ class RCMain:
     def __init__(self):
         self.SWITCH_TRIG = 900  # Trigger value for a switch
         self.CHANNEL_TRIG = 800  # Trigger value for continuous value
-        
+
         # Teleop
         self.MAX_SPEED = 1000
         self.MAX_STEER = 1000
@@ -56,20 +56,23 @@ class RCMain:
         self.arm_mode = self.ARM_MODE_NONE
 
         # Counters for limiting publish rate
-        self.arm_cmd_counter = 0    
+        self.arm_cmd_counter = 0
         self.rc_modes_counter = 0
+
+        # Other
+        self.last_rc_update = rospy.Time()  # Last time msg received from Arduino
+        self.last_rc_stop = False           # Was the last rc msg stop
 
     def init_ros(self):
         rospy.init_node('rc_main')
 
         # Publishers
-        self.pub_audio = rospy.Publisher(
-            'text_to_speech', String, queue_size=5)
+        self.pub_audio = rospy.Publisher('text_to_speech', String, queue_size=5)
         self.modes_pub = rospy.Publisher('/rc/modes', RCModes, queue_size=2, latch=True)
         self.teleop_pub = rospy.Publisher('/rc/teleop', Teleop, queue_size=2, latch=True)
         self.arm_cmd_pub = rospy.Publisher('/rc/arm_cmd', ArmCmd, queue_size=2, latch=True)
 
-        #Messages
+        # Messages
         self.modes_msg = RCModes()
         self.teleop_msg = Teleop()
         self.arm_cmd_msg = ArmCmd()
@@ -80,10 +83,30 @@ class RCMain:
         # Services
         rospy.Service("set_allow_rc", SetBool, self.handle_set_allow_rc)
 
+        # Timers
+        rospy.Timer(rospy.Duration(0.5), self.health_check)
+        print("Timer called")
+
         rospy.spin()
 
     def clamp(self, _val, _min, _max):
         return min(_max, max(_min, _val))
+
+    def health_check(self, _):
+        '''
+            Checks if RC commands aren't too old
+            If it is. It publishes off state to all rc topics 
+            TODO: IMPORTANT: Probably will interfare with auton mode so check before competition
+        '''
+
+        if self.last_rc_stop is not True:
+            if rospy.Time.now() - self.last_rc_update > rospy.Duration(0.05):
+                # Arduino disconnected stop all RC
+                self.publish_teleop_stop()
+                self.publish_rc_modes_disable_all()
+                self.publish_arm_cmd_stop()
+                self.pub_audio.publish("Remote stale disconnected")
+                self.last_rc_stop = True
 
     def rc_modes_publish(self):
         # Setup message
@@ -93,6 +116,15 @@ class RCMain:
         self.modes_msg.arm_mode = self.arm_mode
         # Publish the message
         self.modes_pub.publish(self.modes_msg)
+
+    def publish_rc_modes_disable_all(self):
+        '''
+            Disables all rc_modes and publishes it
+        '''
+        self.armed = False
+        self.auton_mode = False
+        self.arm_mode = self.ARM_MODE_NONE
+        self.rc_modes_publish()
 
     def rc_modes_update(self, rc):
         '''
@@ -108,11 +140,6 @@ class RCMain:
         else:
             return
 
-        def rc_modes_disable_all():
-            self.armed = False
-            self.auton_mode = False
-            self.arm_mode = self.ARM_MODE_NONE
-
         if self.allow_rc is True:
             # -----------------------ARMED MODE--------------------------
             # Switch arm by 2 pos-switch
@@ -126,7 +153,7 @@ class RCMain:
                 self.pub_audio.publish("Disarmed")
 
             # ----------------------AUTONOMOUS MODE----------------------
-            # Check for autonomous mode (conditions are same as failsafe)
+            # NOTE: Check for autonomous mode (conditions are same as failsafe)
             if self.armed is False:
                 # If both 3-pos switches at the middle
                 if abs(rc.data[4]) < 50:
@@ -154,22 +181,22 @@ class RCMain:
                 if self.armed is True:
                     self.pub_audio.publish("Arm mode disabled")
 
+            # -----------------------PUBLISH-----------------------------
+            self.rc_modes_publish()  # Publish RC modes
         else:  # -----------RC not allowed disable all modes-------------
-            rc_modes_disable_all()
+            self.publish_rc_modes_disable_all()  # Publishes inside
 
-        self.rc_modes_publish()  # Publish RC modes
+    def publish_teleop_stop(self):
+        self.teleop_msg.speed = 0
+        self.teleop_msg.steer = 0
+        self.teleop_pub.publish(self.teleop_msg)
 
     def rc_teleop_update(self, rc):
         '''
             Calculates teleop control values from RC input
             And publishes it to /rc/teleop topic if it is allowed
-            When RC is not allow it publishes one message to the topic to stop
+            When RC is not allowed it publishes one message to the topic to stop
         '''
-
-        def publish_teleop_stop():
-            self.teleop_msg.speed = 0
-            self.teleop_msg.steer = 0
-            self.teleop_pub.publish(self.teleop_msg)
 
         # ------------------------Calculating control values------------------------
         if self.allow_rc is True and self.armed is True:
@@ -206,7 +233,12 @@ class RCMain:
             self.teleop_pub.publish(self.teleop_msg)
         elif self.last_teleop_stop is False:  # Publish stop message once
             self.last_teleop_stop = True
-            publish_teleop_stop()
+            self.publish_teleop_stop()
+
+    def publish_arm_cmd_stop(self):
+        self.arm_cmd_msg.grabber_cmd = self.GRABBER_STOP
+        self.arm_cmd_msg.lifter_cmd = self.LIFTER_STOP
+        self.arm_cmd_pub.publish(self.arm_cmd_msg)
 
     def rc_arm_update(self, rc):
         '''
@@ -220,11 +252,6 @@ class RCMain:
             self.arm_cmd_counter = 0
         else:
             return
-
-        def publish_arm_cmd_stop():
-            self.arm_cmd_msg.grabber_cmd = self.GRABBER_STOP
-            self.arm_cmd_msg.lifter_cmd = self.LIFTER_STOP
-            self.arm_cmd_pub.publish(self.arm_cmd_msg)
 
         # ------------------------Calculating control values------------------------
         if self.allow_rc is True and self.armed is True:
@@ -260,7 +287,7 @@ class RCMain:
             self.arm_cmd_pub.publish(self.arm_cmd_msg)
         elif self.last_arm_cmd_stop is False:  # Publish stop message once
             self.last_arm_cmd_stop = True
-            publish_arm_cmd_stop()
+            self.publish_arm_cmd_stop()
 
     def rc_callback(self, rc):
         '''
@@ -272,6 +299,9 @@ class RCMain:
         # rospy.loginfo(rospy.get_caller_id() + "  RC   %s", rc.data)
 
         # ------------------------Check if RC allowed------------------------
+        self.last_rc_update = rospy.Time.now()
+        self.last_rc_stop = False
+
         if self.allow_rc is False:
             return  # Remote control is not allowed return
 
