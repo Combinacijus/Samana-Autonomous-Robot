@@ -61,5 +61,6 @@
 <exec_depend>roscpp</exec_depend>
 <exec_depend>samana_msgs</exec_depend>
 <exec_depend>robot_localization</exec_depend>
+<exec_depend>move_base</exec_depend>
 <exec_depend>costmap_2d</exec_depend>
 </package>
