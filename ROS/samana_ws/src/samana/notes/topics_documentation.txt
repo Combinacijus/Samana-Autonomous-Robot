@@ -33,7 +33,7 @@ GPS and Odometry sensors:
 Hoverboard controller and Remote receiver:
 	Arduino:
         Publishes:
-        	/rc 			int[7]		number in range [-1000 .. 1000] of every channel of the receiver
+        	/rc 			int[7]		47Hz; number in range [-1000 .. 1000] of every channel of the receiver
         	/hov 			int[8]		data from internal hoverboard controller
         	hov.msg: [0: 0, 1: 0, 2: l_pwm(*-1), 3: r_pwm(*-1), 4: bat_calib, 5: bat_voltage*100, 6: temp_calib, 7: temp in C]
         Subscribes:

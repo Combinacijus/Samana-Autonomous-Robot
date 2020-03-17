@@ -4,9 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
         - /Status1
-        - /RobotModel1
         - /TF1/Frames1
         - /MarkerArray1/Namespaces1
         - /Imu1/Axes properties1
@@ -240,10 +238,10 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Alpha: 0.30000001192092896
+    - Alpha: 0.5
       Buffer Length: 10
       Class: rviz/Range
-      Color: 255; 255; 255
+      Color: 138; 226; 52
       Enabled: true
       Name: RangeSonar
       Queue Size: 10
@@ -406,7 +404,7 @@ Visualization Manager:
       Value: true
     - Alpha: 0.699999988079071
       Class: rviz/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: true
       Enabled: true
       Name: MapLocal
@@ -483,12 +481,22 @@ Visualization Manager:
       Topic: /move_base/current_goal
       Unreliable: false
       Value: true
+    - Alpha: 0.20000000298023224
+      Buffer Length: 10
+      Class: rviz/Range
+      Color: 186; 189; 182
+      Enabled: true
+      Name: RangeSonar1DEBUG
+      Queue Size: 10
+      Topic: /sonar1
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
     Fixed Frame: odom
-    Frame Rate: 15
+    Frame Rate: 20
   Name: root
   Tools:
     - Class: rviz/Interact
@@ -511,25 +519,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.113967418670654
+      Distance: 8.556747436523438
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.15719068050384521
-        Y: -0.04924096539616585
-        Z: -0.4165847599506378
+        X: -0.18774187564849854
+        Y: -0.1190934106707573
+        Z: 0.27461016178131104
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
+      Pitch: 1.2697960138320923
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 3.1346435546875
+      Yaw: 3.1846463680267334
     Saved: ~
 Window Geometry:
   Displays:
@@ -547,5 +555,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1327
-  X: 229
-  Y: 1077
+  X: 39
+  Y: 0
