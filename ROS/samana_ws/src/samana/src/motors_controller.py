@@ -86,7 +86,7 @@ class MotorsController:
             self.pid_vel_enable_pub.publish(self.enable_msg)
             self.pid_yaw_enable_pub.publish(self.enable_msg)
 
-        if enable is True: # Enable pids
+        if enable is True:  # Enable pids
             if self.enable_msg.data is not True:
                 self.enable_msg.data = True
                 publish_to_pid_enable()
@@ -115,7 +115,7 @@ class MotorsController:
             Publish velocity and yaw speed setpoint for a pid controller if auton_mode is true
             Save cmd_vel to a variable for later use in control funciton
         '''
-        self.last_cmd_vel_update = rospy.Time()
+        self.last_cmd_vel_update = rospy.Time.now()
         self.cmd_vel = cmd_vel
 
         if self.auton_mode is True:
@@ -206,9 +206,10 @@ class MotorsController:
                     self.enable_pids(True)
 
                 # self.teleop = self.rc_teleop  # Old pure RC control
-                
-                # --------------------------- PID RC CONTROL ---------------------------
 
+                # --------------------------- PID RC CONTROL ---------------------------
+                # Sub and Publish state vel to state_vel topic (in odom_callback())
+                
                 # Velocity setpoint in m/s
                 vel = self.rc_teleop.speed / 1000.0 * 2.0  # Maximum sensible 3.7 m/s
                 self.float64.data = vel
@@ -225,44 +226,40 @@ class MotorsController:
 
                 limit_accel()  # Limit acceleration
 
-            elif self.auton_mode is True:  # ------------------------Autonomous control
-                # Brief: Executes /cmd_vel commands
-                # Reads /cmd_vel in callback
-                # Uses PID to find apropriate teleop commands
-                # Sets teleop commands
-                
-                self.enable_pids(False)  # TODO: delete (now for safety)
-                # self.enable_pids(True)
+            elif self.auton_mode is True:  # ----------- Autonomous control
+                '''
+                    Brief: Executes /cmd_vel commands
+                    Reads /cmd_vel in callback
+                    Uses PID to find apropriate teleop commands
+                    Sets teleop commands
+                '''
+
+                self.enable_pids(True)
                 # Check if /cmd_vel is stale and should not be used
-                # if rospy.Time.now() - self.last_cmd_vel_update > self.CMD_VEL_TIMEOUT: # cmd_vel is stale
-                #     if self.last_cmd_vel_stale is not True: # Audio feedback
-                #         self.pub_audio.publish("Velocity command stale")
-                #     self.last_cmd_vel_stale = True
+                if rospy.Time.now() - self.last_cmd_vel_update > self.CMD_VEL_TIMEOUT:  # cmd_vel is stale
+                    if self.last_cmd_vel_stale is not True:
+                        self.pub_audio.publish("Velocity command stale")  # Audio feedback
+                    self.last_cmd_vel_stale = True
 
-                #     self.teleop.speed = 0
-                #     self.teleop.steer = 0
-                # else:  # cmd_vel is good
-                #     # ONLY IF AUTON MODE IS TRUE
-                #     # Publish cmd_vel velocity to setpoint topic
-                #     # Sub and Publish state vel to state_vel topic
-                #     # Sub to effort_vel topic
-                #     # Set effort to teleop
+                    self.teleop.speed = 0
+                    self.teleop.steer = 0
+                else:  # cmd_vel is good
+                    '''
+                        Do only if auton_mode is True (set inside cmd_vel_callback function)
+                        Publish cmd_vel velocity as setpoint for pid controller (cmd_vel_callback())
+                        Sub and Publish state vel to state_vel topic (odom_callback())
+                        Sub to effort_vel topic (pid_vel_callback())
+                        Set effort to teleop
+                    '''
 
-                #     self.last_cmd_vel_stale = False
-
-                #     self.teleop.speed = self.pid_teleop.speed
-                #     print('auton')
-                #     print(self.teleop.speed)
-                #     # self.teleop.speed = self.cmd_vel.linear.x
-                #     # self.teleop.steer = self.cmd_vel.angular.z
-
-                # self.teleop.speed = self.pid_teleop.speed
-                # self.teleop.steer = self.pid_teleop.steer
+                    self.last_cmd_vel_stale = False
+                    self.teleop.speed = self.pid_teleop.speed
+                    self.teleop.steer = self.pid_teleop.steer
 
                 limit_accel()  # Limit acceleration from pid linear and angular
 
-                # print('auton %f %f' % (self.teleop.speed, self.teleop.steer))
-            else:  # ------------------------------------------------Fully disarmed no control
+                # print('Auton mode: speed: {:2.2f}  steer: {:2.2f}'.format(self.teleop.speed, self.teleop.steer))
+            else:  # ------------------------------------------------ Fully disarmed no control
                 self.teleop.speed = 0
                 self.teleop.steer = 0
                 self.enable_pids(False)

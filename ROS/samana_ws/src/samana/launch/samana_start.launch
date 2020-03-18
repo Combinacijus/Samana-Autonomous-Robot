@@ -9,8 +9,17 @@
     <include file="$(find samana)/launch/nav_sat.launch"/>
 
     <!--Mapping and path planning-->
-    <!--<include file="$(find samana)/launch/move_base.launch"/>-->
+    <include file="$(find samana)/launch/move_base.launch"/>
     
+
+
+    <!--Rqt graph-->
+    <!--<node name="pos_vel_plot" pkg="rqt_plot" type="rqt_plot"
+        args="
+                /sonar1/range
+                /sonar1f/range
+             "
+              />-->
 
     <!--Publish transform from odom to base_link using raw odometry data-->
     <!--Obsolete because ekf_localization_node publishes it's own tf of odemetry-->
