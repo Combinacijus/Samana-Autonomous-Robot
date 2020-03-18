@@ -1,36 +1,40 @@
  <launch>
     <!--Rqt-->
-    <node name="pos_vel_plot"
+    <!--<node name="pos_vel_plot"
         pkg="rqt_plot"
         type="rqt_plot"
         args="
                 /vel_pid/setpoint/data
                 /vel_pid/state/data
                 /vel_pid/control_effort
-                /yaw_pid/setpoint/data
-                /yaw_pid/state/data
-                /yaw_pid/control_effort
-             "
-              />
 
-    <node name="reconfig" pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" />
+             "
+              />-->
+                <!--/yaw_pid/setpoint/data
+                /yaw_pid/state/data
+                /yaw_pid/control_effort-->
+
+    <!--           FOR TUNING              -->
+    <!--Use rqt_multiplot instead. Params at rviz_configs-->
+    <!--<node name="multiplot_graph" pkg="rqt_multiplot" type="rqt_multiplot"/>-->
+    <!--<node name="reconfig" pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" />-->
     
     <!--Velocity PID-->
     <node name="controller" pkg="pid" type="controller" ns="vel_pid" output="screen" >
       <rosparam>
         node_name: vel_pid_node
-        Kp: 0.4
-        Ki: 0.004
-        Kd: 0.004
+        Kp: 0.2
+        Ki: 1.0
+        Kd: 0.00
         upper_limit: 1
         lower_limit: -1
-        windup_limit: 1
+        windup_limit: 0.5
         topic_from_controller: control_effort
         topic_from_plant: state
         setpoint_topic: setpoint
-        max_loop_frequency: 80.0
-        min_loop_frequency: 120.0
-        setpoint_timeout: 4.0
+        max_loop_frequency: 120.0
+        min_loop_frequency: 80.0
+        setpoint_timeout: 0.1
       </rosparam>
      </node>
 
@@ -38,18 +42,20 @@
     <node name="controller" pkg="pid" type="controller" ns="yaw_pid" output="screen" >
       <rosparam>
         node_name: yaw_pid_node
-        Kp: 0.001
-        Ki: 0.00001
-        Kd: 0.0001
+        <!--Tuned with scale factor f=max_vel/max_ang_vel = 0.26-->
+        <!--Taking vel pid tune and multiplying by f. Also tested work well-->
+        Kp: 0.052
+        Ki: 0.26
+        Kd: 0.00
         upper_limit: 1
         lower_limit: -1
-        windup_limit: 1
-        topic_from_controller: control_effort_yaw
-        topic_from_plant: state_yaw
-        setpoint_topic: setpoint_yaw
-        max_loop_frequency: 80.0
-        min_loop_frequency: 120.0
-        setpoint_timeout: 4.0
+        windup_limit: 0.5
+        topic_from_controller: control_effort
+        topic_from_plant: state
+        setpoint_topic: setpoint
+        max_loop_frequency: 120.0
+        min_loop_frequency: 80.0
+        setpoint_timeout: 0.1
       </rosparam>
      </node>
 </launch>

@@ -7,11 +7,20 @@
 
     <rosparam>
         /init_allow_rc: true
-        /hoverboard/max_speed: 100
-        /hoverboard/max_steer: 90
-        /hoverboard/max_accel_lin: 650
-        /hoverboard/max_accel_ang: 550
+        /hoverboard/max_speed: 500
+        /hoverboard/max_steer: 500
+        /hoverboard/max_accel_lin: 2000
+        /hoverboard/max_accel_ang: 4000
     </rosparam>
+
+    <!--Maxed out setting-->
+    <!--<rosparam>
+        /init_allow_rc: true
+        /hoverboard/max_speed: 1000
+        /hoverboard/max_steer: 1000
+        /hoverboard/max_accel_lin: 100000
+        /hoverboard/max_accel_ang: 100000
+    </rosparam>-->
     
     <!--GPS and Odometry sensors arduino serial and republisher-->
     <node name="repub_odom" pkg="samana" type="republish_odom.py" output="screen" respawn="true"/>
@@ -30,7 +39,7 @@
 
     <!--Remote control arduino serial and controller-->
     <node name="motors_controller" pkg="samana" type="motors_controller.py" output="screen" respawn="true"/>
-    <!--<include file="$(find samana)/launch/hoverboard_pids.launch"/>-->
+    <include file="$(find samana)/launch/hoverboard_pids.launch"/>
     <node name="rc_main" pkg="samana" type="rc_main.py" output="screen" respawn="true"/>
     <node name="serial_node_rc" pkg="rosserial_arduino" type="serial_node.py" output="screen" respawn="true">
         <param name="port" value="/dev/ttyUSB-arduino$(arg port).1.3"/>

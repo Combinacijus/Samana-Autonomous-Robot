@@ -68,9 +68,9 @@ class RCMain:
 
         # Publishers
         self.pub_audio = rospy.Publisher('text_to_speech', String, queue_size=5)
-        self.modes_pub = rospy.Publisher('/rc/modes', RCModes, queue_size=2, latch=True)
-        self.teleop_pub = rospy.Publisher('/rc/teleop', Teleop, queue_size=2, latch=True)
-        self.arm_cmd_pub = rospy.Publisher('/rc/arm_cmd', ArmCmd, queue_size=2, latch=True)
+        self.modes_pub = rospy.Publisher('/rc/modes', RCModes, queue_size=1, latch=True)
+        self.teleop_pub = rospy.Publisher('/rc/teleop', Teleop, queue_size=1, latch=True)
+        self.arm_cmd_pub = rospy.Publisher('/rc/arm_cmd', ArmCmd, queue_size=1, latch=True)
 
         # Messages
         self.modes_msg = RCModes()
@@ -100,7 +100,7 @@ class RCMain:
         '''
 
         if self.last_rc_stop is not True:
-            if rospy.Time.now() - self.last_rc_update > rospy.Duration(0.05):
+            if rospy.Time.now() - self.last_rc_update > rospy.Duration(0.1):
                 # Arduino disconnected stop all RC
                 self.publish_teleop_stop()
                 self.publish_rc_modes_disable_all()
@@ -122,7 +122,7 @@ class RCMain:
             Disables all rc_modes and publishes it
         '''
         self.armed = False
-        self.auton_mode = False
+        self.auton_mode = False  # TODO: Change to True because it's critical
         self.arm_mode = self.ARM_MODE_NONE
         self.rc_modes_publish()
 
@@ -203,7 +203,7 @@ class RCMain:
             # RC to speed and steer
             power_coef = (rc.data[6] + 1000) / 2000.0  # Knob channel
             self.speed = rc.data[1] * power_coef  # Pitch
-            self.steer = rc.data[0] * power_coef  # Roll
+            self.steer = -rc.data[0] * power_coef  # Roll | Negative to conform to REP that CCW is positive
 
             # Add deadzone for RC inputs
             if (abs(self.speed) < self.DEADZONE):
@@ -212,10 +212,8 @@ class RCMain:
                 self.steer = 0
 
             # Clamp values to accepted range
-            self.speed = self.clamp(
-                self.speed, -self.MAX_SPEED, self.MAX_SPEED)
-            self.steer = self.clamp(
-                self.steer, -self.MAX_STEER, self.MAX_STEER)
+            self.speed = self.clamp(self.speed, -self.MAX_SPEED, self.MAX_SPEED)
+            self.steer = self.clamp(self.steer, -self.MAX_STEER, self.MAX_STEER)
         else:  # Hoverboard disarmed or RC is not allowed
             self.speed = 0
             self.steer = 0
