@@ -151,7 +151,7 @@ void loop()
     {
       power_coef = (rc_data[6] + 1000) / 2000.0; // Knob channel
       speed = rc_data[1] * power_coef;           // Pitch
-      steer = rc_data[0] * power_coef;           // Roll
+      steer = -rc_data[0] * power_coef;          // Roll 
 
       // Add deadzone
       if (abs(speed) < SPEED_DEADZONE)
@@ -348,8 +348,8 @@ void sendCommand(uint16_t _steer, uint16_t _speed)
   static uint16_t cmd_end = COMMAND_END;
   static uint16_t cmd_rnd = 0;
 
-  // Inverting front direction
-  _speed *= -1;
+  _speed *= -1;  // Inverting front direction
+  _steer *= -1;  // Negative to conform with REP that CCW is positive
 
   cmd_rnd = 1000 + (cmd_rnd % 200); // Generate different value
   ++cmd_rnd;
