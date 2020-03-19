@@ -6,7 +6,39 @@ TrajectoryPlannerROS:
   min_in_place_vel_theta: 0.3
 
   acc_lim_theta: 0.3
-  acc_lim_x: 0.2
-  acc_lim_y: 0.2
+  acc_lim_x: 0.15
+  acc_lim_y: 0.15
 
   holonomic_robot: false
+
+  # occdist_scale: 0.0
+  # path_distance_bias: 
+  # sim_time: 10
+
+  # All parameters (possible bug?):
+  # acc_lim_x: 0.1
+  # acc_lim_y: 0.1
+  # acc_lim_th: 0.3
+  # max_vel_x: 0.3
+  # min_vel_x: 0.1
+  # max_vel_theta: 0.6
+  # min_vel_theta: 0.05
+  # min_in_place_vel_theta: 0.3
+  # sim_time: 1.7
+  # sim_granularity: 0.025
+  # pdist_scale: 0.6
+  # gdist_scale: 0.8
+  # occdist_scale: 0.01
+  # oscillation_reset_dist: 0.05
+  # escape_reset_dist: 0.1
+  # escape_reset_theta: 1.5708
+  # vx_samples: 20
+  # vtheta_samples: 20
+  # heading_lookahead: 0.325
+  # holonomic_robot: false
+  # escape_vel: -0.1
+  # dwa: false
+  # heading_scoring: false
+  # heading_scoring_timestep: 0.1
+  # simple_attractor: true
+  # angular_sim_granularity: 0.025

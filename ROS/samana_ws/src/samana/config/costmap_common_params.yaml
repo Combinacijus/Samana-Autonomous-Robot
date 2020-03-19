@@ -6,12 +6,12 @@ sonar_layer:
   ns: ""
   frame: ultrasound
   # topics: ["/range_bump1", "/range_bump2"]
-  # topics: ["/range_sonar"]
-  topics: ["/range_sonar", "/range_bump1", "/range_bump2"]
-  no_readings_timeout: 300000.0
+  topics: ["/range_sonar"]
+  # topics: ["/range_sonar", "/range_bump1", "/range_bump2"]
+  no_readings_timeout: 9999999.0  # Ignore timeout
   clear_threshold: 0.2
   mark_threshold: 0.9
   clear_on_max_reading: false
 
 inflation_layer:
-  inflation_radius: 0.5
+  inflation_radius: 0.4

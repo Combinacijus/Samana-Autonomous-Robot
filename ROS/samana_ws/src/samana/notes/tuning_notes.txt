@@ -8,7 +8,7 @@ IMU tuning:
     republish_imu.py - imu covariances tuning
 
 Odometry tuning:
-    republish_odom.py - encoders tuning
+    republish_odom.py - encoders and covariance tuning
 
 TextToSpeech:
     text_to_speech.py - words per minute tuning
