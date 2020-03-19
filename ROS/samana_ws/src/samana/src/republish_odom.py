@@ -107,6 +107,14 @@ class OdomRepub:
         # Angular speed
         msg.twist.twist.angular.z = omega
 
+        # Covariance | Make diagonal covariance matrix
+        default_cov = [0.0,]*36
+        for i in range(0, 6):
+            default_cov[i + i*6] = 0.00001  # NOTE: tuning robot localization
+
+        msg.twist.covariance = tuple(default_cov)
+        msg.pose.covariance = tuple(default_cov)
+
         pub = rospy.Publisher("odom", Odometry, queue_size=10)
         pub.publish(msg)
 
