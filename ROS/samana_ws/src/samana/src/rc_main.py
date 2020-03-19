@@ -27,6 +27,8 @@ class RCMain:
         self.SWITCH_TRIG = 900  # Trigger value for a switch
         self.CHANNEL_TRIG = 800  # Trigger value for continuous value
 
+        self.rc_timeout = rospy.Duration(0.1)
+
         # Teleop
         self.MAX_SPEED = 1000
         self.MAX_STEER = 1000
@@ -85,7 +87,6 @@ class RCMain:
 
         # Timers
         rospy.Timer(rospy.Duration(0.5), self.health_check)
-        print("Timer called")
 
         rospy.spin()
 
@@ -97,15 +98,19 @@ class RCMain:
             Checks if RC commands aren't too old
             If it is. It publishes off state to all rc topics 
             TODO: IMPORTANT: Probably will interfare with auton mode so check before competition
+            This will trigger when Arduino controlling hoverboard is disconnected
+            When RX is disconnected Arduino prints error: FAILSAFE! and publishes default rc channel values
+            which supossed to put hoverboard into autonomous mode 
         '''
 
         if self.last_rc_stop is not True:
-            if rospy.Time.now() - self.last_rc_update > rospy.Duration(0.1):
+            if rospy.Time.now() - self.last_rc_update > self.rc_timeout:
                 # Arduino disconnected stop all RC
                 self.publish_teleop_stop()
                 self.publish_rc_modes_disable_all()
                 self.publish_arm_cmd_stop()
-                self.pub_audio.publish("Remote stale disconnected")
+                self.pub_audio.publish("Hoverboard disconnected")
+                print("dt: {}  tout: {}".format(rospy.Time.now() - self.last_rc_update, self.rc_timeout))
                 self.last_rc_stop = True
 
     def rc_modes_publish(self):
@@ -298,6 +303,8 @@ class RCMain:
 
         # ------------------------Check if RC allowed------------------------
         self.last_rc_update = rospy.Time.now()
+        # if self.last_rc_stop is not False:
+        #     self.pub_audio.publish("Hoverboard connected")
         self.last_rc_stop = False
 
         if self.allow_rc is False:
