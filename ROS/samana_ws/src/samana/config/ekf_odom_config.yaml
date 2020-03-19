@@ -1,0 +1,91 @@
+# INPUTS
+odom0: /odom
+imu0: /imu
+
+# imu0: /android/imu/fixed
+# odom0: /odometry/gps
+
+frequency: 50
+sensor_timeout: 999999
+two_d_mode: true
+odom0_queue_size: 40
+imu0_queue_size: 40
+
+map_frame: map
+odom_frame: odom
+base_link_frame: base_link
+world_frame: odom
+
+# *******************************ODOM***********************************
+# odom0_config: [false, false, false,
+#                false, false, false,
+#                true, true, false,
+#                false, false, true,
+#                false, false, false]
+# odom0_differential: false
+
+odom0_config: [true, true, false,
+               false, false, true,
+               false, false, false,
+               false, false, false,
+               false, false, false]
+odom0_differential: true
+
+
+# *******************************IMU***********************************
+imu0_config: [false, false, false,
+              true, true, false,
+              false, false, false,
+              false, false, false,
+              false, false, false]
+imu0_differential: false
+
+# Differiantial is worse than just using velocity directly
+# imu0_config: [false, false, false,
+#              true, true, false,
+#              false, false, false,
+#              true, true, true,
+#              true, true, true]
+#   <imu0_differential: true
+
+imu0_remove_gravitational_acceleration: false
+# yaw_offset: 1.5707963
+
+# Footer
+print_diagnostics: true
+debug: false
+debug_out_file: ~/adroid_files/debug_ekf_localization.txt
+
+# Makes final covariances smaller than with default values but diverges faster from real path(random values)
+# process_noise_covariance: [0.005, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0.005, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0.006, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0.003, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0.003, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0.006, 0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0.0025, 0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0.0025, 0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0.004, 0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0.001, 0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0.001, 0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0.002, 0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0.001, 0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0.001, 0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0.0015]
+
+
+# process_noise_covariance: [0, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0, 0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0, 0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0, 0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0, 0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0, 0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0, 0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0, 0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0, 0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0, 0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0]
