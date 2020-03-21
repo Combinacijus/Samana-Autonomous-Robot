@@ -109,13 +109,7 @@ void setupRoutine()
     connectToBNO055();
 
     // CALIBRATION
-    if (recalibrate)
-    {
-        log_str = F("Recalibrate");
-        strcpy(log_msg, log_str.c_str());
-        nh.logwarn(log_msg);
-    }
-    else
+    if (!recalibrate)
     {
         found_calib = readCalibrationFromEEPROM();
     }
@@ -124,10 +118,19 @@ void setupRoutine()
     // \/ Crystal must be configured after loading calibration
     bno.setExtCrystalUse(true);
 
-    fullyCalibrate();
     if (!found_calib || recalibrate)
+        // Recalibrate IMU
+        log_str = F("Recal IMU");
+        strcpy(log_msg, log_str.c_str());
+        nh.logwarn(log_msg);
+
+        fullyCalibrate();  // Wait till fully calibrated
         saveCalibrationToEEPROM();
 
+    log_str = F("IMU Started");
+    strcpy(log_msg, log_str.c_str());
+    nh.logwarn(log_msg);
+    nh.spinOnce();
     // nh.setSpinTimeout(100); // Reset timeout
 }
 
@@ -256,9 +259,6 @@ bool readCalibrationFromEEPROM()
     }
     else
     {
-        log_str = F("Calib data found");
-        strcpy(log_msg, log_str.c_str());
-        nh.loginfo(log_msg);
         EEPROM.get(EE_ADDRESS + sizeof(long), calibrationData);
 
         bno.setSensorOffsets(calibrationData);
