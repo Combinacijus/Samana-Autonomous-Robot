@@ -79,8 +79,12 @@ def bump_callback(bump_data):
     # Static variable equivalent bin_data_old
     try:
         bump_callback.bin_data_old  # Checks if variable exists
+        bump_callback.bin_prev_posted  # Checks if variable exists
+        bump_callback.last_bump_t  # Checks if variable exists
     except AttributeError:
         bump_callback.bin_data_old = '0' * BUMP_SENSORS_COUNT
+        bump_callback.bin_prev_posted = [0, ] * BUMP_SENSORS_COUNT
+        bump_callback.last_bump_t = [rospy.Time.now(), ] * BUMP_SENSORS_COUNT
         # print("DEFINED")
 
     # Converting int16 to string of len 15
@@ -96,17 +100,23 @@ def bump_callback(bump_data):
         # if bin_data[i] == '1':
         #     r = float("-inf")  # -inf - detection bumped
 
-        # Publish bump as fixed Range
-        range_bump_msg.header.frame_id = "bump_%d" % (i+1)
-        range_bump_msg.header.stamp = rospy.Time.now()
-        range_bump_msg.range = r
+        # If not the same range as previous or forced update
+        if bump_callback.bin_prev_posted[i] != r or rospy.Time.now() - bump_callback.last_bump_t[i] > rospy.Duration(0.4):
+            bump_callback.last_bump_t[i] = rospy.Time.now()
+              
+            # Publish bump as fixed Range
+            range_bump_msg.header.frame_id = "bump_%d" % (i+1)
+            range_bump_msg.header.stamp = rospy.Time.now()
+            range_bump_msg.range = r
 
-        # There's limit of 10 Range messages to display
-        # https://answers.ros.org/question/11701/rviz-message-filter-queue-size/
-        if i <= 7:
-            bump_pub1.publish(range_bump_msg)
-        else:
-            bump_pub2.publish(range_bump_msg)
+            # There's limit of 10 Range messages to display
+            # https://answers.ros.org/question/11701/rviz-message-filter-queue-size/
+            if i <= 7:
+                bump_pub1.publish(range_bump_msg)
+                bump_callback.bin_prev_posted[i] = range_bump_msg.range 
+            else:
+                bump_pub2.publish(range_bump_msg)
+                bump_callback.bin_prev_posted[i] = range_bump_msg.range
 
     # Remember previous bin_data
     bump_callback.bin_data_old = bin_data
