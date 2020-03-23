@@ -31,9 +31,6 @@ class MotorsController:
         self.MAX_STEER = min(1000, rospy.get_param("hoverboard/max_steer", 170))
         self.MAX_ACCEL_LIN = max(0, rospy.get_param("hoverboard/max_accel_lin", 400))
         self.MAX_ACCEL_ANG = max(0, rospy.get_param("hoverboard/max_accel_ang", 400))
-        self.CMD_VEL_TIMEOUT = rospy.Duration(0.15)
-        self.RC_TELEOP_TIMEOUT = rospy.Duration(0.07)
-        self.ODOM_TIMEOUT = rospy.Duration(0.04)
         self.SWITCH_TRIG = 950  # Trigger value for a switch
         self.TELEOP_RATE = 40  # Command sending to motor frequency
 
@@ -43,7 +40,7 @@ class MotorsController:
         self.auton_mode = False  # When True read /cmd_vel and publish it to PID controller
 
         # Is fresh variables
-        self.fresh_cmd_vel = IsFresh(0.15, "Velocity command")
+        self.fresh_cmd_vel = IsFresh(0.20, "Velocity command")
         self.fresh_rc_teleop = IsFresh(0.15, "Remote teleop")
         self.fresh_odom = IsFresh(0.1, "Odometry")
 
@@ -210,7 +207,10 @@ class MotorsController:
             if self.fresh_odom.changed() is True:  # On odom freshes change
                 is_fresh = self.fresh_odom.is_fresh()
                 req = ToggleFilterProcessingRequest(is_fresh)
-                self.toggle_ekf_srv(req)
+                try:
+                    self.toggle_ekf_srv(req)
+                except Exception as e:
+                    rospy.logwarn("Can't toggle ekf node: {}".format(e))
                 self.enable_pids(is_fresh)
 
                 if self.fresh_odom.is_fresh() is False:
