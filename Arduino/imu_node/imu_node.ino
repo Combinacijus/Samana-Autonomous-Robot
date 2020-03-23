@@ -304,7 +304,7 @@ void fullyCalibrate()
         if (isDataStuck(true))
         {
             counter++;
-            if (counter >= 3) // To filter accidental resets
+            if (counter >= 5) // To filter accidental resets
                 reset();
         }
         else
