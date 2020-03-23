@@ -34,7 +34,7 @@ def imu_callback(imu_data):
     imu_msg.angular_velocity.y = imu_data.angular_velocity_z
     imu_msg.angular_velocity.z = imu_data.angular_velocity_y
     # Add covariances NOTE: IMU tuning
-    default_cov = (0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001)
+    default_cov = (0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1)
     imu_msg.orientation_covariance = default_cov
     imu_msg.angular_velocity_covariance = default_cov
     imu_msg.linear_acceleration_covariance = default_cov
@@ -86,7 +86,7 @@ def imu_callback(imu_data):
         # final_transform.transform.translation = pose_transformed.pose.position
 
         br.sendTransform(final_transform)
-
+        
 
 if __name__ == '__main__':
     try:

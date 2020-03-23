@@ -1,14 +1,16 @@
 # INPUTS
 odom0: /odom
 imu0: /imu
+pose0: /initialpose  # For setting initial pose in Rviz
 
 # imu0: /android/imu/fixed
-# odom0: /odometry/gps
+# odom1: /odometry/gps
 
 frequency: 50
 sensor_timeout: 999999
 two_d_mode: true
 odom0_queue_size: 40
+odom0_queue_size: 1
 imu0_queue_size: 40
 
 map_frame: map
@@ -16,7 +18,7 @@ odom_frame: odom
 base_link_frame: base_link
 world_frame: odom
 
-# *******************************ODOM***********************************
+# *******************************ODOM0***********************************
 # odom0_config: [false, false, false,
 #                false, false, false,
 #                true, true, false,
@@ -24,20 +26,23 @@ world_frame: odom
 #                false, false, false]
 # odom0_differential: false
 
-odom0_config: [true, true, false,
-               false, false, true,
-               false, false, false,
-               false, false, false,
-               false, false, false]
+odom0_config: [
+               true, true, false,   # x, y, z
+               false, false, true,  # roll, pitch, yaw
+               false, false, false, # x vel, y vel, z vel
+               false, false, false, # roll vel, pitch vel, yaw vel
+               false, false, false  # x accel, y accel, z accel
+               ] 
 odom0_differential: true
 
-
 # *******************************IMU***********************************
-imu0_config: [false, false, false,
-              true, true, false,
-              false, false, false,
-              false, false, false,
-              false, false, false]
+imu0_config: [
+              false, false, false,  # x, y, z
+              true, true, true,    # roll, pitch, yaw
+              false, false, false,  # x vel, y vel, z vel
+              false, false, true,  # roll vel, pitch vel, yaw vel
+              false, false, false   # x accel, y accel, z accel
+              ]
 imu0_differential: false
 
 # Differiantial is worse than just using velocity directly
@@ -51,10 +56,22 @@ imu0_differential: false
 imu0_remove_gravitational_acceleration: false
 # yaw_offset: 1.5707963
 
-# Footer
+# *******************************POSE0***********************************
+
+pose0_config: [
+               true, true, false,   # x, y, z
+               false, false, true,  # roll, pitch, yaw
+               false, false, false, # x vel, y vel, z vel
+               false, false, false, # roll vel, pitch vel, yaw vel
+               false, false, false  # x accel, y accel, z accel
+               ] 
+pose0_differential: false
+
+
+# *******************************FOOTER***********************************
 print_diagnostics: true
 debug: false
-debug_out_file: ~/adroid_files/debug_ekf_localization.txt
+debug_out_file: ~/ros_debug_logs/debug_ekf_localization.txt
 
 # Makes final covariances smaller than with default values but diverges faster from real path(random values)
 # process_noise_covariance: [0.005, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,

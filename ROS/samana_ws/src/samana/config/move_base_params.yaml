@@ -1,0 +1,24 @@
+planner_frequency: 1.0
+
+# conservative_reset:
+#   reset_distance: 5.55
+#   layer_names: ["sonar_layer", "inflation_layer"]
+
+recovery_behavior_enabled: true
+recovery_behaviors:
+  - name: 'aggressive_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+
+aggressive_reset:
+  reset_distance: 1000.0
+  layer_names: ["sonar_layer"]
+
+
+base_global_planner: "SBPLLatticePlanner"
+
+recovery_behaviors:
+  - name: 'costmap_reset_conservative'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+costmap_reset_conservative:
+  reset_distance: 5.0
+  layer_names: ["sonar_layer"]

@@ -1,17 +1,19 @@
 <launch>
- <!-- Run the map server --> 
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find samana)/maps/test_map_2.yaml"/>
+    <!-- Run the map server --> 
+    <arg name="map_file" value="room_map_clean.yaml"/>
 
- <!--- AMCL Uses laser scan so not applicable--> 
-    <!--<include file="$(find amcl)/examples/amcl_omni.launch" />-->
+<node name="map_server" pkg="map_server" type="map_server" args="$(find samana)/maps/$(arg map_file)"/>
 
-   <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
-    <!--TODO: IMPORTANT MIGHT NEED TO REMAP /odom to /odometry/filtered-->
+    <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
+
+    <param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" />
+    <rosparam file="$(find samana)/config/move_base_params.yaml" command="load" /> 
+
     <rosparam file="$(find samana)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
     <rosparam file="$(find samana)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find samana)/config/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find samana)/config/global_costmap_params.yaml" command="load" /> 
     <rosparam file="$(find samana)/config/base_local_planner_params.yaml" command="load" />
- </node>
+</node>
 
 </launch> 
