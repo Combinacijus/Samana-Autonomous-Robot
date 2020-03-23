@@ -1,5 +1,7 @@
 There is described all ROS parameters which could be change to tune robot
 
+/serial_node_imu/recal      set true when launching imu node to recalibrate IMU (in arduino_start.launch file in args recalibrate_imu)
+
 /arm_mode (int) (not a parameter)
     0: no move
     1: arm commands will be forced, both swithes up
