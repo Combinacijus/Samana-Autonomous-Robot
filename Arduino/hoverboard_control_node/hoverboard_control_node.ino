@@ -15,6 +15,7 @@
   AltSoftSerial always uses these pins: TX 9, RX 8 also D10 PWM is unusable
   
   Note: 5V to 3.3V bidirectional logic converted needed between Arduino and hoverboard
+  Note: Check which radio transmitter stick mode is defined RC_MODEx either Mode 1 or Mode 2
 
   CH1: Roll | CH2: Pitch | CH3: Throtlle | CH4: Yaw
   CH5: Switches | CH6: 2-Pos-Switch | CH7: Knob
@@ -65,6 +66,10 @@
 #define START_CHAR '<'  // Of hoverboard data
 #define END_CHAR '>'    // Of hoverboard data
 #define SPACER_CHAR ':' // Of hoverboard data
+
+// Receiver stick mode selection (comment and uncomment)
+#define RC_MODE1 1
+// #define RC_MODE2 1
 
 AltSoftSerial softSerial; // Pins TX9 RX8 hardcoded in library
 PPMReader ppm(PIN_INTERRUPT, CHANNEL_COUNT);
@@ -150,8 +155,15 @@ void loop()
     if (armed)
     {
       power_coef = (rc_data[6] + 1000) / 2000.0; // Knob channel
-      speed = rc_data[1] * power_coef;           // Pitch
-      steer = -rc_data[0] * power_coef;          // Roll 
+      speed = rc_data[1] * power_coef;           // Pitch / Speed
+      
+      #ifdef RC_MODE1
+        // Mode 1 radio stick configuration
+        steer = -rc_data[3] * power_coef;        // Yaw / Steer
+      #elif defined(RC_MODE2)
+          // Mode 2 radio stick configuration
+          steer = -rc_data[0] * power_coef;      // Roll / Steer
+      #endif
 
       // Add deadzone
       if (abs(speed) < SPEED_DEADZONE)
