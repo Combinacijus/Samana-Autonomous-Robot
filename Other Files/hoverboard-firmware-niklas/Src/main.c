@@ -89,7 +89,7 @@ extern volatile uint32_t timeout; // global variable for timeout
 extern float batteryVoltage;      // global variable for battery voltage
 
 uint32_t inactivity_timeout_counter;
-uint32_t main_loop_counter;
+uint64_t main_loop_counter;
 
 int32_t motor_test_direction = 1;
 
