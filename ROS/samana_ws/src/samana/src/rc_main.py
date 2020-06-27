@@ -24,7 +24,8 @@ from std_srvs.srv import SetBool, SetBoolResponse, SetBoolRequest
 
 class RCMain:
     def __init__(self):
-        self.SWITCH_TRIG = 900  # Trigger value for a switch
+        self.RC_MODE = 1         # Either mode 1 or 2 NOTE: set to the radio transmitter mode
+        self.SWITCH_TRIG = 900   # Trigger value for a switch
         self.CHANNEL_TRIG = 800  # Trigger value for continuous value
 
         self.rc_timeout = rospy.Duration(0.1)
@@ -208,7 +209,12 @@ class RCMain:
             # RC to speed and steer
             power_coef = (rc.data[6] + 1000) / 2000.0  # Knob channel
             self.speed = rc.data[1] * power_coef  # Pitch
-            self.steer = -rc.data[0] * power_coef  # Roll | Negative to conform to REP that CCW is positive
+            if self.RC_MODE == 1:
+                self.steer = -rc.data[3] * power_coef  # Roll | Negative to conform to REP that CCW is positive
+            elif self.RC_MODE == 2:
+                self.steer = -rc.data[0] * power_coef  # Negative to conform to REP that CCW is positive
+            else:
+                rospy.logerr("RADIO TRANSMITTER WRONG MODE SELECTED: {}".format(self.RC_MODE))
 
             # Add deadzone for RC inputs
             if (abs(self.speed) < self.DEADZONE):
@@ -259,12 +265,23 @@ class RCMain:
         # ------------------------Calculating control values------------------------
         if self.allow_rc is True and self.armed is True:
             # Yaw channel controls grabber
-            if rc.data[3] < -self.CHANNEL_TRIG:
-                self.grabber_cmd = self.GRABBER_OPEN
-            elif rc.data[3] > self.CHANNEL_TRIG:
-                self.grabber_cmd = self.GRABBER_CLOSE
+            if self.RC_MODE == 1:
+                if rc.data[0] < -self.CHANNEL_TRIG:
+                    self.grabber_cmd = self.GRABBER_OPEN
+                elif rc.data[0] > self.CHANNEL_TRIG:
+                    self.grabber_cmd = self.GRABBER_CLOSE
+                else:
+                    self.grabber_cmd = self.GRABBER_STOP
+            elif self.RC_MODE == 2:
+                if rc.data[3] < -self.CHANNEL_TRIG:
+                    self.grabber_cmd = self.GRABBER_OPEN
+                elif rc.data[3] > self.CHANNEL_TRIG:
+                    self.grabber_cmd = self.GRABBER_CLOSE
+                else:
+                    self.grabber_cmd = self.GRABBER_STOP
             else:
                 self.grabber_cmd = self.GRABBER_STOP
+                rospy.logerr("RADIO TRANSMITTER WRONG MODE SELECTED: {}".format(self.RC_MODE))
 
             # Throttle channel controls lifter
             if rc.data[2] > self.CHANNEL_TRIG:
@@ -295,6 +312,7 @@ class RCMain:
     def rc_callback(self, rc):
         '''
         Radio controller data callback function
+        Bolow channels in Mode 2:
         CH1: Roll | CH2: Pitch | CH3: Throtlle | CH4: Yaw
         CH5: Switches | CH6: 2-Pos-Switch | CH7: Knob
         CH1 - rc.data[0] etc...
