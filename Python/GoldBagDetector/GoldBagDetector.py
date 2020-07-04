@@ -7,6 +7,11 @@
     
     To run it in docker:
     sudo docker run -it --rm --gpus all --net host --device /dev/video2 -v /home/combinacijus/Documents/SamanaAutonomousRobot/Python/GoldBagDetector/:/notebooks/GoldBagDetector --name imageai combinacijus/imageai:compute3.0
+    cd /notebooks/GoldBagDetector/
+	python GoldBagDetector.py
+	# Run ROS script (TCP/IP server side)
+	# Set laptop to performance mode
+	feh -R 0.7 /home/combinacijus/Documents/SamanaAutonomousRobot/Python/GoldBagDetector/image.jpg  # For image debugging
 
     NOTE: Before use update DIR_MODEL and DIR_CONFIG
 """
@@ -16,6 +21,43 @@ import cv2 as cv
 import time
 import socket
 import pickle
+import queue
+import threading
+
+
+class BufferlessVideoCapture:
+    """
+        Discards all previous frames on other threads
+        So that only most recent frame is available
+    """
+
+    def __init__(self, name):
+        self.cap = cv.VideoCapture(name)
+        self.q = queue.Queue()
+
+        t = threading.Thread(target=self._reader)
+        t.daemon = True
+        t.start()
+
+        # read frames as soon as they are available, keeping only most recent one
+
+    def _reader(self):
+        while True:
+            ret, frame = self.cap.read()
+            if not ret:
+                break
+            if not self.q.empty():
+                try:
+                    self.q.get_nowait()  # discard previous (unprocessed) frame
+                except queue.Empty:
+                    pass
+
+            self.q.put(frame)
+            # print("t: {:.7f}  FRAME".format(time.time()))
+
+    def read(self):
+        # print("t: {:.7f}  READ FRAME".format(time.time()))
+        return self.q.get()
 
 
 class Detector:
@@ -24,7 +66,8 @@ class Detector:
     """
 
     def __init__(self):
-        self.CAM_INDEX = 2  # Change if using different camera
+        # self.CAM_INDEX = 2  # Change if using different camera (webcam: 2, or IP webcam: IP address)
+        self.CAM_INDEX = "http://192.168.8.102:4747/video"
         # NOTE: Change to update model
         self.DIR_MODEL = "detection_model-ex-58--loss-1.79.h5"
         self.DIR_CONFIG = "detection_config.json"
@@ -33,6 +76,8 @@ class Detector:
         # Variables
         self.num = 1
 
+        self.cap = None
+
         self.wait_for_camera()
         self.init_object_detection()
 
@@ -40,8 +85,8 @@ class Detector:
         # Find usb webcam | NOTE: make sure it's working
         while True:
             print("Starting video capture on camera {}...".format(self.CAM_INDEX))
-            self.cap = cv.VideoCapture(self.CAM_INDEX)
-            if self.cap is None or not self.cap.isOpened():
+            self.cap = BufferlessVideoCapture(self.CAM_INDEX)
+            if self.cap is None or not self.cap.cap.isOpened():
                 print("CRITICAL ERROR: CAMERA {} NOT FOUND!".format(self.CAM_INDEX))
                 time.sleep(2)
             else:
@@ -59,20 +104,21 @@ class Detector:
         print("Model loaded")
 
     def detect_objects(self, debug_image=False):
-        '''
+        """
             return: ImageAI detection dictionary of highest probability detection
             or returns None if nothing detected
-        '''
+        """
 
         start_t = time.time()  # Timming
 
         try:
-            for i in range(7):  # Cleans buffer and reads current frame
-                _, frame = self.cap.read()  # Get new frame from camera
+            # for i in range(7):  # Cleans buffer and reads current frame
+            frame = self.cap.read()  # Get new frame from camera
 
             # Detect from image
             frame_out, detections = self.detector.detectObjectsFromImage(
-                input_type="array", input_image=frame, output_type="array", minimum_percentage_probability=self.MIN_PROB)
+                input_type="array", input_image=frame, output_type="array",
+                minimum_percentage_probability=self.MIN_PROB)
 
             # Get highest probability detection
             best_det = None
@@ -109,7 +155,7 @@ class Detector:
             print("Not detected")
 
     def __del__(self):
-        print("Capture realeased")
+        print("Capture released")
 
 
 class TcpClient:
@@ -137,7 +183,7 @@ class TcpClient:
                 self.socket.connect((self.TCP_IP, self.TCP_PORT))
                 connected = True
             except Exception:
-                print("Waiting for server at {}:{}".format(self.TCP_IP, self.TCP_PORT))
+                print("Waiting for TCP/IP server from ROS side at {}:{}".format(self.TCP_IP, self.TCP_PORT))
                 time.sleep(1)
             else:
                 print("Connected to the server {}:{}".format(self.TCP_IP, self.TCP_PORT))
@@ -215,7 +261,8 @@ if __name__ == "__main__":
                 client.wait_for_server()
                 continue
 
-            # Decode data to timeout and debug_image (same as on server side)
+            # Decode data to timeout and
+            # (same as on server side)
             if data >= 1000:
                 debug_image = True
                 timeout = data - 1000
@@ -236,10 +283,10 @@ if __name__ == "__main__":
                 if not timeit.passed(timeout - SLEEP_TIME * 2):
                     det_data = pickle.dumps(detection, protocol=2)
                     client.send(det_data)
-                    print("SENT: in {:4.2f}sec. Data: {}".format(timeit.get_dt(), detection))
+                    print("t: {:.7f} SENT: in {:4.2f}sec.\nData: {}".format(time.time(), timeit.get_dt(), detection))
                 else:  # Timeout
                     print("WARNING: Detection timeout! Detection time: {:.2f}".format(timeit.get_dt()))
-            else:  # Detection is not requested. Wait
+            else:  # Detection is not requested, timeout=0. Wait
                 time.sleep(SLEEP_TIME)
                 if timeit2.passed(2, True):
                     print("Detection is not requested. Waiting...")
