@@ -65,5 +65,14 @@
 <exec_depend>costmap_2d</exec_depend>
 <exec_depend>pid</exec_depend>
 <exec_depend>espeak</exec_depend>
-<exec_depend>nvidia-container-toolkit</exec_depend>
+<exec_depend>joint_state_publisher_gui</exec_depend>
+<exec_depend>map_server</exec_depend>
+<exec_depend>pose_follower</exec_depend>
+
+<!-- Needed but should be installed manually because there no definition is rosdep -->
+<!-- 
+<exec_depend>nvidia-container-toolkit</exec_depend>  
+<exec_depend>ros-melodic-sbpl-lattice-planner</exec_depend>
+<exec_depend>feh</exec_depend>
+-->
 </package>

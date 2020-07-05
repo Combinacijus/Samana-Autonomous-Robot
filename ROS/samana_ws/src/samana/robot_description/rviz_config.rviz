@@ -14,12 +14,11 @@ Panels:
         - /Odom EKF1/Shape1
         - /Odom EKF1/Covariance1
         - /Odom EKF1/Covariance1/Position1
-        - /MapGlobal1
-        - /PathGlobal1
-        - /PathLocal1
-        - /PointCloud21
-      Splitter Ratio: 0.49117645621299744
-    Tree Height: 416
+        - /OdomGlobal1/Shape1
+        - /OdomGPS1/Shape1
+        - /OdomGPS1/Covariance1
+      Splitter Ratio: 0.4579439163208008
+    Tree Height: 484
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -427,5 +426,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1327
-  X: 229
-  Y: 1077
+  X: 39
+  Y: 0
