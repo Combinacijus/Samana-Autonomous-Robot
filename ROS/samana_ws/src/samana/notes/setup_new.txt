@@ -1,0 +1,13 @@
+Dependencies:
+    # Check missing dependencies
+    rosdep check --from-paths ~/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/ --ignore-src
+    # Check all dependencies (only installed?)
+    rospack depends samana
+    # Simulate what dependencies will be installed
+    rosdep install --simulate --from-paths ~/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/ --ignore-src
+    # Install missing dependencies
+    rosdep install --from-paths ~/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/ --ignore-src
+
+USB permissions (connect all Arduinos):
+    # Give usb permissions when connected all Arduinos
+    sudo chmod 0777 /dev/ttyUSB*

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
     ROS Node which reads out loud text send to its a topic
     
@@ -5,7 +6,6 @@
         sudo apt-get install espeak
 """
 
-#!/usr/bin/env python
 import rospy
 from std_msgs.msg import String
 import pyttsx3
