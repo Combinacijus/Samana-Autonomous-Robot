@@ -1,5 +1,0 @@
-# generated from catkin/cmake/template/order_packages.context.py.in
-source_root_dir = "/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src"
-whitelisted_packages = "".split(';') if "" != "" else []
-blacklisted_packages = "".split(';') if "" != "" else []
-underlay_workspaces = "/home/combinacijus/Documents/ROS/learning_tf_ws/devel;/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel;/opt/ros/melodic".split(';') if "/home/combinacijus/Documents/ROS/learning_tf_ws/devel;/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel;/opt/ros/melodic" != "" else []
