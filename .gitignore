@@ -1,3 +1,17 @@
 Arduino/ArduinoOutput/*
 **/CMakeFiles/*
 Python/GoldBagDetector/image.jpg
+
+# Build files
+build/
+devel/
+devel_isolated/
+el/
+el_isolated/
+
+bin/
+lib/
+msg_gen/
+srv_gen/
+*.pyc
+*.cache
