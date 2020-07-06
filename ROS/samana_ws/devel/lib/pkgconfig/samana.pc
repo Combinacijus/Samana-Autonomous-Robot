@@ -1,8 +1,0 @@
-prefix=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/devel
-
-Name: samana
-Description: Description of samana
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: message_runtime

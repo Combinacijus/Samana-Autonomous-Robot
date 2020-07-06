@@ -1,8 +1,0 @@
-prefix=/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/install
-
-Name: rosserial_test
-Description: Description of rosserial_test
-Version: 0.8.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: rosserial_msgs std_msgs

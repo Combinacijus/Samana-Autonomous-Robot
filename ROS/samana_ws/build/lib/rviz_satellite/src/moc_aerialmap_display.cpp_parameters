@@ -1,7 +1,0 @@
--DROS_BUILD_SHARED_LIBS=1
--DROS_BUILD_SHARED_LIBS=1
--DROS_PACKAGE_NAME="rviz_satellite"
--DROSCONSOLE_BACKEND_LOG4CXX
--o
-/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/build/lib/rviz_satellite/src/moc_aerialmap_display.cpp
-/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/lib/rviz_satellite/src/aerialmap_display.h
