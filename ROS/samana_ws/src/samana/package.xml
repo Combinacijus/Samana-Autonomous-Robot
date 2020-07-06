@@ -64,4 +64,6 @@
 <exec_depend>move_base</exec_depend>
 <exec_depend>costmap_2d</exec_depend>
 <exec_depend>pid</exec_depend>
+<exec_depend>espeak</exec_depend>
+<exec_depend>nvidia-container-toolkit</exec_depend>
 </package>

@@ -1,6 +1,12 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+	{
+		"name": "ROS: Launch",
+		"type": "ros",
+		"request": "launch",
+		"target": "absolute path to launch file"
+	},
 		{
 			"name": "C++",
 			"type": "gdb",
@@ -26,7 +32,7 @@
 			"type": "python",
 			"request": "launch",
 			"stopOnEntry": true,
-			"pythonPath": "${config:python.pythonPath}",
+			"pythonPath": "${command:python.interpreterPath}",
 			"program": "${file}",
 			"debugOptions": [
 				"WaitOnAbnormalExit",
