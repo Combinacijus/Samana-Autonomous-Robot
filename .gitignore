@@ -17,3 +17,6 @@ msg_gen/
 srv_gen/
 *.pyc
 *.cache
+
+# PyCharm
+**/*.idea
