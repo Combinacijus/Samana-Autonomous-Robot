@@ -3,9 +3,9 @@ global_costmap:
   robot_base_frame: base_link
   update_frequency: 5.0
   static_map: true  # Will use map served by the map_server
-  publish_frequency: 2.0  # Visualization frequency
+  publish_frequency: 3.0  # Visualization frequency
 
   plugins:
       - {name: static_layer, type: 'costmap_2d::StaticLayer'}
-      - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}
       - {name: sonar_layer,   type: "range_sensor_layer::RangeSensorLayer"}
+      - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}

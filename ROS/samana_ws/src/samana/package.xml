@@ -74,5 +74,6 @@
 <exec_depend>nvidia-container-toolkit</exec_depend>  
 <exec_depend>ros-melodic-sbpl-lattice-planner</exec_depend>
 <exec_depend>feh</exec_depend>
+<exec_depend>pip install easygui</exec_depend>
 -->
 </package>

@@ -69,3 +69,49 @@ class IsFresh:
             return True
 
         return False
+
+
+class BashRunner:
+    """
+        Runs bash command in order.
+        If delay is specified puts command into new thread and sleeps for delay period until executing next command.
+        Example usage:
+        cmd = BashRunner()
+        cmd.add("pwd", delay=3)
+        cmd.add("ls -l")
+        cmd.run()
+    """
+
+    import os
+    import threading
+    import time
+
+    def __init__(self):
+        self.cmd = []
+        self.delay = []
+
+    def add(self, cmd, delay=-1):
+        self.cmd.append(cmd)
+        self.delay.append(delay)
+
+    def run(self):
+        """
+        Runs bash command in order.
+        If delay is specified puts command into new thread and sleeps for delay period until executing next command.
+        """
+        
+        for cmd, delay in zip(self.cmd, self.delay):
+            if delay == -1:
+                print("Run command: {}".format(cmd))
+                self.os.system(cmd)
+            else:
+                self.threading.Thread(target=self.os.system, args=(cmd,)).start()
+                print("Sleep for {} sec".format(delay))
+                self.time.sleep(delay)
+
+    def __str__(self):
+        s = ""
+        for c, d in zip(self.cmd, self.delay):
+            s += "{}  | DELAY={}\n".format(c, d)
+        
+        return s

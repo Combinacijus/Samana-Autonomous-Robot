@@ -2,10 +2,11 @@ Step to setup robot for competition:
 
 Before:
 - Charge laptop and hoverboard fully
-- Check IMU calibration | If required recalibrate
+- Check IMU calibration | If required recalibrate (always calibrate heading)
 - Check if buck converters on 11V can lift the bag 
 
 Right before launch:
+- Make sure that all previous nodes are killed
 - Set allow_rc to False | Check if auton mode is enabled
 - Disconnect RC receiver
 - Check is odometry working | Might need to restart STM32

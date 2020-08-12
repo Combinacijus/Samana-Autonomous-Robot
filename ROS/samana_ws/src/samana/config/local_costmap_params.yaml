@@ -1,16 +1,16 @@
 local_costmap:
   global_frame: odom
   robot_base_frame: base_link
-  update_frequency: 5.0
+  update_frequency: 2.0
   publish_frequency: 2.0  # Visualization frequency
   static_map: false
-  rolling_window: true
-  width: 3.0
-  height: 3.0
+  rolling_window: false
+  width: 10.0
+  height: 10.0
   resolution: 0.025  # Can be different than static map
+  origin_x: -5.0
+  origin_y: -5.0
 
   plugins:
-    - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}
     - {name: sonar_layer,   type: "range_sensor_layer::RangeSensorLayer"}
-
-    
+    - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}

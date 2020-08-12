@@ -6,16 +6,19 @@
 '''
 
 import rospy
-from samana_msgs.msg import OdometrySmall
+from samana_msgs.msg import OdometrySmall, ImuSmall
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Quaternion
 from tf.transformations import quaternion_from_euler
 from std_srvs.srv import Empty, EmptyResponse
+from tf.transformations import euler_from_quaternion
 import math
 
 
 class OdomRepub:
     def __init__(self):
+        self.odom_pitch_correction_coef = 1.0  # How much distance travelled forward differ due to pitch angle
+
         self.reset_odom()
         self.get_params_or_default()
         self.debug = False  # NOTE: set tot true for more debug info
@@ -26,6 +29,7 @@ class OdomRepub:
 
             s = rospy.Service("reset_odom", Empty, self.handle_reset_odom)
             rospy.Subscriber("odom_data", OdometrySmall, self.odom_cb)
+            rospy.Subscriber("imu_data", ImuSmall, self.imu_callback)
             rospy.spin()
         except rospy.ROSInterruptException:
             pass
@@ -90,7 +94,7 @@ class OdomRepub:
         # print("vL: %f, vR %f" %(v_left, v_right))
 
         # Position
-        self.posx += vx * math.cos(self.theta) * dt
+        self.posx += vx * math.cos(self.theta) * dt * self.odom_pitch_correction_coef
         self.posy += vx * math.sin(self.theta) * dt
         msg.pose.pose.position = Point(self.posx, self.posy, 0)  # x - fwd
         # Angle
@@ -101,14 +105,14 @@ class OdomRepub:
         msg.pose.pose.orientation.w = quat[3]
 
         # Linear speed
-        msg.twist.twist.linear.x = vx
+        msg.twist.twist.linear.x = vx * self.odom_pitch_correction_coef
         # msg.twist.twist.linear.y = 0  # Default already zero
 
         # Angular speed
         msg.twist.twist.angular.z = omega
 
         # Covariance | Make diagonal covariance matrix
-        default_cov = [0.0,]*36
+        default_cov = [0.0, ]*36
         for i in range(0, 6):
             default_cov[i + i*6] = 0.00001  # NOTE: tuning robot localization
 
@@ -121,18 +125,38 @@ class OdomRepub:
         if self.debug is True:
             self.calibration_debug_data(odom_data)
 
+    def imu_callback(self, imu_data):
+        MIN_PITCH = 0.025  # In radians when to start correcting
+
+        qx = imu_data.quaternion_x
+        qy = imu_data.quaternion_y
+        qz = imu_data.quaternion_z
+        qw = imu_data.quaternion_w
+        (pitch, roll, yaw) = euler_from_quaternion([qx, qy, qz, qw])  # PRY instead of RPY due to sensor mounting orientation
+
+        if abs(pitch) < 0.03:
+            pitch = 0.00
+
+        self.odom_pitch_correction_coef = math.cos(pitch)
+
+        if self.debug is True:
+            print("correction: {:1.3f} pitch: {:2.3f} roll: {:2.3f} yaw: {:2.3f}".format(self.odom_pitch_correction_coef, pitch, roll, yaw))
+
     def calibration_debug_data(self, od):
+        TICKS_PER_ROTATION = 2400
+
         v_left = od.rps1 / self.rot_per_m_right  # Wheel speed in m/s
         v_right = od.rps2 / self.rot_per_m_left  # Wheel speed in m/s
         omega = v_right - v_left  # Angular speed in rad/s
         self.theta_debug += omega * od.dt / 1000000.0
-        self.rot1 += od.delta_ticks1 / 2400.0
-        self.rot2 += od.delta_ticks2 / 2400.0
-        print("r1: %f, r2: %f, th: %f, thd: %f" % (self.rot1, self.rot2, self.theta * 180 / math.pi, self.theta_debug * 180 / math.pi))
+        self.rot1 += od.delta_ticks1 / TICKS_PER_ROTATION
+        self.rot2 += od.delta_ticks2 / TICKS_PER_ROTATION
+        # print("r1: %f, r2: %f, th: %f, thd: %f" % (self.rot1, self.rot2, self.theta * 180 / math.pi, self.theta_debug * 180 / math.pi))
 
     def handle_reset_odom(self, _):
         self.reset_odom()
         return EmptyResponse()
+
 
 if __name__ == "__main__":
     try:

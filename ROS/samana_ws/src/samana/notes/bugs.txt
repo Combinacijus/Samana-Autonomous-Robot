@@ -1,8 +1,14 @@
+CURRENT IMPORTANT:
+stf_odom static transform from map to odom frame is published by rviz launch file problably needs to move to other file
+
+
 SOFTWARE:
 sonars detects bag as an obstacle. Fix by reducing max distance (to around 25cm so it wont detect low obstacles) and disabling lower front sonars
 sonars detects low obstacles
 after restarting STM32 odometry jumps a bit
 rc Arduino can loose sync and won't recover without powering off (at least with RC on)
+IMU gets biased for no reason. Possible solution to restart IMU.
+Sometimes not all nodes are killed which uses a lot of resources
 
 HARDWARE:
 STM32 requires reset for odometry to work
