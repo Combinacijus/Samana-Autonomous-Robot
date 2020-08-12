@@ -1,10 +1,8 @@
 <launch>
   <arg name="model" default="$(find samana)/robot_description/urdf/samana.xml"/>
-  <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find samana)/robot_description/rviz_config.rviz" />
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
-  <param name="use_gui" value="$(arg gui)"/>
 
   <!--Robot model-->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />

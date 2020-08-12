@@ -1,0 +1,25 @@
+<!--This file is for debuging sonar data algoritms using bag files-->
+<!--To run bag: rosbag play bags/full_room_sonar.bag (dashDash)clock -->
+<launch>
+    <!--To use time from bag which publishes to /clock topic instead of current wall time-->
+    <param name="use_sim_time" value="true" />
+
+    <!--Rviz visualization for sonar debug-->
+    <include file="$(find samana)/launch/rviz_visualization.launch">
+        <arg name="rvizconfig" value="$(find samana)/robot_description/rviz_config_sonar.rviz" />
+    </include>
+
+    <!--Republish filtered sonar and bump data-->
+    <node name="repub_sonar_bump" pkg="samana" type="republish_sonar_bump.py" output="screen" respawn="true"/>
+
+    <!--Mapping and path planning-->
+    <include file="$(find samana)/launch/move_base.launch"/>
+
+    <!--Rqt graph-->
+    <!--<node name="pos_vel_plot" pkg="rqt_plot" type="rqt_plot"
+        args="
+                /sonar1/range
+                /sonar1f/range
+             "
+              />-->
+</launch>

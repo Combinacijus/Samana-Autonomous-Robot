@@ -1,4 +1,4 @@
-Updated 2020-01-31
+Updated 2020-08-07
 
 NOTE: if /<name> is not described ctrl+F for description
 
@@ -9,6 +9,16 @@ Distance and Bump sensors:
             /bump   							uint16      		15 bump sensors on/off in bits from LS
         Subscribes: None
     Nodes:
+        republish_sonar_bump.py:
+        	Publishes:
+				/range_sonar					msg.Range			for localization
+				/range_bump1					msg.Range			first half of bump sensors as range
+				/range_bump2					msg.Range			second half of bump sensors as range
+				/range_sonar_all				msg.Range			for debugging sonar data
+        	Subscribes:
+				/sonar
+				/bump
+        		/imu_calib			...temp 								for temperature to calibrate sonar readings
         visualize_distances.py:
         	Publishes:
         		/range_data 					msg.Range 			range messages for later use in rviz or elsewhere
@@ -26,9 +36,11 @@ GPS and Odometry sensors:
     Nodes:
         republish_odom.py:
         	Publishes:
-        		/odom 	msg.Odometry										standard ROS odometry message
+        		/odom 				msg.Odometry							standard ROS odometry message
         	Subscribes: 
         		/odom_data
+			Service:
+        		/reset_odom			srv.Empty								Sets all odometry (/odom_raw?) values to 0 (on ROS side not on Arduino)
 
 Hoverboard controller and Remote receiver:
 	Arduino:
@@ -52,8 +64,8 @@ Hoverboard controller and Remote receiver:
 IMU sensor:
 	Arduino:
         Publishes:
-        	/imu_data		quat, lin_acc, ang_acc		for all 3 directions, lin_acc in ms, ang_acc in rad/s
-        	/imu_calib		int x4 calib, int8 temp 	calibration data of gyro, acc, mag and system
+        	/imu_data		quat, lin_acc, ang_acc		for all 3 directions, lin_acc in ms, ang_acc in rad/s. Assumed temp 20C
+        	/imu_calib		int x4 calib, int8 temp 	calibration data of gyro, acc, mag and system, internal temp not ambient
         Subscribes: None
         Service:
         	/reset			srv.Empty					(never used) it should restart Arduino by triggering rst pin itself

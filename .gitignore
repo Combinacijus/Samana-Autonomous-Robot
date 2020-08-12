@@ -1,5 +1,8 @@
+# Other
 Arduino/ArduinoOutput/*
 **/CMakeFiles/*
+
+# Goldbag images
 Python/GoldBagDetector/image.jpg
 Python/GoldBagDetector/latest_detection_debug.jpg
 Python/GoldBagDetector/training-images
@@ -20,3 +23,14 @@ srv_gen/
 
 # PyCharm
 **/*.idea
+
+# Jupyter
+**/*.ipynb_checkpoints
+*.csv
+!**/data/*.csv
+
+# Bag files
+**/*.bag
+
+# Maps
+ROS/samana_ws/src/samana/maps/room_map2.*

@@ -1,4 +1,9 @@
 <launch>
+    <param name="use_sim_time" value="false" />
+
+    <!--Killing all nodes from previuos session just to make sure-->
+    <node name="kill_all_nodes" pkg="samana" type="kill_all_nodes.py" output="screen"/>
+
     <!--Data reading and decoding from Arduinos-->
     <include file="$(find samana)/launch/arduino_start.launch"/>
 
@@ -11,6 +16,9 @@
     <!--Mapping and path planning-->
     <include file="$(find samana)/launch/move_base.launch"/>
     
+
+    <!--Helper scripts-->
+    <!--<node name="helper_cmd_gui" pkg="samana" type="helper_cmd_gui.py"/>-->
 
 
     <!--Rqt graph-->

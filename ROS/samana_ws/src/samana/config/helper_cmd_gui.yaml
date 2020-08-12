@@ -1,0 +1,18 @@
+- rosservice call /move_base/clear_costmaps "{}"
+- "rosservice call /move_base/clear_costmaps \"{}\"; rosservice call /reset_odom \"\
+  {}\"; rosservice call /set_pose \"pose:\n  header:\n    seq: 0\n    stamp:\n   \
+  \   secs: 0\n      nsecs: 0\n    frame_id: ''\n  pose:\n    pose:\n      position:\
+  \ {x: 0.0, y: 0.0, z: 0.0}\n      orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}\n\
+  \    covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,\n\
+  \      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,\
+  \ 0.0,\n      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]\""
+- rosrun map_server map_saver --occ 100 --free 10 -f `rospack find samana`/maps/map_tmp
+  map:=/move_base/local_costmap/costmap
+- '--------'
+- rosrun samana helper_bag_to_map.py
+- rosrun samana helper_bag_filter_sonar_bump.py
+- '--------'
+- rosbag play room_map_3_sonar.bag --clock -r 5
+- rosbag record bump sonar /tf /tf_static
+- rosservice call /move_base/clear_costmaps "{}"; rosbag play --clock -r 4 `rospack
+  find samana`/../../bags/room_4_lside_sonar.bag
