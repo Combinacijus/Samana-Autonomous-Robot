@@ -53,14 +53,11 @@ def sonar_callback(range_data):
     """
         Republishes filtered received distances array to Range messages
     """
-    # global sonar_pub, sonar_pub_all, range_sonar_msg, sonar_max_ranges, sonar_hist
-    # global SONAR_COUNT TODO delete
-
     time_now = rospy.Time.now() - rospy.Time(0.04)  # 1 / 24Hz
     for i in range(SONAR_COUNT):
         # Setup message info
         range_sonar_msg.header.frame_id = "ultrasonic_%d" % (i + 1)
-        range_sonar_msg.header.stamp = time_now
+        range_sonar_msg.header.stamp = range_data.header.stamp
         range_sonar_msg.max_range = sonar_max_ranges[i]  # Set each max range different
         dist = range_data.data[i] / 1000.0 * temp_correction_coef  # Distance in meters corrected for temperature
         range_sonar_msg.range = dist
@@ -69,9 +66,7 @@ def sonar_callback(range_data):
         outlier = is_outlier(dist, i)
 
         if outlier is False:
-            # if i in [3, 66]:  # TODO delete debug
-            if True:  # TODO delete debug
-                sonar_pub.publish(range_sonar_msg)
+            sonar_pub.publish(range_sonar_msg)
 
         # Debug all sonar ranges  # TODO: delete
         range_sonar_msg.max_range = 10.0
@@ -130,7 +125,7 @@ def bump_callback(bump_data):
     """
         Republishes received bitmask to Range messages of fixed distance ranger
     """
-    global bump_pub1, bump_pub2, range_bump_msg
+    global range_bump_msg
 
     BUMP_SENSORS_COUNT = 15
     # Static variable equivalent bin_data_old
@@ -154,16 +149,13 @@ def bump_callback(bump_data):
         if bin_data[i] == '1' and bump_callback.bin_data_old[i] == '1':
             r = float("-inf")  # -inf - detection bumped
 
-        # if bin_data[i] == '1':
-        #     r = float("-inf")  # -inf - detection bumped
-
         # If not the same range as previous or forced update
         if bump_callback.bin_prev_posted[i] != r or rospy.Time.now() - bump_callback.last_bump_t[i] > rospy.Duration(0.4):
             bump_callback.last_bump_t[i] = rospy.Time.now()
 
             # Publish bump as fixed Range
             range_bump_msg.header.frame_id = "bump_%d" % (i + 1)
-            range_bump_msg.header.stamp = rospy.Time.now()
+            range_bump_msg.header.stamp = bump_data.header.stamp
             range_bump_msg.range = r
 
             # There's limit of 10 Range messages to display
