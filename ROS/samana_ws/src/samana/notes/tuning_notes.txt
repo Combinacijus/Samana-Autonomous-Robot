@@ -15,3 +15,8 @@ TextToSpeech:
 
 SonarAndBump:
     republish_sonar_bump.py - sonar range filter
+
+Planners:
+    base_local_planner_params.yaml - for local planner tune in accordance
+                                     to hoverboard_params.yaml
+    other yaml files in notes/

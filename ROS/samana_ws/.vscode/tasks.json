@@ -11,7 +11,7 @@
 		{
 			"taskName": "Debug",
 			"args": [
-				"source /opt/ros/melodic/setup.bash; catkin_make -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+				"catkin_make -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
 			],
 			"problemMatcher": [
 				{
@@ -107,7 +107,7 @@
 		{
 			"taskName": "Release",
 			"args": [
-				"source /opt/ros/melodic/setup.bash; catkin_make -C ${workspaceRoot}"
+				"catkin_make -C ${workspaceRoot}"
 			],
 			"problemMatcher": [
 				{

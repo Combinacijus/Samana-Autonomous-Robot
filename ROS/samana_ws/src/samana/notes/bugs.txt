@@ -8,7 +8,9 @@ sonars detects low obstacles
 after restarting STM32 odometry jumps a bit
 rc Arduino can loose sync and won't recover without powering off (at least with RC on)
 IMU gets biased for no reason. Possible solution to restart IMU.
-Sometimes not all nodes are killed which uses a lot of resources
+Odometry: sometimes no /odom_data is received from Arduino even tho topic is published. This causes constant speed even after setting speed to 0. Need power off on
+
+Hoverboard: /hov topic is not published from Arduino
 
 HARDWARE:
 STM32 requires reset for odometry to work
@@ -20,3 +22,5 @@ FIXED:
 ekf_odom and odom tranform both publishes to tf so it jumps around
 sonars randomly triggers needs some filtering
 ekf_odometry will drift if Arduinos disconnect and after reconnect it will be far away from true position
+Sometimes not all nodes are killed which uses a lot of resources
+DWA planner: gives commands above max velocity and max acceleration limits. Sometime very jerky start
