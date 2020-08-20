@@ -1,3 +1,5 @@
+- '!rosrun rqt_top rqt_top'
+- 'rosrun rqt_plot rqt_plot'
 - rosservice call /move_base/clear_costmaps "{}"
 - "rosservice call /move_base/clear_costmaps \"{}\"; rosservice call /reset_odom \"\
   {}\"; rosservice call /set_pose \"pose:\n  header:\n    seq: 0\n    stamp:\n   \

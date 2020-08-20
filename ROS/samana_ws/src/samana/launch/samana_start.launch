@@ -1,10 +1,11 @@
 <launch>
+    <!--Set to true if using bag file-->
     <param name="use_sim_time" value="false" />
 
-    <!--Killing all nodes from previuos session just to make sure-->
-    <node name="kill_all_nodes" pkg="samana" type="kill_all_nodes.py" output="screen"/>
+    <!--Won't work in same launch file. Launch it separatly-->
+    <!--<node name="kill_all_nodes" pkg="samana" type="kill_all_nodes.py" output="screen"/>-->
 
-    <!--Data reading and decoding from Arduinos-->
+    <!--Data reading and decoding from Arduinos and control nodes-->
     <include file="$(find samana)/launch/arduino_start.launch"/>
 
     <!--Rviz visualization for debug-->
@@ -22,10 +23,10 @@
 
 
     <!--Rqt graph-->
-    <!--<node name="pos_vel_plot" pkg="rqt_plot" type="rqt_plot"
+    <!--<node name="vel_plot" pkg="rqt_plot" type="rqt_plot"
         args="
-                /sonar1/range
-                /sonar1f/range
+                /odom/twist/twist/linear/x
+                /odom/twist/twist/angular/z
              "
               />-->
 

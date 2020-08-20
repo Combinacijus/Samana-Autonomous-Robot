@@ -1,0 +1,3 @@
+<launch>
+    <node name="kill_all_nodes" pkg="samana" type="kill_all_nodes.py" output="screen"/>
+</launch>

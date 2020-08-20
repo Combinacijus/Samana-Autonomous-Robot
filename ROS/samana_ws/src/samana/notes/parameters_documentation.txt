@@ -10,11 +10,22 @@ There is described all ROS parameters which could be change to tune robot
 /armed (bool)       arm state set by arm switch
 /auton_mode (bool)  if true robot goes into autonomous mode rc is ignored
 
-/hoverboard/max_speed (int)         max speed command; unit/s [0..1000] ;clamped before sending to hoverboard 
-/hoverboard/max_steer (int)         max steer command; unit/s [0..1000] ;clamped before sending to hoverboard
-/hoverboard/max_accel_lin (int)     max speed acceleration; unit/s^2 [0..1000]
-/hoverboard/max_accel_ang (int)     max steer acceleration; unit/s^2 [0..1000]
 
+/hoverboard:  # In YAML format
+  max_speed      (int)   max speed command; unit/s [0..1000] ;clamped before sending to hoverboard 
+  max_steer      (int)   max speed command; unit/s [0..1000] ;clamped before sending to hoverboard 
+  max_accel_lin  (int)   max speed acceleration; unit/s^2
+  max_accel_ang  (int)   max speed acceleration; unit/s^2
+
+  max_auton_vel_lin         (float)  max linear  velocity in m/s in autonamous mode
+  max_auton_vel_ang         (float)  max angular velocity in m/s in autonamous mode
+  max_auton_accel_lin       (float)  max linear  acceleration in m/s^2 in autonamous mode
+  max_auton_accel_ang       (float)  max angular acceleration in m/s^2 in autonamous mode
+
+  max_rc_vel_lin: 2.1       (float)  max linear  velocity in m/s in rc mode
+  max_rc_vel_ang: 5.0       (float)  max angular velocity in m/s in rc mode
+  max_rc_accel_lin: 7.5     (float)  max linear  acceleration in m/s^2 in rc mode
+  max_rc_accel_ang: 15.0    (float)  max angular acceleration in m/s^2 in rc mode
 
 --------------------------NEVER UPDATED IF CHANGED----------------------------------------
 base_width - distance between hoverboard wheels in meters

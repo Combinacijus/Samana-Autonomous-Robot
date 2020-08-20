@@ -9,8 +9,7 @@ pose0: /initialpose  # For setting initial pose in Rviz
 frequency: 50
 sensor_timeout: 999999
 two_d_mode: true
-odom0_queue_size: 40
-odom0_queue_size: 1
+odom0_queue_size: 10  # >1 to catch all in between data
 imu0_queue_size: 40
 
 map_frame: map
