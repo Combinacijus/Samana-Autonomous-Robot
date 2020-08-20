@@ -80,7 +80,7 @@ class OdomRepub:
         # Foward kinematics
         v_left = odom_data.rps1 / self.rot_per_m_right  # Wheel speed in m/s
         v_right = odom_data.rps2 / self.rot_per_m_left  # Wheel speed in m/s
-        vx = (v_right + v_left) / 2  # Speed forward in m/s
+        vx = (v_right + v_left) / 2  * self.odom_pitch_correction_coef  # Speed forward in m/s
         omega = (v_right - v_left) / self.base_width  # Angular speed in rad/s
 
         # Clamped angle
@@ -94,7 +94,7 @@ class OdomRepub:
         # print("vL: %f, vR %f" %(v_left, v_right))
 
         # Position
-        self.posx += vx * math.cos(self.theta) * dt * self.odom_pitch_correction_coef
+        self.posx += vx * math.cos(self.theta) * dt
         self.posy += vx * math.sin(self.theta) * dt
         msg.pose.pose.position = Point(self.posx, self.posy, 0)  # x - fwd
         # Angle
@@ -105,7 +105,7 @@ class OdomRepub:
         msg.pose.pose.orientation.w = quat[3]
 
         # Linear speed
-        msg.twist.twist.linear.x = vx * self.odom_pitch_correction_coef
+        msg.twist.twist.linear.x = vx
         # msg.twist.twist.linear.y = 0  # Default already zero
 
         # Angular speed
@@ -126,7 +126,7 @@ class OdomRepub:
             self.calibration_debug_data(odom_data)
 
     def imu_callback(self, imu_data):
-        MIN_PITCH = 0.025  # In radians when to start correcting
+        MIN_PITCH = 0.020  # In radians when to start correcting
 
         qx = imu_data.quaternion_x
         qy = imu_data.quaternion_y
@@ -134,7 +134,7 @@ class OdomRepub:
         qw = imu_data.quaternion_w
         (pitch, roll, yaw) = euler_from_quaternion([qx, qy, qz, qw])  # PRY instead of RPY due to sensor mounting orientation
 
-        if abs(pitch) < 0.03:
+        if abs(pitch) < MIN_PITCH:
             pitch = 0.00
 
         self.odom_pitch_correction_coef = math.cos(pitch)

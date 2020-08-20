@@ -99,7 +99,7 @@ class BashRunner:
         Runs bash command in order.
         If delay is specified puts command into new thread and sleeps for delay period until executing next command.
         """
-        
+
         for cmd, delay in zip(self.cmd, self.delay):
             if delay == -1:
                 print("Run command: {}".format(cmd))
@@ -113,5 +113,50 @@ class BashRunner:
         s = ""
         for c, d in zip(self.cmd, self.delay):
             s += "{}  | DELAY={}\n".format(c, d)
-        
+
         return s
+
+# --------------------------------------- FUNCTIONS ------------------------------------------
+
+
+def sign(x):
+    if x < 0:
+        return -1
+    else:
+        return 1
+
+
+def clamp(x, x_min, x_max):
+    if x < x_min:
+        x = x_min
+    elif x > x_max:
+        x = x_max
+
+    return x
+
+
+def limit_x(x, x_prev, x_min=None, x_max=None, dx_max=None, x_max_abs=None):
+    '''
+        Clamps x between [x_min..x_max] and [-x_max_abs..x_max_abs] and limits x change to dx_max
+    '''
+
+    # Clamp to x_min
+    if x_min is not None:
+        if x < x_min:
+            x = x_min
+    
+    # Clamp to x_max
+    if x_max is not None:
+        if x > x_max:
+            x = x_max
+
+    if x_max_abs is not None:
+        x = clamp(x, -x_max_abs, x_max_abs)
+
+    # Limit x change
+    if dx_max is not None:
+        dx = x - x_prev
+        if abs(dx) > dx_max:
+            x = x_prev + (dx_max * sign(dx))
+
+    return x

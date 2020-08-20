@@ -1,0 +1,44 @@
+init_allow_rc: true
+
+# Usually ratio linear/angular = 0.26 = 1 / 3.846 works well
+
+# Normal
+hoverboard:
+  # In units
+  max_speed: 500  # 0..1000
+  max_steer: 500  # 0..1000
+  max_accel_lin: 9000
+  max_accel_ang: 4000
+
+  # In m/s for cmd_vel auton mode test speed = *0.5 full speed
+  max_auton_vel_lin: 0.35
+  max_auton_vel_ang: 1.5
+  max_auton_accel_lin: 2.5  # Max 6m/s^2 at max_accel_lin: 2000, max_speed: 500, max_auton_vel_lin: 0.7
+  max_auton_accel_ang: 9.6
+
+  # In m/s for cmd_vel auton mode full speed
+  # max_auton_vel_lin: 0.7
+  # max_auton_vel_ang: 3.0
+  # max_auton_accel_lin: 2.5  # Max 6m/s^2 at max_accel_lin: 2000, max_speed: 500, max_auton_vel_lin: 0.7
+  # max_auton_accel_ang: 9.6
+
+  # In m/s for RC  ~x3 auton mode
+  max_rc_vel_lin: 2.1  # Maximum sensible 3.7 m/s. Max ~4.4m/s
+  max_rc_vel_ang: 5.0  # Maximum sensible 7 rad/s. Max ~15-18rad/s
+  max_rc_accel_lin: 7.5  # Max 6m/s^2 at max_accel_lin: 2000, max_speed: 500, max_rc_vel_lin: 0.7. Total max ~8m/s^2
+  max_rc_accel_ang: 15.0
+
+# Maxed out
+# hoverboard:
+#   max_speed: 1000
+#   max_steer: 1000
+#   max_accel_lin: 100000
+#   max_accel_ang: 100000
+#   max_auton_vel_lin: 100
+#   max_auton_vel_ang: 100
+#   max_auton_accel_lin: 1000
+#   max_auton_accel_ang: 1000
+#   max_rc_vel_lin: 100
+#   max_rc_vel_ang: 100
+#   max_rc_accel_lin: 1000
+#   max_rc_accel_ang: 1000

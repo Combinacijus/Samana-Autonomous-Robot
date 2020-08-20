@@ -6,22 +6,8 @@
     <arg name="baud" value="115200" />
     <arg name="recalibrate_imu" value="false" />
 
-    <rosparam>
-        /init_allow_rc: true
-        /hoverboard/max_speed: 500
-        /hoverboard/max_steer: 500
-        /hoverboard/max_accel_lin: 2000
-        /hoverboard/max_accel_ang: 4000
-    </rosparam>
-
-    <!--Maxed out setting-->
-    <!--<rosparam>
-        /init_allow_rc: true
-        /hoverboard/max_speed: 1000
-        /hoverboard/max_steer: 1000
-        /hoverboard/max_accel_lin: 100000
-        /hoverboard/max_accel_ang: 100000
-    </rosparam>-->
+    <!--Load hoverboard params-->
+    <rosparam file="$(find samana)/config/hoverboard_params.yaml" command="load"/> 
     
     <!--GPS and Odometry sensors arduino serial and republisher-->
     <node name="repub_odom" pkg="samana" type="republish_odom.py" output="screen" respawn="true"/>

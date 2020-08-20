@@ -128,7 +128,7 @@ class RCMain:
             Disables all rc_modes and publishes it
         '''
         self.armed = False
-        self.auton_mode = False  # TODO: Change to True because it's critical
+        self.auton_mode = True  # TODO: Change to True because it's critical
         self.arm_mode = self.ARM_MODE_NONE
         self.rc_modes_publish()
 

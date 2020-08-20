@@ -19,7 +19,7 @@
 	TODO: to handle counter overflow (mess up speed)
 */
 
-#include <ros_odom.h>
+#include <ros_gps_odom.h>
 #include <samana_msgs/OdometrySmall.h>
 
 
