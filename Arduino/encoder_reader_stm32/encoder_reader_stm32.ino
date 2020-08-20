@@ -16,6 +16,8 @@
 
     digitalRead max speed 28RPS and >24RPS without skips with both encoders (good communication)
     ~18RPS without noticable skips with both encoders on I2C with 4bytes every 10ms = 400B/s
+
+    Programming via serial adapter: A9 - RXD, A10 - TXD, 5V - 5V, GND - GND
 */
 
 #include <Wire_slave.h>
@@ -26,6 +28,7 @@
 #define PIN_B2 PA3
 #define BAUD_RATE 115200
 #define ODOM_SLAVE_ADDR 8 // NOTE: must be same as in master
+#define SERIAL_DEBUG 0
 
 /*
     CW rotation 013201320
@@ -61,9 +64,13 @@ void setup()
     pinMode(PIN_A2, INPUT_PULLUP);
     pinMode(PIN_B2, INPUT_PULLUP);
 
-    // Serial.begin(BAUD_RATE);
-    // while (!Serial)
-    //     ;
+    if (SERIAL_DEBUG)
+    {
+        Serial.begin(BAUD_RATE);
+        while (!Serial)
+            ;
+        Serial.print("Started");
+    }
 
     Wire.begin(ODOM_SLAVE_ADDR);
     Wire.onRequest(request_event);
@@ -88,7 +95,8 @@ void request_event()
     Wire.write(ticks1 >> 8);
     Wire.write(ticks2);
     Wire.write(ticks2 >> 8);
-    // Serial.println(String(ticks1) + " | " + String(ticks2));
+    if (SERIAL_DEBUG)
+        Serial.println(String(ticks1) + " | " + String(ticks2) + " | ");
 }
 
 void a1_change_int()

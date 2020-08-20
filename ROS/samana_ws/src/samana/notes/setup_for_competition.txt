@@ -9,7 +9,7 @@ Right before launch:
 - Make sure that all previous nodes are killed
 - Set allow_rc to False | Check if auton mode is enabled
 - Disconnect RC receiver
-- Check is odometry working | Might need to restart STM32
+- Check is odometry working | Might need to repower Arduino
 
 
 

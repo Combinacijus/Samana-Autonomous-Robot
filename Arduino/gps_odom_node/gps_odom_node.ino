@@ -40,6 +40,7 @@
 #define PIN_SS_TX 3                // Softserial TX pin
 #define IDEAL_MES_ERR 1.5          // Ideal measurement error for gps module (guessing)
 #define FORCED_GPS_MSG_PERIOD 2000 // Period when even with no new data gps message would be pubslished in ms
+#define DEBUG_SERIAL 0             // If true/1 disables ROS and prints debug data via serial port
 
 ros::NodeHandle nh;
 samana_msgs::OdometrySmall odometry_msg;
@@ -52,10 +53,15 @@ TinyGPS gps;
 
 void setup()
 {
-    // Serial.begin(115200);
+    if (DEBUG_SERIAL)
+        Serial.begin(BAUD_RATE);
+        
+    Serial.println("Started");
     Wire.begin();
     ss.begin(SS_BAUD);
-    init_ros();
+    
+    if (!DEBUG_SERIAL)
+        init_ros();
 }
 
 /*
@@ -117,13 +123,26 @@ void handle_odometry_messages()
     static float rps1 = 0; // Rotations per second
     static float rps2 = 0; // Rotations per second
     static float dt = 0;   // Delta time in us
+    static uint8_t rnd_byte = 0; // Should be different byte every read for health check
+    static uint8_t rnd_byte_prev = 0;
 
     // Read ticks from STM32
     Wire.requestFrom(ODOM_SLAVE_ADDR, 4);
-    ticks1 = Wire.read();
-    ticks1 += Wire.read() << 8;
-    ticks2 = Wire.read();
-    ticks2 += Wire.read() << 8;
+    if (Wire.available())
+    {
+        ticks1 = Wire.read();
+        ticks1 += Wire.read() << 8;
+        ticks2 = Wire.read();
+        ticks2 += Wire.read() << 8;
+    }
+    else  // No bytes recieved don't send to ROS
+    {
+        if (DEBUG_SERIAL)
+            Serial.println("Odom Failed");
+
+        last_time = micros();
+        return;
+    }
 
     // Rotations per second. delta_ticks / (ticks_per_rotation * delta_time_s)
     // Overflow handles itself: delta_ticks is correct on overflow
@@ -155,11 +174,16 @@ void handle_odometry_messages()
     odometry_msg.rps1 = rps1;
     odometry_msg.rps2 = -rps2;
     odometry_msg.dt = dt;
-    odometry_pub.publish(&odometry_msg);
-    nh.spinOnce();
 
+    if (!DEBUG_SERIAL)
+    {
+        odometry_pub.publish(&odometry_msg);
+        nh.spinOnce();
+    }
+    
     // Serial debug
-    // Serial.print(String(ticks1) + " " + String(ticks2) + " ");
+    if (DEBUG_SERIAL)
+        Serial.print(String(ticks1) + " " + String(ticks2) + " ");
     // Serial.println(String(rps1) + " " + String(rps2));
     // Serial.println(String(k1) + "|" + String(k2));
 }
@@ -191,12 +215,15 @@ void handle_gps_messages()
         unsigned long hdop = gps.hdop();
 
         //  Debug
-        // Serial.print(gps.satellites());
-        // Serial.print("  ");
-        // Serial.println(gps.hdop());
-        // Serial.print(lat, 12);
-        // Serial.print("  ");
-        // Serial.println(lon, 12);
+        if (DEBUG_SERIAL)
+        {
+            Serial.print(gps.satellites());
+            Serial.print("  ");
+            Serial.println(gps.hdop());
+            Serial.print(lat, 12);
+            Serial.print("  ");
+            Serial.println(lon, 12);
+        }
 
         // Setup and send ROS message
         gps_msg.header.stamp = nh.now();
@@ -230,7 +257,8 @@ void handle_gps_messages()
 
         gps_msg.position_covariance_type = gps_msg.COVARIANCE_TYPE_APPROXIMATED;
 
-        gps_pub.publish(&gps_msg);
+        if (!DEBUG_SERIAL)
+            gps_pub.publish(&gps_msg);
     }
 
     nh.spinOnce();

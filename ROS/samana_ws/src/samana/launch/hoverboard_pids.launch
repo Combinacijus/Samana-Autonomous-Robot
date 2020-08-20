@@ -28,7 +28,7 @@
         Kd: 0.00
         upper_limit: 1
         lower_limit: -1
-        windup_limit: 0.5
+        windup_limit: 0.35
         topic_from_controller: control_effort
         topic_from_plant: state
         setpoint_topic: setpoint
@@ -49,7 +49,7 @@
         Kd: 0.00
         upper_limit: 1
         lower_limit: -1
-        windup_limit: 0.5
+        windup_limit: 0.3
         topic_from_controller: control_effort
         topic_from_plant: state
         setpoint_topic: setpoint
