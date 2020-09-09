@@ -5,23 +5,17 @@ import time
 import rospy
 from sensor_msgs.msg import Imu
 import tf2_ros
-import geometry_msgs.msg
-import tf2_geometry_msgs
 
 from samana_msgs.msg import ImuSmall
 
 imu_msg = Imu()
 
-# For transforming imu to base_link
-tf_buffer = 1
-tf_listener = 1
-
 
 def imu_callback(imu_data):
-    global tf_buffer, tf_listener, imu_msg
+    global imu_msg
 
     imu_msg.header.stamp = imu_data.header.stamp
-    imu_msg.header.frame_id = "imu_link"
+    imu_msg.header.frame_id = "imu"
 
     imu_msg.orientation.x = imu_data.quaternion_x
     imu_msg.orientation.y = imu_data.quaternion_y
@@ -31,61 +25,17 @@ def imu_callback(imu_data):
     imu_msg.linear_acceleration.y = imu_data.linear_acceleration_y
     imu_msg.linear_acceleration.z = imu_data.linear_acceleration_z
     imu_msg.angular_velocity.x = imu_data.angular_velocity_x
-    imu_msg.angular_velocity.y = imu_data.angular_velocity_z
-    imu_msg.angular_velocity.z = imu_data.angular_velocity_y
+    imu_msg.angular_velocity.y = imu_data.angular_velocity_y
+    imu_msg.angular_velocity.z = imu_data.angular_velocity_z
+
     # Add covariances NOTE: IMU tuning
-    default_cov = (0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1)
+    default_cov = (0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004)
     imu_msg.orientation_covariance = default_cov
     imu_msg.angular_velocity_covariance = default_cov
     imu_msg.linear_acceleration_covariance = default_cov
 
     imu_pub = rospy.Publisher("imu", Imu, queue_size=10)
     imu_pub.publish(imu_msg)
-
-    # Transform map to imu_link -----------------------------------------------------------------
-    if False:  # Make it false to disable manual TF for IMU in rviz
-        FRAME_ID = "map"
-        CHILD_FRAME_ID = "base_link"
-
-        br = tf2_ros.TransformBroadcaster()
-        imu_tr = geometry_msgs.msg.TransformStamped()
-
-        # p2 = tf2_geometry_msgs.tf2_geometry_msgs.PoseStamped()
-        imu_tr.header.stamp = imu_data.header.stamp
-        imu_tr.header.frame_id = FRAME_ID
-        imu_tr.child_frame_id = CHILD_FRAME_ID
-        imu_tr.transform.translation.x = 0
-        imu_tr.transform.translation.y = 0
-        imu_tr.transform.rotation.x = imu_data.quaternion_x
-        imu_tr.transform.rotation.y = imu_data.quaternion_y
-        imu_tr.transform.rotation.z = imu_data.quaternion_z
-        imu_tr.transform.rotation.w = imu_data.quaternion_w
-
-        imu_to_base_tr = tf_buffer.lookup_transform(
-            "imu_link", "base_link", rospy.Time(), rospy.Duration(1.0))
-
-        # Empty pose
-        pose_transformed = geometry_msgs.msg.PoseStamped()
-        pose_transformed.header = imu_tr.header
-        pose_transformed.pose.orientation.w = 1
-
-        # Transforming
-        pose_transformed = tf2_geometry_msgs.do_transform_pose(
-            pose_transformed, imu_to_base_tr)
-        # imu_tr.transform.translation.x = 0
-        # imu_tr.transform.translation.y = 0
-        pose_transformed = tf2_geometry_msgs.do_transform_pose(
-            pose_transformed, imu_tr)
-
-        # Converting back to TransformStamped for broadcasting
-        final_transform = geometry_msgs.msg.TransformStamped()
-        final_transform.header = pose_transformed.header
-        final_transform.header.frame_id = FRAME_ID
-        final_transform.child_frame_id = CHILD_FRAME_ID
-        final_transform.transform.rotation = pose_transformed.pose.orientation
-        # final_transform.transform.translation = pose_transformed.pose.position
-
-        br.sendTransform(final_transform)
         
 
 if __name__ == '__main__':
@@ -93,10 +43,6 @@ if __name__ == '__main__':
         rospy.init_node("imu_repub")
 
         rospy.Subscriber("imu_data", ImuSmall, imu_callback)
-
-        # For transforming imu to base_link
-        tf_buffer = tf2_ros.Buffer(rospy.Duration(10.0))  # tf buffer length
-        tf_listener = tf2_ros.TransformListener(tf_buffer)
 
         rospy.spin()
     except rospy.ROSInterruptException:

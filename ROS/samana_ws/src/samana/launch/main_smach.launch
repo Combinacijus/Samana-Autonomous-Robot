@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="samana" type="main_smach.py" name="main_smach" output="screen" clear_params="true">
+        <param name="file_wp_to_goal" value="$(find samana)/config/waypoints_to_bag.csv"/>
+        <param name="file_wp_to_home" value="$(find samana)/config/waypoints_to_home.csv"/>
+    </node>
+</launch>

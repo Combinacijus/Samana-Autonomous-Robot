@@ -32,13 +32,13 @@
 #include <TimerOne.h>
 #include <std_srvs/Empty.h>
 
-#define IMU_ID 42                // IMU sensor id
-#define EE_ADDRESS 0             // Starting EEPROM addres for calibration data
-#define SAMPLERATE_DELAY_US 3000 // Delay between samples (>4k slows updates)
-#define BAUD_RATE 115200         // Serial communication speed. 115200 is minimal for maximal 100hz update rate
-#define ISR_PERIOD 40000         // Interrupt service routine period in micro sec
-#define PIN_RESET 2              // GPIO pin which is connected to RST
-#define IMU_UPDATE_TIMEOUT 500   // Restart after inactivity in ms
+#define IMU_ID 42                 // IMU sensor id
+#define EE_ADDRESS 0              // Starting EEPROM addres for calibration data
+#define SAMPLERATE_DELAY_US 20000 // Delay between IMU samples
+#define BAUD_RATE 115200          // Serial communication speed. 115200 is minimal for maximal 100hz update rate
+#define ISR_PERIOD 40000          // Interrupt service routine period in micro sec
+#define PIN_RESET 2               // GPIO pin which is connected to RST
+#define IMU_UPDATE_TIMEOUT 500    // Restart after inactivity in ms
 
 void reset_service(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res)
 {
@@ -49,6 +49,7 @@ bool found_calib = false;                  // Is calibration found in EEPROM
 bool recalibrate = false;                  // Value read from param server if false don't read EEPROM
 unsigned long long last_update_time = 0;   // In milis
 unsigned long long last_setup_up_time = 0; // In milis
+unsigned long long loop_start_time = 0;    // In micros
 
 Adafruit_BNO055 bno = Adafruit_BNO055();
 ros::NodeHandle nh; // ROS node
@@ -84,7 +85,10 @@ void loop(void)
     sendCalibrationStatus();
     last_update_time = millis();
 
-    delayMicroseconds(SAMPLERATE_DELAY_US);
+    // Keeping same rate with variable delay
+    int sleep_time = SAMPLERATE_DELAY_US - (micros() - loop_start_time);
+    delayMicroseconds(sleep_time);
+    loop_start_time = micros();
 }
 
 void reset()

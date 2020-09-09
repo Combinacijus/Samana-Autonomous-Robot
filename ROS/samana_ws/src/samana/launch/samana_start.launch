@@ -1,26 +1,38 @@
 <launch>
-    <!--Set to true if using bag file-->
-    <param name="use_sim_time" value="false" />
+    <!--Config-->
+    <arg name="use_simtime" default="true"/>
+    <arg name="use_arduinos" default="false"/>
+
+    <arg name="use_mapviz" default="true"/>
+    <arg name="use_rviz" default="false"/>
+    
+    <param name="use_sim_time" value="$(arg use_simtime)"/>   
+
+    <!--NOTE: For downloading new map tiles-->
+    <!--sudo docker run -p 8080:8080 -it -v ~/mapproxy:/mapproxy danielsnider/mapproxy-->
 
     <!--Won't work in same launch file. Launch it separatly-->
     <!--<node name="kill_all_nodes" pkg="samana" type="kill_all_nodes.py" output="screen"/>-->
 
-    <!--Data reading and decoding from Arduinos and control nodes-->
-    <include file="$(find samana)/launch/arduino_start.launch"/>
+    <!--Publish dummy messages to initialize some topics which are needed for core nodes-->
+    <include file="$(find samana)/launch/init_topics.launch">
+        <arg name="use_simtime" value="$(arg use_simtime)"/>
+    </include>
+
+    <!--Core Samana functionality. Delay to make sure topics are initalized-->
+    <node pkg="samana" type="timed_roslaunch.sh" name="timed_roslaunch_samana_core" output="screen"
+          args="2 samana samana_core.launch use_arduinos:=$(arg use_arduinos)"/>
+        
+    <!--Mapviz visualization for debug-->
+    <include file="$(find samana)/launch/mapviz.launch" if="$(arg use_mapviz)"/>
 
     <!--Rviz visualization for debug-->
-    <include file="$(find samana)/launch/rviz_visualization.launch"/>
+    <include file="$(find samana)/launch/rviz.launch" if="$(arg use_rviz)"/>
 
-    <!--Robot localization-->
-    <include file="$(find samana)/launch/nav_sat.launch"/>
 
-    <!--Mapping and path planning-->
-    <include file="$(find samana)/launch/move_base.launch"/>
-    
 
     <!--Helper scripts-->
     <!--<node name="helper_cmd_gui" pkg="samana" type="helper_cmd_gui.py"/>-->
-
 
     <!--Rqt graph-->
     <!--<node name="vel_plot" pkg="rqt_plot" type="rqt_plot"
@@ -29,8 +41,4 @@
                 /odom/twist/twist/angular/z
              "
               />-->
-
-    <!--Publish transform from odom to base_link using raw odometry data-->
-    <!--Obsolete because ekf_localization_node publishes it's own tf of odemetry-->
-    <!--<node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>-->
 </launch>

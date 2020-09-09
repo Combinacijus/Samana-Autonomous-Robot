@@ -1,3 +1,6 @@
+
+VSCode setup:
+    https://github.com/RoboGnome/VS_Code_ROS#1-vs-code-extensions
 Dependencies:
     # Check missing dependencies
     rosdep check --from-paths ~/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/ --ignore-src

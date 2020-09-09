@@ -1,0 +1,57 @@
+<launch>
+
+  <!--Seems like IMU points to true North at 90deg so magnetic declination should be 0deg-->
+  <arg name="mag_declination_rad" default="0"/>
+  <arg name="yaw_offset" default="0"/>
+  <!-- Home -->
+  <!--<arg name="mag_declination_rad" default="1.129852496"/>-->
+  <!--Kaunas-->
+  <!--<arg name="mag_declination_rad" default="0.134041286"/>-->
+
+  <!--***********************************EKF LOCAL**************************************-->
+  <node pkg="robot_localization" type="ekf_localization_node"  name="ekf_local" clear_params="true" respawn="true">
+    <param name="magnetic_declination_radians" value="$(arg mag_declination_rad)"/> 
+    <rosparam command="load" file="$(find samana)/config/ekf_local_config.yaml" />
+
+    <!--OUTPUT-->
+    <remap from="/odometry/filtered" to="/odometry/local"/>
+  </node>
+
+  <!--***********************************EKF GLOBAL*************************************-->
+  <node pkg="robot_localization" type="ekf_localization_node"  name="ekf_global" clear_params="true" respawn="true">
+    <param name="magnetic_declination_radians" value="$(arg mag_declination_rad)"/> 
+    <rosparam command="load" file="$(find samana)/config/ekf_global_config.yaml" />
+
+    <!--OUTPUT-->
+    <remap from="/odometry/filtered" to="/odometry/global"/>
+  </node>
+
+  <!--***************************************NAV****************************************-->
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true" output="screen">
+    <!--TODO: set false cuz not needed-->
+    <param name="publish_filtered_gps" value="true"/>
+    <param name="broadcast_utm_transform" value="true"/>  <!-- Needed for static costmap-->
+    <param name="zero_altitude" value="true"/>
+    <!-- Setting datum messed up /odometry/gps it won't be on top of GPS points-->
+    <!--<param name="wait_for_datum" value="true"/>-->
+    <!--<rosparam param="datum">[54.89989236, 23.96210486, 0.0, map, base_link]</rosparam>-->
+
+    <param name="delay" value="5"/>
+    <param name="use_odometry_yaw" value="true"/>
+    <param name="yaw_offset" value="$(arg yaw_offset)"/>
+    <param name="magnetic_declination_radians" value="$(arg mag_declination_rad)"/> 
+
+    <!--INPUT-->
+    <remap from="/gps/fix" to="/android/fix/fixed"/>
+    <remap from="/imu/data" to="/imu"/>
+    <remap from="/odometry/filtered" to="/odometry/global"/>
+
+    <!--OUTPUT-->
+    <remap from="/odometry/gps" to="/odometry/gps"/>
+  </node>
+
+  <!--******************************FIXING GPS FRAME_ID*********************************-->
+  
+  <node pkg="topic_tools" type="transform" name="android_gps_fix" args="/android/fix /android/fix/fixed sensor_msgs/NavSatFix 'sensor_msgs.msg.NavSatFix(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id=&quot;gps&quot;), status=m.status, latitude=m.latitude, longitude=m.longitude, altitude=m.altitude, position_covariance=m.position_covariance, position_covariance_type=m.position_covariance_type)' --import sensor_msgs std_msgs" />
+</launch>
+

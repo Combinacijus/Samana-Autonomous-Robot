@@ -1,0 +1,33 @@
+<launch>
+    <!-- Translate from NavSatFix to GPSFix //-->
+    <!-- <node name="fix_translator" pkg="gps_common" type="fix_translator">
+      <remap from="/navsat_fix_in"  to="/fix"/>
+      <remap from="/gps_fix_out"    to="/gps/fix"/>
+    </node> -->
+
+    <!--WGS84 transform-->
+    <node pkg="swri_transform_util" type="initialize_origin.py" name="initialize_origin" output="screen" >
+        <param name="local_xy_frame" value="map"/>
+        <param name="local_xy_origin" value="auto"/>
+
+        <!--For loading event Google map-->
+        <!--<param name="local_xy_origin" value="swri"/>
+        <rosparam param="local_xy_origins">
+            [{ name: swri,
+             latitude: 54.8998329,
+             longitude: 23.9614507,
+             altitude: 129.69,
+             heading: 0.0}]
+        </rosparam>-->
+
+        <remap from="/fix" to="/android/fix/fixed"/>
+    </node>
+
+    <!--Mapviz-->
+    <node pkg="mapviz" type="mapviz" name="mapviz">
+        <param name="config" value="$(find samana)/config_viz/mapviz_config.mvc"/>
+    </node>
+
+    <!--Debug float data for mapviz-->
+     <node pkg="samana" type="mapviz_pub_floats.py" name="mapviz_pub_floats" output="screen"/> 
+</launch>

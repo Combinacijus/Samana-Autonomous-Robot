@@ -1,9 +1,21 @@
 Step to setup robot for competition:
 
 Before:
-- Charge laptop and hoverboard fully
+- Charge laptop, smartphone and hoverboard fully
 - Check IMU calibration | If required recalibrate (always calibrate heading)
-- Check if buck converters on 11V can lift the bag 
+- Check if buck converters on 11V can lift the bag
+- Update magnetic declination to event location
+
+Setup:
+- Connect android GPS and camera:
+    - Enable smartphone GPS
+    - Find IP in terminal write ip route and find last "ip scope link src 192.168.0.102 metric" append :11311/
+    - Connect via ROS Sensors Driver on Android with same IP eg. http://192.168.0.102:11311
+    - Connect android camera via DroidCam app
+
+Other:
+- For downloading new map tiles run
+    - sudo docker run -p 8080:8080 -it -v ~/mapproxy:/mapproxy danielsnider/mapproxy
 
 Right before launch:
 - Make sure that all previous nodes are killed

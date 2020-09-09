@@ -3,7 +3,6 @@
 Gintaras Grebliunas
 combinacijus@gmail.com
 mototors_controller ROS Node
-TODO modify description
 Gathers data from sensors and tells hoverboard motors what to do
 
 Modes are switched in rc_callback()

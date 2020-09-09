@@ -111,7 +111,7 @@ class RCMain:
                 self.publish_rc_modes_disable_all()
                 self.publish_arm_cmd_stop()
                 self.pub_audio.publish("Hoverboard disconnected")
-                print("dt: {}  tout: {}".format(rospy.Time.now() - self.last_rc_update, self.rc_timeout))
+                # print("dt: {}  tout: {}".format(rospy.Time.now() - self.last_rc_update, self.rc_timeout))
                 self.last_rc_stop = True
 
     def rc_modes_publish(self):

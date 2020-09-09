@@ -1,0 +1,26 @@
+<launch>
+    <arg name="use_simtime" default="false"/>
+
+    <!--/android/fix for topictools transform node-->
+    <node pkg="rostopic" type="rostopic" name="rostopic_android_fix_init"
+        args="pub /android/fix sensor_msgs/NavSatFix
+        &quot;{
+            header: {seq: 0, stamp: {secs: 0, nsecs: 0}, frame_id: 'gps'},
+            status: {status: -1, service: 1},
+            latitude: 0.0,
+            longitude: 0.0,
+            altitude: 0.0,
+            position_covariance: [1.0e+19, 1.0e+19, 1.0e+19, 1.0e+19, 1.0e+19, 1.0e+19, 1.0e+19, 1.0e+19, 1.0e+19],
+            position_covariance_type: 0
+        }&quot;
+    "/>
+
+    <!--/clock for mapviz to open before starting bag file-->
+    <node pkg="rostopic" type="rostopic" name="rostopic_clock_init" if="$(arg use_simtime)"
+        args="pub /clock rosgraph_msgs/Clock
+        &quot;{
+            clock: {secs: 0, nsecs: 1}
+        }&quot;
+    "/>
+
+</launch>

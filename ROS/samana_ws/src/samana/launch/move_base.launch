@@ -1,30 +1,29 @@
 <launch>
     <!-- Run the map server --> 
-    <!--<arg name="map_file" value="room_map_clean.yaml"/>-->
-    <arg name="map_file" value="room_map3_clean.yaml"/>
-    <!--<arg name="map_file" value="test_map_3.yaml"/>-->
+    <!--<arg name="map_file" value="room_clean.yaml"/>-->
+    <!--<arg name="map_file" value="event_empty_100.yaml"/>-->
+    <arg name="map_file" value="event_precise_100.yaml"/>
+    <!--<arg name="map_file" value="event_padded4_100.yaml"/>-->
 
     <!--Map Server-->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find samana)/maps/$(arg map_file)"/>
 
-    <!--Move Base   TODO: remove debug prefix-->
+    <!--Move Base-->
     <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
-    <!--<node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen" launch-prefix="xterm -e gdb - -args">-->
-    <!--<node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen" launch-prefix="valgrind">-->
-    
-        <!--Uncomment for SBPLLatticePlanner-->
-        <!--<param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" />-->
-        
+        <!--Remap topics | Use pure odometry just in case if IMU orientations is lost-->
+        <remap from="/odom" to="/odom"/>
+
         <!--Move base-->
         <rosparam file="$(find samana)/config/move_base_params.yaml" command="load" /> 
 
-        <!--Local planner-->
+        <!--Local and Global planner-->
         <rosparam file="$(find samana)/config/base_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find samana)/config/base_global_planner_params.yaml" command="load" />
 
         <!--Costmap-->
         <rosparam file="$(find samana)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
         <rosparam file="$(find samana)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find samana)/config/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find samana)/config/global_costmap_params.yaml" command="load" /> 
+        <rosparam file="$(find samana)/config/costmap_local_params.yaml" command="load" />
+        <rosparam file="$(find samana)/config/costmap_global_params.yaml" command="load" /> 
     </node>
 </launch> 

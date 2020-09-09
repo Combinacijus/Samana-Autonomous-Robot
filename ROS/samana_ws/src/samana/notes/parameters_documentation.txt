@@ -31,6 +31,7 @@ There is described all ROS parameters which could be change to tune robot
 base_width - distance between hoverboard wheels in meters
 rot_per_m_left  - (float) left encoder rotation per meter; must be found experimentally
 rot_per_m_right - (float) right encoder rotation per meter; must be found experimentally
+surface_factor - (float) multiplier for rot_per_m_xxxx; Used for adjusting for surface roughness. Bigger = less distance
 
 /init_allow_rc (bool)    if false any RC input will be ignored works only on init 
                          can be changed with service /set_allow_rc e.g.

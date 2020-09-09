@@ -2,7 +2,8 @@
 
 '''
     When OdometrySmall message is received translates it
-    to Odometry message and published to odom_raw topic
+    to Odometry message adjusts depending on pitch and calibration
+    and publishes to odom_raw topic
 '''
 
 import rospy
@@ -38,7 +39,8 @@ class OdomRepub:
         self.posx = 0
         self.posy = 0
         self.theta = 0
-        self.theta_debug = 0
+        self.theta_raw = 0
+        self.theta_cal = 0
         self.rot1 = 0
         self.rot2 = 0
 
@@ -46,25 +48,41 @@ class OdomRepub:
         '''
             Reads parameters from parameter server or
             if not found sets default values
+
+            NOTE: tuning. How to tune Odometry:
+            - self.debug = True
+            - rosservice call /reset_odom
+
+            - drive forward in known length track eg. real_len = 4m
+            - count number of encoder rotations for both wheels rl and rr
+            - self.rot_per_m_l = rl / real_len; self.rot_per_mr = rr / real_len
+
+            - spin in place 10 times (real_th = 3600) get th_raw
+            - self.base_width = th_raw / real_th
         '''
-        # NOTE: odom tuning
+
         # Default params
-        # base_width = 1, -3600deg:
-        # -1885.885155 -1886.326100
-        self.base_width = 0.523856988
-        # 4m straight track rotation:
-        # 15.985200 15.980833 15.968500 15.985000 15.987700
-        # 15.936250 15.929167 15.991667 15.959583 15.974167
-        self.rot_per_m_left = 3.99536165
-        self.rot_per_m_right = 3.9895417
+        self.surface_factor = 1.0  # On rough surface robot travels less than on flat surface. Bigger = less distance
+        # 3600deg: 1884.43241407 1884.67177595 1885.09056770  avg-> 1884.7315859066666
+        # 3m L: 11.977917 11.967500 11.966250   avg-> 11.9705556666
+        # 3m R: 11.970833 11.975200 11.965417   avg-> 11.9704833333
+        self.base_width = 0.5235365516407408
+        self.rot_per_m_left = 3.9901852222222223   # old: 3.99536165
+        self.rot_per_m_right = 3.9901611111111115  # old: 3.9895417
 
         # Updated params from param server if available
         if rospy.has_param("base_width"):
-            self.base_width = rospy.get_param("base_width", )
+            self.base_width = rospy.get_param("base_width")
         if rospy.has_param("rot_per_m_left"):
-            self.base_width = rospy.get_param("rot_per_m_left")
+            self.rot_per_m_left = rospy.get_param("rot_per_m_left")
         if rospy.has_param("rot_per_m_right"):
-            self.base_width = rospy.get_param("rot_per_m_right")
+            self.rot_per_m_right = rospy.get_param("rot_per_m_right")
+        if rospy.has_param("surface_factor"):
+            self.rot_per_m_right = rospy.get_param("surface_factor")
+
+        self.rot_per_m_left *= self.surface_factor
+        self.rot_per_m_right *= self.surface_factor
+        self.base_width *= self.surface_factor  # Not sure if it's right
 
     def odom_cb(self, odom_data):
         '''
@@ -80,7 +98,7 @@ class OdomRepub:
         # Foward kinematics
         v_left = odom_data.rps1 / self.rot_per_m_right  # Wheel speed in m/s
         v_right = odom_data.rps2 / self.rot_per_m_left  # Wheel speed in m/s
-        vx = (v_right + v_left) / 2  * self.odom_pitch_correction_coef  # Speed forward in m/s
+        vx = (v_right + v_left) / 2 * self.odom_pitch_correction_coef  # Speed forward in m/s
         omega = (v_right - v_left) / self.base_width  # Angular speed in rad/s
 
         # Clamped angle
@@ -139,19 +157,26 @@ class OdomRepub:
 
         self.odom_pitch_correction_coef = math.cos(pitch)
 
-        if self.debug is True:
-            print("correction: {:1.3f} pitch: {:2.3f} roll: {:2.3f} yaw: {:2.3f}".format(self.odom_pitch_correction_coef, pitch, roll, yaw))
-
     def calibration_debug_data(self, od):
-        TICKS_PER_ROTATION = 2400
+        # 1 - left, 2 - right
+        TICKS_PER_ROTATION = 2400.0
 
         v_left = od.rps1 / self.rot_per_m_right  # Wheel speed in m/s
         v_right = od.rps2 / self.rot_per_m_left  # Wheel speed in m/s
-        omega = v_right - v_left  # Angular speed in rad/s
-        self.theta_debug += omega * od.dt / 1000000.0
+
+        self.theta_raw += (v_right - v_left) * od.dt / 1000000.0  # base_width = 1
+        th_raw = math.degrees(self.theta_raw)
+        
+        self.theta_cal += (v_right - v_left) / self.base_width * od.dt / 1000000.0
+        th_cal = math.degrees(self.theta_cal)  # With current base_width calibration
+
+        th = math.degrees(self.theta)  # With current base_width bounded to +-180
+
         self.rot1 += od.delta_ticks1 / TICKS_PER_ROTATION
         self.rot2 += od.delta_ticks2 / TICKS_PER_ROTATION
-        # print("r1: %f, r2: %f, th: %f, thd: %f" % (self.rot1, self.rot2, self.theta * 180 / math.pi, self.theta_debug * 180 / math.pi))
+
+        print("vl: {:2.3f}, vr: {:2.3f}, rl: {:3.6f}, rr: {:3.6f}, th: {:4.2f}, th_raw: {:4.8f}, th_cal: {:4.8f}, p_corr: {:1.3f}"
+              .format(v_left, v_right, self.rot1, self.rot2, th, th_raw, th_cal, self.odom_pitch_correction_coef))
 
     def handle_reset_odom(self, _):
         self.reset_odom()

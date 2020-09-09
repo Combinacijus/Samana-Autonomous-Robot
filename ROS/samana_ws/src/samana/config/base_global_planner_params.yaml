@@ -1,0 +1,15 @@
+GlobalPlanner:
+  use_dijkstra: true   # default: true | if false use A*
+  use_quadratic: true   # default: true | if false use simpler
+  
+  lethal_cost: 253   # default: 253
+  neutral_cost: 66   # default: 50
+  cost_factor: 0.55  # default: 3.0
+
+  visualize_potential: false  # default: false | not sure what it does
+  publish_potential: true     # default: true | for cost field visualization  TODO: remove for event
+
+
+# NavfnROS:
+#   default_tolerance: 0.15    # default: 0.0  Creates plan in this circle
+#   visualize_potential: false  # default: false  Debuging

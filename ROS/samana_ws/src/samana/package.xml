@@ -57,6 +57,7 @@
 <build_depend>samana_msgs</build_depend>
 <build_export_depend>roscpp</build_export_depend>
 <build_export_depend>samana_msgs</build_export_depend>
+
 <exec_depend>message_generation</exec_depend>
 <exec_depend>roscpp</exec_depend>
 <exec_depend>samana_msgs</exec_depend>
@@ -69,8 +70,12 @@
 <exec_depend>map_server</exec_depend>
 <exec_depend>pose_follower</exec_depend>
 <exec_depend>rqt_multiplot</exec_depend>
-<exec_depend>navigation_layers</exec_depend>
-<exec_depend>rviz_sattelite</exec_depend>
+<exec_depend>actionlib</exec_depend>
+<exec_depend>geometry_msgs</exec_depend>
+<exec_depend>move_base_msgs</exec_depend>
+<exec_depend>smach</exec_depend>
+
+<build_depend>smach</build_depend>
 
 <!--rosdep install samana  - -ignore-src-->
 <!-- Needed but should be installed manually because there no definition is rosdep -->
@@ -78,5 +83,11 @@
 <exec_depend>nvidia-container-toolkit</exec_depend>  
 <exec_depend>feh</exec_depend>
 <exec_depend>pip install easygui</exec_depend>
+-->
+
+<!--Already inside workspace and probably modified for the project or installed from source-->
+<!--
+<exec_depend>navigation_layers</exec_depend>
+<exec_depend>range_sensor_layer</exec_depend>
 -->
 </package>

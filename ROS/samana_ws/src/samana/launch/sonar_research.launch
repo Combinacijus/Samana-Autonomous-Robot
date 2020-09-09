@@ -5,8 +5,8 @@
     <param name="use_sim_time" value="true" />
 
     <!--Rviz visualization for sonar debug-->
-    <include file="$(find samana)/launch/rviz_visualization.launch">
-        <arg name="rvizconfig" value="$(find samana)/rviz_configs/rviz_config_sonar.rviz" />
+    <include file="$(find samana)/launch/rviz.launch">
+        <arg name="rvizconfig" value="$(find samana)/config_viz/rviz_config_sonar.rviz" />
     </include>
 
     <!--Republish filtered sonar and bump data-->

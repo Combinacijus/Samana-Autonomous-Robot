@@ -1,0 +1,9 @@
+# Goal
+geometry_msgs/PoseArray waypoints
+float32 dist_tolerance
+---
+# Result
+int32 wp_current
+---
+# Feedback
+int32 wp_current

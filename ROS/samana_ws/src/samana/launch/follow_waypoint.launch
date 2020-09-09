@@ -1,0 +1,36 @@
+<launch>
+    <node pkg="samana" type="follow_waypoints.py" name="follow_waypoints" output="screen" clear_params="true">
+        <rosparam>
+            goal_frame_id: utm
+            odom_frame_id: odom
+            base_frame_id: base_link
+
+            wait_duration: 0.0
+            waypoint_distance_tolerance: 4.0
+
+            use_action_lib: true
+            
+            always_from_file: true
+            check_dist_period: 0.3
+            follow_back: false
+            rotate_going_back: true
+            pose_topic: "/initialpose"
+            visualize_smach: false
+        </rosparam>
+        <!--<param name="file_path" value="$(find samana)/config/waypoints.csv"/>-->
+        <param name="file_path" value="$(find samana)/config/waypoints_to_goal.csv"/>
+    </node>
+</launch>
+
+<!--
+use_action_lib: if true state machine is excecuted just if requested by action client
+output_file_path: path to the .csv file for reading and writing waypoints
+follow_back: When reading waypoints from a file it will read again from back to front
+rotate_going_back: Only used if follow_back is true. Rotates goal poses 180deg when going back
+check_dist_period: How often to check distance to the goal in seconds. Setting above 0 reduces CPU usage. Setting to high robot could miss the goal.
+pose_topic: Pose topic from which to read new waypoints
+always_from_file: Skips new waypoints creation and right away reads waypoints from a file without publishing to topic
+visualize_smach: if true call IntrospectionServer for smach visualization
+-->
+
+

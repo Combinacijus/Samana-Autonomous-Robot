@@ -1,12 +1,6 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-	{
-		"name": "ROS: Launch",
-		"type": "ros",
-		"request": "launch",
-		"target": "absolute path to launch file"
-	},
 		{
 			"name": "C++",
 			"type": "gdb",

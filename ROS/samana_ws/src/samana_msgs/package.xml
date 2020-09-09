@@ -51,6 +51,10 @@
 <exec_depend>roscpp</exec_depend>
 <exec_depend>rospy</exec_depend>
 <exec_depend>std_msgs</exec_depend>
+<exec_depend>geometry_msgs</exec_depend>
 <build_depend>message_generation</build_depend>
 <build_export_depend>message_generation</build_export_depend>
+
+<depend>actionlib</depend>
+<depend>actionlib_msgs</depend>
 </package>

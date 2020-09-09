@@ -1,0 +1,380 @@
+capture_directory: ~
+fixed_frame: map
+target_frame: map
+fix_orientation: false
+rotate_90: false
+enable_antialiasing: true
+show_displays: true
+show_status_bar: true
+show_capture_tools: true
+window_width: 913
+window_height: 727
+view_scale: 0.1095699
+offset_x: -3.182175
+offset_y: -1.019521
+use_latest_transforms: true
+background: "#a0a0a4"
+displays:
+  - type: mapviz_plugins/tile_map
+    name: map
+    config:
+      visible: true
+      collapsed: true
+      custom_sources:
+        - base_url: http://localhost:8080/wmts/gm_layer/gm_grid/{level}/{x}/{y}.png
+          max_zoom: 19
+          name: GoogleLocal
+          type: wmts
+        - base_url: https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29tYmluYWNpanVzIiwiYSI6ImNrODRyanl4dTAxYTYza25zcWtvNWg1MGYifQ.yWFS3a-J3ot_FvuLkg0S1g
+          max_zoom: 15
+          name: mapbox
+          type: wmts
+      bing_api_key: ""
+      source: GoogleLocal
+  - type: mapviz_plugins/robot_image
+    name: samana
+    config:
+      visible: true
+      collapsed: true
+      frame: base_link
+      image: /home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/src/samana/robot_description/robot2d.png
+      width: 0.63
+      height: 0.58
+      offset_x: -0.19
+      offset_y: 0
+      ratio: custom
+  - type: mapviz_plugins/float
+    name: x_vel
+    config:
+      visible: true
+      collapsed: true
+      font: Liberation Sans,12,-1,5,75,0,0,0,0,0
+      color: "#000000"
+      topic: /vel_pid/state
+      anchor: top left
+      units: pixels
+      offset_x: 0
+      offset_y: 0
+      postfix_text: ms/s
+  - type: mapviz_plugins/float
+    name: yaw_vel
+    config:
+      visible: true
+      collapsed: true
+      font: Liberation Sans,12,-1,5,75,0,0,0,0,0
+      color: "#000000"
+      topic: /yaw_pid/state
+      anchor: top left
+      units: pixels
+      offset_x: 0
+      offset_y: 15
+      postfix_text: rad/s
+  - type: mapviz_plugins/grid
+    name: grid
+    config:
+      visible: false
+      collapsed: true
+      color: "#eeeeec"
+      alpha: 0.05
+      frame: map
+      x: -10
+      y: -20
+      size: 1
+      rows: 40
+      columns: 20
+  - type: mapviz_plugins/move_base
+    name: move_base
+    config:
+      visible: true
+      collapsed: false
+  - type: mapviz_plugins/marker
+    name: navigation markers
+    config:
+      visible: true
+      collapsed: true
+      topic: /waypoint_markers
+  - type: mapviz_plugins/measuring
+    name: measuring
+    config:
+      visible: true
+      collapsed: false
+      main_color: "#000000"
+      bkgnd_color: "#ffffff"
+      show_bkgnd_color: true
+      show_measurements: true
+      font_size: 8
+      alpha: 0.5
+  - type: mapviz_plugins/occupancy_grid
+    name: path_costmap
+    config:
+      visible: true
+      collapsed: true
+      alpha: 0.5
+      topic: /move_base/GlobalPlanner/potential
+      update: true
+      scheme: costmap
+  - type: mapviz_plugins/occupancy_grid
+    name: local
+    config:
+      visible: true
+      collapsed: true
+      alpha: 0.1
+      topic: /move_base/local_costmap/costmap
+      update: false
+      scheme: costmap
+  - type: mapviz_plugins/occupancy_grid
+    name: global
+    config:
+      visible: true
+      collapsed: true
+      alpha: 0.1
+      topic: /move_base/global_costmap/costmap
+      update: true
+      scheme: costmap
+  - type: mapviz_plugins/occupancy_grid
+    name: global_raw
+    config:
+      visible: true
+      collapsed: true
+      alpha: 0.1
+      topic: /move_base/global_costmap/costmap
+      update: true
+      scheme: map
+  - type: mapviz_plugins/navsat
+    name: /gps/filtered
+    config:
+      visible: true
+      collapsed: true
+      topic: /gps/filtered
+      color: "#4e9a06"
+      draw_style: lines
+      position_tolerance: 0
+      buffer_size: 1000
+  - type: mapviz_plugins/navsat
+    name: /android/fix
+    config:
+      visible: true
+      collapsed: true
+      topic: /android/fix
+      color: "#eeeeec"
+      draw_style: points
+      position_tolerance: 0
+      buffer_size: 1000
+  - type: mapviz_plugins/navsat
+    name: /fix
+    config:
+      visible: true
+      collapsed: true
+      topic: /fix
+      color: "#000000"
+      draw_style: points
+      position_tolerance: 0
+      buffer_size: 1000
+  - type: mapviz_plugins/odometry
+    name: raw
+    config:
+      visible: true
+      collapsed: true
+      topic: /odom
+      color: "#fce94f"
+      draw_style: lines
+      position_tolerance: 0
+      buffer_size: 0
+      show_laps: false
+      show_covariance: true
+      show_all_covariances: false
+      static_arrow_sizes: false
+      arrow_size: 25
+      show_timestamps: 0
+  - type: mapviz_plugins/odometry
+    name: local
+    config:
+      visible: true
+      collapsed: true
+      topic: /odometry/local
+      color: "#3465a4"
+      draw_style: arrows
+      position_tolerance: 0.5
+      buffer_size: 0
+      show_laps: true
+      show_covariance: true
+      show_all_covariances: false
+      static_arrow_sizes: false
+      arrow_size: 10
+      show_timestamps: 0
+  - type: mapviz_plugins/odometry
+    name: global
+    config:
+      visible: true
+      collapsed: true
+      topic: /odometry/global
+      color: "#00ff00"
+      draw_style: arrows
+      position_tolerance: 0.5
+      buffer_size: 0
+      show_laps: true
+      show_covariance: true
+      show_all_covariances: false
+      static_arrow_sizes: false
+      arrow_size: 10
+      show_timestamps: 0
+  - type: mapviz_plugins/odometry
+    name: gps
+    config:
+      visible: true
+      collapsed: true
+      topic: /odometry/gps
+      color: "#f57900"
+      draw_style: lines
+      position_tolerance: 0
+      buffer_size: 0
+      show_laps: false
+      show_covariance: true
+      show_all_covariances: false
+      static_arrow_sizes: false
+      arrow_size: 25
+      show_timestamps: 0
+  - type: mapviz_plugins/odometry
+    name: heading(global)
+    config:
+      visible: true
+      collapsed: true
+      topic: /odometry/global
+      color: "#000000"
+      draw_style: arrows
+      position_tolerance: 0
+      buffer_size: 2
+      show_laps: false
+      show_covariance: false
+      show_all_covariances: false
+      static_arrow_sizes: false
+      arrow_size: 15
+      show_timestamps: 0
+  - type: mapviz_plugins/path
+    name: local_planner
+    config:
+      visible: true
+      collapsed: true
+      topic: /move_base/DWAPlannerROS/local_plan
+      color: "#fce94f"
+  - type: mapviz_plugins/path
+    name: global_planner
+    config:
+      visible: true
+      collapsed: true
+      topic: /move_base/DWAPlannerROS/global_plan
+      color: "#ce5c00"
+  - type: mapviz_plugins/pose
+    name: current_goal
+    config:
+      visible: true
+      collapsed: true
+      topic: /move_base/current_goal
+      color: "#5c3566"
+      draw_style: arrows
+      position_tolerance: 0
+      buffer_size: 1
+      show_laps: false
+      static_arrow_sizes: false
+      arrow_size: 31
+  - type: mapviz_plugins/string
+    name: text_to_speech
+    config:
+      visible: true
+      collapsed: true
+      font: LKLUG,13,-1,5,50,0,0,0,0,0
+      color: "#000000"
+      topic: /text_to_speech
+      anchor: bottom left
+      units: pixels
+      offset_x: 0
+      offset_y: 0
+  - type: mapviz_plugins/tf_frame
+    name: map
+    config:
+      visible: true
+      collapsed: true
+      frame: map
+      color: "#ef2929"
+      draw_style: arrows
+      position_tolerance: 0
+      buffer_size: 3
+      static_arrow_sizes: false
+      arrow_size: 115
+  - type: mapviz_plugins/tf_frame
+    name: odom
+    config:
+      visible: true
+      collapsed: true
+      frame: odom
+      color: "#8f5902"
+      draw_style: arrows
+      position_tolerance: 1
+      buffer_size: 3
+      static_arrow_sizes: false
+      arrow_size: 146
+  - type: mapviz_plugins/float
+    name: yaw_imu
+    config:
+      visible: true
+      collapsed: true
+      font: Helvetica,11,-1,5,50,0,0,0,0,0
+      color: "#000000"
+      topic: /debug/yaw_imu
+      anchor: top left
+      units: pixels
+      offset_x: 130
+      offset_y: 0
+      postfix_text: deg|yimu
+  - type: mapviz_plugins/float
+    name: yaw_odom_global
+    config:
+      visible: true
+      collapsed: true
+      font: Helvetica,11,-1,5,50,0,0,0,0,0
+      color: "#000000"
+      topic: /debug/yaw_odom
+      anchor: top left
+      units: pixels
+      offset_x: 130
+      offset_y: 15
+      postfix_text: deg|yodom
+  - type: mapviz_plugins/float
+    name: pitch_imu
+    config:
+      visible: true
+      collapsed: true
+      font: Helvetica,11,-1,5,50,0,0,0,0,0
+      color: "#000000"
+      topic: /debug/pitch_imu
+      anchor: top left
+      units: pixels
+      offset_x: 130
+      offset_y: 30
+      postfix_text: deg|pimu
+  - type: mapviz_plugins/float
+    name: pos_x
+    config:
+      visible: true
+      collapsed: true
+      font: Helvetica,11,-1,5,50,0,0,0,0,0
+      color: "#000000"
+      topic: /debug/x
+      anchor: top left
+      units: pixels
+      offset_x: 300
+      offset_y: 0
+      postfix_text: m|x
+  - type: mapviz_plugins/float
+    name: pos_y
+    config:
+      visible: true
+      collapsed: true
+      font: Helvetica,11,-1,5,50,0,0,0,0,0
+      color: "#000000"
+      topic: /debug/y
+      anchor: top left
+      units: pixels
+      offset_x: 300
+      offset_y: 15
+      postfix_text: m|y
