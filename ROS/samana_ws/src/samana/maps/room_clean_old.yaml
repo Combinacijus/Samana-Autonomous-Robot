@@ -1,0 +1,6 @@
+image: room_clean_old.pgm
+resolution: 0.025000
+origin: [-3.0, -3.0, 0.0]
+negate: 0
+occupied_thresh: 0.8
+free_thresh: 0.2

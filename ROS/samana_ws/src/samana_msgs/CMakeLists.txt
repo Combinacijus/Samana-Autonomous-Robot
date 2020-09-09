@@ -8,6 +8,7 @@ project(samana_msgs)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  actionlib_msgs
   message_generation roscpp rospy std_msgs)
 
 ## System dependencies are found with CMake's conventions
@@ -70,14 +71,13 @@ add_message_files(FILES
 # )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
-#   Action2.action
-# )
+add_action_files(FILES
+  FollowWp.action
+)
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(DEPENDENCIES
+  actionlib_msgs
   std_msgs
   geometry_msgs
 )

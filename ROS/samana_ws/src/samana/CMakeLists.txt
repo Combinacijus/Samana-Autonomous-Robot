@@ -209,3 +209,11 @@ add_dependencies(odom_tf ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_T
 target_link_libraries(odom_tf
   ${catkin_LIBRARIES}
 )
+
+add_executable(mapviz_pub_floats
+  src/mapviz_pub_floats.cpp
+)
+add_dependencies(mapviz_pub_floats ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(mapviz_pub_floats
+  ${catkin_LIBRARIES}
+)

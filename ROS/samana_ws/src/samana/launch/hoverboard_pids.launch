@@ -15,12 +15,13 @@
                 /yaw_pid/control_effort-->
 
     <!--           FOR TUNING              -->
-    <!--Use rqt_multiplot instead. Params at rviz_configs-->
+    <!--Use rqt_multiplot instead. Params at config_viz-->
     <!--<node name="multiplot_graph" pkg="rqt_multiplot" type="rqt_multiplot"/>-->
     <!--<node name="reconfig" pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" />-->
     
     <!--Velocity PID-->
-    <node name="controller" pkg="pid" type="controller" ns="vel_pid" output="screen" >
+    <!--<node name="controller" pkg="pid" type="controller" ns="vel_pid" output="screen" >-->
+    <node name="controller" pkg="pid" type="controller" ns="vel_pid">
       <rosparam>
         node_name: vel_pid_node
         Kp: 0.2
@@ -39,7 +40,8 @@
      </node>
 
     <!--Yaw PID-->
-    <node name="controller" pkg="pid" type="controller" ns="yaw_pid" output="screen" >
+    <!--<node name="controller" pkg="pid" type="controller" ns="yaw_pid" output="screen" >-->
+    <node name="controller" pkg="pid" type="controller" ns="yaw_pid">
       <rosparam>
         node_name: yaw_pid_node
         <!--Tuned with scale factor f=max_vel/max_ang_vel = 0.26-->

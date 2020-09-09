@@ -33,7 +33,7 @@
 
 #define BAUD_RATE 115200
 #define ODOM_SLAVE_ADDR 8          // NOTE: check if address is correct
-#define MAIN_LOOP_PERIOD 10        // In ms
+#define MAIN_LOOP_PERIOD 20        // In ms
 #define MIN_DELAY 2                // In ms
 #define SS_BAUD 9600               // Softserial baud rate
 #define PIN_SS_RX 4                // Softserial RX pin

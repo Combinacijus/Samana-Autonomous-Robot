@@ -1,7 +1,14 @@
 <launch>
-    <node name="odom_tf" pkg="samana" type="odom_tf" output="screen" respawn="true"/>
-    <include file="$(find samana)/launch/nav_sat.launch"/>
-    <arg name="file" default="/home/combinacijus/Documents/SamanaAutonomousRobot/ROS/samana_ws/bags/Full_room_drive_no_tf.bag" />
-    <node pkg="rosbag" type="play" name="drive" output="screen" args="--clock $(arg file) -r 1"/> 
+    <node name="fix_translator" pkg="gps_common" type="fix_translator">
+    <!-- Translate from NavSatFix to GPSFix //-->
+      <remap from="/navsat_fix_in"  to="/android/fix/fixed"/>
+      <remap from="/gps_fix_out"    to="/android/fix/gpsfix"/>
+    </node>
 
+    <node pkg="swri_transform_util" type="initialize_origin.py" name="initialize_origin" output="screen" >
+        <param name="local_xy_frame" value="map"/>
+        <param name="local_xy_origin" value="auto"/>
+
+      <remap from="/fix"    to="/android/fix/fixed"/>
+    </node>
 </launch>

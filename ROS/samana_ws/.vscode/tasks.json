@@ -11,7 +11,103 @@
 		{
 			"taskName": "Debug",
 			"args": [
-				"catkin_make -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+				"source /opt/ros/melodic/setup.bash; catkin_make --pkg samana -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+			],
+			"problemMatcher": [
+				{
+					"owner": "cpp",
+					"fileLocation": [
+						"absolute"
+					],
+					"pattern": {
+						"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+						"file": 1,
+						"line": 2,
+						"column": 3,
+						"severity": 4,
+						"message": 5
+					}
+				},
+				{
+					"owner": "cmake",
+					"fileLocation": [
+						"relative",
+						"${workspaceRoot}/src"
+					],
+					"pattern": [
+						{
+							"regexp": "^CMake\\s+(\\w+).*at\\s+(\\w.*):(\\d+)",
+							"file": 2,
+							"line": 3,
+							"severity": 1
+						},
+						{
+							"regexp": "^(.+)$",
+							"message": 1
+						}
+					]
+				},
+				{
+					"owner": "cmake",
+					"fileLocation": [
+						"absolute"
+					],
+					"pattern": [
+						{
+							"regexp": "^CMake\\s+(\\w+).*at\\s+(\\/.+):(\\d+)",
+							"file": 2,
+							"line": 3,
+							"severity": 1
+						},
+						{
+							"regexp": "^(.+)$",
+							"message": 1
+						}
+					]
+				},
+				{
+					"owner": "cmake",
+					"fileLocation": [
+						"absolute"
+					],
+					"pattern": [
+						{
+							"regexp": "^CMake\\s+(\\w+)",
+							"severity": 1
+						},
+						{
+							"regexp": "^(\\/.+):(\\d+)",
+							"file": 1,
+							"line": 2
+						},
+						{
+							"regexp": "^(.+)$",
+							"message": 1
+						}
+					]
+				},
+				{
+					"owner": "cmake",
+					"fileLocation": [
+						"relative",
+						"${workspaceRoot}/src"
+					],
+					"pattern": [
+						{
+							"regexp": "^\\s+(\\w.*):(\\d+)\\s+(.+)$",
+							"file": 1,
+							"line": 2,
+							"message": 3
+						}
+					]
+				}
+			],
+			"isBuildCommand": true
+		},
+		{
+			"taskName": "DebugAll",
+			"args": [
+				"source /opt/ros/melodic/setup.bash; catkin_make -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
 			],
 			"problemMatcher": [
 				{
@@ -107,7 +203,7 @@
 		{
 			"taskName": "Release",
 			"args": [
-				"catkin_make -C ${workspaceRoot}"
+				"catkin_make --pkg samana -C ${workspaceRoot}"
 			],
 			"problemMatcher": [
 				{
@@ -202,7 +298,7 @@
 		{
 			"taskName": "Debug (isolated)",
 			"args": [
-				"catkin_make_isolated -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+				"catkin_make_isolated --pkg samana -C ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
 			],
 			"problemMatcher": [
 				{
@@ -297,7 +393,7 @@
 		{
 			"taskName": "Release (isolated)",
 			"args": [
-				"catkin_make_isolated -C ${workspaceRoot}"
+				"catkin_make_isolated --pkg samana -C ${workspaceRoot}"
 			],
 			"problemMatcher": [
 				{
@@ -772,7 +868,7 @@
 		{
 			"taskName": "Debug (catkin)",
 			"args": [
-				"catkin build -w ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
+				"catkin build samana -w ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug"
 			],
 			"problemMatcher": [
 				{
@@ -867,7 +963,7 @@
 		{
 			"taskName": "Release (catkin)",
 			"args": [
-				"catkin build -w ${workspaceRoot}"
+				"catkin build samana -w ${workspaceRoot}"
 			],
 			"problemMatcher": [
 				{

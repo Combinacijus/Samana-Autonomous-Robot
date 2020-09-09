@@ -10,8 +10,9 @@ To run object detection script in docker:
     sudo docker run -it --rm --gpus all --net host -v /home/combinacijus/Documents/SamanaAutonomousRobot/Python/GoldBagDetector/:/notebooks/GoldBagDetector -v /home/combinacijus/Desktop/ros-logs/:/home/combinacijus/Desktop/ros-logs/ -w /notebooks/GoldBagDetector --name imageai combinacijus/imageai:compute3.0
     python GoldBagDetector.py
 
-    # Run ROS script (TCP/IP server side)
-    # Set laptop to performance mode
+    - Connect to this computer hotspot
+    - Run ROS script (TCP/IP server side)
+    - Set laptop to performance mode
     feh -R 0.7 /home/combinacijus/Documents/SamanaAutonomousRobot/Python/GoldBagDetector/latest_detection_debug.jpg  # For image debugging
 
 NOTE: If socket in use run   lsof -i :5005   and check listening processes and sudo kill -9 <PID>

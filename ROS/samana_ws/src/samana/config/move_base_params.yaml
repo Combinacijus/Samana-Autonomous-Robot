@@ -1,5 +1,6 @@
 # Global planner
-base_global_planner: "navfn/NavfnROS"
+# base_global_planner: "navfn/NavfnROS"
+base_global_planner: "global_planner/GlobalPlanner"
 # base_global_planner: "SBPLLatticePlanner"
 
 # Local planner
@@ -8,13 +9,14 @@ base_local_planner: "dwa_local_planner/DWAPlannerROS"
 # base_local_planner: "pose_follower/PoseFollower"
 
 # General
-planner_frequency: 5.0
-controller_frequency: 10.0
-planner_patience: 5.0
-controller_patience: 15.0
-oscillation_timeout: 5.0
-oscillation_distance: 0.2
-shutdown_costmaps: false
+planner_frequency: 0.33     # Global planner default: 0.0  if 0 run on new goal or when local planner is blocked
+controller_frequency: 15.0  # Local planner  default: 20.0
+planner_patience: 7.0       # How long to wait before clearing default: 5.0
+controller_patience: 15.0   # default: 15.0
+oscillation_timeout: 5.0    # default: 0.0
+oscillation_distance: 0.4   # default: 0.5
+shutdown_costmaps: false    # default: false
+max_planning_retries: -1    # default: -1
 
 # Recovery behaviours
 recovery_behavior_enabled: true
@@ -34,10 +36,10 @@ conservative_reset:
   reset_distance: 0.5
   layer_names: ['sonar_layer']
   
-  aggressive_reset:
-    reset_distance: 0.0
-    layer_names: ['sonar_layer']
+aggressive_reset:
+  reset_distance: 100.0
+  layer_names: ['sonar_layer']
 
-  aggressive_reset2:
-    reset_distance: 0.0
-    layer_names: ['sonar_layer']
+aggressive_reset2:
+  reset_distance: 0.0
+  layer_names: ['sonar_layer']

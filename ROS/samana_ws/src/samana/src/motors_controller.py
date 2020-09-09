@@ -53,7 +53,7 @@ class MotorsController:
         self.auton_mode_prev = False  # To track change od auton_mode
 
         # Is fresh variables
-        self.fresh_cmd_vel = IsFresh(0.25, "Velocity command")
+        self.fresh_cmd_vel = IsFresh(0.4, "Velocity command")
         self.fresh_rc_teleop = IsFresh(0.15, "Remote teleop")
         self.fresh_odom = IsFresh(0.1, "Odometry")
 

@@ -91,7 +91,7 @@
   	</link>
 
 	<!--Imu sensor-->
-	<link name="imu_link">
+	<link name="imu">
 		<visual>
           	<geometry>
               	<box size="0.02 0.01 0.002"/>
@@ -101,8 +101,19 @@
         </visual>
 	</link>
 
-	<!--GPS sensor-->
-	<link name="gps_link">
+	<!--GPS sensor 1 smartphone-->
+	<link name="gps">
+		<visual>
+          	<geometry>
+              	<box size="0.16 0.08 0.01"/>
+        	</geometry>
+          	<origin xyz="0 0 0"/>
+          <material name="green"/>
+        </visual>
+	</link>
+
+	<!--GPS sensor 2 built-in-->
+	<link name="gps2">
 		<visual>
           	<geometry>
               	<box size="0.02 0.01 0.002"/>
@@ -213,15 +224,22 @@
 
 	<!--NOTE: IMU position and orientation tuning-->
 	<joint name="base_to_imu" type="fixed">
-		<origin xyz="0 0 0.45" rpy="0 0 ${pi/2}"/>
+		<!-- yaw 90deg minus 2deg due to mounting. IMU mounted CW 2deg from robot orientation-->
+		<origin xyz="0 0 0.45" rpy="0 0 ${pi/2 - pi/180*2}"/>
 		<parent link="base_link"/>
-		<child link="imu_link"/>
+		<child link="imu"/>
 	</joint>
 
 	<joint name="base_to_gps" type="fixed">
+		<origin xyz="0 -0.12 0.56" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="gps"/>
+	</joint>
+
+	<joint name="base_to_gps2" type="fixed">
 		<origin xyz="0 -0.18 0.45" rpy="0 0 0"/>
 		<parent link="base_link"/>
-		<child link="gps_link"/>
+		<child link="gps2"/>
 	</joint>
 
 	<joint name="base_to_sonic" type="fixed">

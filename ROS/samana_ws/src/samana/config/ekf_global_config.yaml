@@ -1,0 +1,103 @@
+# INPUTS
+odom0: /odom
+odom1: /odometry/gps
+imu0:  /imu
+pose0: /initialpose  # For setting initial pose in Rviz
+
+frequency: 50
+sensor_timeout: 999999
+two_d_mode: true
+odom0_queue_size: 3
+odom1_queue_size: 2
+imu0_queue_size: 3
+
+map_frame: map
+odom_frame: odom
+base_link_frame: base_link
+world_frame: map
+
+dynamic_process_noise_covariance: true
+# reset_on_time_jump: true
+transform_time_offset: 0.03  # move_base controller needs future transform it fixes it
+# smooth_lagged_data: true
+# history_length: 5
+
+# **************************ODOM0 LOCAL********************************
+odom0_config: [
+               true, true, false,   # x, y, z
+               false, false, true,  # roll, pitch, yaw
+               false, false, false, # x vel, y vel, z vel
+               false, false, false, # roll vel, pitch vel, yaw vel
+               false, false, false  # x accel, y accel, z accel
+               ] 
+odom0_differential: true
+
+# ****************************ODOM1 GPS********************************
+odom1_config: [
+               true, true, false,   # x, y, z
+               false, false, false,  # roll, pitch, yaw
+               false, false, false, # x vel, y vel, z vel
+               false, false, false, # roll vel, pitch vel, yaw vel
+               false, false, false  # x accel, y accel, z accel
+               ] 
+odom1_differential: false
+
+# *******************************IMU***********************************
+imu0_config: [
+              false, false, false,  # x, y, z
+              false, false, true,    # roll, pitch, yaw
+              false, false, false,  # x vel, y vel, z vel
+              false, false, true,  # roll vel, pitch vel, yaw vel
+              false, false, false   # x accel, y accel, z accel
+              ]
+imu0_differential: false
+imu0_remove_gravitational_acceleration: false
+
+# *******************************POSE0***********************************
+
+pose0_config: [
+               true, true, false,   # x, y, z
+               false, false, false,  # roll, pitch, yaw
+               false, false, false, # x vel, y vel, z vel
+               false, false, false, # roll vel, pitch vel, yaw vel
+               false, false, false  # x accel, y accel, z accel
+               ] 
+pose0_differential: false
+
+# *******************************FOOTER***********************************
+print_diagnostics: false
+debug: false
+debug_out_file: ~/ros_debug_logs/debug_ekf_global.txt
+
+# x0.4 default variances
+process_noise_covariance: [0.02, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0.02, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0.024, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0.012, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0.012, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0.024, 0,     0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0.01, 0,     0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0.01, 0,    0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0.012, 0,    0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0.004, 0,    0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0.004, 0,    0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0.008, 0,    0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0.004, 0,    0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0.004, 0,
+                           0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0.006]
+
+# process_noise_covariance: [0.005, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0.005, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0.006, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0.003, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0.003, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0.006, 0,     0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0.0025, 0,     0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0.0025, 0,    0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0.004, 0,    0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0.001, 0,    0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0.001, 0,    0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0.002, 0,    0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0.001, 0,    0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0.001, 0,
+#                            0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0.0015]

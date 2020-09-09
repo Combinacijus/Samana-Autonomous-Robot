@@ -38,11 +38,13 @@ temp_correction_coef = 1.0  # Updated in imu_calib_callback()
 range_sonar_msg = Range()
 range_bump_msg = Range()
 #                    0    1     2    3    4 |  5    6    7     8    9
-sonar_max_ranges = [0.4, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.4]  # NOTE: tuning filter. Found experimentally
+# sonar_max_ranges = [0.4, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.4]  # NOTE: tuning filter. Found experimentally
+sonar_max_ranges = [0.2, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.15]  # NOTE: tuning filter. Found experimentally
 # sonar_max_ranges = [0.4] + [0.5] * 8 + [0.4]  # NOTE: tuning filter. Found experimentally
+# sonar_max_ranges = [0.0] + [0.3] * 8 + [0.0]  # NOTE: tuning filter. Found experimentally
 
 sonar_pub = rospy.Publisher("range_sonar", Range, queue_size=10)
-sonar_pub_all = rospy.Publisher("range_sonar_all", Range, queue_size=5)  # TODO: delete
+# sonar_pub_all = rospy.Publisher("range_sonar_all", Range, queue_size=5)  # NOTE: debug
 bump_pub1 = rospy.Publisher("range_bump1", Range, queue_size=10)
 bump_pub2 = rospy.Publisher("range_bump2", Range, queue_size=10)
 
@@ -68,9 +70,9 @@ def sonar_callback(range_data):
         if outlier is False:
             sonar_pub.publish(range_sonar_msg)
 
-        # Debug all sonar ranges  # TODO: delete
-        range_sonar_msg.max_range = 10.0
-        sonar_pub_all.publish(range_sonar_msg)
+        # NOTE: Debug all sonar ranges
+        # range_sonar_msg.max_range = 10.0
+        # sonar_pub_all.publish(range_sonar_msg)
 
 
 def is_outlier(reading, i=0):

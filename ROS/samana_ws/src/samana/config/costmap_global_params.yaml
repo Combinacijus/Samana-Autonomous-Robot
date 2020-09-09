@@ -1,0 +1,18 @@
+global_costmap:
+  global_frame: utm
+  robot_base_frame: base_link
+  update_frequency: 1.0
+  publish_frequency: 1.0  # Visualization frequency
+  
+  # For padded 4m map
+  inflation_radius: 7.0
+  cost_scaling_factor: 0.8
+
+  # For precise map
+  # inflation_radius: 5.0
+  # cost_scaling_factor: 1.0
+  
+  plugins:
+      - {name: static_layer, type: 'costmap_2d::StaticLayer'}
+      - {name: sonar_layer,   type: "range_sensor_layer::RangeSensorLayer"}
+      - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}

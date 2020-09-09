@@ -1,0 +1,781 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+        - /TF1/Frames1
+        - /Imu1/Axes properties1
+        - /GlobalMap1
+        - /GlobalMap1/OdomEkfGlobal1/Covariance1
+        - /GlobalMap1/OdomEkfGlobal1/Covariance1/Position1
+        - /LocalMap1
+        - /GPS1/AerialMapDisplay1
+        - /GPS1/OdomGPS1/Shape1
+        - /GPS1/OdomGPS1/Covariance1
+        - /GPS1/OdomGPS1/Covariance1/Position1
+        - /PoseArray1
+        - /MarkerArray1
+      Splitter Ratio: 0.6735293865203857
+    Tree Height: 484
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.5886790156364441
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5018587112426758
+  - Class: rviz/Time
+    Experimental: true
+    Name: Time
+    SyncMode: 0
+    SyncSource: ""
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 1
+      Name: AxesMap
+      Radius: 0.10000000149011612
+      Reference Frame: map
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 1.2999999523162842
+      Name: AxesOdom
+      Radius: 0.05000000074505806
+      Reference Frame: odom
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_bump_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_sonic_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        bump_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_11:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_12:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_13:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_14:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_15:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bump_9:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gps:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gps2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        imu:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        middle_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ultrasonic_9:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.5
+          Buffer Length: 10
+          Class: rviz/Range
+          Color: 138; 226; 52
+          Enabled: true
+          Name: Sonar
+          Queue Size: 10
+          Topic: /range_sonar
+          Unreliable: false
+          Value: true
+        - Alpha: 0.10000000149011612
+          Buffer Length: 10
+          Class: rviz/Range
+          Color: 186; 189; 182
+          Enabled: true
+          Name: SonarAll
+          Queue Size: 10
+          Topic: /range_sonar_all
+          Unreliable: false
+          Value: true
+        - Alpha: 0.800000011920929
+          Buffer Length: 9
+          Class: rviz/Range
+          Color: 255; 25; 0
+          Enabled: true
+          Name: Bump1
+          Queue Size: 9
+          Topic: /range_bump1
+          Unreliable: false
+          Value: true
+        - Alpha: 0.800000011920929
+          Buffer Length: 9
+          Class: rviz/Range
+          Color: 255; 25; 0
+          Enabled: true
+          Name: Bump2
+          Queue Size: 9
+          Topic: /range_bump2
+          Unreliable: false
+          Value: true
+      Enabled: false
+      Name: Ranging
+    - Class: rviz/TF
+      Enabled: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: false
+      Show Axes: true
+      Show Names: true
+      Tree:
+        {}
+      Update Interval: 0
+      Value: false
+    - Acceleration properties:
+        Acc. vector alpha: 0.25
+        Acc. vector color: 255; 0; 0
+        Acc. vector scale: 0.05000000074505806
+        Derotate acceleration: true
+        Enable acceleration: true
+      Axes properties:
+        Axes scale: 0.07000000029802322
+        Enable axes: true
+      Box properties:
+        Box alpha: 1
+        Box color: 255; 0; 0
+        Enable box: false
+        x_scale: 1
+        y_scale: 1
+        z_scale: 1
+      Class: rviz_imu_plugin/Imu
+      Enabled: false
+      Name: Imu
+      Topic: /imu
+      Unreliable: false
+      Value: false
+      fixed_frame_orientation: false
+    - Alpha: 0.5
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 193; 125; 17
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: CurrentGoal
+      Shaft Length: 0.30000001192092896
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic: /move_base/current_goal
+      Unreliable: false
+      Value: true
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.4000000059604645
+          Class: rviz/Map
+          Color Scheme: costmap
+          Draw Behind: true
+          Enabled: true
+          Name: MapGlobal
+          Topic: /move_base/global_costmap/costmap
+          Unreliable: false
+          Use Timestamp: false
+          Value: true
+        - Alpha: 0.07500000298023224
+          Class: rviz/Map
+          Color Scheme: map
+          Draw Behind: true
+          Enabled: true
+          Name: MapRectGlobal
+          Topic: /move_base/global_costmap/costmap
+          Unreliable: false
+          Use Timestamp: false
+          Value: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 143; 89; 2
+          Enabled: true
+          Head Diameter: 0.30000001192092896
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
+          Line Style: Lines
+          Line Width: 0.029999999329447746
+          Name: PathGlobal
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.10000000149011612
+          Shaft Length: 0.10000000149011612
+          Topic: /move_base/DWAPlannerROS/global_plan
+          Unreliable: false
+          Value: true
+        - Angle Tolerance: 0.4000000059604645
+          Class: rviz/Odometry
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 0.3499999940395355
+              Scale: 1
+              Value: false
+            Position:
+              Alpha: 0.10000000149011612
+              Color: 204; 51; 204
+              Scale: 1
+              Value: true
+            Value: true
+          Enabled: true
+          Keep: 100
+          Name: OdomEkfGlobal
+          Position Tolerance: 0.4000000059604645
+          Shape:
+            Alpha: 1
+            Axes Length: 1
+            Axes Radius: 0.10000000149011612
+            Color: 115; 210; 22
+            Head Length: 0.10000000149011612
+            Head Radius: 0.05000000074505806
+            Shaft Length: 0.3499999940395355
+            Shaft Radius: 0.03999999910593033
+            Value: Arrow
+          Topic: /odometry/global
+          Unreliable: false
+          Value: true
+      Enabled: true
+      Name: GlobalMap
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.5
+          Class: rviz/Map
+          Color Scheme: costmap
+          Draw Behind: true
+          Enabled: true
+          Name: MapLocal
+          Topic: /move_base/local_costmap/costmap
+          Unreliable: false
+          Use Timestamp: false
+          Value: true
+        - Alpha: 0.07500000298023224
+          Class: rviz/Map
+          Color Scheme: map
+          Draw Behind: true
+          Enabled: true
+          Name: MapRectLocal
+          Topic: /move_base/local_costmap/costmap
+          Unreliable: false
+          Use Timestamp: false
+          Value: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 252; 233; 79
+          Enabled: true
+          Head Diameter: 0.019999999552965164
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
+          Line Style: Lines
+          Line Width: 0.029999999329447746
+          Name: PathLocal
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.009999999776482582
+          Shaft Length: 0.10000000149011612
+          Topic: /move_base/DWAPlannerROS/local_plan
+          Unreliable: false
+          Value: true
+        - Alpha: 1
+          Class: rviz/Polygon
+          Color: 25; 255; 0
+          Enabled: true
+          Name: PolygonFootprint
+          Topic: /move_base/local_costmap/footprint
+          Unreliable: false
+          Value: true
+        - Angle Tolerance: 0.4000000059604645
+          Class: rviz/Odometry
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 0.3499999940395355
+              Scale: 1
+              Value: false
+            Position:
+              Alpha: 0.014999999664723873
+              Color: 204; 51; 204
+              Scale: 1
+              Value: true
+            Value: true
+          Enabled: true
+          Keep: 100
+          Name: OdomEkfLocal
+          Position Tolerance: 0.4000000059604645
+          Shape:
+            Alpha: 1
+            Axes Length: 1
+            Axes Radius: 0.10000000149011612
+            Color: 114; 159; 207
+            Head Length: 0.10000000149011612
+            Head Radius: 0.05000000074505806
+            Shaft Length: 0.3499999940395355
+            Shaft Radius: 0.03999999910593033
+            Value: Arrow
+          Topic: /odometry/local
+          Unreliable: false
+          Value: true
+        - Angle Tolerance: 0.20000000298023224
+          Class: rviz/Odometry
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 1
+              Scale: 1
+              Value: true
+            Position:
+              Alpha: 0.30000001192092896
+              Color: 204; 51; 204
+              Scale: 1
+              Value: true
+            Value: false
+          Enabled: false
+          Keep: 100
+          Name: Odom Encoders
+          Position Tolerance: 0.15000000596046448
+          Shape:
+            Alpha: 0.5
+            Axes Length: 1
+            Axes Radius: 0.10000000149011612
+            Color: 255; 25; 0
+            Head Length: 0.10000000149011612
+            Head Radius: 0.05000000074505806
+            Shaft Length: 0.25
+            Shaft Radius: 0.019999999552965164
+            Value: Arrow
+          Topic: /odom
+          Unreliable: false
+          Value: false
+      Enabled: true
+      Name: LocalMap
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Blocks: 1
+          Class: rviz_plugins/AerialMapDisplay
+          Draw Behind: true
+          Enabled: true
+          Frame Convention: XYZ -> ENU
+          Name: AerialMapDisplay
+          Object URI: https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29tYmluYWNpanVzIiwiYSI6ImNrODRyanl4dTAxYTYza25zcWtvNWg1MGYifQ.yWFS3a-J3ot_FvuLkg0S1g
+          Topic: /gps/filtered
+          Value: true
+          Zoom: 20
+        - Angle Tolerance: 0.10000000149011612
+          Class: rviz/Odometry
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 1
+              Scale: 1
+              Value: false
+            Position:
+              Alpha: 0.014999999664723873
+              Color: 245; 121; 0
+              Scale: 1
+              Value: true
+            Value: true
+          Enabled: true
+          Keep: 200
+          Name: OdomGPS
+          Position Tolerance: 0.10000000149011612
+          Shape:
+            Alpha: 1
+            Axes Length: 0.4000000059604645
+            Axes Radius: 0.05999999865889549
+            Color: 255; 25; 0
+            Head Length: 0.30000001192092896
+            Head Radius: 0.10000000149011612
+            Shaft Length: 1
+            Shaft Radius: 0.05000000074505806
+            Value: Axes
+          Topic: /odometry/gps
+          Unreliable: false
+          Value: true
+      Enabled: true
+      Name: GPS
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: CloudTraject
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.009999999776482582
+          Style: Flat Squares
+          Topic: /move_base/DWAPlannerROS/trajectory_cloud
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: CloudCost
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.009999999776482582
+          Style: Flat Squares
+          Topic: /move_base/DWAPlannerROS/cost_cloud
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+      Enabled: false
+      Name: DebugPlanner
+    - Class: rviz/TF
+      Enabled: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+      Marker Scale: 4
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        {}
+      Update Interval: 0
+      Value: false
+    - Alpha: 1
+      Arrow Length: 2
+      Axes Length: 0.30000001192092896
+      Axes Radius: 0.009999999776482582
+      Class: rviz/PoseArray
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.07000000029802322
+      Head Radius: 0.029999999329447746
+      Name: PoseArray
+      Shaft Length: 0.23000000417232513
+      Shaft Radius: 0.009999999776482582
+      Shape: Arrow (Flat)
+      Topic: /waypoints
+      Unreliable: false
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: visualization_marker_array
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Default Light: true
+    Fixed Frame: map
+    Frame Rate: 20
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 18.428102493286133
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 9.390582084655762
+        Y: -7.607710838317871
+        Z: 24.445903778076172
+      Focal Shape Fixed Size: false
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 1.2347965240478516
+      Target Frame: base_link
+      Value: Orbit (rviz)
+      Yaw: 4.688594341278076
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 713
+  Hide Left Dock: false
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd0000000400000000000001800000026ffc0200000008fb000000100044006900730070006c006100790073010000003d0000026f000000c900fffffffb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000026ffc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000026f000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000533000000c9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000052f0000003efc0100000002fb0000000800540069006d006500000000000000052f0000031b00fffffffb0000000800540069006d00650100000000000004500000000000000000000002600000026f00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 998
+  X: 53
+  Y: 77

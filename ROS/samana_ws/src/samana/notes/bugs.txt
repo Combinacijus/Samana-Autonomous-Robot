@@ -9,8 +9,8 @@ after restarting STM32 odometry jumps a bit
 rc Arduino can loose sync and won't recover without powering off (at least with RC on)
 IMU gets biased for no reason. Possible solution to restart IMU.
 Odometry: sometimes no /odom_data is received from Arduino even tho topic is published. This causes constant speed even after setting speed to 0. Need power off on
-
 Hoverboard: /hov topic is not published from Arduino
+IMU: roll and pitch axes are messed up in visualization although imu seems to follow conventions 
 
 HARDWARE:
 STM32 requires reset for odometry to work
