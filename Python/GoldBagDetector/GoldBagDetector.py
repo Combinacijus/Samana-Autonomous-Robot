@@ -212,8 +212,9 @@ class Detector:
     """
 
     def __init__(self):
-        self.BASE_IP = "http://192.168.8.101:4747/"  # For home wifi
-        # self.BASE_IP = "http://10.42.0.32:4747/"  # For hotspot connection
+        # self.BASE_IP = "http://192.168.8.101:4747/"  # For home wifi
+        # self.BASE_IP = "http://192.168.0.100:4747/"  # For dormitory wifi
+        self.BASE_IP = "http://10.42.0.32:4747/"  # For hotspot connection
         self.CAM_ADDR = self.BASE_IP + "video"  # NOTE: might change
         self.CAM_FORCE_ADDR = self.BASE_IP + "override"  # NOTE: might change
         self.CAM_FOCUS_ADDR = self.BASE_IP + "cam/1/af"  # NOTE: might change

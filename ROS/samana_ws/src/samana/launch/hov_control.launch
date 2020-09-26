@@ -6,6 +6,6 @@
         x: 2
     </rosparam>
 
-    <node name="teleop_rc" pkg="samana" type="teleop_rc.py" output="screen" /> 
+    <node name="teleop_rc" pkg="samana" type="teleop_rc.py" output="screen" respawn="true"/> 
 
 </launch>

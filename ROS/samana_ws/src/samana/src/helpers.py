@@ -28,13 +28,13 @@ class IsFresh:
         self.audio_pub = rospy.Publisher('text_to_speech', String, queue_size=5)
         self.last_state = self.fresh
 
-    def updated(self):
+    def updated(self, no_audio=False):
         '''
             Updates last_updated time. 
             Publishes "{prefix} fresh" on state change to fresh
         '''
         self.last_updated = rospy.Time.now()
-        if self.audio and self.fresh is not True:
+        if self.audio and no_audio is False and self.fresh is not True:
             rospy.logwarn("REFRESHED {}".format(self.prefix))
             self.audio_pub.publish("{} fresh".format(self.prefix))
         self.fresh = True

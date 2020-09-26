@@ -1,0 +1,12 @@
+# Arm command list
+uint8 GRABBER_OPEN_FULLY = 1
+uint8 GRABBER_CLOSE_FULLY = 2
+uint8 LIFTER_RAISE_FULLY = 3
+uint8 LIFTER_LOWER_FULLY = 4
+uint8 LIFTER_RAISE_SMALL = 5
+uint8 OPEN_AND_LOWER = 6
+
+uint8 arm_command  # Single command
+---
+float32 completion_time  # Time it took to complete command
+---

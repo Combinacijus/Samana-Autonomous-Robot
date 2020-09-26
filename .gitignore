@@ -1,11 +1,13 @@
 # Other
 Arduino/ArduinoOutput/*
 **/CMakeFiles/*
+**/src/.vscode
 
 # Goldbag images
 Python/GoldBagDetector/image.jpg
 Python/GoldBagDetector/latest_detection_debug.jpg
 Python/GoldBagDetector/training-images
+Python/GoldBagDetector/calib
 
 # Build files
 build/

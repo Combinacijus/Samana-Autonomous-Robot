@@ -195,7 +195,7 @@ include_directories(
 # catkin_add_nosetests(test)
 
 add_executable(visualize_test
-  src/visualize_test.cpp
+  src/unused/visualize_test.cpp
 )
 add_dependencies(visualize_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(visualize_test
@@ -203,7 +203,7 @@ target_link_libraries(visualize_test
 )
 
 add_executable(odom_tf
-  src/odom_tf.cpp
+  src/unused/odom_tf.cpp
 )
 add_dependencies(odom_tf ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(odom_tf
@@ -211,7 +211,7 @@ target_link_libraries(odom_tf
 )
 
 add_executable(mapviz_pub_floats
-  src/mapviz_pub_floats.cpp
+  src/unused/mapviz_pub_floats.cpp
 )
 add_dependencies(mapviz_pub_floats ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(mapviz_pub_floats

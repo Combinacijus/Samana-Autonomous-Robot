@@ -16,6 +16,7 @@ hoverboard:
   max_auton_accel_lin: 2.5  # Max 6m/s^2 at max_accel_lin: 2000, max_speed: 500, max_auton_vel_lin: 0.7
   max_auton_accel_ang: 9.6
 
+  # TODO change to full speed for event
   # In m/s for cmd_vel auton mode full speed
   # max_auton_vel_lin: 0.7
   # max_auton_vel_ang: 3.0

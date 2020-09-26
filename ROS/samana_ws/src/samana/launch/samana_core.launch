@@ -4,7 +4,7 @@
     <!--Robot model and tf transforms-->
     <arg name="model" default="$(find samana)/robot_description/urdf/samana.xml"/>
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true"/>
 
     <!--Data reading and decoding from Arduinos and control nodes-->
     <include file="$(find samana)/launch/arduino_start.launch">
@@ -16,4 +16,11 @@
 
     <!--Mapping and path planning-->
     <include file="$(find samana)/launch/move_base.launch"/>
+    <include file="$(find samana)/launch/follow_waypoints.launch"/>
+
+    <!--Object detection-->
+    <node name="object_detector" pkg="samana" type="object_detector.py" respawn="true"/>
+
+    <!--TODO Main state machine-->
+    <!--<node name="main_state_machine" pkg="samana" type="main_smach.py" respawn="true"/>-->
 </launch>

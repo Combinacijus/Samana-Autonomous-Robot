@@ -1,14 +1,14 @@
 <launch>
     <!--Config-->
-    <arg name="use_simtime" default="true"/>
-    <arg name="use_arduinos" default="false"/>
+    <arg name="use_simtime" default="false"/>
+    <arg name="use_arduinos" default="true"/>
 
-    <arg name="use_mapviz" default="true"/>
-    <arg name="use_rviz" default="false"/>
+    <arg name="use_mapviz" default="false"/>
+    <arg name="use_rviz" default="true"/>
     
     <param name="use_sim_time" value="$(arg use_simtime)"/>   
 
-    <!--NOTE: For downloading new map tiles-->
+    <!--NOTE: For displaying satellite map tiles-->
     <!--sudo docker run -p 8080:8080 -it -v ~/mapproxy:/mapproxy danielsnider/mapproxy-->
 
     <!--Won't work in same launch file. Launch it separatly-->

@@ -223,13 +223,18 @@ class FollowPath(State):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
         # Parameters
-        self.goal_frame_id = rospy.get_param('~goal_frame_id', 'map')
+        self.goal_frame_id = rospy.get_param('~goal_frame_id', 'utm')
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
         self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link')
         self.duration = rospy.get_param('~wait_duration', 0.0)
         self.distance_tolerance = rospy.get_param('~waypoint_distance_tolerance', 0.0)
         self.check_dist_period = rospy.get_param('~check_dist_period', 0.33)
         self.use_action_lib = rospy.get_param('~use_action_lib', 'false')
+
+        self.use_timeout = rospy.get_param('~use_timeout', 'false')
+        self.timeout_a = rospy.get_param('~timeout_a', 2.5)
+        self.timeout_b = rospy.get_param('~timeout_b', 4)
+        self.timeout_vel = rospy.get_param('~timeout_vel', 0.3)
 
         self.waypoints_viz = WaypointsViz()
 
@@ -241,7 +246,7 @@ class FollowPath(State):
 
         # Tf listener
         rospy.loginfo('Starting a tf listner.')
-        self.tf = TransformListener()
+        self.tf = TransformListener()  # TODO remove not used?
         self.listener = tf.TransformListener()
 
     def parameters_set_for_actionlib(self):
@@ -249,11 +254,12 @@ class FollowPath(State):
         if self.use_action_lib is True:
             self.distance_tolerance = distance_tolerance_action
 
-    def execute(self, userdata, feedback=None):
+    def execute(self, userdata, feedback=None, action_server=None):
         """
-            Used as state machine state or by simple call
+            Used as state machine state or by call from actionlib server
             param feedback: should be callback function cb(waypoint_current) which is called every new goal
                             arg waypoint_current: currently excecuting waypoint
+            param action_server: action server object which called this function used to return state
         """
         global waypoints
 
@@ -288,20 +294,55 @@ class FollowPath(State):
                 rospy.loginfo("Waiting for %f sec..." % self.duration)
                 time.sleep(self.duration)
             else:  # If distance_tolerance is set
-                # Possible BUG: won't ever return if move_base finished while distance_tolerance not satisfied
+                start_time = rospy.Time.now()  # Used for timeout
+                dist_to_wp = self.dist_to_waypoint(waypoint)
+                timeout = self.timeout_a * (dist_to_wp / self.timeout_vel) + self.timeout_b
+                rospy.loginfo("Waypoint dist: {:.2f}, timeout: {:.2f}".format(self.dist_to_waypoint(waypoint), timeout))
 
                 distance = self.distance_tolerance + 1  # distace > distance_tolerance to always enter the while loop
-                while distance > self.distance_tolerance:  # Loops until distance to the goal is within tolerance
-                    self.listener.waitForTransform(self.goal_frame_id, self.base_frame_id, rospy.Time(0), rospy.Duration(4.0))
-                    trans, rot = self.listener.lookupTransform(self.goal_frame_id, self.base_frame_id, rospy.Time(0))
-                    distance = math.sqrt(pow(waypoint.pose.position.x-trans[0], 2) + pow(waypoint.pose.position.y-trans[1], 2))
+                while True:  # Loops until waypoint is reached or timed-out
+                    # Skip this waypoint because timeout
+                    if rospy.Time.now() - start_time > rospy.Duration(timeout):
+                        rospy.logwarn("Waypoint TIMEOUT! Couldn't reach goal in {:.2f}sec {:.2f}m away".format(timeout, dist_to_wp))
+                        break
+
+                    # Waypoint reached by move_base continue with next waypoint
+                    if self.client.get_state() == actionlib.GoalStatus.SUCCEEDED:
+                        break
+
+                    # Follow waypoints tolerance satisfied continue with next waypoint
+                    if self.dist_to_waypoint(waypoint) < self.distance_tolerance:
+                        break
+                    
+                    # Preempt requested (only when using actionlib).
+                    # Send current waypoint index as result and stop move_base and return
+                    if action_server:
+                        if action_server.is_preempt_requested():
+                            print("PREEMPTING follow_waypoints")  # TODO:
+                            self.client.cancel_all_goals()
+                            print("CANCELED move_base")
+                            action_server.set_preempted(result=FollowWpResult(i))
+
+                            self.waypoints_viz.visualize_current_waypoint(waypoint, done=True)
+
+                            return 'preempt'
+
                     time.sleep(self.check_dist_period)  # Reduces CPU usage
+
                     # rospy.loginfo_throttle(1, "Distance to goal point: {}".format(distance))  # For debuging
                     # rospy.loginfo("Distance to goal point: {}".format(distance))  # For debuging
 
             self.waypoints_viz.visualize_current_waypoint(waypoint, done=True)
-
+        
+        action_server.set_succeeded(result=FollowWpResult(len(waypoints)))  # All waypoints done
         return 'success'
+
+    def dist_to_waypoint(self, waypoint):
+        self.listener.waitForTransform(waypoint.header.frame_id, self.base_frame_id, rospy.Time(0), rospy.Duration(4.0))
+        trans, rot = self.listener.lookupTransform(self.goal_frame_id, self.base_frame_id, rospy.Time(0))
+        distance = math.sqrt(pow(waypoint.pose.position.x-trans[0], 2) + pow(waypoint.pose.position.y-trans[1], 2))
+
+        return distance
 
 
 class PathComplete(State):
@@ -390,7 +431,7 @@ class WaypointsViz:
         self.markers.color.b = self.marker_color['b']
         self.markers.color.a = self.marker_color['a']
 
-        self.markers.header.frame_id = rospy.get_param('~goal_frame_id', 'map')
+        # self.markers.header.frame_id = rospy.get_param('~goal_frame_id', 'map')
         self.markers.header.stamp = rospy.Time.now()
         self.markers.points = []
 
@@ -405,20 +446,21 @@ class WaypointsViz:
             param waypoints: (list of PoseStamped)
         """
         self.markers.points = []
+        self.markers.id = self.MARKER_ID_PATH
 
         if waypoints:
-            self.markers.id = self.MARKER_ID_PATH
+            self.markers.header.frame_id = waypoints[0].header.frame_id
             self.markers.type = Marker.LINE_STRIP
             self.markers.scale.x = self.marker_scale
             self.set_color(self.marker_color['r'], self.marker_color['g'], self.marker_color['b'], self.marker_color['a'])
-            self.markers.points = []
             for waypoint in waypoints:
                 self.markers.points.append(waypoint.pose.position)
 
         if len(self.markers.points) > 0:
             self.marker_pub.publish(self.markers)
         else:
-            rospy.loginfo('No waypoints to visualize')
+            rospy.loginfo('No waypoints. Clearing markers')
+            self.marker_pub.publish(self.markers)
 
     def visualize_current_waypoint(self, waypoint, done=False):
         """
@@ -426,6 +468,7 @@ class WaypointsViz:
         """
 
         if waypoint:
+            self.markers.header.frame_id = waypoints[0].header.frame_id
             self.markers.type = Marker.POINTS
             self.markers.id = self.MARKER_ID_CURRENT
             self.markers.scale.x = self.marker_scale * 15
@@ -464,16 +507,17 @@ class FollowWaypointServer:
         follow_path = FollowPath()
         distance_tolerance_action = goal.dist_tolerance
         waypoints = PoseArray_to_PoseStamped_list(goal.waypoints)  # Global variable set for further use
-        
+
         print_waypoints_info(waypoints)
-        waypoints_viz = WaypointsViz()  # For visualizing using MarkerArray    
+        waypoints_viz = WaypointsViz()  # For visualizing using MarkerArray
         waypoints_viz.visualize_waypoints(waypoints)
 
-        follow_path.execute(None, feedback_cb)
+        status = follow_path.execute(None, feedback_cb, self.server)
+
+        waypoints_viz.visualize_waypoints(None)  # Clearing markers
 
         # rospy.loginfo("Following waypoints done with outcome: {}".format(outcome))
-
-        self.server.set_succeeded(result=FollowWpResult(self.feedback.wp_current))
+        # self.server.set_succeeded(result=FollowWpResult(self.feedback.wp_current))  # Already set
 
 
 def PoseArray_to_PoseStamped_list(pose_array):
