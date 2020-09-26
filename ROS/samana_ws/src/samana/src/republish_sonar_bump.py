@@ -26,27 +26,38 @@
 
 import rospy
 from sensor_msgs.msg import Range
-from samana_msgs.msg import Int16Array
-from samana_msgs.msg import Bump
-from samana_msgs.msg import ImuCalib
+from samana_msgs.msg import Int16Array, Bump, ImuCalib
+from std_msgs.msg import Bool
 import math
+
+
+def enable_front_sensors_cb(msg):
+    global enable_front_sensors
+
+    enable_front_sensors = msg.data
+    rospy.loginfo("enable_front_sensors: {}".format(enable_front_sensors))
+
 
 SONAR_COUNT = 10
 sonar_hist = [[] for _ in range(SONAR_COUNT)]  # [[],] * SONAR_COUNT BUGFIX
 temp_correction_coef = 1.0  # Updated in imu_calib_callback()
+enable_front_sensors = True  # If false shortens front sonars range and disables from bump sensors
 
 range_sonar_msg = Range()
 range_bump_msg = Range()
 #                    0    1     2    3    4 |  5    6    7     8    9
-# sonar_max_ranges = [0.4, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.4]  # NOTE: tuning filter. Found experimentally
-sonar_max_ranges = [0.2, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.15]  # NOTE: tuning filter. Found experimentally
+sonar_max_ranges = [0.2, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.2]  # NOTE: tuning filter. Found experimentally
+sonar_max_ranges_disabled = [0.03, 0.06, -1, -1, -1, -1, -1, -1, 0.06, 0.03]  # NOTE: tuning filter. Found experimentally
 # sonar_max_ranges = [0.4] + [0.5] * 8 + [0.4]  # NOTE: tuning filter. Found experimentally
-# sonar_max_ranges = [0.0] + [0.3] * 8 + [0.0]  # NOTE: tuning filter. Found experimentally
 
+# Publishers
 sonar_pub = rospy.Publisher("range_sonar", Range, queue_size=10)
 # sonar_pub_all = rospy.Publisher("range_sonar_all", Range, queue_size=5)  # NOTE: debug
 bump_pub1 = rospy.Publisher("range_bump1", Range, queue_size=10)
 bump_pub2 = rospy.Publisher("range_bump2", Range, queue_size=10)
+
+# Subscribers
+rospy.Subscriber("params/enable_front_sensors", Bool, enable_front_sensors_cb)
 
 
 # ------------------------------- FUNCTIONS -------------------------------
@@ -61,6 +72,11 @@ def sonar_callback(range_data):
         range_sonar_msg.header.frame_id = "ultrasonic_%d" % (i + 1)
         range_sonar_msg.header.stamp = range_data.header.stamp
         range_sonar_msg.max_range = sonar_max_ranges[i]  # Set each max range different
+
+        # Shorten front sensors range if published to do so
+        if enable_front_sensors is False and sonar_max_ranges_disabled[i] != -1:
+            range_sonar_msg.max_range = sonar_max_ranges_disabled[i]
+
         dist = range_data.data[i] / 1000.0 * temp_correction_coef  # Distance in meters corrected for temperature
         range_sonar_msg.range = dist
 
@@ -151,6 +167,9 @@ def bump_callback(bump_data):
         if bin_data[i] == '1' and bump_callback.bin_data_old[i] == '1':
             r = float("-inf")  # -inf - detection bumped
 
+        if enable_front_sensors is False and i in [0, 1, 13, 14]:
+            r = float("inf")  # Effectivelly disables 4 front bump sensors
+
         # If not the same range as previous or forced update
         if bump_callback.bin_prev_posted[i] != r or rospy.Time.now() - bump_callback.last_bump_t[i] > rospy.Duration(0.4):
             bump_callback.last_bump_t[i] = rospy.Time.now()
@@ -172,8 +191,8 @@ def bump_callback(bump_data):
     # Remember previous bin_data
     bump_callback.bin_data_old = bin_data
 
-
 # ------------------------------- MAIN -------------------------------
+
 
 if __name__ == "__main__":
     rospy.init_node("range_pub")

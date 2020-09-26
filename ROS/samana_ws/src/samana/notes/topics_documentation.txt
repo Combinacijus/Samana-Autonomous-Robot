@@ -18,8 +18,9 @@ Distance and Bump sensors:
         	Subscribes:
 				/sonar
 				/bump
-        		/imu_calib			...temp 								for temperature to calibrate sonar readings
-        visualize_distances.py:
+        		/imu_calib			...temp 						for temperature to calibrate sonar readings
+				/params/enable_front_sensors    Bool					
+		visualize_distances.py:
         	Publishes:
         		/range_data 					msg.Range 			range messages for later use in rviz or elsewhere
         		/visualization_marker_array		msg.MarkerArray 	for bump sensors visualization
@@ -118,6 +119,7 @@ rc_main.py:
 
 object_detection.py:
 	Publishes:
+		/bag_point					PointStamped						Center point of detected bag (x-fwd, y-right)
 	Subscribes:
 		via TCP/IP Client			[x1, y1, x2, y2] and other			ImageAI detection dictionary (socket ip in code)
 	Service:
@@ -129,3 +131,12 @@ helpers.py:
 			/text_to_speech
 		Subscribes:
 		Service:
+
+main_smach.py:
+	Publishes:
+		/cmd_vel						Twist					For aligning with bag
+		/params/enable_front_sensors	Bool					If true shortens front sonars and disables front bump sensors
+	Subscribes:
+		/bag_point						PointStamped			Center point of detected bag (x-fwd, y-right)
+		/arm_data
+	Service:

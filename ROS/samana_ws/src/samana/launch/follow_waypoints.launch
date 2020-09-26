@@ -1,17 +1,23 @@
 <launch>
-    <node pkg="samana" type="follow_waypoints.py" name="follow_waypoints" output="screen" clear_params="true">
+    <node pkg="samana" type="follow_waypoints.py" name="follow_waypoints" output="screen" clear_params="true" respawn="true">
         <rosparam>
-            goal_frame_id: utm
+            <!--TODO change goal_frame_id to utm for event-->
+            goal_frame_id: map
             odom_frame_id: odom
             base_frame_id: base_link
 
             wait_duration: 0.0
-            waypoint_distance_tolerance: 4.0
+            waypoint_distance_tolerance: 4.0 <!--Overriden by actionlib call-->
+
+            use_timeout: true
+            timeout_a: 2.0
+            timeout_b: 4
+            timeout_vel: 0.3
 
             use_action_lib: true
             
             always_from_file: true
-            check_dist_period: 0.3
+            check_dist_period: 0.075
             follow_back: false
             rotate_going_back: true
             pose_topic: "/initialpose"
@@ -23,6 +29,10 @@
 </launch>
 
 <!--
+use_timeout: if true every waypoint will have timeout which depends on distance to the waypoints and specified velocity
+timeout_a and timeout_b: used in formula timeout = timeout_a * (dist/velocity) + timeout_b
+timeout_vel: expected averege velocity for robot to move. Used for timeout calculations
+
 use_action_lib: if true state machine is excecuted just if requested by action client
 output_file_path: path to the .csv file for reading and writing waypoints
 follow_back: When reading waypoints from a file it will read again from back to front

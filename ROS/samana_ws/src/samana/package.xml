@@ -83,6 +83,7 @@
 <exec_depend>nvidia-container-toolkit</exec_depend>  
 <exec_depend>feh</exec_depend>
 <exec_depend>pip install easygui</exec_depend>
+<exec_depend>pip install shapely</exec_depend>
 -->
 
 <!--Already inside workspace and probably modified for the project or installed from source-->

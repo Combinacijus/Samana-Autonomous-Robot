@@ -21,7 +21,7 @@
     
     <!--Velocity PID-->
     <!--<node name="controller" pkg="pid" type="controller" ns="vel_pid" output="screen" >-->
-    <node name="controller" pkg="pid" type="controller" ns="vel_pid">
+    <node name="controller" pkg="pid" type="controller" ns="vel_pid" respawn="true">
       <rosparam>
         node_name: vel_pid_node
         Kp: 0.2
@@ -41,7 +41,7 @@
 
     <!--Yaw PID-->
     <!--<node name="controller" pkg="pid" type="controller" ns="yaw_pid" output="screen" >-->
-    <node name="controller" pkg="pid" type="controller" ns="yaw_pid">
+    <node name="controller" pkg="pid" type="controller" ns="yaw_pid" respawn="true">
       <rosparam>
         node_name: yaw_pid_node
         <!--Tuned with scale factor f=max_vel/max_ang_vel = 0.26-->

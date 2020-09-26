@@ -1,6 +1,26 @@
 <launch>
-    <node pkg="samana" type="main_smach.py" name="main_smach" output="screen" clear_params="true">
+    <node pkg="samana" type="main_smach.py" name="main_smach" output="screen" clear_params="true" respawn="true">
+        <!--<rosparam>
+            wp_frame_id: utm
+            utm_spiral_x: 689830.2577150462
+            utm_spiral_y: 6087794.247483239
+        </rosparam>-->
+
+        <!--TODO change to normal path for event-->
+        <!--For inside spiral-->
+        <rosparam>
+            wp_frame_id: odom
+            utm_spiral_x: 0
+            utm_spiral_y: 0
+        </rosparam>
+        
+        <param name="wp_frame_id" value="odom"/>
         <param name="file_wp_to_goal" value="$(find samana)/config/waypoints_to_bag.csv"/>
         <param name="file_wp_to_home" value="$(find samana)/config/waypoints_to_home.csv"/>
     </node>
 </launch>
+
+<!--
+wp_frame_id: frame_id of waypoints
+utm_spiral_x and utm_spiral_y: for setting search spiral center coordinates
+-->

@@ -21,7 +21,6 @@ from std_msgs.msg import String
 from std_msgs.msg import Float64
 from std_msgs.msg import Bool
 from nav_msgs.msg import Odometry
-from std_srvs.srv import SetBool, SetBoolRequest
 from robot_localization.srv import ToggleFilterProcessing, ToggleFilterProcessingRequest
 
 

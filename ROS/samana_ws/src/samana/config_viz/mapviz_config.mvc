@@ -1,17 +1,17 @@
 capture_directory: ~
-fixed_frame: map
-target_frame: map
+fixed_frame: odom
+target_frame: base_link
 fix_orientation: false
 rotate_90: false
 enable_antialiasing: true
 show_displays: true
 show_status_bar: true
 show_capture_tools: true
-window_width: 913
+window_width: 666
 window_height: 727
-view_scale: 0.1095699
-offset_x: -3.182175
-offset_y: -1.019521
+view_scale: 0.02066899
+offset_x: -0.1544351
+offset_y: -1.037019
 use_latest_transforms: true
 background: "#a0a0a4"
 displays:
@@ -96,8 +96,8 @@ displays:
   - type: mapviz_plugins/measuring
     name: measuring
     config:
-      visible: true
-      collapsed: false
+      visible: false
+      collapsed: true
       main_color: "#000000"
       bkgnd_color: "#ffffff"
       show_bkgnd_color: true
@@ -277,6 +277,19 @@ displays:
       show_laps: false
       static_arrow_sizes: false
       arrow_size: 31
+  - type: mapviz_plugins/pose
+    name: bag_pose
+    config:
+      visible: true
+      collapsed: true
+      topic: /bag_pose
+      color: "#eb00ff"
+      draw_style: arrows
+      position_tolerance: 0
+      buffer_size: 2
+      show_laps: false
+      static_arrow_sizes: true
+      arrow_size: 101
   - type: mapviz_plugins/string
     name: text_to_speech
     config:

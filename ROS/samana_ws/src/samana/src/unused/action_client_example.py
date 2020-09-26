@@ -52,7 +52,6 @@ if __name__ == "__main__":
     rospy.loginfo("Wait for {} server...".format(server_name))
     client.wait_for_server()
 
-
     goal = FollowWpGoal()
     goal.waypoints = read_waypoints_from_file()
     goal.dist_tolerance = 4.0
