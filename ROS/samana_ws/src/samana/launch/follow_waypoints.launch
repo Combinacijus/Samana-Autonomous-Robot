@@ -1,13 +1,13 @@
 <launch>
     <node pkg="samana" type="follow_waypoints.py" name="follow_waypoints" output="screen" clear_params="true" respawn="true">
         <rosparam>
-            <!--TODO change goal_frame_id to utm for event-->
-            goal_frame_id: map
+            <!--goal_frame_id: map   FOR INSIDE-->
+            goal_frame_id: utm
             odom_frame_id: odom
             base_frame_id: base_link
 
             wait_duration: 0.0
-            waypoint_distance_tolerance: 4.0 <!--Overriden by actionlib call-->
+            waypoint_distance_tolerance: 1.5 <!--Overriden by actionlib call-->
 
             use_timeout: true
             timeout_a: 2.0

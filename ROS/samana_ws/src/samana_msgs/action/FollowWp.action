@@ -1,6 +1,7 @@
 # Goal
 geometry_msgs/PoseArray waypoints
 float32 dist_tolerance
+bool clear_costmaps_on_wp
 ---
 # Result
 int32 wp_current

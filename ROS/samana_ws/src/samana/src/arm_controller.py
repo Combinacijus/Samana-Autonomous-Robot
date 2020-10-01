@@ -32,7 +32,7 @@ class ArmController:
         self.LIFTER_LOWER = 2
 
         # NOTE: tuning
-        self.current_grabber_max = 950  # TODO change
+        self.current_grabber_max = 950
         self.current_lifter_max = 950
         self.grabber_timeout = 16  # In sec
         self.lifter_timeout = 60  # In sec

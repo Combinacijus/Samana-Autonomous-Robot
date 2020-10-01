@@ -28,8 +28,8 @@
 
   <!--***************************************NAV****************************************-->
   <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true" output="screen">
-    <!--TODO: set false cuz not needed-->
-    <param name="publish_filtered_gps" value="true"/>
+    
+    <param name="publish_filtered_gps" value="true"/> <!--can be set false cuz not needed-->
     <param name="broadcast_utm_transform" value="true"/>  <!-- Needed for static costmap-->
     <param name="zero_altitude" value="true"/>
     <!-- Setting datum messed up /odometry/gps it won't be on top of GPS points-->

@@ -17,6 +17,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseArray, PoseStamped, PointStamped, Point, PoseWithCovarianceStamped
 from std_msgs.msg import Empty
 from samana_msgs.msg import FollowWpAction, FollowWpFeedback, FollowWpResult
+from std_srvs import srv
 from tf.transformations import euler_from_quaternion, quaternion_from_euler, quaternion_multiply
 from visualization_msgs.msg import Marker
 from tf import TransformListener
@@ -232,29 +233,51 @@ class FollowPath(State):
         self.use_action_lib = rospy.get_param('~use_action_lib', 'false')
 
         self.use_timeout = rospy.get_param('~use_timeout', 'false')
-        self.timeout_a = rospy.get_param('~timeout_a', 2.5)
+        self.timeout_a = rospy.get_param('~timeout_a', 2.1)
         self.timeout_b = rospy.get_param('~timeout_b', 4)
         self.timeout_vel = rospy.get_param('~timeout_vel', 0.3)
 
+        self.last_action_move_base = False  # True if last action call was to move_base
+        
         self.waypoints_viz = WaypointsViz()
 
-        # Get a move_base action client
-        self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+        # Action client
+        self.move_base_client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         rospy.loginfo('Connecting to move_base...')
-        self.client.wait_for_server()
+        self.move_base_client.wait_for_server()
         rospy.loginfo('Connected to move_base.')
+
+        self.bug_alg_client = actionlib.SimpleActionClient('bug_algorithm', MoveBaseAction)
+        rospy.loginfo('Connecting to bug_algorithm...')
+        self.bug_alg_client.wait_for_server()
+        rospy.loginfo('Connected to bug_algorithm.')
+
+        # Service
+        service_name = "move_base/clear_costmaps"
+        rospy.loginfo("Waiting for {} service".format(service_name))
+        rospy.wait_for_service(service_name)
+        self.clear_costmaps_srv = rospy.ServiceProxy(service_name, srv.Empty)
 
         # Tf listener
         rospy.loginfo('Starting a tf listner.')
-        self.tf = TransformListener()  # TODO remove not used?
         self.listener = tf.TransformListener()
+
 
     def parameters_set_for_actionlib(self):
         # Action parameters override
         if self.use_action_lib is True:
             self.distance_tolerance = distance_tolerance_action
 
-    def execute(self, userdata, feedback=None, action_server=None):
+    def clear_costmaps(self, do_clearing=True):
+        if do_clearing is True:
+            try:
+                rospy.logwarn("Clearing all costmaps")
+                response = self.clear_costmaps_srv(srv.EmptyRequest())
+                rospy.logwarn("Cleared all costmaps: {}".format(response))
+            except rospy.ServiceException as e:
+                print("Clear costmap service did not process request: " + str(e))
+
+    def execute(self, userdata, feedback=None, action_server=None, clear_costmaps_on_wp=False):
         """
             Used as state machine state or by call from actionlib server
             param feedback: should be callback function cb(waypoint_current) which is called every new goal
@@ -273,6 +296,9 @@ class FollowPath(State):
 
             self.waypoints_viz.visualize_current_waypoint(waypoint)
 
+            # Clear costmap before executing next waypoint 
+            self.clear_costmaps(clear_costmaps_on_wp)
+
             # Publish next waypoint as goal
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = waypoint.header.frame_id
@@ -283,14 +309,20 @@ class FollowPath(State):
                 i, waypoint.pose.position.x, waypoint.pose.position.y))
             rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
 
-            self.client.send_goal(goal)
+            # Start with move_base
+            self.move_base_client.send_goal(goal)
+            self.last_action_move_base = True
+
+            # Start with bug algorithm
+            # self.bug_alg_client.send_goal(goal)
+            # self.last_action_move_base = False
 
             # Waypoint execution started call feedback function and pass waypoint number
             if feedback:
                 feedback(i)
 
             if not self.distance_tolerance > 0.0:
-                self.client.wait_for_result()  # Waits for server to finish action
+                self.move_base_client.wait_for_result()  # Waits for server to finish action
                 rospy.loginfo("Waiting for %f sec..." % self.duration)
                 time.sleep(self.duration)
             else:  # If distance_tolerance is set
@@ -307,20 +339,40 @@ class FollowPath(State):
                         break
 
                     # Waypoint reached by move_base continue with next waypoint
-                    if self.client.get_state() == actionlib.GoalStatus.SUCCEEDED:
+                    if self.move_base_client.get_state() == actionlib.GoalStatus.SUCCEEDED:
+                        break
+                    
+                    if self.bug_alg_client.get_state() == actionlib.GoalStatus.SUCCEEDED:
                         break
 
                     # Follow waypoints tolerance satisfied continue with next waypoint
                     if self.dist_to_waypoint(waypoint) < self.distance_tolerance:
                         break
                     
+                    # Check if move_base finished before completing action if so clear costmap and repeat goal
+                    gs = actionlib.GoalStatus
+                    action_failed = (gs.PREEMPTED, gs.ABORTED, gs.REJECTED, gs.RECALLED, gs.LOST)
+                    if (self.last_action_move_base is True and self.move_base_client.get_state() in action_failed) or \
+                       (self.last_action_move_base is False and self.bug_alg_client.get_state() in action_failed):
+                        # After move_base or bug_algorithm failed. Here are custom recovery behaviours
+                        if self.last_action_move_base is True:  # Choose bug algorithm every second time
+                            self.clear_costmaps()
+                            self.bug_alg_client.send_goal(goal)
+                            self.last_action_move_base = False
+                        else:
+                            self.move_base_client.send_goal(goal)  # Resend same goal
+                            self.last_action_move_base = True
+                    
                     # Preempt requested (only when using actionlib).
                     # Send current waypoint index as result and stop move_base and return
                     if action_server:
                         if action_server.is_preempt_requested():
-                            print("PREEMPTING follow_waypoints")  # TODO:
-                            self.client.cancel_all_goals()
-                            print("CANCELED move_base")
+                            print("PREEMPTING follow_waypoints")
+                            self.move_base_client.cancel_all_goals()
+                            rospy.loginfo("CANCELED move_base")
+                            self.bug_alg_client.cancel_all_goals()
+                            rospy.loginfo("CANCELED bug_algorithm")
+                            
                             action_server.set_preempted(result=FollowWpResult(i))
 
                             self.waypoints_viz.visualize_current_waypoint(waypoint, done=True)
@@ -339,7 +391,7 @@ class FollowPath(State):
 
     def dist_to_waypoint(self, waypoint):
         self.listener.waitForTransform(waypoint.header.frame_id, self.base_frame_id, rospy.Time(0), rospy.Duration(4.0))
-        trans, rot = self.listener.lookupTransform(self.goal_frame_id, self.base_frame_id, rospy.Time(0))
+        trans, rot = self.listener.lookupTransform(waypoint.header.frame_id, self.base_frame_id, rospy.Time(0))
         distance = math.sqrt(pow(waypoint.pose.position.x-trans[0], 2) + pow(waypoint.pose.position.y-trans[1], 2))
 
         return distance
@@ -512,7 +564,7 @@ class FollowWaypointServer:
         waypoints_viz = WaypointsViz()  # For visualizing using MarkerArray
         waypoints_viz.visualize_waypoints(waypoints)
 
-        status = follow_path.execute(None, feedback_cb, self.server)
+        status = follow_path.execute(None, feedback_cb, self.server, goal.clear_costmaps_on_wp)
 
         waypoints_viz.visualize_waypoints(None)  # Clearing markers
 

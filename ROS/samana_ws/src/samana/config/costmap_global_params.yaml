@@ -1,5 +1,6 @@
 global_costmap:
-  global_frame: map  # TODO: set to utm for event
+  # global_frame: map  # For inside
+  global_frame: utm  # For outside
   robot_base_frame: base_link
   update_frequency: 1.0
   publish_frequency: 1.0  # Visualization frequency

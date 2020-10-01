@@ -5,18 +5,23 @@ init_allow_rc: true
 # Normal
 hoverboard:
   # In units
-  max_speed: 500  # 0..1000
-  max_steer: 500  # 0..1000
+  max_speed: 400  # 0..1000
+  max_steer: 400  # 0..1000
   max_accel_lin: 9000
   max_accel_ang: 4000
 
   # In m/s for cmd_vel auton mode test speed = *0.5 full speed
-  max_auton_vel_lin: 0.35
-  max_auton_vel_ang: 1.5
+  # max_auton_vel_lin: 0.35
+  # max_auton_vel_ang: 1.5
+  # max_auton_accel_lin: 2.5  # Max 6m/s^2 at max_accel_lin: 2000, max_speed: 500, max_auton_vel_lin: 0.7
+  # max_auton_accel_ang: 9.6
+
+  # In m/s for cmd_vel auton mode slow
+  max_auton_vel_lin: 0.4
+  max_auton_vel_ang: 1.8
   max_auton_accel_lin: 2.5  # Max 6m/s^2 at max_accel_lin: 2000, max_speed: 500, max_auton_vel_lin: 0.7
   max_auton_accel_ang: 9.6
 
-  # TODO change to full speed for event
   # In m/s for cmd_vel auton mode full speed
   # max_auton_vel_lin: 0.7
   # max_auton_vel_ang: 3.0

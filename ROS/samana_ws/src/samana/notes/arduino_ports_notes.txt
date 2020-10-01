@@ -27,14 +27,14 @@ Creating UDEV rule:
     sudo nano /etc/udev/rules.d/99-usb-serial.rules
     write your rule eg.
                                                                             from ports tree (lsusb -t)     <any_new_name>
-    SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{devpath}=="2.1", SYMLINK+="ttyUSB-arduino1"
+    ACTION=="add", SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{devpath}=="2.1", SYMLINK+="ttyUSB-arduino1"
     sudo udevadm control --reload
 
     Replug devices and they will be be given new names by UDEV rules
 
 
 Current UDEV rules (which works for any devpath):
-    SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttyUSB-arduino%s{/devpath}"
+    ACTION=="add", SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttyUSB-arduino%s{/devpath}"
 
 This gives names like:
     /dev/ttyUSB-arduino2.1  /dev/ttyUSB-arduino2.3.3  /dev/ttyUSB-arduino1

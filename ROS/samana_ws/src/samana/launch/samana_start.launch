@@ -3,15 +3,15 @@
     <arg name="use_simtime" default="false"/>
     <arg name="use_arduinos" default="true"/>
 
-    <arg name="use_mapviz" default="false"/>
-    <arg name="use_rviz" default="true"/>
+    <arg name="use_mapviz" default="true"/>
+    <arg name="use_rviz" default="false"/>
     
     <param name="use_sim_time" value="$(arg use_simtime)"/>   
 
-    <!--NOTE: For displaying satellite map tiles-->
+    <!--NOTE: For displaying satellite map tiles and object detection model-->
     <!--sudo docker run -p 8080:8080 -it -v ~/mapproxy:/mapproxy danielsnider/mapproxy-->
 
-    <!--Won't work in same launch file. Launch it separatly-->
+    <!--Won't work in same launch file. Launch it seperatly-->
     <!--<node name="kill_all_nodes" pkg="samana" type="kill_all_nodes.py" output="screen"/>-->
 
     <!--Publish dummy messages to initialize some topics which are needed for core nodes-->

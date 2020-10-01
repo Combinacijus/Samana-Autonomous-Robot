@@ -254,5 +254,3 @@
 		<child link="base_bump_link"/>
 	</joint>
 </robot>
-
-<!--TODO add GPS module frame-->
