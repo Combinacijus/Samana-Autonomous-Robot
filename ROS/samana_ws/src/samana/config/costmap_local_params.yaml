@@ -2,17 +2,14 @@ local_costmap:
   global_frame: odom
   robot_base_frame: base_link
   update_frequency: 5.0  
-  publish_frequency: 1.0  # Visualization frequency # TODO: lower for event
+  publish_frequency: 0.5  # Visualization frequency
   rolling_window: true
-  width: 7.0
-  height: 7.0
-  resolution: 0.035  # Can be different than static map
-  # width: 27.0
-  # height: 27.0
-  # resolution: 0.135  # Can be different than static map
+  width: 4.994
+  height: 4.994
+  resolution: 0.025  # Can be different than static map
 
-  inflation_radius: 0.8
-  cost_scaling_factor: 4.0
+  inflation_radius: 2.0
+  cost_scaling_factor: 2.0
 
   plugins:
     - {name: sonar_layer,   type: "range_sensor_layer::RangeSensorLayer"}

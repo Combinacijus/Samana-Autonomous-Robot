@@ -1,11 +1,10 @@
 <launch>
     <!-- Run the map server --> 
-    <!--TODO change to event map for event-->
     <!--<arg name="map_file" value="room_clean.yaml"/>-->
-    <arg name="map_file" value="empty_100.yaml"/>
+    <!--<arg name="map_file" value="empty_100.yaml"/>-->
     <!--<arg name="map_file" value="event_empty_100.yaml"/>-->
     <!--<arg name="map_file" value="event_precise_100.yaml"/>-->
-    <!--<arg name="map_file" value="event_padded4_100.yaml"/>-->
+    <arg name="map_file" value="event_padded4_100.yaml"/>
 
     <!--Map Server-->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find samana)/maps/$(arg map_file)" respawn="true"/>

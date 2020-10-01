@@ -17,10 +17,14 @@
     <!--Mapping and path planning-->
     <include file="$(find samana)/launch/move_base.launch"/>
     <include file="$(find samana)/launch/follow_waypoints.launch"/>
+    <node name="bug_algorithm" pkg="samana" type="bug_algorithm.py" respawn="true"/>
 
     <!--Object detection-->
     <node name="object_detector" pkg="samana" type="object_detector.py" respawn="true"/>
 
-    <!--TODO Main state machine-->
+    <!--Launched separatly to start the run-->
     <!--<node name="main_state_machine" pkg="samana" type="main_smach.py" respawn="true"/>-->
+
+    <!--Health check-->
+    <node name="health_checker" pkg="samana" type="health_checker.py" respawn="true"/>
 </launch>

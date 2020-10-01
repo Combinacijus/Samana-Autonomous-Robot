@@ -1,5 +1,5 @@
 capture_directory: ~
-fixed_frame: odom
+fixed_frame: map
 target_frame: base_link
 fix_orientation: false
 rotate_90: false
@@ -7,11 +7,11 @@ enable_antialiasing: true
 show_displays: true
 show_status_bar: true
 show_capture_tools: true
-window_width: 666
+window_width: 909
 window_height: 727
-view_scale: 0.02066899
-offset_x: -0.1544351
-offset_y: -1.037019
+view_scale: 0.02648135
+offset_x: 1.233644
+offset_y: 1.320511
 use_latest_transforms: true
 background: "#a0a0a4"
 displays:
@@ -97,7 +97,7 @@ displays:
     name: measuring
     config:
       visible: false
-      collapsed: true
+      collapsed: false
       main_color: "#000000"
       bkgnd_color: "#ffffff"
       show_bkgnd_color: true
@@ -107,7 +107,7 @@ displays:
   - type: mapviz_plugins/occupancy_grid
     name: path_costmap
     config:
-      visible: true
+      visible: false
       collapsed: true
       alpha: 0.5
       topic: /move_base/GlobalPlanner/potential
@@ -118,7 +118,7 @@ displays:
     config:
       visible: true
       collapsed: true
-      alpha: 0.1
+      alpha: 0.3
       topic: /move_base/local_costmap/costmap
       update: false
       scheme: costmap
@@ -127,7 +127,7 @@ displays:
     config:
       visible: true
       collapsed: true
-      alpha: 0.1
+      alpha: 0.3
       topic: /move_base/global_costmap/costmap
       update: true
       scheme: costmap

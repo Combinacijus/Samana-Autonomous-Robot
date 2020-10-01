@@ -46,7 +46,8 @@ enable_front_sensors = True  # If false shortens front sonars range and disables
 range_sonar_msg = Range()
 range_bump_msg = Range()
 #                    0    1     2    3    4 |  5    6    7     8    9
-sonar_max_ranges = [0.2, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.2]  # NOTE: tuning filter. Found experimentally
+# sonar_max_ranges = [0.2, 0.5, 0.55, 0.7, 0.5, 0.5, 0.7, 0.55, 0.5, 0.2]  # NOTE: tuning filter. Found experimentally
+sonar_max_ranges = [0.07, 0.4, 0.45, 0.55, 0.4, 0.4, 0.55, 0.45, 0.4, 0.07]  # NOTE: tuning filter. Found experimentally
 sonar_max_ranges_disabled = [0.03, 0.06, -1, -1, -1, -1, -1, -1, 0.06, 0.03]  # NOTE: tuning filter. Found experimentally
 # sonar_max_ranges = [0.4] + [0.5] * 8 + [0.4]  # NOTE: tuning filter. Found experimentally
 
@@ -103,7 +104,7 @@ def is_outlier(reading, i=0):
     # NOTE: tuning range filter parameters
     HIST_COUNT = 6  # 6*41.7 = 250.2ms | 7*41.7 = 291.9ms
     MAX_OUTLIERS = int(HIST_COUNT // 3)  # For every 3 readings 1 outlier is allowed
-    MAX_DELTA_PER_READING = 0.021  # 0.5m/s / 24Hz = 0.021m | 0.03 * 7 = 0.21
+    MAX_DELTA_PER_READING = 0.0292  # 0.5m/s / 24Hz = 0.021m | 0.7m/s - 0.0292cm | 0.03 * 7 = 0.21
     NOISE_LEVEL = 0.0275  # Found by graphing sonar data
 
     # Store history of readings

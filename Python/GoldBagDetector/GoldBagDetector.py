@@ -218,7 +218,7 @@ class Detector:
         self.CAM_ADDR = self.BASE_IP + "video"  # NOTE: might change
         self.CAM_FORCE_ADDR = self.BASE_IP + "override"  # NOTE: might change
         self.CAM_FOCUS_ADDR = self.BASE_IP + "cam/1/af"  # NOTE: might change
-        self.DIR_MODEL = "detection_model-ex-016--loss-0001.398.h5"  # TODO NOTE: might change
+        self.DIR_MODEL = "detection_model-ex-015--loss-0001.342.h5"  # TODO NOTE: might change
         self.DIR_CONFIG = "detection_config.json"  # NOTE: might change
         self.MIN_PROB = 30  # TODO NOTE: Change to sensible value to prevent false positives
 

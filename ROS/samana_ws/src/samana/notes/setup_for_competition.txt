@@ -8,18 +8,35 @@ Before:
 
 Setup:
 - Connect android GPS and camera:
+    
+
+    roslaunch samana kill_all_nodes.launch 
+    sudo docker run -it --rm --gpus all --net host -v /home/combinacijus/Documents/SamanaAutonomousRobot/Python/GoldBagDetector/:/notebooks/GoldBagDetector -v /home/combinacijus/Desktop/ros-logs/:/home/combinacijus/Desktop/ros-logs/ -w /notebooks/GoldBagDetector --name imageai combinacijus/imageai:compute3.0 python GoldBagDetector.py
+    sudo docker run -p 8080:8080 --name tile_server -it --rm -v ~/mapproxy:/mapproxy danielsnider/mapproxy
+    roslaunch samana samana_start.launch 
+    roslaunch samana main_smach.launch
+    watch -n 0.3 "ls /dev/ttyU*"
+
+    - Hotspot on laptop
     - Enable smartphone GPS
-    - Find IP in terminal write ip route and find last "ip scope link src 192.168.0.102 metric" append :11311/
-    - Connect via ROS Sensors Driver on Android with same IP eg. http://192.168.0.102:11311
+    - Find IP in terminal write "ip route" and find last "ip scope link src 192.168.0.102 metric" append :11311/
+                                                          10.42.0.0/24 dev wlp3s0 proto kernel scope link src 10.42.0.1 metric 600 
+    - Connect via ROS Sensors Driver on Android with same IP eg. http://192.168.0.102:11311 or http://10.42.0.0:11311
+    - ROS drivers on phone
     - Connect android camera via DroidCam app
 
+    On ERROR: socket.error: [Errno 98] Address already in use. Run   lsof -i :5005 
+    and check listening processes and sudo kill -9 <process_id>
+
+    To fix blocked usb:
+    sudo -i
+    echo -n 0000:00:14.0 > /sys/bus/pci/drivers/xhci_hcd/unbind 
+    echo -n 0000:00:14.0 > /sys/bus/pci/drivers/xhci_hcd/bind
+
 Other:
-- For downloading new map tiles run
-    - sudo docker run -p 8080:8080 -it -v ~/mapproxy:/mapproxy danielsnider/mapproxy
 
 Right before launch:
 - Make sure that all previous nodes are killed
-- Set allow_rc to False | Check if auton mode is enabled
 - Disconnect RC receiver
 - Check is odometry working | Might need to repower Arduino
 

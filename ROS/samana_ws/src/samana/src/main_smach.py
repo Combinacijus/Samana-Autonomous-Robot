@@ -17,6 +17,7 @@ import sys
 import numpy as np
 import time
 from time import sleep
+from random import random
 from helpers import IsFresh, clamp, sign
 from smach import State, StateMachine
 from geometry_msgs.msg import PoseArray, Pose, PointStamped, PoseStamped, Twist
@@ -64,7 +65,8 @@ class DriveToBag(State):
 
         file_path_default = rospkg.RosPack().get_path("samana") + "/config/waypoints_to_bag.csv"
         file_path = rospy.get_param("~file_wp_to_bag", file_path_default)
-        self.drive_to_goal = DriveToGoal(file_path=file_path, dist_tolerance=4.0, goal_frame_id="utm", waypoint_name="goldbag")
+        self.drive_to_goal = DriveToGoal(file_path=file_path, dist_tolerance=1.5, clear_costmaps_on_wp=True,
+                                         goal_frame_id="utm", waypoint_name="goldbag")
 
     def execute(self, userdata):
         pub_audio.publish("Samana driving to bag area")
@@ -78,7 +80,7 @@ class SearchBag(State):
         self.center_x = rospy.get_param("~utm_spiral_x", "689830.2577150462")
         self.center_y = rospy.get_param("~utm_spiral_y", "6087794.247483239")
 
-        self.dist_tolerance = 0.2  # NOTE: tune
+        self.dist_tolerance = 0.5  # NOTE: tune
         self.delta_wp = 0
         self.last_wp = 0
         self.bag_found = False
@@ -100,7 +102,6 @@ class SearchBag(State):
         else:
             pub_audio.publish("Samana continuing bag search")
 
-        # TODO change to normal
         # path_gen = PathGenerator(radius=self.spiral_radius/20.0, pitch=0.1, segm_len_min=0.1, arc_ratio_min=0.05)  # NOTE: inside
         # path_gen = PathGenerator(radius=self.spiral_radius, pitch=2.5, segm_len_min=0.8, arc_ratio_min=0.15)  # NOTE: short
         path_gen = PathGenerator(radius=self.spiral_radius, pitch=0.5, segm_len_min=0.3, arc_ratio_min=0.1)  # NOTE: tuning normal
@@ -110,13 +111,15 @@ class SearchBag(State):
         self.enable_detector_proxy(SetBoolRequest(True))
 
         # Generate path
-        r, phi = path_gen.spiral()   # Polar coordinates list to numpy array
+        # r, phi = path_gen.spiral()   # Polar coordinates list to numpy array
+        r, phi = path_gen.random_circle()  # Used uniform random circle instead of spiral
+        print(r)
         x, y = path_gen.xy_from_polar(r, phi, self.center_x, self.center_y)  # Generate x, y coordinates from polar form
         waypoints = self.xy_phi_to_waypoints(x, y, phi, self.frame_id)
         path_gen.print_path_dist(x, y, self.last_wp)
 
         # Follow waypoints
-        self.drive_to_goal = DriveToGoal(waypoints=waypoints, dist_tolerance=self.dist_tolerance,
+        self.drive_to_goal = DriveToGoal(waypoints=waypoints, dist_tolerance=self.dist_tolerance, clear_costmaps_on_wp=False,
                                          goal_frame_id=self.frame_id, short_audio=True, feedback_client=self.feedback_cb,
                                          last_wp=self.last_wp)
 
@@ -133,7 +136,7 @@ class SearchBag(State):
                 self.delta_wp = 0
                 self.last_wp = 0
                 self.spiral_radius += self.spiral_radius_addition
-                # TODO global timeout
+                # Global timeout (not implemented)
                 return "fail"
             sleep(0.1)
 
@@ -215,7 +218,7 @@ class AlignWithBag(State):
         self.pos_p = 0.30  # NOTE: tune position P controller
         self.pos_min = 0.02
         self.pos_max = 0.10
-        self.pos_goal = 0.25
+        self.pos_goal = 0.28
         self.pos_far = 0.4  # If further than this drive forward while aligning angle
 
         self.point_lock = PointLock(tolerance=0.2, count_to=6, fresh_time=0.7, fresh_name="Bag detection")
@@ -291,7 +294,7 @@ class AlignWithBag(State):
                 # Check if goal reach for some time. If so break (return success)
                 if goal_reached:
                     counter_grab_area += 1
-                    if counter_grab_area > 10:  # TODO: tune
+                    if counter_grab_area > 10:
                         break
                 else:
                     counter_grab_area = max(0, counter_grab_area - 2)
@@ -545,7 +548,8 @@ class DriveToHome(State):
 
         file_path_default = rospkg.RosPack().get_path("samana") + "/config/waypoints_to_home.csv"
         file_path = rospy.get_param("~file_wp_to_home", file_path_default)
-        self.drive_to_goal = DriveToGoal(file_path=file_path, dist_tolerance=4.0, goal_frame_id="utm", waypoint_name="a home")
+        self.drive_to_goal = DriveToGoal(file_path=file_path, dist_tolerance=1.5, clear_costmaps_on_wp=True,
+                                         goal_frame_id="utm", waypoint_name="a home")
 
     def execute(self, userdata):
         pub_audio.publish("Samana driving back to the start area")
@@ -566,9 +570,10 @@ class DriveToGoal():
         Sends specified file with waypoints to follow_waypoints action_server
     """
 
-    def __init__(self, file_path=None, waypoints=None, dist_tolerance=4.0, goal_frame_id="utm",
-                 waypoint_name="", short_audio=False, feedback_client=None, last_wp=0):
+    def __init__(self, file_path=None, waypoints=None, dist_tolerance=1.5, clear_costmaps_on_wp=False,
+                 goal_frame_id="utm", waypoint_name="", short_audio=False, feedback_client=None, last_wp=0):
         self.dist_tolerance = dist_tolerance
+        self.clear_costmaps_on_wp = clear_costmaps_on_wp
         self.goal_frame_id = goal_frame_id
         self.server_name = "follow_waypoints"
         self.last_wp = last_wp  # Counting from 0
@@ -600,6 +605,7 @@ class DriveToGoal():
             goal.waypoints = self.read_waypoints_from_file(start_from=self.last_wp)  # Read from file
 
         goal.dist_tolerance = self.dist_tolerance  # To override distance tolerance
+        goal.clear_costmaps_on_wp = self.clear_costmaps_on_wp  # To clear costmap on every waypoint
 
         self.client.send_goal(goal, done_cb=self.done_cb, active_cb=self.active_cb, feedback_cb=self.feedback_cb)
 
@@ -672,6 +678,8 @@ class PathGenerator:
         self.pitch = pitch
         self.segment_len_min = segm_len_min  # Minimum segment length (mainly in the center)
         self.arc_ratio_min = arc_ratio_min  # Minimum arc ratio (mainly in outer spiral)
+        self.random_points_count = 50
+
         self.phi_list = [0, ]
         self.r_list = [0, ]
         self.phi_array = None
@@ -682,6 +690,9 @@ class PathGenerator:
           param for_viz: if True all segment length is fixed else fix by arc length
           return: (r_array, phi_array) in numpy arrays
         """
+
+        self.phi_list = [0, ]
+        self.r_list = [0, ]
 
         # Spiral
         r = self.radius_min
@@ -702,6 +713,27 @@ class PathGenerator:
 
             self.r_list.append(r)
             self.phi_list.append(self.phi)
+
+        self.phi_array = np.array(self.phi_list)
+        self.r_array = np.array(self.r_list)
+
+        return self.r_array, self.phi_array
+
+    def random_circle(self):
+        """
+          Uniformly generated point inside a circle
+          return: (r_array, phi_array) in numpy arrays
+        """
+
+        self.phi_list = [0, ]
+        self.r_list = [0, ]
+
+        # Uniform points in a circle
+        for i in range(self.random_points_count):
+            r = self.radius * math.sqrt(random())
+            theta = random() * 2 * math.pi
+            self.r_list.append(r)
+            self.phi_list.append(theta)
 
         self.phi_array = np.array(self.phi_list)
         self.r_array = np.array(self.r_list)
@@ -761,7 +793,7 @@ class PointLock():
             found = False
             if self.locked_point_index is None:  # Still no lock find nearest point
                 for i, p in enumerate(self.point_list):  # Find where to add count or append new point
-                    print("p1 {}, p2 {}, dist {}, tol: {}".format(p, point, dist(p, point), self.tolerance))
+                    # print("p1 {}, p2 {}, dist {}, tol: {}".format(p, point, dist(p, point), self.tolerance))
                     if dist(p, point) <= self.tolerance:  # Withing tolerance
                         self.point_list[i] = avg(self.point_list[i], point)  # Average position of points
                         self.point_count[i] += 1  # Add count
@@ -812,20 +844,23 @@ def main():
     sm_top = StateMachine(outcomes=["success", "fail", "restart"])
 
     with sm_top:
-        # GRAB state
-        StateMachine.add("GRAB_BAG", GrabBag(), transitions={"success": "FINISHED",
-                                                             "fail": "GRAB_BAG"})
+        # ALL states
+        StateMachine.add("INIT", Init(), transitions={"success": "CHECK"})
+        StateMachine.add("CHECK", Check(), transitions={"success": "DRIVE_TO_BAG",
+                                                        "fail": "INIT"})
+        StateMachine.add("DRIVE_TO_BAG", DriveToBag(), transitions={"success": "SEARCH_BAG",
+                                                                    "fail": "DRIVE_TO_BAG"})
+        StateMachine.add("SEARCH_BAG", SearchBag(), transitions={"success": "ALIGN_WITH_BAG",
+                                                                 "fail": "DRIVE_TO_HOME"})
+        StateMachine.add("ALIGN_WITH_BAG", AlignWithBag(), transitions={"success": "GRAB_BAG",
+                                                                        "fail": "SEARCH_BAG"})
+        StateMachine.add("GRAB_BAG", GrabBag(), transitions={"success": "DRIVE_TO_HOME",
+                                                             "fail": "SEARCH_BAG"})
+        StateMachine.add("DRIVE_TO_HOME", DriveToHome(), transitions={"success": "FINISHED",
+                                                                      "fail": "DRIVE_TO_HOME"})
         StateMachine.add("FINISHED", Finished(), transitions={"success": "success"})
 
-        # SEARCH and ALIGN
-        # StateMachine.add("INIT", Init(), transitions={"success": "SEARCH_BAG"})
-        # StateMachine.add("SEARCH_BAG", SearchBag(), transitions={"success": "ALIGN_WITH_BAG",
-        #                                                          "fail": "SEARCH_BAG"})
-        # StateMachine.add("ALIGN_WITH_BAG", AlignWithBag(), transitions={"success": "FINISHED",
-        #                                                                 "fail": "SEARCH_BAG"})
-        # StateMachine.add("FINISHED", Finished(), transitions={"success": "success"})
-
-        # ALL states
+        # For testing
         # StateMachine.add("INIT", Init(), transitions={"success": "CHECK"})
         # StateMachine.add("CHECK", Check(), transitions={"success": "DRIVE_TO_BAG",
         #                                                 "fail": "INIT"})
@@ -836,7 +871,7 @@ def main():
         # StateMachine.add("ALIGN_WITH_BAG", AlignWithBag(), transitions={"success": "GRAB_BAG",
         #                                                                 "fail": "SEARCH_BAG"})
         # StateMachine.add("GRAB_BAG", GrabBag(), transitions={"success": "DRIVE_TO_HOME",
-        #                                                      "fail": "ALIGN_WITH_BAG"})
+        #                                                      "fail": "SEARCH_BAG"})
         # StateMachine.add("DRIVE_TO_HOME", DriveToHome(), transitions={"success": "FINISHED",
         #                                                               "fail": "DRIVE_TO_HOME"})
         # StateMachine.add("FINISHED", Finished(), transitions={"success": "success"})

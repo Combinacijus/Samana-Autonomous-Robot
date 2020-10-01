@@ -7,7 +7,7 @@ GlobalPlanner:
   cost_factor: 0.55  # default: 3.0
 
   visualize_potential: false  # default: false | not sure what it does
-  publish_potential: true     # default: true | for cost field visualization  TODO: remove for event
+  publish_potential: false     # default: true | for cost field visualization 
 
 
 # NavfnROS:

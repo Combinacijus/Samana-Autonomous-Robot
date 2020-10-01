@@ -98,7 +98,6 @@ class RCMain:
         '''
             Checks if RC commands aren't too old
             If it is. It publishes off state to all rc topics 
-            TODO: IMPORTANT: Probably will interfare with auton mode so check before competition
             This will trigger when Arduino controlling hoverboard is disconnected
             When RX is disconnected Arduino prints error: FAILSAFE! and publishes default rc channel values
             which supossed to put hoverboard into autonomous mode 

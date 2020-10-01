@@ -28,6 +28,6 @@
         <param name="config" value="$(find samana)/config_viz/mapviz_config.mvc"/>
     </node>
 
-    <!--Debug float data for mapviz TODO comment out for the run-->
-     <node pkg="samana" type="mapviz_pub_floats.py" name="mapviz_pub_floats" output="screen"/> 
+    <!--Debug float data for mapviz-->
+     <!--<node pkg="samana" type="mapviz_pub_floats.py" name="mapviz_pub_floats" output="screen"/> -->
 </launch>

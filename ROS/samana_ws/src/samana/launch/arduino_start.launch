@@ -27,8 +27,6 @@
         <param name="recal" value="$(arg recalibrate_imu)"/>
     </node>
 
-    <!--TODO uncomment-->
-
     <!--Remote control arduino serial and controller-->
     <node name="motors_controller" pkg="samana" type="motors_controller.py" output="screen" respawn="true"/>
     <include file="$(find samana)/launch/hoverboard_pids.launch"/>

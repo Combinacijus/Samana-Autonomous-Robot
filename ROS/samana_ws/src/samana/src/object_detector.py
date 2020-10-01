@@ -40,12 +40,12 @@ from std_srvs.srv import SetBool, SetBoolResponse, SetBoolRequest
 from shapely.geometry import Polygon, Point
 
 
-FAKE_DETECTOR = False  # NOTE: if true uses faster face detector TODO set to false for event!
+FAKE_DETECTOR = False  # NOTE: if true uses faster face detector
 TIMEOUT = 5  # NOTE: Detection timeout (default 5s)
 IMG_W = 640
 IMG_H = 480
 
-BoundingBox = namedtuple("BoumdingBox", ["x1", "y1", "x2", "y2"])
+BoundingBox = namedtuple("BoundingBox", ["x1", "y1", "x2", "y2"])
 
 
 class TcpServer:
@@ -211,11 +211,47 @@ class RosHandler:
             return SetBoolResponse(True, '')
         return SetBoolResponse(False, 'Wrong data type')
 
-    def handle_detection_box(self, box, hom, frame_time=None):
+    def handle_detection_box(self, box, hom, frame_time=None, prob=100):
         """ 
         Publishes detected box base point to ROS topic in frame (x - forward, y - left)
         :param box: tuple(x1, y1, x2, y2) in screen space
         """
+        def is_false_detection():
+            false_detection = False
+
+            # NOTE: tuning
+            MIN_SIZE_X = 0.09  # Smaller detections are ignored
+            MIN_SIZE_Y = 0.09
+            MIN_DIST_X = 0.13  # If bag is closer than this ignore
+            MIN_PROB = 35
+
+            p1 = hom.s2w((box.x1, box.y1))
+            p2 = hom.s2w((box.x2, box.y2))
+            size_x = abs(p1[1] - p2[1])
+            size_y = abs(p1[0] - p2[0])
+
+            # print("-"*50)
+            # print("x1{:.3f} y1{:.3f} x2{:.3f} y2{:.3f}".format(p1[0], p1[1], p2[0], p2[1]))
+            # print("x {:.2f} y {:.2f}".format(p[1], p[0]))
+            # print("dx: {:.3f} dy: {:.3f}".format(size_x, size_y))
+            # print("-"*50)
+
+            # Filter by bounding box size
+            if size_x < MIN_SIZE_X or size_y < MIN_SIZE_Y:
+                false_detection = True
+            
+            # FIlter by forward position
+            if p[1] < MIN_DIST_X:
+                false_detection = True
+
+            # Filter by probability
+            if prob < MIN_PROB:
+                false_detection = True
+
+            rospy.loginfo("is_false_detection: {}".format(false_detection))
+
+            return false_detection
+
         p = hom.s2w(box_to_point(box))
 
         if frame_time:
@@ -227,7 +263,8 @@ class RosHandler:
         self.bag_pos_msg.point.x = p[1]  # Transformed to (x - forward, y - left)
         self.bag_pos_msg.point.y = -p[0]  # Transformed to (x - forward, y - left)
 
-        self.bag_pos_pub.publish(self.bag_pos_msg)
+        if not is_false_detection():  # Publish only real detections
+            self.bag_pos_pub.publish(self.bag_pos_msg)
 
 
 def signal_handler(sig, frame):
@@ -311,7 +348,7 @@ class Homography():
         # PTS_SCREEN = np.array([[2219, 2256], [500, 911], [3263, 965], [1515, 371], [2939, 1881], [2877, 731], [1765, 581], [1029, 1422]])  # High-res 4000x3000
         # NOTE: this calibration is getting worse at the edges (~8cm off) probably should recalibrate for better performance
         PTS_SCREEN = np.array([[355.04, 360.96], [80, 145.76], [522.08, 154.4], [242.4, 59.36], [470.24, 300.96],
-                               [460.32, 116.96], [282.4, 92.96], [164.64, 227.52]])  # TODO: change Low-res 640x480
+                               [460.32, 116.96], [282.4, 92.96], [164.64, 227.52]])  # Low-res 640x480
         PTS_WORLD = np.array([[0.1, 0.241], [-0.4, 0.797], [0.50, 0.78], [-0.1, 1.146], [0.3, 0.418], [0.4, 0.91], [0, 0.998], [-0.2, 0.568]])
         self.screen_to_world_tf, status = cv2.findHomography(PTS_SCREEN, PTS_WORLD)  # Transform matrix
         self.world_to_screen_tf = np.linalg.pinv(self.screen_to_world_tf)  # Transform matrix
@@ -409,18 +446,12 @@ class DisplayFunctions():
             img = cv2.putText(img, text_pts_w, (p[0] + 10, p[1] - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.4, color, 1, cv2.LINE_AA)
             img = cv2.putText(img, text_pts_s, (p[0] + 10, p[1] + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 3, cv2.LINE_AA)  # Outline
             img = cv2.putText(img, text_pts_s, (p[0] + 10, p[1] + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.4, color, 1, cv2.LINE_AA)
-        
+
     def draw_area_text(self, img, hom, point):
         text = "Other"
 
-        # Areas of action  TODO clean up
-        area_drive_fwd = Polygon([(1.2, -0.9), (1.6, -0.9), (1.6, 1.1), (1.2, 1.1)])
-        area_turn_cw = Polygon([(0.55, 0.6), (1.2, 0.6), (1.2, 1.0), (0.55, 1.0)])
-        area_turn_ccw = Polygon([(0.55, -0.4), (0.55, -0.8), (1.2, -0.8), (1.2, -0.4)])
         area_drive_back1 = Polygon([(0, -0.2), (0, -0.5), (0.55, -0.5), (0.55, -0.2)])
         area_drive_back2 = Polygon([(0, 0.2), (0.55, 0.2), (0.55, 0.7), (0, 0.7)])
-        area_grab = Polygon([(0.25, -0.03), (0.3, -0.03), (0.3, 0.03), (0.25, 0.03)])
-
 
         # Areas visualization by point grid
         if False:
@@ -435,51 +466,25 @@ class DisplayFunctions():
                     ps = hom.w2s(pw)
 
                     img = cv2.circle(img, ps, 3, (0, 255, 0), 2)
-                    
-                    count = 0
+
                     color = (0, 0, 0)
-                    if area_drive_fwd.contains(p):
-                        color = (100, 0, 200)
-                        count += 1
-                    if area_turn_cw.contains(p):
-                        color = (200, 0, 200)
-                        count += 1
-                    if area_turn_ccw.contains(p):
-                        color = (200, 50, 200)
-                        count += 1
                     if area_drive_back1.contains(p) or area_drive_back2.contains(p):
                         color = (50, 50, 230)
                         count += 1
-                    if area_grab.contains(p):
-                        color = (0, 255, 0)
-                        count += 1
-
-                    if count > 1:
-                        print("AREAS OVERLAP")
 
                     img = cv2.circle(img, ps, 3, color, 2)
 
         p = hom.s2w(point)
         p = Point(p[1], p[0])
 
-        # print("point {}, polygon: {}".format(p, area_drive_fwd))
-
-        if area_drive_fwd.contains(p):
-            text = "Drive forward"
-        elif area_turn_cw.contains(p):
-            text = "Turn CW"
-        elif area_turn_ccw.contains(p):
-            text = "Turn CCW"
-        elif area_drive_back1.contains(p) or area_drive_back2.contains(p):
+        if area_drive_back1.contains(p) or area_drive_back2.contains(p):
             text = "Drive backward"
-        elif area_grab.contains(p):
-            text = "GRAB"
 
         img = cv2.putText(img, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3, cv2.LINE_AA)  # Outline
         img = cv2.putText(img, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 50, 50), 2, cv2.LINE_AA)
 
-    
-def box_to_point(box, ratio_y=0.5):  # TODO: change default to bag default
+
+def box_to_point(box, ratio_y=0.5):
     """
     :param box: tuple (x1, y1, x2, y2)
     :param ratio_y: at what fraction from the bottom to return the point (0.5 = center point, 0.0 = bottom point)
@@ -503,7 +508,7 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)  # Needed for Ctrl+C to work
     rosh = RosHandler(debug_image=True)  # NOTE: debug_image change here
     disp = DisplayFunctions()
-    hom = Homography()  # For point transformation between screen and ground plane 
+    hom = Homography()  # For point transformation between screen and ground plane
 
     if FAKE_DETECTOR is True:  # Faking bag detector (fast) and with visualization
         face_det = FaceDetector()
@@ -553,9 +558,10 @@ def main():
                         bp = data["box_points"]
                         box = BoundingBox(bp[0], bp[1], bp[2], bp[3])
                         prob = data["percentage_probability"]
-                        print("Box {}\n Probability: {} frame_time: {}".format(box, prob, detection_data["frame_time"]))  # TODO remove
+                        # print("Box {}\n Probability: {} frame_time: {}".format(box, prob, detection_data["frame_time"]))
+                        # (Not implemented) check all boxes and keep filtered box with highest probability 
 
-                        rosh.handle_detection_box(box, hom, frame_time=detection_data["frame_time"])
+                        rosh.handle_detection_box(box, hom, frame_time=detection_data["frame_time"], prob=prob)
                     else:  # No detection
                         pass
 
