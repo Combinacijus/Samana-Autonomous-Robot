@@ -88,6 +88,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 ## Contact
-Name: &nbsp; &nbsp; &nbsp;Gintaras Grėbliūnas
-Email: &nbsp; &nbsp; &nbsp; combinacijus@gmail.com
-LinkedIn:  &nbsp;https://www.linkedin.com/in/gintaras-gr%C4%97bli%C5%ABnas-72214a119/
+<p> Name: &nbsp; &nbsp; &nbsp;Gintaras Grėbliūnas </p>
+<p> Email: &nbsp; &nbsp; &nbsp; combinacijus@gmail.com</p>
+<p> LinkedIn:  &nbsp;https://www.linkedin.com/in/gintaras-gr%C4%97bli%C5%ABnas-72214a119/</p>
