@@ -1,40 +1,30 @@
-<p align="center"> README IS WORK IN PROGRESS!!! </p>
-  <h1 align="center">Samana -<br> Autonomous Mobile Robot</h1>
+ <h1 align="center">Samana -<br> Autonomous Mobile Robot</h1>
   <p align="center">GPS waypoints following differential drive mobile robot based on Robot Operating System (ROS) Melodic. It was built to compete in <a href="http://www.robotsintellect.com/en/competitions">Robots’ Intellect 2020</a>.</p>
  
 ## Table of Contents
 
 * [Intro](#intro)
 * [About the Competition](#about-the-competition)
-
----
-* [About the Robot](#about-the-robot)
-  * [Hardware](#hardware)
-     * [Base](#base)
-     * [Gripper](#gripper)
-     * [Electronics](#electronics)
-     
-  * [Software](#software)
-     * [Arduinos](#arduinos)
-	 * [ROS](#ros)
-	 * [Object detection](#object-detection)
----
-
 * [Getting Started](#getting-started)
   * [Installation](#installation)
+  * [Design decisions](#design-decisions)
 * [License](#license)
 * [Contact](#contact)
 
 
 ## Intro
-This project was developed over the period of 16 months single-handedly by me. During this time I made some bad and questionable design decisions which led to badly failed attempts at the competition.
-
+This project was developed over the period of 16 months single-handedly. During this time I made some bad and questionable design decisions which led to badly failed attempts at the competition.
 The main **purpose of this README file** is to share gained knowledge and hopefully give some insights into development of autonomous robots.
+
+![Bag](https://user-images.githubusercontent.com/16375702/106159061-17a67500-618d-11eb-9af0-52d4ec398bea.gif)
+
+[More images and GIFs](https://github.com/Combinacijus/Samana-Autonomous-Robot/discussions/5)
+
 
 **Code and whole project** is not well documented so it's for those people who are not afraid to dig into code and analyze it line by line. Although some code might contain valuable comments and you might find template scripts so don't be afraid to check it out. 
 Some files (e.g *.config) could be used as a reference for your own ROS based robot.
 
-**Hardware:** robot frame is custom made and I don't have any detailed blueprints for whole robot but I'll share main components and why some design decisions were made and what to avoid etc.
+**Hardware:** robot frame is custom made and I don't have any detailed blueprints for whole robot.
 
 ## About The Competition
 From official [competition rules](http://www.robotsintellect.com/files/Golden_bag_search_EN_2020_newdocx_.pdf):
@@ -69,18 +59,71 @@ Some interesting directories to check:
 - [Object detection files](https://github.com/Combinacijus/Samana-Autonomous-Robot/tree/master/Python/GoldBagDetector)
 - [CAD drawings](https://github.com/Combinacijus/Samana-Autonomous-Robot/tree/master/SamanaPartDrawings)
 
+### Design decisions
 
-## About the Robot
-It's built on a tight budget which resulted in questionable and bad design decisions .........................
-### Hardware
-     ### Base
-     
-     ### Gripper
-     
-     ### Electronics
-     
-  * [Software](#software)
-	  
+**Used hoverboard for base of the robot**
+- Pros
+	- VERY good price for performance
+	- Powerful motors and ESC, big battery pack, strong build capable of carrying human
+	- Already [hacked firmware](https://github.com/NiklasFauth/hoverboard-firmware-hack) for control via UART. Also my [repo with Arduino examples](https://github.com/Combinacijus/hoverboard-firmware-hack/tree/master/ArduinoExamples).
+- Cons
+	- With great power comes great WEIGHT (~11kg). That's not something you can just throw in your backpack
+	- With great power also comes great crashes when accidentally it full throttles into a wall (just saying)
+	- It's ~60cm in width. Big footprint means it's harder to navigate through tight spaces. Also it's harder to navigate in general because ratio of distance sensor range and robot's footprint is smaller combining it with non-symetrical footprint it becomes really hard to drive autonomously without colliding while turning.
+
+**5 Arduino Nano for interfacing with hardware**
+- Why?
+	- Arduino supported by ROS
+	- It was modular every sensor/group of sensors had it's own Arduino
+	- I didn't want to try unfamiliar microcontroller because lack of support from ROS
+	- Arduino Nano is slow microcontroller therefore it was impossible to process all data on single one nor to fit all code (half of program memory was used just by ROS)
+- Problems
+	- 5 Arduinos = 5 USB cables = 5 devices communicating with computer
+	- Most of the sensors was powered from Arduino and simple USB hub wasn't enough to supply enough current therefore external power via left over USB was needed
+	- Mechanical connection was hard to guarantee for all 5 USBs
+	- Communication was sometimes unreliable or even crashed computer for unknown reason. I guess it didn't like to have 5 different devices on same USB port
+- Solutions
+	- If possible try to use single powerful microcontroller for all sensors
+	- Power sensors from external power supply (voltage regulator) to avoid power related problems
+
+**Ultrasonic (sonar) sensors for SLAM**
+- Brief
+	- I used 10 SR04 ultrasonic sensors all around robot to imitate crude lidar. All sensors are triggered at once at ~20Hz (waiting period is enough to not catch any previous echoes). I was worried for cross-talk but it was unnoticeable. So there was ~200readings/sec which would be enough but sonar data is very noisy and without  heavy filtering built map was unusable but after filtering most of the readings were discarded and delayed which degraded map building. Also ROS didn't have support for localization part of SLAM for sonars. Therefore DON'T USE ULTRASONIC SENSOR FOR SLAM better use stereo camera.
+
+- Pros
+	- Fairly cheap
+	- Works on different surfaces than other sensors
+- Cons
+	- Very noisy measurements
+	- Is wall is >12-15deg from perpendicular it won't be detected
+	- Ultrasound can bounce around corners giving bad readings
+	- Wide detection angle (not desirable for SLAM)
+	- Not very too accurate
+	-  Effective range is reduce due to widening ultrasound cone which can bounce back from small objects on the ground like: grass, pebbles, tiles
+	- Slow measurement rate limited by speed of sound (around 20Hz if assumed max range of ~5-6m)
+- Solution
+	- Lidar is way better than ultrasound sensors array but cheap lidars might not work outside in direct sunlight. But lidar has fixed height and in some environments height of and obstacles might be lower than lidar itself.
+	- Stereo camera seems to be best solution which was proven good by other robot which actually completed the track. Stereo camera has good range, good details and non-fixed height which is good for outdoor environments.
+
+**Laptop as main computing power**
+		-  Because my robot was big and had enough power to carry a laptop it was a best choice. Laptop is more powerful than usual single board computers like Jetson Tx/Nano or Raspberry Pi. Due to big map for navigation and YoloV3 object detection model which was still slow even on a gpu there was no way I could optimize and cram everything into single board computer (although I don't say it's impossible). Also laptop was charging from robot's battery and it used way more power than all the other electronics and driving combined. So it wasn't power efficient but I needed a lot of computing power.
+
+**Grabbing mechanism made from plywood?**
+- Worked well enough but tolerances wasn't very good. Definitely recommend using cnc or 3d printer for such parts.
+
+**Localization**
+- Data: odometry, IMU, GPS
+- Tried cheap GPS module but it was very inaccurate
+- Used android phone as GPS module and in my opinion it is as good as simple GPS receivers for reasonable price. But in testing it turned out that in best case accuracy was 3-5m radius circle and near some building 10-20m which is totally unusable for ROS navigation stack. Basically with such accuracy robot thought it was out of course perimeter which broke path finding.
+- Solutions:
+	- Don't use algorithms which depends on accurate position estimate
+	- Use expensive RTK GPS modules with base station which could provide "centimeter-level accuracy"
+	- If allowed use global markers/fiducials which are accurately positioned in know locations
+
+**Final notes**
+- Those blue and white thingies around the robot are fancy limit switches which can be pressed from any angle with a little force. Also it can bend which allows crashing into a wall without worrying to break limit switches.
+- Big robot -> Long wires  +  Many sensors -> Many wires  =  A mess
+- It's fun to manually drive because it's way too overpowered. Its acceleration is limited just by grip. Also it can carry a human which is even more fun to ride.
 
 ## License
 
