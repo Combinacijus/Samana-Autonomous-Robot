@@ -17,6 +17,7 @@ This project was developed over the period of 16 months single-handedly. During 
 The main **purpose of this README file** is to share gained knowledge and hopefully give some insights into development of autonomous robots.
 
 ![Bag](https://user-images.githubusercontent.com/16375702/106159061-17a67500-618d-11eb-9af0-52d4ec398bea.gif)
+![Wheelie](https://user-images.githubusercontent.com/16375702/106160997-1d9d5580-618f-11eb-997c-e0ad831e3954.gif)
 
 [More images and GIFs](https://github.com/Combinacijus/Samana-Autonomous-Robot/discussions/5)
 
