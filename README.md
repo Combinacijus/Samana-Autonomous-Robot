@@ -1,3 +1,4 @@
+
  <h1 align="center">Samana -<br> Autonomous Mobile Robot</h1>
   <p align="center">GPS waypoints following differential drive mobile robot based on Robot Operating System (ROS) Melodic. It was built to compete in <a href="http://www.robotsintellect.com/en/competitions">Robots’ Intellect 2020</a>.</p>
  
@@ -120,6 +121,11 @@ Some interesting directories to check:
 	- Don't use algorithms which depends on accurate position estimate
 	- Use expensive RTK GPS modules with base station which could provide "centimeter-level accuracy"
 	- If allowed use global markers/fiducials which are accurately positioned in know locations
+
+**Obeject Detection**
+- For object detection I used [ImageAI](https://github.com/OlafenwaMoses/ImageAI) library with YoloV3 and custom object detection model trained on "gold bag" images. Detection worked well but it's GPU heavy on Nvidia GT 740M it run at ~1.4 FPS which is slow but enough also it didn't use much of CPU which is good.
+- Custom model was trained in Jupyter notebook on [Google Colab](https://colab.research.google.com/) GPU enabled server **for free**. Training on ~600 images took about 2-3 hours
+- Some notes on how to train model and link to my Jupyter notebook is available at [Robot Notes.docx](https://github.com/Combinacijus/Samana-Autonomous-Robot/blob/master/Documentation/Robot%20Notes.docx) -> Object Detection -> Training new model.
 
 **Final notes**
 - Those blue and white thingies around the robot are fancy limit switches which can be pressed from any angle with a little force. Also it can bend which allows crashing into a wall without worrying to break limit switches.
